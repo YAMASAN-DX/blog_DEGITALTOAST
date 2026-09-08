@@ -143,6 +143,21 @@ function fit_pre_get_avatar_data( $args, $id_or_email ) {
 }
 add_filter( 'pre_get_avatar_data', 'fit_pre_get_avatar_data', 20, 2 );
 
+/**
+ * トップページの記事一覧では投稿日ではなく更新日を表示する
+ *
+ * @param string $the_time 表示する日時.
+ * @param string $format    日時フォーマット.
+ * @return string
+ */
+function fit_child_home_list_use_modified_time( $the_time, $format ) {
+	if ( is_admin() || ! is_home() || ! in_the_loop() ) {
+		return $the_time;
+	}
+	return get_the_modified_time( $format );
+}
+add_filter( 'the_time', 'fit_child_home_list_use_modified_time', 10, 2 );
+
 /*	wp_headの余分な表記を消す
 ------------------------------------------------------------------------------*/
 if (!is_admin()) {
