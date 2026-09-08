@@ -185,11 +185,11 @@ div.yyi-rinker-contents div.yyi-rinker-box {
     padding: 20px 20px 0;
 }
 
-@media screen and (max-width:767px){   
+@media screen and (max-width:767px){
 div.yyi-rinker-contents div.yyi-rinker-box {
     flex-direction: column;
     padding: 0 14px 0;
-} 
+}
 div.yyi-rinker-info div.yyi-rinker-title a{
     font-size:15px;
 }
@@ -235,7 +235,7 @@ div.yyi-rinker-info div.yyi-rinker-title a{
 
 .content h4{
     border-radius: 10px;
-    display: inline-block;	
+    display: inline-block;
 }
 
 .outline__list:before{
@@ -245,12 +245,12 @@ div.yyi-rinker-info div.yyi-rinker-title a{
 .content h5{
 	background: #fff;
     border-radius: 10px;
-    padding: 10px;	
+    padding: 10px;
 	margin-top: 30px !important;
 }
 
 .content h5 a{
-    color: #008fde;	
+    color: #008fde;
 	position:relative;
 }
 
@@ -272,7 +272,7 @@ div.yyi-rinker-info div.yyi-rinker-title a{
 .form-submit{
     margin: 30px auto;
     display: block;
-    text-align: center;	
+    text-align: center;
 }
 
 .wp-block-columns{
@@ -305,7 +305,7 @@ iframe{
 	position:relative !important;
 }
 
-.wp-block-embed-wordpress blockquote{	
+.wp-block-embed-wordpress blockquote{
 	display:none
 }
 
@@ -356,7 +356,7 @@ color:#ddd;
 }
     .eyecatch__cat a {
         font-size:11px;
-	    padding: 3px 5px;		
+	    padding: 3px 5px;
     }
     .eyecatch__cat {
         top:0;
@@ -379,7 +379,7 @@ background: #f1e767; /* Old browsers */
 background: -moz-linear-gradient(45deg, #f1e767 0%, #feb645 100%); /* FF3.6-15 */
 background: -webkit-linear-gradient(45deg, #f1e767 0%,#feb645 100%); /* Chrome10-25,Safari5.1-6 */
 background: linear-gradient(45deg, #f1e767 0%,#feb645 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f1e767', endColorstr='#feb645',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */    
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f1e767', endColorstr='#feb645',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
 .l-extra{
@@ -387,7 +387,7 @@ background: #45484d; /* Old browsers */
 background: -moz-linear-gradient(45deg, #45484d 0%, #000000 100%); /* FF3.6-15 */
 background: -webkit-linear-gradient(45deg, #45484d 0%,#000000 100%); /* Chrome10-25,Safari5.1-6 */
 background: linear-gradient(45deg, #45484d 0%,#000000 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */    
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
 .pagetop{
@@ -397,7 +397,7 @@ background: #f1e767; /* Old browsers */
 background: -moz-linear-gradient(45deg, #f1e767 0%, #feb645 100%); /* FF3.6-15 */
 background: -webkit-linear-gradient(45deg, #f1e767 0%,#feb645 100%); /* Chrome10-25,Safari5.1-6 */
 background: linear-gradient(45deg, #f1e767 0%,#feb645 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f1e767', endColorstr='#feb645',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */ 
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f1e767', endColorstr='#feb645',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
 .widget-foot ul{
@@ -430,14 +430,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f1e767', end
     margin:1%;
     float:left;
     padding-top: 0;
-    border-top: 0; 
+    border-top: 0;
     border-bottom:1px solid #ddd;
 }
 
 .widget .eyecatch{
     width: 100px;
     float: left;
-    margin-right: 10px;    
+    margin-right: 10px;
 }
 
 .content ul li, .content ol li{
@@ -469,7 +469,7 @@ strong{
 	height: 0;
 	border-style: solid;
 	border-width: 15px 15px 0 0;
-	border-color: #f0b400 transparent transparent transparent;	
+	border-color: #f0b400 transparent transparent transparent;
 }
 
 .copySns__copyInfo{
@@ -535,7 +535,7 @@ strong{
 .content h2 {
     color:#fff !important;
     border-bottom: 2px dotted #999;
-    padding: 10px;    
+    padding: 10px;
 }
 
 .content h3{
@@ -603,12 +603,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4089c9', end
 }
 
 .key__item::before{
- background:linear-gradient(to bottom, rgba(0,0,0,0.5) 50%,rgba(0,0,0,0.9) 100%)	
+ background:linear-gradient(to bottom, rgba(0,0,0,0.5) 50%,rgba(0,0,0,0.9) 100%)
 }
 
 .archiveItem .btn.btn-right{
     text-align: right;
-    margin-top: 10px;	
+    margin-top: 10px;
 	display:block;
 }
 
@@ -639,10 +639,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4089c9', end
 /*ダークモード*/
 
 body{
-background: #333333; 
-background: -moz-linear-gradient(top, #333333 0%, #111111 100%); 
+background: #333333;
+background: -moz-linear-gradient(top, #333333 0%, #111111 100%);
 background: -webkit-linear-gradient(top, #333333 0%,#111111 100%);
-background: linear-gradient(to bottom, #333333 0%,#111111 100%); 
+background: linear-gradient(to bottom, #333333 0%,#111111 100%);
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#333333', endColorstr='#111111',GradientType=0 );
     color:#fff;
 }
@@ -805,6 +805,25 @@ code{
     background:#333;
 }
 
+.content pre code{
+    color:darkblue;
+}
+
+.profile__imgArea{
+    width:160px;
+}
+
+
+.profile__imgArea img{
+    width:140px;
+    height:140px;
+}
+
+.profile__contents {
+    width: calc(100% - 180px);
+    float: right;
+}
+
 @media (max-width:900px){
 	.siteTitle{
 	    width: calc(100% - 250px);
@@ -823,8 +842,8 @@ code{
 	}
 			.content h3{
 				padding:10px 15px !important;
-			}		
-	
+			}
+
 .archiveItem {
     width: calc(50% - 20px);
     position: relative;
@@ -842,7 +861,7 @@ code{
 .categoryDescription__text{
 	font-size:14px;
 }
-	
+
 
 .archiveItem .btn.btn-right{
     display:none;
@@ -853,7 +872,7 @@ code{
 	.key__title{
 		font-size:1.45rem;
 	}
-	
+
 	.siteTitle__main{
 		width:223px;
 	}
@@ -865,7 +884,7 @@ code{
 	background:url(../img/logo.png) no-repeat center left;
 	background-size:100% auto;
 	}
-	
+
 	.heading.heading-singleTitle{
 		font-size:2.0rem;
 	}

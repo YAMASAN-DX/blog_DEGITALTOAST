@@ -6,7 +6,7 @@ if(get_option('fit_anp_check') == 'value2' && is_single() && @$_GET['amp'] === '
 }
 
 // icatchサイズの画像内容を取得
-$thumbnail_id = get_post_thumbnail_id(); 
+$thumbnail_id = get_post_thumbnail_id();
 $icatch_img = wp_get_attachment_image_src( $thumbnail_id , 'icatch' );
 // アイキャッチ画像出力
 $src = $icatch_img[0];
@@ -47,16 +47,16 @@ get_header(); ?>
 
       <!-- タイトル -->
       <div class="singleTitle__heading">
-        <h1 class="heading heading-singleTitle u-txtShdw" itemprop="name"><?php the_title(); ?></h1>        
-        
+        <h1 class="heading heading-singleTitle u-txtShdw" itemprop="name"><?php the_title(); ?></h1>
+
         <ul class="dateList dateList-singleTitle">
           <li class="dateList__item icon-calendar"><?php the_time('Y.m.d'); ?></li>
           <li class="dateList__item icon-folder"><a class="hc<?php if (isset($cat_meta[$cat_id])) { echo esc_html($cat_meta[$cat_id]);} ?>" href="<?php echo $cat_link; ?>" rel="category"><?php echo $cat_name; ?></a></li>
           <?php if(has_tag() == true) : ?><li class="dateList__item icon-tag"><?php the_tags(''); ?></li><?php endif; ?>
         </ul>
-        
-        
-        
+
+
+
       </div>
       <!-- /タイトル -->
 
@@ -68,7 +68,7 @@ get_header(); ?>
 	    <?php else :?>
           <?php if($myAmp){echo '<amp-img layout="responsive"';}else{echo '<img';} ?> src="<?php echo get_template_directory_uri(); ?>/img/img_no.gif" alt="NO IMAGE" width="890" height="500" >
 		  <?php if($myAmp){echo '</amp-img>';}?>
-	    <?php endif; ?>  
+	    <?php endif; ?>
       </div>
       <!-- /アイキャッチ -->
 
@@ -80,14 +80,14 @@ get_header(); ?>
 
   <!-- l-wrapper -->
   <div class="l-wrapper">
-	
+
     <!-- l-main -->
     <main class="l-main<?php if ( get_option('fit_theme_postLayout') == 'value2' ):?> l-main-single
 	<?php if ( get_option('fit_theme_singleWidth') == 'value2' ):?> l-main-w740<?php endif; ?>
     <?php if ( get_option('fit_theme_singleWidth') == 'value3' ):?> l-main-w900<?php endif; ?>
     <?php if ( get_option('fit_theme_singleWidth') == 'value4' ):?> l-main-w100<?php endif; ?>
     <?php endif; ?>" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-           
+
 	  <?php if ( get_option('fit_post_shareTop') != 'value2' ):?>
       <!-- 記事上シェアボタン -->
         <?php fit_share_btn(); ?>
@@ -103,7 +103,7 @@ get_header(); ?>
         ?>
       <!-- /記事上エリア[widget] -->
 	  <?php endif; ?>
-      
+
       <?php if ($myAmp && get_option('fit_ad_postTop')) :?>
       <!-- AMP用記事上広告エリア -->
       <aside class="ampAd">
@@ -112,9 +112,9 @@ get_header(); ?>
       </aside>
       <!-- /AMP用記事上広告エリア -->
 	  <?php endif; ?>
-      
-      
-	  
+
+
+
 	  <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
       <section class="content" itemprop="articleBody">
 
@@ -130,10 +130,10 @@ get_header(); ?>
 	    <?php the_content(); ?>
       </section>
 	  <?php endwhile; endif; ?>
-      
-      
-      
-      
+
+
+
+
 	  <?php if ( get_option('fit_post_shareBottom') != 'value2' ):?>
       <!-- 記事下シェアボタン -->
         <?php fit_share_btn(); ?>
@@ -148,8 +148,8 @@ get_header(); ?>
 	    <?php if (get_option('fit_cta_postTitle')) :?>
           <h2 class="ctaPost__title"><?php echo get_option('fit_cta_postTitle'); ?></h2>
         <?php endif; ?>
-        <div class="ctaPost__contents">           
-          
+        <div class="ctaPost__contents">
+
           <?php if (get_fit_cta_postImg()) :
 		      $postImg = get_fit_cta_postImg();
 			  $postImg_id = fit_get_image_id($postImg);
@@ -176,25 +176,25 @@ get_header(); ?>
 			    echo '</amp-img>';
 		    }?>
           <?php endif; ?>
-          
+
           <?php if (get_option('fit_cta_postUrl')) :?></a><?php endif; ?>
 
           <?php if (get_option('fit_cta_postContents')) :?>
 		    <?php echo apply_filters( 'fit_postContents', get_option('fit_cta_postContents') ); ?>
           <?php endif; ?>
 
-          
+
           <?php if (get_option('fit_cta_postBtn') && get_option('fit_cta_postUrl')) :?>
             <div class="ctaPost__btn"><a href="<?php echo get_option('fit_cta_postUrl'); ?>"><?php echo get_option('fit_cta_postBtn'); ?></a></div>
           <?php endif; ?>
-          
+
         </div>
       </div>
       <!-- /記事下CTAエリア -->
       <?php endif; ?>
 
 
-      
+
 	  <?php if (!$myAmp && is_active_sidebar('post-bottom')) :?>
       <!-- 記事下エリア[widget] -->
         <?php
@@ -204,7 +204,7 @@ get_header(); ?>
         ?>
       <!-- /記事下エリア[widget] -->
 	  <?php endif; ?>
-      
+
       <?php if ($myAmp && get_option('fit_ad_postBottom')) :?>
       <!-- AMP用記事下広告エリア -->
       <aside class="ampAd">
@@ -213,8 +213,8 @@ get_header(); ?>
       </aside>
       <!-- /AMP用記事下広告エリア -->
 	  <?php endif; ?>
-      
-      
+
+
 
 
       <?php if (!$myAmp &&  get_option('fit_ad_double') == 'value2' ) :	?>
@@ -232,22 +232,32 @@ get_header(); ?>
       <?php endif; ?>
 
 
-	  
+
 	  <?php if ( get_option('fit_post_poster') != 'value2' ) :	?>
       <!-- プロフィール -->
 	  <aside class="profile">
 	    <div class="profile__imgArea">
 	      <?php
  	      $author = get_the_author_meta('ID');
- 	      /*$author_img = get_avatar($author);*/
-		  $author_img = 'https://degital-toast.com/wp-content/themes/img/icon.jpg';
- 	      $imgtag= '/<img.*?src=(["\'])(.+?)\1.*?>/i';
- 	      if(preg_match($imgtag, $author_img, $imgurl)){
- 	    	  $author_img = $imgurl[2];
- 	      }
+		  if ( function_exists( 'fit_get_author_icon_url' ) ) {
+			  $author_img = fit_get_author_icon_url( $author );
+		  } else {
+			  $author_name = (string) get_the_author_meta( 'display_name' );
+			  $author_slug = (string) get_the_author_meta( 'user_nicename' );
+			  $is_editor  = ( 2 === (int) $author )
+				  || ( 'henshutyo' === $author_slug )
+				  || ( false !== mb_strpos( $author_name, '編集長' ) )
+				  || ( false !== mb_strpos( $author_name, '編集者' ) );
+			  $author_img = $is_editor
+				  ? 'https://d-toast.com/wp-content/uploads/2026/09/women.png'
+				  : 'https://d-toast.com/wp-content/uploads/2026/09/men.png';
+		  }
+		  if ( ! $author_img ) {
+			  $author_img = 'https://d-toast.com/wp-content/uploads/2026/09/men.png';
+		  }
 		  ?>
-		  <?php if($myAmp){echo '<amp-img layout="responsive"';}else{echo '<img';} ?> src="<?php echo $author_img; ?>" alt="<?php echo the_author_meta('display_name'); ?>" width="60" height="60" >
-		  <?php if($myAmp){echo '</amp-img>';}?>	        
+		  <?php if($myAmp){echo '<amp-img layout="responsive"';}else{echo '<img';} ?> src="<?php echo esc_url( $author_img ); ?>" alt="<?php echo esc_attr( get_the_author_meta('display_name') ); ?>" width="60" height="60" >
+		  <?php if($myAmp){echo '</amp-img>';}?>
 
 	      <ul class="profile__list">
 	  	    <?php
@@ -261,7 +271,7 @@ get_header(); ?>
 				echo '<li class="profile__item"><a class="profile__link icon-google" href="'. esc_url(get_the_author_meta('gplus')) .'"></a></li>';
 			}
 			?>
-	      </ul>  
+	      </ul>
 	    </div>
 	    <div class="profile__contents">
 	      <h2 class="profile__name">【この記事を書いた人】<?php the_author_meta('display_name'); ?>
@@ -273,10 +283,10 @@ get_header(); ?>
 	  </aside>
       <!-- /プロフィール -->
 	  <?php endif; ?>
-	  
 
 
-	  
+
+
 	  <?php if (get_option('fit_post_related') != 'value2' ) : ?>
       <!-- 関連記事 -->
 	  <?php
@@ -349,7 +359,7 @@ get_header(); ?>
 	  	}
 	  	foreach ($rel_posts as $post){setup_postdata($post);
 		// thumbnailサイズの画像内容を取得
-		$thumbnail_id = get_post_thumbnail_id(); 
+		$thumbnail_id = get_post_thumbnail_id();
 		$thumb_img = wp_get_attachment_image_src( $thumbnail_id , 'thumbnail' );
 		// サムネイル画像出力
 		$thumb_src = $thumb_img[0];
@@ -363,7 +373,7 @@ get_header(); ?>
 			  <?php if($myAmp){echo '</amp-img>';}?>
 		    <?php else :?>
               <?php if($myAmp){echo '<amp-img layout="responsive"';}else{echo '<img';} ?> src="<?php echo get_template_directory_uri(); ?>/img/img_no_thumbnail.gif" alt="NO IMAGE" width="160" height="160" >
-			  <?php if($myAmp){echo '</amp-img>';}?>		
+			  <?php if($myAmp){echo '</amp-img>';}?>
 		    <?php endif; ?>
 	        </a>
 	        <h3 class="related__title">
@@ -375,69 +385,69 @@ get_header(); ?>
 	        <p class="related__contents"><?php echo mb_substr(get_the_excerpt(), 0, 75); ?>[…]</p>
 	      </li>
 	  	<?php }
-	
+
 	  	echo'</ul>';
 	  }else{
 	  	echo'<p class="related__contents related__contents-max">関連記事はありませんでした</p>';
 	  }
- 
+
 	  echo'</aside>';
 	  ?>
 	  <?php wp_reset_postdata();?>
       <!-- /関連記事 -->
 	  <?php endif; ?>
-	  
 
 
-	  
+
+
 	  <?php if(!$myAmp): ?>
       <!-- コメント -->
         <?php comments_template(); ?>
       <!-- /コメント -->
 	  <?php endif; ?>
-	  
 
-	  
+
+
 	  <?php if(!is_user_logged_in() && !is_bot()): ?>
       <!-- PVカウンター -->
         <?php set_post_views(get_the_ID()); ?>
 	  <!-- /PVカウンター -->
 	  <?php endif; ?>
-      
-      
+
+
     </main>
     <!-- /l-main -->
 
-    
+
 	<?php if (!$myAmp && get_option('fit_theme_postLayout') != 'value2' ):?>
     <!-- l-sidebar -->
       <?php get_sidebar(); ?>
     <!-- /l-sidebar -->
 	<?php endif; ?>
-    
-    
+
+
   </div>
   <!-- /l-wrapper -->
-  
+
   <?php if ( get_option('fit_post_category') != 'value2' ) :
   $cat_meta = get_option('cat_meta_data');
   $category = get_the_category();
   $cat_id   = $category[0]->cat_ID;
-  $cat_name = $category[0]->cat_name;  
+  $cat_name = $category[0]->cat_name;
   ?>
   <div class="categoryBox<?php if(get_option('fit_skin_base') != 'value2' ):?> categoryBox-gray<?php endif; ?>">
 
     <div class="container">
-    
+
       <h2 class="heading heading-primary">
         <span class="heading__bg u-txtShdw bgc<?php if (isset($cat_meta[$cat_id])) { echo esc_html($cat_meta[$cat_id]);} ?>"><?php echo $cat_name; ?></span>カテゴリの最新記事
       </h2>
-      
+
       <ul class="categoryBox__list">
         <?php query_posts('cat='.$cat_id.'&posts_per_page=6'); ?>
         <?php if (have_posts()) : while (have_posts()) : the_post();
 		// icatchサイズの画像内容を取得
-		$thumbnail_id = get_post_thumbnail_id(); 
+		$thumbnail_id = get_post_thumbnail_id();
 		$icatch_img = wp_get_attachment_image_src( $thumbnail_id , 'icatch' );
 		// アイキャッチ画像出力
 		$src = $icatch_img[0];
@@ -451,11 +461,11 @@ get_header(); ?>
               <?php if(has_post_thumbnail()) : ?>
 		        <?php if($myAmp){echo '<amp-img layout="responsive"';}else{echo '<img';} ?> src="<?php echo $src; ?>" alt="<?php the_title(); ?>" width="<?php echo $width; ?>" height="<?php echo $height; ?>" itemprop="image" ><?php if($myAmp){echo '</amp-img>';}?>
 		      <?php else :?>
-                <?php if($myAmp){echo '<amp-img layout="responsive"';}else{echo '<img';} ?> src="<?php echo get_template_directory_uri(); ?>/img/img_no.gif" alt="NO IMAGE" width="730" height="410" ><?php if($myAmp){echo '</amp-img>';}?>		
+                <?php if($myAmp){echo '<amp-img layout="responsive"';}else{echo '<img';} ?> src="<?php echo get_template_directory_uri(); ?>/img/img_no.gif" alt="NO IMAGE" width="730" height="410" ><?php if($myAmp){echo '</amp-img>';}?>
 		      <?php endif; ?>
             </a>
           </div>
-          
+
           <?php if (get_option('fit_post_time') != 'value2' || has_tag() == true ) :?>
           <ul class="dateList dateList-archive">
             <?php if (get_option('fit_post_time') != 'value2' ) :	?>
@@ -472,14 +482,14 @@ get_header(); ?>
 		    $count = '0';
 		    foreach($posttags as $tag) {
 			    $count++;
-			    if ($count > $number) break; 
+			    if ($count > $number) break;
 			    echo '<a href="'. get_tag_link($tag->term_id) .'" rel="tag">'. $tag->name ."</a><span>, </span>";
 		    }
 		    ?></li>
             <?php endif; ?>
           </ul>
           <?php endif; ?>
-          
+
           <h2 class="heading heading-archive ">
             <a class="hc<?php if (isset($cat_meta[$cat_id])) { echo esc_html($cat_meta[$cat_id]);} ?>" href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
           </h2>
