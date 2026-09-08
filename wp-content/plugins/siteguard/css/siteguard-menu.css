@@ -1,0 +1,200 @@
+.siteguard-form-table {
+	border-collapse: collapse;
+	margin-top: 0.5em;
+	width: 100%;
+	clear: both;
+}
+
+.siteguard-form-table tr {
+	height: 35px;
+}
+
+.siteguard-form-table,
+.siteguard-form-table td,
+.siteguard-form-table th,
+.siteguard-form-table td p,
+.siteguard-form-wrap label {
+	font-size: 14px;
+}
+
+.siteguard-form-table td {
+	border:1px solid #cccccc;
+	margin-bottom: 5px;
+	padding: 5px 5px;
+	line-height: 1.3;
+	vertical-align: middle;
+	background-color: #ffffff;
+}
+
+.siteguard-form-wrap label {
+	color: #222;
+	font-weight: normal;
+	text-shadow: none;
+	vertical-align: baseline;
+}
+
+.siteguard-form-table th {
+	border:1px solid #cccccc;
+	vertical-align: middle;
+	text-align: left;
+	padding: 5px 5px 0px 5px;
+	width: 300px;
+	line-height: 1.3;
+	font-weight: 600;
+	background-color: #f9f9f9;
+}
+
+.siteguard-form-table th.th-full {
+	width: auto;
+	font-weight: 400;
+}
+
+.siteguard-form-table td p {
+	margin-top: 4px;
+	margin-bottom: 0;
+}
+
+.siteguard-form-table th img {
+	vertical-align: middle;
+}
+
+.siteguard-status-icon {
+	margin: 3px;
+}
+
+.siteguard-status-icon-spacer {
+	display: inline-block;
+	width: 24px;
+	height: 24px;
+	margin: 3px;
+	vertical-align: middle;
+}
+
+.siteguard-form-table td fieldset label {
+	margin: 0.25em 0 0.5em !important;
+	display: inline-block;
+}
+
+.siteguard-form-table td fieldset label,
+.siteguard-form-table td fieldset p,
+.siteguard-form-table td fieldset li {
+	line-height: 1.4em;
+}
+
+.siteguard-form-table input.tog,
+.siteguard-form-table input[type=radio] {
+	margin-top: -4px;
+	margin-right: 4px;
+	float: none;
+}
+
+.siteguard-form-table .pre {
+	padding: 8px;
+	margin: 0;
+}
+
+table.siteguard-form-table td .updated {
+	font-size: 13px;
+}
+
+.siteguard-radios {
+	display: inline-flex;
+	align-items: stretch;
+	gap: 2px;
+	margin: 0;
+	padding: 3px;
+	clear: both;
+	border: 1px solid #c3c4c7;
+	border-radius: 6px;
+	background: #f0f0f1;
+	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+.siteguard-radios li {
+	display: block;
+	position: relative;
+	float: none;
+	margin: 0;
+	list-style: none;
+	border: 0;
+	border-radius: 4px;
+}
+.siteguard-radios label {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	min-width: 52px;
+	min-height: 32px;
+	padding: 0 12px;
+	border: 0;
+	border-radius: 4px;
+	color: #50575e;
+	background: transparent;
+	font-weight: 600;
+	line-height: 1;
+	text-align: center;
+	text-shadow: none;
+	cursor: pointer;
+	transition: background-color 0.12s ease, box-shadow 0.12s ease, color 0.12s ease;
+}
+.siteguard-radios input[type=radio] {
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	opacity: 0;
+	cursor: pointer;
+}
+.siteguard-radios input[type=radio]:hover + label {
+	color: #1d2327;
+	background: #fff;
+}
+.siteguard-radios input[type=radio]:checked + label {
+	color: #fff;
+	background: var(--wp-admin-theme-color, #3858e9);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+}
+.siteguard-radios input[type=radio]:focus-visible + label {
+	outline: 2px solid var(--wp-admin-theme-color, #3858e9);
+	outline-offset: 2px;
+}
+.siteguard-radios ~ p.description {
+	margin-top: 8px;
+}
+.siteguard-box-300 {
+	width: 300px;
+	box-sizing:border-box;
+}
+div.siteguard-description {
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	padding: 5px 5px 5px 5px;
+	border:solid 1px #cccccc;
+	background-color: #fdfdfd;
+}
+
+.siteguard-login-history-filter-table {
+	margin-bottom: 6px;
+}
+
+.siteguard-login-history-filter-table td {
+	padding: 0 6px 4px 0;
+	vertical-align: middle;
+}
+
+#filter-by-operation,
+#filter-type {
+	min-width: 150px;
+}
+
+#filter-login-name-not,
+#filter-ip-address-not {
+	min-width: 85px;
+}
+
+.siteguard-login-history-form .wp-list-table {
+	margin: 8px 0;
+}

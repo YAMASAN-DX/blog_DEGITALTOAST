@@ -1,0 +1,30 @@
+# WordPress uploaded media (images, backups, plugin cache under uploads)
+/wp-content/uploads/
+
+# Database credentials and site secrets
+/wp-config.php
+
+# Generated cache (WP Fastest Cache, Autoptimize, etc.)
+/wp-content/cache/
+
+# EWWW Image Optimizer binaries and lazy-load placeholders
+/wp-content/ewww/
+
+# All-in-One WP Migration: keep the plugin, exclude generated backups
+/wp-content/ai1wm-backups/
+*.wpress
+/wp-content/plugins/all-in-one-wp-migration/storage/*.log
+
+# UpdraftPlus backup logs (plugin itself is kept)
+/wp-content/updraft/
+
+# WordPress core update leftovers
+/wp-content/upgrade/
+/wp-content/upgrade-temp-backup/
+
+# SiteGuard generated CAPTCHA images (plugin itself is kept)
+/wp-content/siteguard/
+
+# Logs
+*.log
+debug.log

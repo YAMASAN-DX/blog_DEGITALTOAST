@@ -1,0 +1,881 @@
+@charset "UTF-8";
+/*----------このエリアは削除すると正しく動作しない可能性があります----------
+
+Theme Name:   LION MEDIA Child
+Theme URI:    http://fit-jp.com/theme/
+Description:  FIT(フィット) が制作するメディア用WordPressTHEME「LION MEDIA」の子テーマ
+Author:       Kota Naito　@FIT(フィット)
+Author URI:   http://fit-jp.com/about/
+Template:     lionmedia
+Version:      1.2
+License:      GNU GENERAL PUBLIC LICENSE
+License URI:  http://www.gnu.org/licenses/gpl.html
+
+----------このエリアは削除すると正しく動作しない可能性があります----------*/
+
+
+/*/////////////////////////////////////////////////
+//下記ユーザーカスタマイズエリア
+/////////////////////////////////////////////////*/
+
+.kiji_border{
+	    padding: 10px 15px;
+    border-radius: 10px;
+    display: inline-block;
+    background: #ae6262;
+}
+
+div.ez-toc-widget-container ul.ez-toc-list{
+	max-height: 750px;
+    overflow-y: scroll;
+    border: 1px solid #999;
+	font-size: 13px;
+}
+
+.widget ul li {
+    margin-bottom: 5px;
+}
+
+.writing_day span{
+    margin-right:10px;
+    font-size:13px;
+    opacity:0.7;
+}
+
+.writing_day span:first-child:after{
+    content:"｜";
+}
+
+/*ヤフーリンク*/
+.yahoolink{
+	display:none !important;
+}
+/*easy table*/
+
+.ez-toc-widget-container ul.ez-toc-list li.active::before{
+	background:none;
+}
+.ez-toc-widget-container li.active>a {
+    font-weight: 900;
+    background: #f0b200;
+    color: #333;
+}
+
+.ez-toc-list li{
+	margin:5px !important;
+	padding-left:10px !important;
+}
+
+div.ez-toc-widget-container ul.ez-toc-list{
+	padding:10px 0;
+}
+
+	#ez-toc-container{
+		display:none !important;
+	}
+div.yyi-rinker-info ul.yyi-rinker-links{
+	display:block;
+}
+/*Amazonマイクロコピー
+div.yyi-rinker-contents ul.yyi-rinker-links li.amazonlink a:before {
+	font-size: 15px;
+	content: "＼7月13日までAmazonプライムデー開催中！／";
+	color: #F6A307;
+	position: absolute;
+	top: -20px;
+}*/
+
+/*楽天マイクロコピー
+div.yyi-rinker-contents ul.yyi-rinker-links li.rakutenlink a:before {
+	font-size:15px;
+	/*content: "＼毎月5と0の付く日はポイントがお得！／"; */
+	content: "楽天スーパーセール開催中／";
+	color: #C44540;
+	position: absolute;
+	top: -20px;
+}*/
+
+/*Yahooマイクロコピー*/
+div.yyi-rinker-contents ul.yyi-rinker-links li.yahoolink a:before {
+	font-size: 1１px;
+	content: "＼タイムセール実施中！／";
+	color: #51A7E8;
+	position: absolute;
+	top: -20px;
+}
+
+ul.yyi-rinker-links a.yyi-rinker-link{
+	overflow:visible;
+}
+
+/*以下は共通設定*/
+div.yyi-rinker-contents ul.yyi-rinker-links li{
+	margin-top: 5px;
+}
+@media screen and (max-width: 599px){
+	div.yyi-rinker-contents ul.yyi-rinker-links li.amazonlink {
+		margin: 15px 0 0 0;
+	}
+	div.yyi-rinker-contents ul.yyi-rinker-links li.rakutenlink {
+		margin: 20px 0 0 0;
+	}
+	div.yyi-rinker-contents ul.yyi-rinker-links li.yahoolink {
+		margin: 20px 0 0 0;
+	}
+	div.yyi-rinker-contents ul.yyi-rinker-links li.amazonlink a:before {
+		font-size: 0.75em;
+		top: -27px;
+	}
+	div.yyi-rinker-contents ul.yyi-rinker-links li.rakutenlink a:before {
+		font-size: 0.75em;
+		top: -27px;
+	}
+	div.yyi-rinker-contents ul.yyi-rinker-links li.yahoolink a:before {
+		font-size: 0.75em;
+		top: -27px;
+	}
+}
+
+
+/*RNKER*/
+/*ul.yyi-rinker-links a.yyi-rinker-link:after {
+    position: absolute;
+    right: 12px;
+    width: 6px;
+    height: 6px;
+    border-top: 2px solid;
+    border-right: 2px solid;
+    content: "";
+    transform: rotate(45deg);
+    box-sizing: border-box;
+}*/
+div.yyi-rinker-detail div.credit-box{
+	display:none;
+}
+div.yyi-rinker-info div.yyi-rinker-detail{
+	border-top: 1px dotted #aaa;
+}
+div.yyi-rinker-contents ul.yyi-rinker-links li a {
+    text-decoration: none;
+    font-size: 17px;
+}
+div.yyi-rinker-contents div.yyi-rinker-box{
+    background: #fff !important;
+    color: #333 !important;
+border: 5px solid #aaa
+}
+div.yyi-rinker-info ul.yyi-rinker-links:before{
+display:none !important;
+}
+div.yyi-rinker-contents div.yyi-rinker-box ul.yyi-rinker-links li{
+padding:0 !important;
+	padding-top: 15px !important;
+	max-width: 500px;
+}
+div.yyi-rinker-info ul.yyi-rinker-links{
+background:#fff;
+}
+div.yyi-rinker-detail div.credit-box{
+font-size:10px;
+}
+ul.yyi-rinker-links a.yyi-rinker-link {
+    padding: 6px 30px;
+}
+div.yyi-rinker-contents div.yyi-rinker-box {
+    padding: 20px 20px 0;
+}
+
+@media screen and (max-width:767px){   
+div.yyi-rinker-contents div.yyi-rinker-box {
+    flex-direction: column;
+    padding: 0 14px 0;
+} 
+div.yyi-rinker-info div.yyi-rinker-title a{
+    font-size:15px;
+}
+}
+/*RNKER*/
+
+.eyecatch img{
+	max-height:none;
+}
+
+.comment-respond label{
+	margin-top:15px;
+}
+
+.comment-form-comment{
+	margin-top:15px;
+	border-top:1px dashed #666;
+}
+
+.widget .calendar_wrap table{
+	margin-bottom:10px;
+}
+
+.widget .calendar_wrap{
+	background:none;
+	border:none;
+}
+
+.widget .calendar_wrap tbody td{
+	border:none;
+}
+
+.content h2,
+.content h3,
+.content h4,
+.content h5{
+	margin-top:50px;
+}
+
+.content .outline__switch+.outline__list{
+	margin:0;
+}
+
+.content h4{
+    border-radius: 10px;
+    display: inline-block;	
+}
+
+.outline__list:before{
+	display: none !important;
+}
+
+.content h5{
+	background: #fff;
+    border-radius: 10px;
+    padding: 10px;	
+	margin-top: 30px !important;
+}
+
+.content h5 a{
+    color: #008fde;	
+	position:relative;
+}
+
+.content h5 a:before{
+	content:"";
+	width:67px;
+	height:31px;
+	background:url("https://degital-toast.com/wp-content/uploads/2020/10/bubble_kanren.png") no-repeat center center;
+	background-size:cover;
+	position:absolute;
+    top: -32px;
+    left: -10px;
+}
+
+.custom-html-widget{
+	text-align:center;
+}
+
+.form-submit{
+    margin: 30px auto;
+    display: block;
+    text-align: center;	
+}
+
+.wp-block-columns{
+	margin-top:30px;
+}
+
+.wp-block-table figcaption{
+	font-size:12px;
+	text-align:center;
+	margin-top: 10px;
+}
+
+.wp-block-table{
+	margin:20px 0;
+}
+
+.content table tr:nth-child(2n+1) {
+    background: #333;
+}
+
+.content .youtube iframe{
+	position:absolute !important;
+}
+
+.key__cat{
+	display:none;
+}
+
+iframe{
+	position:relative !important;
+}
+
+.wp-block-embed-wordpress blockquote{	
+	display:none
+}
+
+.wp-block-image .aligncenter>figcaption, .wp-block-image .alignleft>figcaption, .wp-block-image .alignright>figcaption, .wp-block-image.is-resized>figcaption{
+font-size:12px;
+color:#ddd;
+}
+
+.content .aligncenter{
+    text-align:center;
+}
+
+.wp-block-image .aligncenter>figcaption{
+    display:block;
+}
+
+/*サムネイルギャラリー*/
+
+.thum_gallery .blocks-gallery-grid{
+    border:1px solid #666 !important;
+    margin-left:0 !important;
+    margin-top:30px;
+    padding: 15px 20px 30px 0 !important;
+}
+
+.thum_gallery ul li:before{
+    display: none !important;
+}
+
+.thum_gallery ul li{
+    margin:0 !important;
+}
+
+/*サムネイルギャラリー*/
+
+.l-wrapper{
+    width:90% !important;
+    max-width:1440px;
+}
+
+.wp-block-image img{
+	height:auto !important;
+}
+
+@media only screen and (max-width: 767px){
+.l-wrapper{
+    width:100% !important;
+}
+    .eyecatch__cat a {
+        font-size:11px;
+	    padding: 3px 5px;		
+    }
+    .eyecatch__cat {
+        top:0;
+    }
+    .eyecatch{
+        overflow: visible;
+    }
+    .wp-block-image img{
+        max-width:100%;
+        height:auto;
+    }
+    .content h4{
+        margin-top:20px !important;
+        font-size: 1.6rem !important;
+    }
+}
+
+.l-header{
+background: #f1e767; /* Old browsers */
+background: -moz-linear-gradient(45deg, #f1e767 0%, #feb645 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(45deg, #f1e767 0%,#feb645 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(45deg, #f1e767 0%,#feb645 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f1e767', endColorstr='#feb645',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */    
+}
+
+.l-extra{
+background: #45484d; /* Old browsers */
+background: -moz-linear-gradient(45deg, #45484d 0%, #000000 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(45deg, #45484d 0%,#000000 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(45deg, #45484d 0%,#000000 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */    
+}
+
+.pagetop{
+    width:100%;
+    border-radius: 0;
+background: #f1e767; /* Old browsers */
+background: -moz-linear-gradient(45deg, #f1e767 0%, #feb645 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(45deg, #f1e767 0%,#feb645 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(45deg, #f1e767 0%,#feb645 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f1e767', endColorstr='#feb645',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */ 
+}
+
+.widget-foot ul{
+    display:flex;
+    flex-wrap: wrap;
+}
+
+.widget-foot ul li{
+    width:48%;
+}
+
+.outline__title{
+    display:none;
+}
+
+.wp-block-embed{
+    margin:1em;
+}
+
+.content ul li, .content ol li{
+    padding: 10px 0 0 20px !important;
+}
+
+.imgListWidget li{
+    overflow:hidden;
+}
+
+.widget .cat-item{
+    width:48%;
+    margin:1%;
+    float:left;
+    padding-top: 0;
+    border-top: 0; 
+    border-bottom:1px solid #ddd;
+}
+
+.widget .eyecatch{
+    width: 100px;
+    float: left;
+    margin-right: 10px;    
+}
+
+.content ul li, .content ol li{
+    font-size:16.5px !important;
+    font-weight:bold;
+}
+
+strong{
+    font-size: 1.2em;
+    border-bottom: 2px solid #fdf165;
+    color: #fff;
+}
+
+.content h4{
+    border: 1px solid #f0b200;
+    padding: 0.5em 1em;
+    font-size: 2rem;
+    color: #222;
+    background: #f0b200;
+	position: relative;
+}
+
+.content h4:before{
+	content:"";
+	position: absolute;
+	bottom:-10px;
+	left:15px;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 15px 15px 0 0;
+	border-color: #f0b400 transparent transparent transparent;	
+}
+
+.copySns__copyInfo{
+	display:none;
+}
+
+.siteTitle__main{
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+	background:url(../img/logo.png) no-repeat center left;
+	background-size:cover;
+    width: 410px;
+    height: 50px;
+}
+
+.siteTitle__link{
+	height:50px;
+}
+
+.siteTitle{
+	height:50px;
+	margin-top:10px;
+}
+
+.content ul, .content ol{
+	border:3px solid #AFDBFF;
+	background:#333;
+	padding:5px 15px 15px;
+	margin:40px auto;
+    margin-left: 30px;
+	position: relative;
+}
+
+.content ul:before,
+.content ol:before{
+    content: "ここがPOINT !!";
+    background: #AFDBFF;
+    padding: 2px .5em;
+    font-size: 14px;
+    color: #222;
+    position: absolute;
+    left: 20px;
+    top: -30px;
+    font-weight: bold;
+}
+
+.content .outline{
+	border: 2px dotted #eeee;
+    border-left: none;
+    border-right: none;
+    padding:20px 0;
+}
+
+.content .outline ul,
+.content .outline ol{
+	background:none;
+	border:none;
+    margin-left: 0;
+	padding:0 1em;
+}
+
+.content h2 {
+    color:#fff !important;
+    border-bottom: 2px dotted #999;
+    padding: 10px;    
+}
+
+.content h3{
+background: #4089c9; /* Old browsers */
+background: -moz-linear-gradient(left, #4089c9 0%, #1e5799 100%, #1e5799 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left, #4089c9 0%,#1e5799 100%,#1e5799 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right, #4089c9 0%,#1e5799 100%,#1e5799 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4089c9', endColorstr='#1e5799',GradientType=1 ); /* IE6-9 */
+    border:none !important;
+    color:#fff !important;
+}
+
+.content h2:first-letter{
+	border-bottom:none !important;
+}
+
+.imgListWidget__borderBox > span:hover:before,
+.imgListWidget__borderBox > span:hover:after,
+.imgListWidget__borderBox:hover:before,
+.imgListWidget__borderBox:hover:after{
+	background:#f0b200;
+}
+
+.content a{
+	text-decoration:underline;
+}
+
+.wp-block-image{
+	margin:1em 0;
+}
+
+.archiveItem__text {
+    height: 87px;
+    overflow: hidden;
+	font-size:1.2rem;
+}
+
+.heading.heading-archive{
+	font-size:1.6rem;
+}
+
+.content blockquote{
+	background:none;
+		border:1px solid #67ced6;
+		background:#555;
+}
+
+.content h2{
+	border-bottom:2px dotted #f0b200;
+}
+
+.key__title{
+	margin:0;
+	padding:10px;
+	background:rgba(0,0,0,0.4);
+	font-size:1.45rem;
+}
+
+.categoryDescription__text{
+	font-size:16px;
+}
+
+.wp-block-image img{
+	border:1px solid #eee;
+}
+
+.key__item::before{
+ background:linear-gradient(to bottom, rgba(0,0,0,0.5) 50%,rgba(0,0,0,0.9) 100%)	
+}
+
+.archiveItem .btn.btn-right{
+    text-align: right;
+    margin-top: 10px;	
+	display:block;
+}
+
+.btn__link{
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.wp-block-code{
+	background:#000 !important;
+}
+
+.rankingBox{
+    background: url(https://degital-toast.com/wp-content/themes/lionmedia/img/bg02.jpg) no-repeat;
+    background-size: 100% auto;
+    background-attachment: fixed;
+    padding: 100px 0 250px;
+}
+
+.l-footer{
+    background:url("https://degital-toast.com/wp-content/themes/lionmedia/img/bg.jpg") no-repeat ;
+    background-size:100% auto;
+    background-attachment: fixed;
+}
+
+/*ダークモード*/
+
+body{
+background: #333333; 
+background: -moz-linear-gradient(top, #333333 0%, #111111 100%); 
+background: -webkit-linear-gradient(top, #333333 0%,#111111 100%);
+background: linear-gradient(to bottom, #333333 0%,#111111 100%); 
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#333333', endColorstr='#111111',GradientType=0 );
+    color:#fff;
+}
+
+.content blockquote{
+    color:#67ced6;
+}
+
+a.page-numbers, span.page-numbers.current{
+    color:#eee;
+}
+
+.dateList__item{
+    color:#f0b200;
+    line-height:1;
+}
+
+.dateList {
+    margin-bottom: 5px;
+}
+
+.eyecatch{
+    margin-bottom:15px;
+}
+
+.dateList.dateList-singleTitle{
+    background:none;
+}
+
+.comments__list li{
+    color:#000;
+    background:#ddd;
+}
+
+.comments__list .comment-author .fn{
+    display:none;
+}
+
+.comments__list .comment-body p{
+    line-height:1.2;
+}
+
+.eyecatch:before {
+    content: "";
+    display: block;
+    padding-top: 56.25%;
+}
+
+.wp-block-image img {
+    border: 1px solid #555;
+}
+
+
+/*ダークモード*/
+
+@media (max-width:800px){
+
+.rankingBox{
+    background: url(https://degital-toast.com/wp-content/themes/lionmedia/img/bg02.jpg) no-repeat;
+    background-size: auto 100% ;
+    background-attachment: fixed;
+    padding: 100px 0 250px;
+}
+
+.l-footer{
+    background:url("https://degital-toast.com/wp-content/themes/lionmedia/img/bg.jpg") no-repeat ;
+    background-size:auto 100% ;
+    background-attachment: fixed;
+}
+    .content ul, .content ol{
+        margin-left:0;
+    }
+}
+.copySns,
+.heading.heading-footer::after,
+.t-dark .widget.widget-foot ul li{
+    border-color:#fff;
+}
+
+.widgetFoot{
+    margin-top:100px;
+}
+
+.copySns{
+    margin-top:100px;
+}
+
+.heading.heading-primary{
+    color:#fff;
+}
+
+code{
+	color:#fff;
+	font-size:15px;
+}
+
+.rankingBox__img{
+	height:150px;
+}
+.rankingBox__title{
+	height: calc(100% - 150px);
+}
+
+.l-wrapper{
+	width:920pt;
+}
+
+.archiveItem {
+    width: calc(50% - 30px);
+    position: relative;
+    margin: 0 15px 40px 15px;
+}
+
+.profile__name span{
+	margin-top: 10px;
+    display: inline-block;
+}
+
+.content blockquote::before{
+	color:#0046a5;
+}
+
+.content ul li, .content ol li{
+    padding: 10px 0 0 10px;
+    font-size:1.5rem;
+}
+
+.content .outline__link {
+    display: inline-block;
+    color: #fff !important;
+    border-bottom: 1px dotted #f0b200;
+    margin: 0.5em 0;
+}
+
+.content .outline__number{
+    background: #f0b200;
+    color:#fff;
+}
+
+.content p{
+    margin-top:30px;
+}
+
+@media (max-width:767px){
+
+.content p{
+    margin:15px 0;
+}
+}
+
+.content h2, .content h3 {
+    margin-top:80px;
+}
+
+.content h4, .content h5{
+    margin-top:30px;
+}
+
+.categoryBox.categoryBox-gray{
+    background:#333;
+}
+
+@media (max-width:900px){
+	.siteTitle{
+	    width: calc(100% - 250px);
+	}
+}
+
+@media (max-width:767px){
+    .content h2{
+        font-size:2rem;
+    }
+    .content h2:first-letter {
+        font-size: 2.8rem !important;
+    }
+    .content h2, .content h3{
+        margin-top:60px;
+	}
+			.content h3{
+				padding:10px 15px !important;
+			}		
+	
+.archiveItem {
+    width: calc(50% - 20px);
+    position: relative;
+    margin: 0 10px 15px;
+}
+	.key,
+	.rankingBox,
+	.widgetSticky{
+		display:none;
+	}
+	.siteTitle{
+	    width: calc(100% - 100px);
+	}
+
+.categoryDescription__text{
+	font-size:14px;
+}
+	
+
+.archiveItem .btn.btn-right{
+    display:none;
+}
+.heading.heading-archive {
+    font-size: 1.35rem;
+}
+	.key__title{
+		font-size:1.45rem;
+	}
+	
+	.siteTitle__main{
+		width:223px;
+	}
+.siteTitle {
+    height: 40px;
+    margin-top: 0px;
+}
+	.siteTitle__main{
+	background:url(../img/logo.png) no-repeat center left;
+	background-size:100% auto;
+	}
+	
+	.heading.heading-singleTitle{
+		font-size:2.0rem;
+	}
+    .content ul li, .content ol li{
+        font-size:15px !important;
+    }
+    .outline__list-3{
+        padding:0 !important;
+    }
+	.eyecatch{
+		overflow:hidden;
+	}
+}

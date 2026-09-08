@@ -1,0 +1,1739 @@
+<?php
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+use function Eztoc\Table_Of_Contents\Cord\mb_find_replace;
+
+ $eztoc_current_theme = '';
+ if ( function_exists( 'wp_get_theme' ) ) {	
+	$eztoc_current_theme = wp_get_theme()->get( 'Name' );
+ }
+
+
+
+/**
+ * Filter to add plugins to the TOC list.
+ *
+ * @link https://rankmath.com/kb/filters-hooks-api-developer/#add-toc-plugin
+ *
+ * @since 2.0
+ *
+ * @param array TOC plugins.
+ */
+add_filter(
+	'rank_math/researches/toc_plugins',
+	function( $toc_plugins ) {
+
+		$toc_plugins[ EZ_TOC_BASE_NAME ] = 'Easy Table of Contents';
+
+		return $toc_plugins;
+	}
+);
+
+/**
+ * Filter to remove Connections Business Directory related shortcodes from being processed as eligible TOC items.
+ *
+ * @since 2.0
+ */
+add_filter(
+	'ez_toc_strip_shortcodes_tagnames',
+	function( $tags_to_remove ) {
+
+		$shortcodes = array (	
+			'basic-user-avatars',		
+			'CARFORM',
+			'connections_form',
+			'cn_multi_category_search',
+			'cn_widget',
+			'cn_carousel',
+			'connections_categories',
+			'connections_link_view',
+			'connections_link_edit',
+			'connections_login',
+			'siteshot',
+			'connections',
+			'upcoming_list',
+			'cn-mapblock',
+			'connections_vcard',
+			'connections_qtip',
+			'cn_thumb',
+			'cn_thumbr',
+			'pmpro_member_profile_edit',
+		);
+
+		$tags_to_remove = array_merge( $tags_to_remove, $shortcodes );
+
+		return $tags_to_remove;
+	}
+);
+
+
+/**
+ * Filter to remove Striking theme related shortcodes from being processed as eligible TOC items.
+ *
+ * @since 2.0
+ */
+add_filter(
+	'ez_toc_strip_shortcodes_tagnames',
+	function( $tags_to_remove ) {
+
+		$shortcodes = array (
+			'iconbox',
+			'toggle',
+		);
+
+		$tags_to_remove = array_merge( $tags_to_remove, $shortcodes );
+
+		return $tags_to_remove;
+	}
+);
+
+/**
+ * Remove the JetPack share buttons node from the post content before extracting headings.
+ *
+ * @since 2.0
+ */
+add_filter(
+	'ez_toc_exclude_by_selector',
+	function( $selectors ) {
+
+		$selectors['jetpack-sharedaddy']   = '.sharedaddy';
+		$selectors['jetpack-relatedposts'] = '.jp-relatedposts';
+
+		return $selectors;
+	}
+);
+
+/**
+ * Remove the Elegant Themes Bloom plugin node from the post content before extracting headings.
+ *
+ * @since 2.0
+ */
+add_filter(
+	'ez_toc_exclude_by_selector',
+	function( $selectors ) {
+
+		$selectors['elegant-themes-bloom'] = '.et_bloom_below_post';
+
+		return $selectors;
+	}
+);
+
+/**
+ * Ultimate FAQ Accordion Plugin compatibility.
+ *
+ * FAQ blocks render question/category headings that must not appear in the page TOC.
+ *
+ * @link https://wordpress.org/plugins/ultimate-faqs/
+ * @since 2.0.83
+ */
+add_filter(
+	'ez_toc_exclude_by_selector',
+	'eztoc_ultimate_faqs_exclude_by_selector'
+);
+add_filter(
+	'eztoc_exclude_by_selector',
+	'eztoc_ultimate_faqs_exclude_by_selector'
+);
+/**
+ * Exclude Ultimate FAQ nodes from eligible TOC headings.
+ *
+ * @param array $selectors Selector map passed to ezTOC heading extraction.
+ * @return array
+ */
+function eztoc_ultimate_faqs_exclude_by_selector( $selectors ) {
+
+	if ( ! eztoc_is_plugin_active( 'ultimate-faqs/ultimate-faqs.php' ) ) {
+		return $selectors;
+	}
+
+	$selectors['ultimate-faqs-list']       = '#ewd-ufaq-faq-list';
+	$selectors['ultimate-faqs-faqs']       = '.ewd-ufaq-faqs';
+	$selectors['ultimate-faqs-categories'] = '.ewd-ufaq-faq-categories';
+	$selectors['ultimate-faqs-faq-div']    = '.ewd-ufaq-faq-div';
+	$selectors['ultimate-faqs-faq-title']  = '.ewd-ufaq-faq-title';
+
+	return $selectors;
+}
+
+add_filter( 'ez_toc_extract_headings_content', 'eztoc_ultimate_faqs_strip_from_headings_content', 10, 1 );
+add_filter( 'eztoc_extract_headings_content', 'eztoc_ultimate_faqs_strip_from_headings_content', 10, 1 );
+
+/**
+ * Remove rendered Ultimate FAQ markup before heading extraction.
+ *
+ * FAQ question titles are often real h2–h6 elements and would otherwise duplicate
+ * or nest under the preceding page heading in the TOC.
+ *
+ * @param string $content Post content being scanned for headings.
+ * @return string
+ */
+function eztoc_ultimate_faqs_strip_from_headings_content( $content ) {
+
+	if ( ! eztoc_is_plugin_active( 'ultimate-faqs/ultimate-faqs.php' ) || false === strpos( $content, 'ewd-ufaq' ) ) {
+		return $content;
+	}
+
+	if ( ! class_exists( 'TagFilter' ) ) {
+		if ( phpversion() <= 5.6 ) {
+			require_once EZ_TOC_PATH . '/includes/vendor/ultimate-web-scraper/tag_filter56.php';
+		} else {
+			require_once EZ_TOC_PATH . '/includes/vendor/ultimate-web-scraper/tag_filter.php';
+		}
+	}
+
+	$tag_filter_options           = TagFilter::GetHTMLOptions();
+	$tag_filter_options['charset'] = get_option( 'blog_charset' );
+	$html                         = TagFilter::Explode( $content, $tag_filter_options );
+	$faq_selectors                = implode(
+		',',
+		array(
+			'#ewd-ufaq-faq-list',
+			'.ewd-ufaq-faqs',
+			'.ewd-ufaq-faq-categories',
+			'.ewd-ufaq-faq-div',
+		)
+	);
+	$nodes                        = $html->Find( $faq_selectors );
+
+	if ( empty( $nodes['success'] ) || empty( $nodes['ids'] ) ) {
+		return $content;
+	}
+
+	$ids_to_remove = eztoc_ultimate_faqs_get_top_level_node_ids( $html, $nodes['ids'] );
+
+	foreach ( $ids_to_remove as $id ) {
+		$html->Remove( $id );
+	}
+
+	return $html->Implode( 0, $tag_filter_options );
+}
+
+/**
+ * Keep only outermost FAQ nodes when multiple nested selectors match.
+ *
+ * @param TagFilterNodes $html TagFilter node tree.
+ * @param array          $ids  Matched node IDs.
+ * @return array
+ */
+function eztoc_ultimate_faqs_get_top_level_node_ids( $html, $ids ) {
+
+	$top_level = array();
+
+	foreach ( $ids as $id ) {
+		$is_nested = false;
+
+		foreach ( $ids as $other_id ) {
+			if ( (int) $id === (int) $other_id ) {
+				continue;
+			}
+
+			if ( eztoc_ultimate_faqs_node_is_descendant_of( $html, $id, $other_id ) ) {
+				$is_nested = true;
+				break;
+			}
+		}
+
+		if ( ! $is_nested ) {
+			$top_level[] = $id;
+		}
+	}
+
+	return $top_level;
+}
+
+/**
+ * Whether a FAQ node is nested inside another matched FAQ node.
+ *
+ * @param TagFilterNodes $html        TagFilter node tree.
+ * @param int            $node_id     Candidate node ID.
+ * @param int            $ancestor_id Potential ancestor node ID.
+ * @return bool
+ */
+function eztoc_ultimate_faqs_node_is_descendant_of( $html, $node_id, $ancestor_id ) {
+
+	$node_id     = (int) $node_id;
+	$ancestor_id = (int) $ancestor_id;
+
+	if ( ! isset( $html->nodes[ $node_id ] ) ) {
+		return false;
+	}
+
+	$parent = $html->nodes[ $node_id ]['parent'];
+
+	while ( false !== $parent && isset( $html->nodes[ $parent ] ) ) {
+		if ( (int) $parent === $ancestor_id ) {
+			return true;
+		}
+
+		$parent = $html->nodes[ $parent ]['parent'];
+	}
+
+	return false;
+}
+
+add_filter(
+	'ez_toc_strip_shortcodes_tagnames',
+	'eztoc_ultimate_faqs_strip_shortcodes_tagnames',
+	10,
+	2
+);
+add_filter(
+	'eztoc_strip_shortcodes_tagnames',
+	'eztoc_ultimate_faqs_strip_shortcodes_tagnames',
+	10,
+	2
+);
+/**
+ * Strip Ultimate FAQ shortcodes during TOC content processing (memory-fix path).
+ *
+ * @param array  $tags_to_remove Shortcode tags to strip.
+ * @param string $content        Post content being processed.
+ * @return array
+ */
+function eztoc_ultimate_faqs_strip_shortcodes_tagnames( $tags_to_remove, $content ) {
+
+	if ( ! eztoc_is_plugin_active( 'ultimate-faqs/ultimate-faqs.php' ) ) {
+		return $tags_to_remove;
+	}
+
+	$faq_shortcodes = array(
+		'ultimate-faqs',
+		'ultimate-faq-search',
+		'select-faq',
+		'popular-faqs',
+		'recent-faqs',
+		'submit-question',
+	);
+
+	return array_merge( $tags_to_remove, $faq_shortcodes );
+}
+
+/**
+ * Whether `the_content` is running inside another `the_content` filter (e.g. per-FAQ answer).
+ *
+ * @since 2.0.86
+ * @return bool
+ */
+function eztoc_ultimate_faqs_is_nested_the_content() {
+
+	global $wp_current_filter;
+
+	if ( empty( $wp_current_filter ) ) {
+		return false;
+	}
+
+	$depth = 0;
+
+	foreach ( (array) $wp_current_filter as $filter ) {
+		if ( 'the_content' === $filter ) {
+			$depth++;
+		}
+	}
+
+	return $depth > 1;
+}
+
+/**
+ * Skip EZ TOC on nested FAQ plugin `the_content` calls to avoid OOM and duplicate TOC output.
+ *
+ * Ultimate FAQ and Helpie FAQ run apply_filters( 'the_content', ... ) on each FAQ answer while
+ * rendering embedded FAQ lists, which would otherwise trigger full TOC processing per item.
+ *
+ * @since 2.0.86
+ * @return bool
+ */
+function eztoc_ultimate_faqs_should_skip_the_content() {
+
+	if ( ! eztoc_ultimate_faqs_is_nested_the_content() ) {
+		return false;
+	}
+
+	return eztoc_is_plugin_active( 'ultimate-faqs/ultimate-faqs.php' )
+		|| eztoc_is_plugin_active( 'helpie-faq/helpie-faq.php' );
+}
+
+/**
+ * Remove Ultimate FAQ Gutenberg blocks from raw post content before nested the_content / do_blocks.
+ *
+ * Prevents the full FAQ list from being expanded during EZ TOC heading extraction.
+ *
+ * @since 2.0.86
+ * @param string $content Raw post content.
+ * @return string
+ */
+function eztoc_ultimate_faqs_strip_blocks_from_process_content( $content ) {
+
+	if ( ! is_string( $content ) || '' === $content || false === strpos( $content, 'ewd-ultimate-faqs' ) ) {
+		return $content;
+	}
+
+	$content = preg_replace( '/<!-- wp:ewd-ultimate-faqs\/[\S]+ \/-->\s*/s', '', $content );
+	$content = preg_replace( '/<!-- wp:ewd-ultimate-faqs\/[\S]+[\s\S]*?<!-- \/wp:ewd-ultimate-faqs\/[\S]+ -->\s*/s', '', $content );
+
+	return $content;
+}
+
+/**
+ * Helpie FAQ Plugin compatibility.
+ *
+ * FAQ blocks render question/category headings that must not appear in the page TOC.
+ *
+ * @link https://wordpress.org/plugins/helpie-faq/
+ * @since 2.0.87
+ */
+add_filter(
+	'ez_toc_exclude_by_selector',
+	'eztoc_helpie_faq_exclude_by_selector'
+);
+add_filter(
+	'eztoc_exclude_by_selector',
+	'eztoc_helpie_faq_exclude_by_selector'
+);
+add_filter(
+	'ez_toc_maybe_apply_the_content_filter',
+	'eztoc_helpie_faq_maybe_skip_nested_the_content'
+);
+add_filter(
+	'eztoc_maybe_apply_the_content_filter',
+	'eztoc_helpie_faq_maybe_skip_nested_the_content'
+);
+add_filter(
+	'ez_toc_strip_shortcodes_tagnames',
+	'eztoc_helpie_faq_strip_shortcodes_tagnames',
+	10,
+	2
+);
+add_filter(
+	'eztoc_strip_shortcodes_tagnames',
+	'eztoc_helpie_faq_strip_shortcodes_tagnames',
+	10,
+	2
+);
+
+/**
+ * Exclude Helpie FAQ nodes from eligible TOC headings.
+ *
+ * @param array $selectors Selector map passed to ezTOC heading extraction.
+ * @return array
+ */
+function eztoc_helpie_faq_exclude_by_selector( $selectors ) {
+
+	if ( ! eztoc_is_plugin_active( 'helpie-faq/helpie-faq.php' ) ) {
+		return $selectors;
+	}
+
+	$selectors['helpie-faq']           = '.helpie-faq';
+	$selectors['helpie-faq-group']   = '.helpie-faq-group';
+	$selectors['helpie-faq-accordian'] = '.helpie-faq-accordian';
+
+	return $selectors;
+}
+
+/**
+ * Skip EZ TOC auto-insert on nested Helpie FAQ `the_content` calls.
+ *
+ * @since 2.0.87
+ *
+ * @param bool $apply Whether to apply the `the_content` TOC callback.
+ * @return bool
+ */
+function eztoc_helpie_faq_maybe_skip_nested_the_content( $apply ) {
+
+	if ( ! $apply || ! eztoc_is_plugin_active( 'helpie-faq/helpie-faq.php' ) ) {
+		return $apply;
+	}
+
+	return eztoc_ultimate_faqs_is_nested_the_content() ? false : $apply;
+}
+
+/**
+ * Strip Helpie FAQ shortcodes during TOC content processing.
+ *
+ * @param array  $tags_to_remove Shortcode tags to strip.
+ * @param string $content        Post content being processed.
+ * @return array
+ */
+function eztoc_helpie_faq_strip_shortcodes_tagnames( $tags_to_remove, $content ) {
+
+	if ( ! eztoc_is_plugin_active( 'helpie-faq/helpie-faq.php' ) ) {
+		return $tags_to_remove;
+	}
+
+	if ( false === strpos( $content, 'helpie_faq' ) ) {
+		return $tags_to_remove;
+	}
+
+	$tags_to_remove[] = 'helpie_faq';
+
+	return $tags_to_remove;
+}
+
+/**
+ * Do not allow `the_content` TOC callback to run when editing a page in Visual Composer.
+ *
+ * @link https://wordpress.org/support/topic/correct-method-to-determine-if-using-frontend-editor/#post-12404679
+ *
+ * @since 2.0
+ */
+add_filter(
+	'ez_toc_maybe_apply_the_content_filter',
+	function( $apply ) {
+
+		if ( function_exists( 'vchelper' ) ) {
+
+			if ( vchelper( 'Frontend' )->isPageEditable() ) {
+
+				$apply = false;
+			}
+		}
+
+		return $apply;
+	}
+);
+
+/**
+ * Do not allow `the_content` TOC callback to run when editing a page in WPBakery Page Builder.
+ *
+ * @link https://wordpress.org/support/topic/correct-method-to-determine-if-using-frontend-editor/#post-12404679
+ *
+ * @since 2.0
+ */
+add_filter(
+	'ez_toc_maybe_apply_the_content_filter',
+	function( $apply ) {
+
+		if ( function_exists( 'vc_is_page_editable' ) ) {
+
+			if ( vc_is_page_editable() ) {
+
+				$apply = false;
+			}
+		}
+
+		return $apply;
+	}
+);
+
+/**
+ * Filter to remove WPBakery Page Builder related shortcodes from being processed as eligible TOC items.
+ *
+ * @since 2.0
+ */
+add_filter(
+	'ez_toc_strip_shortcodes_tagnames',
+	function( $tags_to_remove ) {
+
+		$shortcodes = array (
+			'vc_tta_section',
+		);
+
+		$tags_to_remove = array_merge( $tags_to_remove, $shortcodes );
+
+		return $tags_to_remove;
+	}
+);
+
+/**
+ * Exclude the TOC shortcodes from being processed in the admin in the Divi Theme by Elegant Themes.
+ *
+ * @since 2.0
+ */
+add_action(
+	'et_pb_admin_excluded_shortcodes',
+	function( $shortcodes ) {
+
+		$shortcodes[] = 'ez-toc';
+		//This is legacy hook,it will be removed in future versions.
+		$filtered_shortcode = apply_filters( 'ez_toc_shortcode', 'toc' ); //phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Legacy hook name.
+		//This is the new hook , it should be used instead of the legacy one.
+		$filtered_shortcode = apply_filters( 'eztoc_shortcode', 'toc' );
+		$shortcodes[] = $filtered_shortcode;
+
+		return $shortcodes;
+	}
+);
+
+/**
+ * Callback the for `et_builder_render_layout` filter.
+ *
+ * Attaches the ezTOC `the_content` filter callback to the Divi layout content filter so the in page anchors will be
+ * added the post content.
+ *
+ * NOTE: Set priority 12 to run after Divi runs the `do_shortcode` filter on its layout content.
+ *
+ * @link https://wordpress.org/support/topic/anchor-links-not-being-added-with-divi/
+ *
+ * @since 2.0
+ */
+add_filter(
+	'et_builder_render_layout',
+	array( 'ezTOC', 'the_content' ),
+	12,
+	1
+);
+
+/**
+ * Add support for the Uncode Theme.
+ *
+ * @link http://www.undsgn.com/
+ *
+ * @since 2.0.11
+ */
+add_action(
+
+	'after_setup_theme',
+	function() {
+		if ( function_exists( 'uncode_setup' ) ) {
+		add_filter(
+				'uncode_single_content_final_output',
+				array( 'ezTOC', 'the_content' ),
+				10,
+				1
+			);
+			add_filter(
+				'ez_toc_apply_filter_status_manually',
+				'__return_false' ,
+				10,
+				1
+			);
+
+		}
+	},
+	11
+);
+
+/**
+ * Remove the Starbox plugin node from the post content before extracting headings.
+ * @link https://wordpress.org/plugins/starbox/
+ * @since 2.0
+ */
+add_filter(
+	'ez_toc_exclude_by_selector',
+	function( $selectors ) {
+
+		$selectors['starbox'] = '.abh_box';
+
+		return $selectors;
+	}
+);
+
+/**
+ * Remove the WordPress Related Posts plugin node from the post content before extracting headings.
+ * @link
+ * @since 2.0
+ */
+add_filter(
+	'ez_toc_exclude_by_selector',
+	function( $selectors ) {
+
+		$selectors['wordpress-23-related-posts-plugin'] = '.wp_rp_content';
+
+		return $selectors;
+	}
+);
+
+/**
+ * Remove the Atomic Blocks plugin node from the post content before extracting headings.
+ * @link
+ * @since 2.0
+ */
+add_filter(
+	'ez_toc_exclude_by_selector',
+	function( $selectors ) {
+
+		$selectors['atomic-blocks-cta']         = '.ab-block-cta';
+		$selectors['atomic-blocks-testimonial'] = '.ab-block-testimonial';
+
+		return $selectors;
+	}
+);
+
+/**
+ * Remove the Ultimate Addons for VC Composer node from the post content before extracting headings.
+ * @link
+ * @since 2.0
+ */
+add_filter(
+	'ez_toc_exclude_by_selector',
+	function( $selectors ) {
+
+		$selectors['ultimate-addons-for-vc-composer'] = '.ult_tabs';
+
+		return $selectors;
+	}
+);
+
+/**
+ * Remove the WP Product Review node from the post content before extracting headings.
+ * @link
+ * @since 2.0
+ */
+add_filter(
+	'ez_toc_exclude_by_selector',
+	function( $selectors ) {
+
+		$selectors['wp-product-review'] = '.wppr-review-container';
+
+		return $selectors;
+	}
+);
+
+/**
+ * Remove the Contextual Related Posts node from the post content before extracting headings.
+ *
+ * @link https://wordpress.org/plugins/contextual-related-posts/
+ * @since 2.0.9
+ */
+add_filter(
+	'ez_toc_exclude_by_selector',
+	function( $selectors ) {
+
+		$selectors['contextual-related-posts'] = '.crp_related';
+
+		return $selectors;
+	}
+);
+
+class ezTOC_Elementor {
+
+	/**
+	 * Whether the excerpt is being called.
+	 *
+	 * Used to determine whether the call to `the_content()` came from `get_the_excerpt()`.
+	 *
+	 * @since 2.0.2
+	 *
+	 * @var bool Whether the excerpt is being used. Default is false.
+	 */
+	private $_is_excerpt = false;
+
+	/**
+	 * ezTOC_Elementor constructor.
+	 *
+	 * @since 2.0.2
+	 */
+	public function __construct() {
+
+		// Hack to avoid enqueue post CSS while it's a `the_excerpt` call.
+		add_filter( 'get_the_excerpt', array( $this, 'start_excerpt_flag' ), 1 );
+		add_filter( 'get_the_excerpt', array( $this, 'end_excerpt_flag' ), 20 );
+		add_filter( 'ez_toc_maybe_apply_the_content_filter', array( $this, 'maybe_apply_the_content_filter' ) );
+
+		add_filter(
+			'ez_toc_strip_shortcodes_tagnames',
+			function( $tags_to_remove ) {
+
+				$shortcodes = array (
+					'elementor-template',
+				);
+
+				$tags_to_remove = array_merge( $tags_to_remove, $shortcodes );
+
+				return $tags_to_remove;
+			}
+		);
+	}
+
+	/**
+	 * Callback for the `elementor/init` action.
+	 *
+	 * Add the compatibility filters for Elementor.
+	 *
+	 * @since 2.0.2
+	 */
+	public static function start() {
+
+		new self();
+	}
+
+	/**
+	 * Callback for the `get_the_excerpt` filter.
+	 *
+	 * Start excerpt flag.
+	 *
+	 * Flags when `the_excerpt` is called. Used to avoid enqueueing CSS in the excerpt.
+	 *
+	 * @since 2.0.2
+	 *
+	 * @param string $excerpt The post excerpt.
+	 *
+	 * @return string The post excerpt.
+	 */
+	public function start_excerpt_flag( $excerpt ) {
+		$this->_is_excerpt = true;
+		return $excerpt;
+	}
+
+	/**
+	 * Callback for the `get_the_excerpt` filter.
+	 *
+	 * End excerpt flag.
+	 *
+	 * Flags when `the_excerpt` call ended.
+	 *
+	 * @since 2.0.2
+	 *
+	 * @param string $excerpt The post excerpt.
+	 *
+	 * @return string The post excerpt.
+	 */
+	public function end_excerpt_flag( $excerpt ) {
+		$this->_is_excerpt = false;
+		return $excerpt;
+	}
+
+	/**
+	 * Callback for the `ez_toc_maybe_apply_the_content_filter` filter.
+	 *
+	 * If doing Elementor excerpt, which calls `the_content` filter, do not apply the ezTOC `the_content` filter.
+	 *
+	 * @since 2.0.2
+	 *
+	 * @param bool $apply
+	 *
+	 * @return bool mixed
+	 */
+	public function maybe_apply_the_content_filter( $apply ) {
+
+		if ( $this->_is_excerpt ) {
+
+			$apply = false;
+		}
+
+		return $apply;
+	}
+}
+add_action( 'elementor/init', array( 'ezTOC_Elementor', 'start' ) );
+
+
+/**
+ * Do not allow `the_content` TOC callback to run when on WooCommerce pages.
+ *
+ * @link https://docs.woocommerce.com/document/conditional-tags/
+ * @link https://wordpress.stackexchange.com/a/246525/59053
+ *
+ * @since 2.0.11
+ */
+add_filter(
+	'ez_toc_maybe_apply_the_content_filter',
+	function( $apply ) {
+
+		$active_plugins = get_option( 'active_plugins' ) ;
+
+		// Just in case an array is not returned.
+		if ( ! is_array( $active_plugins ) ) {
+
+			$active_plugins = array();
+		}
+
+		$string = implode( '|', $active_plugins );
+
+		if ( class_exists( 'WooCommerce' ) && FALSE !== stripos( $string, 'woocommerce.php' ) ) {
+
+			/** @noinspection PhpUndefinedFunctionInspection */
+			if ( is_shop() ||			     
+			     is_product_tag() ||
+			     is_cart() ||
+			     is_checkout() ||
+			     is_account_page() ||
+			     is_wc_endpoint_url()
+			) {
+
+				$apply = false;
+			}
+
+		}
+
+		return $apply;
+	}
+);
+/**
+ * Beaver Builder Plugin Customization
+ * for remove excluding heading contents
+ * @since 2.0.34
+ */
+add_filter(
+	'fl_builder_layout_data',
+	'eztoc_flbuilder_layout_data',
+	12,
+	1
+);
+function eztoc_flbuilder_layout_data( $data ) {
+	if( has_action( 'the_content' ) ) {
+		if(!empty($data)){
+			foreach( $data as $nodeKey => $node ){		
+				$data[$nodeKey] = $node;
+			}
+		}				
+	}
+	return $data;
+}
+
+/**
+ * Kalium - Medical Theme Compatibility
+ * remove duplicate eztoc containers
+ * in faq sections
+ * @since 2.0.38
+ */
+
+if ( eztoc_is_plugin_active( 'js_composer/js_composer.php' ) && ( 'Kalium - Medical Theme' == $eztoc_current_theme || 'Kalium' == $eztoc_current_theme ) ) {
+    add_shortcode( 'vc_toggle', 'eztoc_vc_toggle_modified' );
+    function eztoc_vc_toggle_modified( $atts, $content, $tag ) {
+        if ( 'vc_toggle' == $tag ) {
+
+            /**
+             * Shortcode attributes
+             * @var $atts
+             * @var $title
+             * @var $el_class
+             * @var $style
+             * @var $color
+             * @var $size
+             * @var $open
+             * @var $css_animation
+             * @var $el_id
+             * @var $content - shortcode content
+             * @var $css
+             * Shortcode class
+             * @var WPBakeryShortCode_Vc_Toggle $this_WPBakeryShortCode_Vc_Toggle
+             */
+            $title = $el_class = $style = $color = $size = $open = $css_animation = $css = $el_id = '';
+
+            $inverted = false;
+            $atts = vc_map_get_attributes('vc_toggle', $atts);
+            extract($atts);
+
+    // checking is color inverted
+            $style = str_replace('_outline', '', $style, $inverted);
+            /**
+             * @since 4.4
+             */
+            $elementClass = array(
+                'base' => apply_filters(VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, 'vc_toggle', 'vc_toggle', $atts), //phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound
+                // TODO: check this code, don't know how to get base class names from params
+                'style' => 'vc_toggle_' . $style,
+                'color' => ( $color ) ? 'vc_toggle_color_' . $color : '',
+                'inverted' => ( $inverted ) ? 'vc_toggle_color_inverted' : '',
+                'size' => ( $size ) ? 'vc_toggle_size_' . $size : '',
+                'open' => ( 'true' === $open ) ? 'vc_toggle_active' : '',
+                'extra' => $atts['css'],
+                'css_animation' => '',
+                    // TODO: remove getCssAnimation as function in helpers
+            );
+
+            $class_to_filter = trim(implode(' ', $elementClass));
+            $class_to_filter .= vc_shortcode_custom_css_class($css, ' ');
+            $css_class = apply_filters(VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, $class_to_filter, 'vc_toggle', $atts); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound,WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound - thirdparty hook
+			
+            $heading_output = apply_filters('wpb_toggle_heading', $atts['title'], array(  // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- using Thirdparty hook for compatibility
+                'title' => $title,
+                'open' => $open,
+                    ));
+            $output = '<div ' . ( isset( $el_id ) && ! empty( $el_id ) ? 'id="' . esc_attr( $el_id ) . '"' : '' ) . ' class="' . esc_attr( $css_class ) . '"><div class="vc_toggle_title">' . $heading_output . '<i class="vc_toggle_icon"></i></div><div class="vc_toggle_content">' . wpb_js_remove_wpautop( $content, true ) . '</div></div>';
+
+            return $output;
+        }
+    }
+}
+
+/**
+ * Poka Theme Compatibility
+ * remove duplicate eztoc containers
+ * in header & footer sections
+ * @since 2.0.46
+ */
+
+if ( 'PokaTheme' == $eztoc_current_theme ) {
+    add_action( 'poka_before_main', 'eztoc_poka_before_main', 4, 0 );
+    function eztoc_poka_before_main() {
+        remove_action('poka_before_main', 'poka_before_content', 5, 0);
+        remove_filter( 'the_content', array( 'ezTOC', 'the_content' ), 100 );
+        add_action( 'poka_before_main', 'poka_before_content', 5, 0 );
+    }
+    add_action( 'poka_before_main', 'eztoc_poka_before_main_after', 6, 0 );
+    function eztoc_poka_before_main_after() {
+        add_filter( 'the_content', array( 'ezTOC', 'the_content' ), 100 );
+    }
+    add_action( 'poka_after_main', 'eztoc_poka_after_main', 3, 0 );
+    function eztoc_poka_after_main() {
+        remove_action( 'poka_after_main', 'poka_banner_footer', 4, 0 );
+        remove_filter( 'the_content', array( 'ezTOC', 'the_content' ), 100 );
+        add_action( 'poka_after_main', 'poka_banner_footer', 4, 0 );
+    }
+    add_action( 'poka_after_main', 'eztoc_poka_after_main_after', 5, 0 );
+    function eztoc_poka_after_main_after() {
+        add_filter( 'the_content', array( 'ezTOC', 'the_content' ), 100 );
+    }
+}
+
+if ( 'MAKE9 Divi zh-tw Child' == $eztoc_current_theme ) {
+    add_filter('ez_toc_regex_filteration', 'eztoc_regex_filteration_for_divi_chinese');
+    function eztoc_regex_filteration_for_divi_chinese( $regEx ) {
+        $regEx = '/(<h([1-6]{1})(?:(?!\bclass="et_pb_slide_title")[^>])*>)(.*)<\/h\2>/msuU';
+    
+        return $regEx;
+    }
+}
+if ( eztoc_is_plugin_active( 'lasso/affiliate-plugin.php' ) ) {
+    add_filter('ez_toc_regex_filteration', 'eztoc_regex_filteration_for_lasso_products');
+    function eztoc_regex_filteration_for_lasso_products( $regEx ) {
+        $regEx = '/(<(?:h|H){1}([1-6]{1})[^>]*>)(.*)<\/(?:h|H){1}\2>/msuU';
+
+        return $regEx;
+    }
+}
+
+/**
+ * Grow, Social Pro by Mediavine plugin compatibility
+ * Anchors were not being generated for special char like inverted comma.
+ * @since 2.0.52
+ */
+add_filter('ez_toc_extract_headings_content', 'eztoc_social_pro_by_mediavine_com',10,1);
+
+function eztoc_social_pro_by_mediavine_com($content){
+	
+	if(class_exists( '\Mediavine\Grow\Shortcodes' ) && ezTOC_Option::get('mediavine-create') == 1){
+
+		$settings = Mediavine\Grow\Settings::get_setting( 'dpsp_pinterest_share_images_setting', [] );		
+		if ( !empty( $settings['share_image_page_builder_compatibility'] ) || ! empty( $settings['share_image_lazy_load_compatibility'] )  ) {
+			$content = mb_convert_encoding( html_entity_decode($content), 'HTML-ENTITIES', 'UTF-8' );	
+		}
+						
+	}
+		
+	return $content;
+}
+
+/**
+ * Parse Gutenberg reusable block
+ * @since 2.0.53
+ */
+add_filter('ez_toc_modify_process_page_content', 'eztoc_parse_gutenberg_reusable_block',10,1);
+
+function eztoc_parse_gutenberg_reusable_block($content){
+
+	// Skip when content is already rendered HTML (no block comments left).
+	if ( ! function_exists( 'do_blocks' ) || ! function_exists( 'has_blocks' ) || ! has_blocks( $content ) ) {
+		return $content;
+	}
+
+	if ( has_block( 'easytoc/toc', $content ) ) {
+		$content = str_replace( '<!-- wp:easytoc/toc /-->', 'eztoctempblock', $content );
+		$content = do_blocks( $content );
+		$content = str_replace( 'eztoctempblock', '<!-- wp:easytoc/toc /-->', $content );
+	} else {
+		$content = do_blocks( $content );
+	}
+
+	return $content;
+}
+
+/**
+ * Create by Mediavine plugin compatibility
+ * shortcode were not being parse for custom post type mv_create added by this plugin inside post content
+ * @since 2.0.52
+ */
+add_filter('ez_toc_modify_process_page_content', 'eztoc_parse_mv_create_shortcode',10,1);
+
+function eztoc_parse_mv_create_shortcode($content){
+	if ( eztoc_is_plugin_active( 'mediavine-create/mediavine-create.php' ) && ezTOC_Option::get('mediavine-create') == 1) {
+		if ( has_shortcode( $content, 'mv_create' )) {
+			$content = do_shortcode($content);		
+		}		
+	}			
+	return $content;
+}
+/**
+ * Remove the Create by Mediavine node from the post content before extracting headings.
+ *
+ * @link https://wordpress.org/plugins/mediavine-create/
+ * @since 2.0.8
+ * Modifyed in 2.0.52
+ */
+add_filter(
+	'ez_toc_exclude_by_selector',
+	function( $selectors ) {
+		if(ezTOC_Option::get('mediavine-create') != 1){
+			$selectors['mediavine-create'] = '.mv-create-card';
+		}	
+		return $selectors;
+	}
+);
+
+
+/**
+ * UpSolution Core compatibility
+ * @link https://help.us-themes.com/impreza/us-core/
+ * @since 2.0.54
+ */
+
+ add_filter('ez_toc_sidebar_has_toc_filter', 'eztoc_sidebar_has_toc_status_us_core', 10,1);
+
+ function eztoc_sidebar_has_toc_status_us_core($status){
+ 
+	if(function_exists('us_get_page_area_id')){
+		$content_template_id = us_get_page_area_id( 'content' );
+		$content_template    = get_post( (int) $content_template_id );
+		if(isset($content_template->post_content)){
+			if ( has_shortcode( $content_template->post_content, 'toc' ) || has_shortcode( $content_template->post_content, 'ez-toc' ) ) {
+				$status = true;				
+			}
+		}
+	}
+
+	 return $status;
+}
+
+/**
+ * Custom Field Suite plugin sidebar compatibility
+ *
+ * @link https://wordpress.org/plugins/custom-field-suite/
+ * @since 2.0.52
+ *
+ */
+
+add_filter('ez_toc_sidebar_has_toc_filter', 'eztoc_sidebar_has_toc_status_cfs', 10,1);
+
+function eztoc_sidebar_has_toc_status_cfs($status){
+
+	global $post;
+	if ( ! ( $post instanceof WP_Post ) || empty( $post->ID ) ) {
+        return $status;
+    }
+	if(function_exists('CFS')){
+		$fields = CFS()->get(false, $post->ID);
+		if(isset($fields['use_ez_toc']) &&  $fields['use_ez_toc'] == true){
+			$status = true;
+		}
+
+	}
+	
+	return $status;
+}
+
+/**
+ * Block Editor Template
+ *
+ * @link https://developer.wordpress.org/block-editor/
+ * @since 2.0.54
+ *
+ */
+
+ if(function_exists('wp_is_block_theme') && wp_is_block_theme()){
+	add_filter('ez_toc_sidebar_has_toc_filter', 'eztoc_guttenberg_has_toc', 10,1);
+ }
+
+ function eztoc_guttenberg_has_toc($status){
+
+	$block_post_template = function_exists('get_block_template') ? get_block_template(get_stylesheet() . '//' .'single') : null;
+	$block_page_template = function_exists('get_block_template') ? get_block_template(get_stylesheet() . '//' .'page') : null;
+	if(is_single() && is_object($block_post_template) && (has_shortcode($block_post_template->content,'toc') || has_shortcode($block_post_template->content,'ez-toc')))
+	{
+		$status=true;
+	}
+	if(is_page() && is_object($block_post_template) && (has_shortcode($block_page_template->content,'toc') || has_shortcode($block_page_template->content,'ez-toc')))
+	{
+		$status=true;
+	}
+	return $status;
+ }
+
+ if(function_exists('init_goodlayers_core_system') && ezTOC_Option::get('goodlayers-core') == 1){
+
+	eztoc_enable_output_buffer_filter();
+	add_filter('eztoc_wordpress_final_output', 'eztoc_gdlr_core_the_content', 10, 1);
+
+function eztoc_gdlr_core_the_content($content){
+	if(is_admin()){
+		return $content;
+	}
+	$post     = ezTOC::get( get_the_ID() );
+	if($post){
+		$find    = $post->getHeadings();	
+		$replace = $post->getHeadingsWithAnchors();
+		$toc     = $post->getTOC();
+		if ( !is_array($content ) && !empty( $find ) && !empty( $replace ) && !empty( $content ) ){
+			$content =  str_replace( $find, $replace, $content );
+		}
+
+		if ( strpos('id="ez-toc-container"',$content) === false ){
+			$content =  str_replace( '<div class="traveltour-single-article-content">', '<div class="traveltour-single-article-content">'.$toc, $content );
+		}
+	} 
+	
+	return $content;
+}
+
+// function to get combined content of goodlayers builder
+function ezTOC_gdlr_core()
+{
+   $postID =  get_the_ID(); 
+   $gdlr_core_builder  = get_post_meta( $postID ,'gdlr-core-page-builder' , false );
+   $gdlr_core_builder = isset($gdlr_core_builder[0])?$gdlr_core_builder[0]:$gdlr_core_builder;
+   $content="";
+   if(!empty($gdlr_core_builder) && is_array($gdlr_core_builder))
+   {
+     foreach($gdlr_core_builder as $element)
+     {
+		
+		if(isset($element['items']))
+		{
+			
+			foreach($element['items'] as $inner_element){
+				if($inner_element['template'] === 'element'){
+					$content= $content . eztoc_gdlr_core_fetch_content($inner_element);
+			    }else if(isset($inner_element['items'])){
+					foreach($inner_element['items'] as $level2_element){
+						if($level2_element['template'] === 'element'){
+							$content= $content . eztoc_gdlr_core_fetch_content($level2_element);
+						}
+					}
+				}
+			}
+	   }
+
+	   if(isset($element['template']) && $element['template'] === 'element'){
+		$content= $content . eztoc_gdlr_core_fetch_content($element);
+   }
+}
+}
+   return $content;
+} 
+
+function eztoc_gdlr_core_fetch_content($element){
+	if(isset($element['type']) && isset($element['value'])){
+		$type = $element['type'];
+		$element_class = 'gdlr_core_pb_element_'.$type;
+			if(class_exists($element_class)){
+				return $element_class::get_content($element['value']);
+			}
+	}
+	return '';
+}
+// Adding Goodlayers Content  to create combined toc
+add_filter( 'ez_toc_modify_process_page_content', 'eztoc_gdlr_core_process_page_content', 10, 1 );
+function eztoc_gdlr_core_process_page_content( $content )
+{
+
+    if (function_exists( 'ezTOC_gdlr_core' ) )
+    {
+        $eztoc_gdlr_core_content = ezTOC_gdlr_core();
+        $content = $content . $eztoc_gdlr_core_content;
+    }
+    return $content;
+}
+
+}
+
+if(function_exists('rest_get_url_prefix') && ezTOC_Option::get('disable_in_restapi') == 1){
+	add_filter( 'ez_toc_modify_process_page_content', 'eztoc_check_for_wp_json_request', 999, 1 );
+	function eztoc_check_for_wp_json_request($content){
+		if ( empty( $_SERVER['REQUEST_URI'] ) ) {
+			return $content;
+		}
+		$rest_prefix         = trailingslashit( rest_get_url_prefix() );
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Resone: We are not saving this variable, just checking its value.
+		if(strpos( $_SERVER['REQUEST_URI'], $rest_prefix ) !== false){
+			return '';
+		}
+		return $content;
+	}
+}
+
+/**
+ * Molongui Authorship plugin compatibility
+ * @link https://wordpress.org/plugins/molongui-authorship/
+ * @since 2.0.56
+ */
+if( function_exists( 'molongui_authorship_load_plugin_textdomain' ) && ezTOC_Option::get('molongui-authorship') == 1 ){
+add_filter( 'ez_toc_modify_process_page_content', 'eztoc_content_molongui_authorship');
+	function eztoc_content_molongui_authorship($content){
+		if(!empty($content))
+		{
+			if(strpos($content, "m-a-box-container") !== false){
+
+					libxml_use_internal_errors(true);
+					$dom = new DOMDocument();
+					$dom->loadHTML(mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8'));
+					$xpath = new DOMXPath($dom);
+					if($xpath){
+						$divs = $xpath->query('//div[@class="m-a-box-container"]');
+							if($divs){
+								foreach ($divs as $div) {
+									$div->parentNode->removeChild($div);
+								}
+							}					
+						// Save the modified HTML content
+						$modifiedHtml = $dom->saveHTML();
+						// Return the modified HTML content
+						return $modifiedHtml;
+					}
+
+			}
+			
+		}
+		return $content;		
+	}
+}
+
+/* 
+* Compatibility for Walker News Template
+* @since 2.0.56
+*/
+if(function_exists('wp_get_theme')){
+    $eztoc_theme_data = wp_get_theme();
+	if(!empty($eztoc_theme_data) && $eztoc_theme_data->get_template()== 'walker-news-template')
+    {
+		add_filter( 'ez_toc_sidebar_has_toc_filter', 'eztoc_walker_news_template_fix');
+
+		function eztoc_walker_news_template_fix($status){
+			
+				$content = get_the_content();
+				if(function_exists('do_blocks')){
+					$content = do_blocks($content);
+				}
+				if(has_shortcode($content,'toc') || has_shortcode($content,'ez-toc')){
+					return true;
+				}
+
+				return 	$status;
+			}	
+		
+	}
+	
+}
+
+/**
+ * Mediavine trellis compatibility
+ * @since 2.0.57
+ */
+add_filter('eztoc_modify_the_content','eztoc_mediavine_trellis_content_improver');
+function eztoc_mediavine_trellis_content_improver($content) {
+    if (class_exists('Mediavine\Trellis\Custom_Content') && ezTOC_Option::get('mediavine-create') == 1) {
+        $pattern = '/<script type="application\/ld\+json">(.*?)<\/script>/s';
+        preg_match_all($pattern, $content, $matches);
+        $jsonLdContents = $matches[1];
+        $content = preg_replace_callback($pattern, function ($match) {
+            static $index = 0;
+            return '<!-- JSON-LD-PLACEHOLDER-' . $index++ . ' -->';
+        }, $content);
+
+        $content = mb_convert_encoding(html_entity_decode($content), 'HTML-ENTITIES', 'UTF-8');
+        
+        if (!empty($jsonLdContents)) {
+            foreach ($jsonLdContents as $index => $jsoncontent) {
+                // Decode JSON content to an array
+                $decodedJson = json_decode($jsoncontent, true);
+
+                // Check if decoding was successful
+                if (json_last_error() === JSON_ERROR_NONE) {
+                    // Apply htmlspecialchars to name and description if they exist
+                    if (isset($decodedJson['name'])) {
+                        $decodedJson['name'] = htmlspecialchars($decodedJson['name'], ENT_QUOTES | ENT_HTML5);
+                    }
+                    if (isset($decodedJson['description'])) {
+                        $decodedJson['description'] = htmlspecialchars($decodedJson['description'], ENT_QUOTES | ENT_HTML5);
+                    }
+
+                    // Re-encode the JSON content
+                    $jsoncontent = json_encode($decodedJson, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+                }
+
+                // Replace the placeholder with the modified script tag
+                $placeholder = '<!-- JSON-LD-PLACEHOLDER-' . $index . ' -->';
+                $scriptTag = '<script type="application/ld+json">' . $jsoncontent . '</script>';
+                $content = str_replace($placeholder, $scriptTag, $content);
+            }
+        }
+    }
+    return $content;
+}
+
+//Perfmatters Compatibility
+add_filter('ez_toc_pro_inline_css','eztoc_perfmatters_touch_css');
+function eztoc_perfmatters_touch_css($css){
+	if('css' == ezTOC_Option::get( 'toc_loading' ) && class_exists('Perfmatters\Config') && !empty(Perfmatters\Config::$options['assets']['delay_js']) && !empty(Perfmatters\Config::$options['assets']['fastclick'])) {
+	 	$css .= 'label > * { pointer-events:none; }';
+	}
+  	return $css;
+}
+/**
+ * Woodmart + WPbakery Gallery compatibility
+ * @since 2.0.58
+ */
+function eztoc_woodmart_gallery_fix(){
+	if(function_exists('woodmart_load_classes') && class_exists('Vc_Manager')){
+		
+		if(!wp_style_is('el-section-title')){
+			wp_register_style( 'el-section-title', WOODMART_THEME_DIR.'/css/parts/el-section-title.min.css', array() ,ezTOC::VERSION );
+			wp_enqueue_style( 'el-section-title' );
+		}
+		
+		if(!wp_style_is('wd-section-title-style-simple-and-brd')){
+		wp_register_style( 'wd-section-title-style-simple-and-brd', WOODMART_THEME_DIR.'/css/parts/el-section-title-style-simple-and-brd.min.css', array() ,ezTOC::VERSION);
+		wp_enqueue_style( 'wd-section-title-style-simple-and-brd' );
+		}
+		
+		if(!wp_style_is('wd-owl-carousel')){
+			wp_register_style( 'wd-owl-carousel', WOODMART_THEME_DIR.'/css/parts/lib-owl-carousel.min.css', array() ,ezTOC::VERSION);
+			wp_enqueue_style( 'wd-owl-carousel' );
+		}
+		
+		if(!wp_style_is('wd-image-gallery')){
+			wp_register_style( 'wd-image-gallery', WOODMART_THEME_DIR.'/css/parts/el-gallery.min.css', array() ,ezTOC::VERSION);
+			wp_enqueue_style( 'wd-image-gallery' );
+		}
+
+		if(!wp_style_is('wd-accordion')){
+			wp_register_style( 'wd-accordion', WOODMART_THEME_DIR.'/css/parts/el-accordion.min.css', array() ,ezTOC::VERSION);
+			wp_enqueue_style( 'wd-accordion' );
+		}
+		
+		if(!wp_style_is('wd-tabs')){
+			wp_register_style( 'wd-tabs', WOODMART_THEME_DIR.'/css/parts/el-tabs.min.css', array() ,ezTOC::VERSION);
+			wp_enqueue_style( 'wd-tabs' );
+		}
+
+		if(!wp_style_is('wd-team-member')){
+			wp_register_style( 'wd-team-member', WOODMART_THEME_DIR.'/css/parts/el-team-member.min.css', array() ,ezTOC::VERSION);
+			wp_enqueue_style( 'wd-team-member' );
+		}
+			
+	}	
+}
+add_action('wp_enqueue_scripts', 'eztoc_woodmart_gallery_fix');
+
+/**
+ * Ad inserter plugin compatibility
+ * url : https://wordpress.org/plugins/ad-inserter/
+ * When toc shortcode being added inside ad inserter block, it runs infinite loop. Below code is the solution for it.
+ * @since 2.0.62
+ * return boolean
+ */
+add_filter('ez_toc_apply_filter_status_manually', 'eztoc_adinserter_block_has_toc_shortcode',10,1);
+
+function eztoc_adinserter_block_has_toc_shortcode($status){
+	if ( eztoc_is_plugin_active( 'ad-inserter/ad-inserter.php' ) ) {
+		global $block_object;		
+		for ($block = 0; $block <= 96; $block ++) {
+			if(isset($block_object [$block])){
+				$obj = $block_object [$block];				
+				if(is_object($obj) && is_array($obj->wp_options)){
+					if(has_shortcode( $obj->wp_options['code'] , 'ez-toc' ) || has_shortcode( $obj->wp_options['code'] , 'toc' )){
+						$status = false;
+						break;			
+					}
+				}
+			}
+			
+		}
+
+	}
+	
+	return $status;
+}
+
+/**
+ * Current Year, Symbols and IP Shortcode compatibility
+ * shortcode were not being parse for heading title in elementor
+ * plugin url : https://wordpress.org/plugins/current-year-shortcode/
+ * @since 2.0.62
+ */
+add_filter('ez_toc_table_heading_title_anchor', 'eztoc_parse_curreny_year_shortcode',10,1);
+add_filter('ez_toc_content_heading_title', 'eztoc_parse_curreny_year_shortcode',10,1);
+add_filter('ez_toc_content_heading_title_anchor', 'eztoc_parse_curreny_year_shortcode',10,1);
+
+function eztoc_parse_curreny_year_shortcode($content){
+	if ( eztoc_is_plugin_active ('current-year-shortcode/year-kgm.php') ) {
+			$content = do_shortcode($content);			
+	}			
+	return $content;
+}
+
+/** Pressbook theme Compatiblity
+ * @since 2.0.63
+ * @param bool $status The current status of applying the TOC filter.
+ * @return bool The updated status of applying the TOC filter.
+ */
+add_filter('ez_toc_apply_filter_status_manually', 'eztoc_press_books_theme_compatibility',10,1);
+function eztoc_press_books_theme_compatibility($status){
+  if(function_exists('wp_get_theme')){
+    $active_theme = wp_get_theme();
+    if(!empty($active_theme) && $active_theme->get( 'Name' ) == 'McLuhan'){
+      $status = false;
+    }
+  }
+  return $status;
+}
+
+
+/**
+ * Divi Builder Compatibility
+ * @since 2.0.64
+ */
+add_filter(
+	'ez_toc_strip_shortcodes_with_inner_content',
+	function( $tags_to_remove ) {
+		$shortcodes = array (
+			'et_pb_text'
+		);
+		$tags_to_remove = array_merge( $tags_to_remove, $shortcodes );
+		return $tags_to_remove;
+	}
+
+);
+
+/**
+ * To fix icon issue in TOC for the woo category page description
+ * @param mixed $allowed_tags
+ * @return mixed
+ */
+function eztoc_woo_category_toc_fix($allowed_tags) {
+    
+    if( function_exists('is_product_category') && is_product_category() && true == ezTOC_Option::get( 'include_product_category', false)) {
+    $allowed_tags['svg'] = array(
+        'width' => true,
+        'height' => true,
+        'viewbox' => true,
+        'xmlns' => true,
+        'fill' => true,
+        'stroke' => true,
+        'style' => true,
+        'class'=> true
+    );
+    
+    $allowed_tags['path'] =   array(
+        'd' => true,
+        'fill' => true,
+        'stroke' => true,
+    );
+    
+     $allowed_tags['span']['style'] = true;
+        
+        
+    }
+
+    return $allowed_tags;
+}
+add_filter('wp_kses_allowed_html', 'eztoc_woo_category_toc_fix', 10, 2);
+
+/*
+*Compatibility for Customize Post Categories for WPBakery Page Builder plugin 
+*@see https://github.com/ahmedkaludi/easy-table-of-contents/issues/843
+*/
+
+/**
+ * Custom post categories for  Customize Post Categories for WPBakery Page Builder plugin
+ * @param string $content
+ * @return string
+ */
+add_filter('ez_toc_modify_process_page_content', 'eztoc_post_categories_for_wpbakery_page_builder', 10, 1);
+
+function eztoc_post_categories_for_wpbakery_page_builder($content) {
+    if (function_exists('Vc_Manager')  && function_exists('POST_CATEGORY_WPBAKERY_PAGE_BUILDER\\plugin_init') && is_category( ) ) {
+        global $wpdb;
+        $template_id =  eztoc_wpbakery_get_template_id();
+		if($template_id){
+			$content = get_post_field('post_content', $template_id);
+		}
+    }
+    return $content;
+}
+
+/**
+ * Start buffer for Customize Post Categories for WPBakery Page Builder plugin
+ */
+add_action('template_redirect', 'eztoc_start_buffer_for_wpbakery_category');
+function eztoc_start_buffer_for_wpbakery_category() {
+	if (function_exists('Vc_Manager')  && is_category() && function_exists('POST_CATEGORY_WPBAKERY_PAGE_BUILDER\\plugin_init')) {
+        ob_start('eztoc_modify_wpbakery_category_template');
+    }
+}
+
+
+
+/**
+ * Modify the category template for WPBakery Page Builder with Post Categories plugin
+ * @param string $buffer
+ * @return string
+ */
+function eztoc_modify_wpbakery_category_template($buffer) {
+	$template_id =eztoc_wpbakery_get_template_id();
+	if($template_id){
+		$post = ezTOC::get( $template_id );
+		if($post){
+			$find    = $post->getHeadings();
+			$replace = $post->getHeadingsWithAnchors();
+			if (  !empty( $find ) && !empty( $replace ) && !empty( $buffer ) ){
+				return mb_find_replace($find, $replace, $buffer);
+			}
+		}  
+	}
+
+    return $buffer;
+}
+
+/**
+ * Get template id for Customize Post Categories for WPBakery Page Builder plugin
+ * @return mixed
+ */
+function eztoc_wpbakery_get_template_id() {
+
+    global $wpdb;
+
+    $category_id = get_queried_object_id();
+
+    // Unique cache key per category
+    $cache_key = 'eztoc_template_id_' . $category_id;
+    $cache_group = 'eztoc';
+
+    // Check cache
+    $template_id = wp_cache_get( $cache_key, $cache_group );
+
+    if ( false !== $template_id ) {
+        return $template_id;
+    }
+
+    // No cache found → run original logic
+    $template_id = false;
+    $meta_template = get_term_meta($category_id, 'mst_post_cat_template', true);
+
+    if ( $meta_template && $meta_template != 'active' ) {
+
+        $template_id = $meta_template;
+
+    } else {
+		//phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Need to use direct query
+        $template_id = $wpdb->get_var( $wpdb->prepare("
+            SELECT p.ID 
+            FROM {$wpdb->posts} p
+            INNER JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id
+            WHERE p.post_type = %s
+              AND p.post_status = %s
+              AND pm.meta_key = %s
+              AND pm.meta_value = %s
+            LIMIT 1
+            ",
+            'category_wpb',
+            'publish',
+            'mst_active',
+            '1'
+        ));
+    }
+
+    // Store in cache
+    wp_cache_set( $cache_key, $template_id, $cache_group );
+
+    return $template_id;
+}
+
+/**
+ * Add js backup fix for Customize Post Categories for WPBakery Page Builder plugin
+ */
+add_action('wp_footer', 'eztoc_js_to_footer_for_wpbakery_category');
+function eztoc_js_to_footer_for_wpbakery_category() {
+    $js_fallback_fix = false;
+
+    if (function_exists('Vc_Manager') && is_category() && function_exists('POST_CATEGORY_WPBAKERY_PAGE_BUILDER\\plugin_init')) {
+        $template_id = eztoc_wpbakery_get_template_id();
+        if ($template_id) {
+            $post = ezTOC::get($template_id);
+            if ($post) {
+                $find = $post->getHeadings();
+                $replace = $post->getHeadingsWithAnchors();
+                if (!empty($find) && !empty($replace)) {
+                    $js_fallback_fix = '
+                        document.addEventListener("DOMContentLoaded", function () {
+                            function eztocfindAndReplaceContent(findArray, replaceArray) {
+                                if (!Array.isArray(findArray) || !Array.isArray(replaceArray) || findArray.length !== replaceArray.length) {
+                                    console.error("The find and replace arrays must be of the same length.");
+                                    return;
+                                }
+
+                                let bodyContent = document.body.innerHTML;
+                                findArray.forEach((findText, index) => {
+                                    const replaceText = replaceArray[index];
+                                    const regex = new RegExp(findText, "g");
+                                    bodyContent = bodyContent.replace(regex, replaceText);
+                                });
+
+                                document.body.innerHTML = bodyContent;
+                            }
+
+                            const findArray = ' . wp_json_encode($find) . ';
+                            const replaceArray = ' . wp_json_encode($replace) . ';
+                            eztocfindAndReplaceContent(findArray, replaceArray);
+                        });
+                    ';
+                }
+            }
+        }
+    } elseif (class_exists('Publisher') && is_singular()) {
+        $post = ezTOC::get(get_the_ID());
+        if ($post) {
+            $find = $post->getHeadings();
+            $replace = $post->getHeadingsWithAnchors();
+            if (!empty($find)) {
+				$js_fallback_fix = '
+				document.addEventListener("DOMContentLoaded", function () {
+
+					function eztocExtractHeadingTexts(inputArray) {
+					return inputArray.map((input) => {
+					if (input.length <= 6) {
+						return "";
+					}
+					return input.substring(1, input.length - 5);
+					});
+				}
+				function eztocStripTags(input) {
+					return input.replace(/<[^>]*>.*?<\/[^>]*>/gis, \'\');
+				}
+
+					const findArray = eztocExtractHeadingTexts(' . wp_json_encode($find) . ');
+					const replaceArray = eztocExtractHeadingTexts(' . wp_json_encode($replace) . ');
+					const elements = document.querySelectorAll(\'h1:not(:has(span.ez-toc-section)), h2:not(:has(span.ez-toc-section)), h3:not(:has(span.ez-toc-section)), h4:not(:has(span.ez-toc-section)), h5:not(:has(span.ez-toc-section)), h6:not(:has(span.ez-toc-section)), H1:not(:has(span.ez-toc-section)), H2:not(:has(span.ez-toc-section)), H3:not(:has(span.ez-toc-section)), H4:not(:has(span.ez-toc-section)), H5:not(:has(span.ez-toc-section)), H6:not(:has(span.ez-toc-section))\');
+					if(elements.length){
+						elements.forEach(function(item, index){
+							let heading_inner =  item.innerHTML;
+							let heading_txt =  eztocStripTags(heading_inner);
+							const find_index = findArray.indexOf(heading_txt.trim());
+							if (find_index !== -1){
+								heading_inner = heading_inner.replace(findArray[find_index],replaceArray[find_index]);
+								item.innerHTML = heading_inner;
+							}
+						});
+					}
+
+				});
+';
+            }
+        }
+    }
+
+    if ($js_fallback_fix) {
+        ?>
+        <script id="eztoc-wpbakery-link-fix-fallback">
+            <?php echo $js_fallback_fix; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Safe variable already escaped ?>
+        </script>
+        <?php
+    }
+}
+
+/**
+ * Compatibility for the theme "Cheap Energy 24"
+ */
+add_filter( 'ez_toc_apply_filter_status_manually', function( $default ) {
+    
+	 $theme = wp_get_theme();
+    if ( $theme->get( 'Name' ) == "cheapenergy24" && function_exists('fusion_builder_activate') ) {
+        return true;
+    }
+    return $default;
+} );
+
+add_action( 'wp_enqueue_scripts', function () {
+    if ( function_exists( 'fusion_builder_activate' ) ) {
+        wp_enqueue_script( 'eztoc-anchor-fix' );
+    }
+}, 20 );

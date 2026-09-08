@@ -1,0 +1,1124 @@
+# Translation of Plugins - SiteGuard WP Plugin - Stable (latest release) in Japanese
+# This file is distributed under the same license as the Plugins - SiteGuard WP Plugin - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2026-08-28 04:45:32+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: GlotPress/4.1.0\n"
+"Language: ja_JP\n"
+"Project-Id-Version: Plugins - SiteGuard WP Plugin - Stable (latest release)\n"
+
+#: classes/siteguard-captcha.php:135
+msgid "The setting has been left as it is, and CAPTCHA resumes automatically once the problem is resolved."
+msgstr "設定はそのまま維持されており、問題が解決すると画像認証は自動的に再開されます。"
+
+#. translators: %s: Filesystem path of the CAPTCHA working directory.
+#: classes/siteguard-captcha.php:128
+msgid "SiteGuard WP Plugin: CAPTCHA is turned on, but the directory %s cannot be written to by the web server, so CAPTCHA is not being applied. Please change the owner of this directory to the user the web server runs as."
+msgstr "SiteGuard WP Plugin: 画像認証が有効になっていますが、ディレクトリ %s に Web サーバーから書き込みができないため、画像認証が適用されません。このディレクトリの所有者を、Web サーバーが実行されているユーザーに変更してください。"
+
+#: classes/siteguard-captcha.php:124
+msgid "SiteGuard WP Plugin: CAPTCHA is turned on, but this server cannot render the CAPTCHA image, so CAPTCHA is not being applied. Please contact your hosting provider about the required image rendering support."
+msgstr "SiteGuard WP Plugin: 画像認証は有効になっていますが、このサーバーでは画像認証画像をレンダリングできないため、画像認証は適用されません。必要な画像レンダリングサポートについては、ホスティングプロバイダーにお問い合わせください。"
+
+#. translators: %s: login URL
+#: classes/siteguard-rename-login.php:1081
+msgid "Another active plugin is also changing the login page URL (%s). Two different login URLs stay available, which weakens this feature, and the two can conflict later. Please use the login page URL change feature in only one of the two plugins."
+msgstr "別のプラグインもログインページの URL（%s）を変更しています。2つの異なるログイン URL が利用可能になるため、この機能が弱体化し、後々競合する可能性があります。ログインページの URL 変更機能は、2つのプラグインのうち1つだけを使用してください。"
+
+#. translators: 1: plugin name, 2: login URL
+#: classes/siteguard-rename-login.php:1074
+msgid "%1$s is also changing the login page URL (%2$s). Two different login URLs stay available, which weakens this feature, and the two can conflict later. Please use the login page URL change feature in only one of the two plugins."
+msgstr "%1$s はログインページの URL (%2$s) も変更します。2つの異なるログイン URL が利用可能になるため、この機能が弱体化し、後で競合する可能性があります。ログインページの URL 変更機能は、2 つのプラグインのうちいずれか 1 つのみで使用してください。"
+
+#. translators: %s: login URL
+#: classes/siteguard-rename-login.php:1066
+msgid "Another active plugin is also changing the login page URL, to the same URL as SiteGuard (%s). In this state the login page can stop working with a PHP fatal error. Please turn off the login page URL change feature in one of the two plugins."
+msgstr "別の有効なプラグインも、ログインページの URL を SiteGuard と同じ URL（%s）に変更しています。この状態では、ログインページが PHP の致命的なエラーで動作しなくなる可能性があります。どちらか一方のプラグインで、ログインページの URL 変更機能を無効にしてください。"
+
+#. translators: 1: plugin name, 2: login URL
+#: classes/siteguard-rename-login.php:1059
+msgid "%1$s is also changing the login page URL, to the same URL as SiteGuard (%2$s). In this state the login page can stop working with a PHP fatal error. Please turn off the login page URL change feature in one of the two plugins."
+msgstr "%1$s はログインページの URL を SiteGuard (%2$s) と同じ URL に変更しています。この状態では、ログインページが PHP の致命的なエラーで動作しなくなる可能性があります。どちらかのプラグインでログインページの URL 変更機能を無効にしてください。"
+
+#. translators: %s: test URL
+#: admin/siteguard-menu-rename-login.php:249
+msgid "Reason: the self-test request to %s did not return the expected result; the .htaccess rewrite did not take effect (it may be disabled by AllowOverride or overridden by another rule)."
+msgstr "理由: %s への自己テスト要求が期待される結果を返さなかったため、.htaccess の書き換えが有効になりませんでした（AllowOverride によって無効化されているか、別のルールによって上書きされている可能性があります）。"
+
+#. translators: 1: test URL, 2: HTTP status code
+#: admin/siteguard-menu-rename-login.php:242
+msgid "Reason: the self-test request to %1$s returned HTTP %2$s instead of 200."
+msgstr "理由: %1$s への自己テストリクエストが200ではなく HTTP %2$s を返しました。"
+
+#: admin/siteguard-menu-rename-login.php:236
+msgid "The request was redirected (for example HTTP to HTTPS, or a canonical redirect)."
+msgstr "リクエストがリダイレクトされました (例えば、HTTP から HTTPS へのリダイレクト、または正規リダイレクト) 。"
+
+#: admin/siteguard-menu-rename-login.php:234
+msgid "The request was rate-limited or temporarily blocked. This is usually a server-side rate limit or anti-bot/access-control protection (separate from .htaccess), not a sign that .htaccess is broken. Try again after a short while."
+msgstr "リクエストはレート制限されているか、一時的にブロックされています。これは通常、サーバー側のレート制限またはアンチボット/アクセス制御保護（.htaccessとは別）によるもので、.htaccessが壊れていることを示すものではありません。しばらくしてからもう一度お試しください。"
+
+#: admin/siteguard-menu-rename-login.php:232
+msgid "The test URL was not found, for example because WordPress is installed in a subdirectory so the self-test URL does not map to it, or the request is routed elsewhere."
+msgstr "テスト URL が見つかりませんでした。たとえば、WordPress がサブディレクトリにインストールされているため、自己テスト URL がそれにマッピングされない、またはリクエストが別の場所にルーティングされたなどの理由が考えられます。"
+
+#: admin/siteguard-menu-rename-login.php:230
+msgid "It may be blocked by an access restriction such as Basic authentication or an IP restriction."
+msgstr "ベーシック認証や IP 制限などのアクセス制限によってブロックされている可能性があります。"
+
+#. translators: 1: test URL, 2: error message
+#: admin/siteguard-menu-rename-login.php:223
+msgid "Reason: the self-test request to %1$s failed (%2$s). The server may be unable to reach its own URL (loopback)."
+msgstr "理由: %1$s への自己テスト要求が失敗しました (%2$s) 。サーバーが自身の URL に到達できない可能性があります (ループバック) 。"
+
+#. translators: %s: test URL
+#: admin/siteguard-menu-rename-login.php:217
+msgid "Reason: the .htaccess file is present but the server is ignoring it (for example AllowOverride is set to None, or mod_rewrite is not enabled for this directory), so the rewrite for %s had no effect."
+msgstr "理由: .htaccess ファイルは存在しますが、サーバーがそれを無視しています (例えば、AllowOverride が None に設定されているか、このディレクトリに対して mod_rewrite が有効になっていないため) 。そのため、%s の書き換えは効果がありませんでした。"
+
+#: admin/siteguard-menu-rename-login.php:213
+msgid "Reason: the temporary test files could not be written."
+msgstr "理由: 一時テストファイルを書き込めませんでした。"
+
+#: admin/siteguard-menu-rename-login.php:211
+msgid "Reason: a temporary test directory could not be created in the WordPress directory (check write permission)."
+msgstr "理由: WordPress ディレクトリに一時テストディレクトリを作成できませんでした (書き込み権限を確認してください) 。"
+
+#: admin/siteguard-menu-rename-login.php:209
+msgid "Reason: the .htaccess file (or the WordPress directory) is not writable."
+msgstr "理由: .htaccess ファイル (または WordPress ディレクトリ) への書き込み権限がありません。"
+
+#: admin/siteguard-menu-rename-login.php:207
+msgid "Reason: the server is not Apache/LiteSpeed, so .htaccess is not used."
+msgstr "理由: サーバーが Apache/LiteSpeed ではないため、.htaccess は使用されません。"
+
+#: admin/siteguard-menu-rename-login.php:205
+msgid "Reason: the server is Nginx, which does not use .htaccess."
+msgstr "理由: サーバーは Nginx であり、.htaccess を使用できません。"
+
+#: admin/siteguard-menu-author-query.php:163
+msgid "This list shows REST API namespaces registered on this site. Select a namespace and add it to the exclusion list."
+msgstr "このリストには、このサイトに登録されている REST API ネームスペースが表示されます。ネームスペースを選択して、除外リストに追加してください。"
+
+#: admin/siteguard-menu-author-query.php:162
+msgid "Add Excluded Namespace"
+msgstr "除外するネームスペースを追加"
+
+#: admin/siteguard-menu-author-query.php:130
+msgid "Specify REST API namespaces to exclude. Enter one per line. Existing plugin-based entries are still supported."
+msgstr "除外する REST API ネームスペースを指定してください。1行に1つずつ入力してください。既存のプラグイン名ベースのエントリも引き続きサポートされます。"
+
+#: admin/siteguard-menu-author-query.php:127
+msgid "Excluded REST API Namespaces"
+msgstr "除外する REST API ネームスペース"
+
+#: siteguard.php:341
+msgid "Please bookmark the %1$s. You can change this setting %2$s."
+msgstr "%1$s をブックマークしてください。設定変更は %2$s です。"
+
+#: siteguard.php:338
+msgid "The login page URL has been changed."
+msgstr "ログインページの URL は変更されました。"
+
+#: classes/siteguard-updates-notify.php:218
+msgid "Theme: %1$s has an update available. Please update from version %2$s to %3$s."
+msgstr "テーマ: %1$s に新しいバージョンがあります。バージョン %2$s から %3$s に更新してください。"
+
+#: classes/siteguard-updates-notify.php:176
+msgid "Plugin: %1$s has an update available. Please update from version %2$s to %3$s."
+msgstr "プラグイン: %1$s に新しいバージョンがあります。バージョン %2$s から %3$s へ更新してください。"
+
+#: classes/siteguard-updates-notify.php:142
+msgid "WordPress core: Update available. Please update from version %1$s to %2$s."
+msgstr "WordPress に新しいバージョンがあります。バージョン %1$s から %2$s に更新してください。"
+
+#: classes/siteguard-updates-notify.php:70
+msgid "wp-cron.php cannot be accessed. This may be caused by access control settings."
+msgstr "wp-cron.php にアクセスできません。アクセス制御が原因である可能性があります。"
+
+#: classes/siteguard-updates-notify.php:59
+msgid "DISABLE_WP_CRON is set to true. This feature cannot be used."
+msgstr "DISABLE_WP_CRON が true に設定されています。この機能は使用できません。"
+
+#: classes/siteguard-rename-login.php:1116
+msgid "SiteGuard: Could not create the required login file. Please check file permissions or contact your hosting provider."
+msgstr "SiteGuard: 必要なログインファイルを作成できませんでした。ファイルのアクセス許可を確認するか、ホスティングプロバイダにお問い合わせください。"
+
+#: classes/siteguard-rename-login.php:652
+msgid "An email has been sent if the address exists."
+msgstr "メールを送信しました。（メールアドレスが登録されている場合のみ）"
+
+#: classes/siteguard-rename-login.php:644
+msgid ""
+"You requested the login URL.\n"
+"\n"
+"URL: %s\n"
+"\n"
+"If you did not request this, you can ignore this email.\n"
+"\n"
+"--\n"
+"SiteGuard WP Plugin"
+msgstr ""
+"リクエストされたログインURLは以下のとおりです。\n"
+"\n"
+"URL: %s\n"
+"\n"
+"心当たりがない場合は、このメールを無視してください。\n"
+"\n"
+"--\n"
+"SiteGuard WP Plugin"
+
+#: classes/siteguard-rename-login.php:642
+msgid "WordPress: Login URL Rescue"
+msgstr "WordPress: ログイン URL (レスキュー)"
+
+#: classes/siteguard-rename-login.php:629
+msgid "Invalid CAPTCHA."
+msgstr "画像認証が間違っています。"
+
+#: classes/siteguard-rename-login.php:619
+msgid "Please enter a valid email address."
+msgstr "有効なメールアドレスを入力してください。"
+
+#: classes/siteguard-rename-login.php:607
+msgid "Invalid request."
+msgstr "無効なリクエストです。"
+
+#: classes/siteguard-rename-login.php:580
+msgid "Send email"
+msgstr "メールを送信"
+
+#: classes/siteguard-rename-login.php:574
+msgid "Enter the characters shown above"
+msgstr "上に表示された文字を入力してください。"
+
+#: classes/siteguard-rename-login.php:568
+msgid "Administrator email address"
+msgstr "管理者メールアドレス"
+
+#: classes/siteguard-rename-login.php:553
+#: classes/siteguard-rename-login.php:555
+#: classes/siteguard-rename-login.php:658
+#: classes/siteguard-rename-login.php:660
+msgid "Login URL Rescue"
+msgstr "ログイン URL レスキュー"
+
+#: classes/siteguard-rename-login.php:498
+msgid "Request limit reached. Please try again later."
+msgstr "リクエスト数の上限に達しました。しばらくしてからもう一度お試しください。"
+
+#: classes/siteguard-login-lock.php:145
+msgid "ERROR: Please log in again"
+msgstr "エラー: もう一度ログインしてください。"
+
+#: classes/siteguard-captcha.php:271
+msgid "Please enter the characters shown above."
+msgstr "上に表示された文字を入力してください。"
+
+#: classes/siteguard-captcha.php:228
+msgid "ERROR: Please check your input and try again."
+msgstr "エラー: 入力内容を確認の上、もう一度送信してください。"
+
+#: classes/siteguard-captcha.php:221
+msgid "Your server does not support the image rendering required for this feature. Please contact your hosting provider."
+msgstr "お使いのサーバーは、この機能に必要な画像レンダリングをサポートしていません。ホスティングプロバイダーにお問い合わせください。"
+
+#: classes/siteguard-captcha.php:205
+msgid "Failed to write the CAPTCHA image file."
+msgstr "画像認証の画像ファイルの書き込みに失敗しました。"
+
+#: classes/siteguard-captcha.php:191
+msgid "This feature requires additional server components. Please contact your hosting provider to enable it."
+msgstr "この機能には追加のサーバーコンポーネントが必要です。有効化するには、ご利用のホスティングプロバイダーにお問い合わせください。"
+
+#: classes/siteguard-base.php:52
+msgid "This plugin does not support WordPress multisite."
+msgstr "このプラグインは WordPress のマルチサイトをサポートしていません。"
+
+#: admin/siteguard-menu-waf-tuning-support.php:344
+msgid "Delete WAF Exclusion Rule"
+msgstr "WAF 除外ルールの削除"
+
+#: admin/siteguard-menu-waf-tuning-support.php:318
+msgid "Enter the target filename. You can also paste the URL path before the question mark (?)."
+msgstr "対象のファイル名を指定してください。URL ('?' より前の部分) をペーストすることもできます。"
+
+#: admin/siteguard-menu-waf-tuning-support.php:311
+msgid "Enter the detected signature name or signature ID. To specify more than one, enter each one on a separate line."
+msgstr "検出されたシグネチャ名またはシグネチャ ID を指定してください。複数指定する場合は改行で区切ってください。"
+
+#: admin/siteguard-menu-waf-tuning-support.php:302
+msgid "Edit WAF Exclusion Rule"
+msgstr "「WAF 除外ルール」編集"
+
+#: admin/siteguard-menu-waf-tuning-support.php:300
+msgid "Add WAF Exclusion Rule"
+msgstr "「WAF 除外ルール」追加"
+
+#: admin/siteguard-menu-waf-tuning-support.php:282
+msgid "If WAF (SiteGuard Server Edition) is installed on the server, it may occasionally block legitimate WordPress actions. Use this tool to create exceptions so those actions work while keeping WAF protection active."
+msgstr "サーバーに WAF (SiteGuard Server Edition) がインストールされている場合、正当な WordPress の操作がブロックされることがあります。このツールを使用して例外を作成することで、WAF による保護を維持しながら、これらの操作を実行できるようになります。"
+
+#: admin/siteguard-menu-waf-tuning-support.php:272
+msgid "This feature requires WAF (SiteGuard Server Edition) to be installed on the server."
+msgstr "この機能を使用するには、サーバーに WAF (SiteGuard Server Edition) がインストールされている必要があります。"
+
+#: admin/siteguard-menu-waf-tuning-support.php:199
+msgid "Rules removed"
+msgstr "ルールを削除しました。"
+
+#: admin/siteguard-menu-waf-tuning-support.php:38
+msgid "ERROR: Cannot enable WAF tuning support. The .htaccess file appears to be ignored by the server (e.g. AllowOverride is disabled, or mod_rewrite is not loaded)."
+msgstr "エラー: WAFチューニングサポートを有効にできません。.htaccessファイルがサーバーによって無視されているようです（例：AllowOverrideが無効になっているか、mod_rewriteがロードされていない）。"
+
+#: admin/siteguard-menu-waf-tuning-support.php:36
+msgid "ERROR: Cannot enable WAF tuning support because the WordPress installation directory is not writable."
+msgstr "エラー: WordPress のインストールディレクトリに書き込み権限がないため、WAF チューニングのサポートを有効にできません。"
+
+#: admin/siteguard-menu-waf-tuning-support.php:34
+msgid "ERROR: Cannot enable WAF tuning support because the .htaccess file is not writable."
+msgstr "エラー: .htaccess ファイルに書き込み権限がないため、WAF チューニングのサポートを有効にできません。"
+
+#: admin/siteguard-menu-waf-tuning-support.php:32
+msgid "ERROR: WAF tuning support is not available on Nginx. This feature edits the .htaccess file used by Apache."
+msgstr "エラー: Nginx では WAF チューニングはサポートされていません。この機能は Apache で使用される .htaccess ファイルを編集します。"
+
+#: admin/siteguard-menu-updates-notify.php:161
+msgid "Keeping WordPress core, plugins, and themes up to date is a basic security practice. This feature checks for updates every 24 hours and emails administrators when updates are available."
+msgstr "セキュリティの基本は、常に最新のバージョンを使用することです。WordPress、プラグイン、テーマの更新が必要になった場合に、管理者にメールで通知します。更新の確認は、24時間毎に実行されます。"
+
+#: admin/siteguard-menu-same-error.php:85
+msgid "Reduces username enumeration by showing the same error message for all login failures. The same message is shown whether the username, password, or CAPTCHA is incorrect."
+msgstr "ユーザー名の存在を調査する攻撃を受けにくくするための機能です。ログインに関するエラーメッセージがすべて同じ内容になります。ユーザー名、パスワード、画像認証のどれを間違えても同じエラーメッセージを表示します。"
+
+#: admin/siteguard-menu-rename-login.php:356
+msgid "This protects your site by changing the login page URL, making it harder for automated attacks to find it. The default URL is “login_&lt;5 random digits&gt;” and can be customized."
+msgstr "この機能はログインページの URL を変更することでサイトを保護し、自動化された攻撃者がサイトを見つけにくくします。デフォルトの URL は「login_5桁のランダムな数字」ですが、カスタマイズ可能です。"
+
+#: admin/siteguard-menu-rename-login.php:349
+msgid "Users can request the current login URL by solving a CAPTCHA. For security, a confirmation is always shown regardless of whether the address exists."
+msgstr "画像認証を解くことで、現在のログイン URL をリクエストできます。セキュリティ上の理由から、メールアドレスが存在するかどうかにかかわらず、常に確認画面が表示されます。"
+
+#: admin/siteguard-menu-rename-login.php:348
+msgid "Enable login rescue"
+msgstr "ログイン URL レスキューを有効にする。"
+
+#: admin/siteguard-menu-rename-login.php:334
+msgid "Letters, numbers, hyphens, and underscores only."
+msgstr "英数字、ハイフン、アンダースコアのみ使用可能です。"
+
+#: admin/siteguard-menu-rename-login.php:332
+msgid "The actual login URL will include .php at the end."
+msgstr "実際のログイン URL の末尾には「.php」が含まれます。"
+
+#: admin/siteguard-menu-rename-login.php:314
+msgid "Works automatically on most servers. If activation fails, please check file permissions or contact your hosting provider."
+msgstr "ほとんどのサーバーでは自動的に動作します。機能の有効化に失敗した場合は、ファイル権限を確認するか、ホスティングプロバイダーにお問い合わせください。"
+
+#: admin/siteguard-menu-rename-login.php:187
+msgid "This feature is currently off."
+msgstr "この機能は、現在無効です。"
+
+#: admin/siteguard-menu-rename-login.php:171
+msgid "The login URL ends with .php because this server does not support .htaccess."
+msgstr "このサーバーは .htaccess をサポートしていないため、ログイン URL は .php で終わります。"
+
+#: admin/siteguard-menu-rename-login.php:169
+#: admin/siteguard-menu-rename-login.php:177
+#: admin/siteguard-menu-rename-login.php:185
+msgid "Login URL:"
+msgstr "ログインURL:"
+
+#: admin/siteguard-menu-rename-login.php:138
+msgid "Please check that the WordPress root directory is writable, or contact your hosting provider."
+msgstr "WordPress のルートディレクトリに書き込み権限があるか確認するか、ホスティングプロバイダーにお問い合わせください。"
+
+#: admin/siteguard-menu-rename-login.php:137
+msgid "ERROR: Failed to enable. WordPress cannot create the required file in the site root."
+msgstr "エラー: 有効化に失敗しました。WordPress はサイトルートに必要なファイルを作成できません。"
+
+#. translators: %s: slug
+#: admin/siteguard-menu-rename-login.php:90
+msgid "%s cannot be used for the new login path because it conflicts with an existing file or directory in the WordPress root."
+msgstr "%s は、WordPress ルートにある既存のファイルまたはディレクトリと競合するため、新しいログインページ名には使用できません。"
+
+#: admin/siteguard-menu-rename-login.php:79
+msgid "The new login path must be at least 4 characters long."
+msgstr "「新しいログインページ名」は、少なくとも4文字以上である必要があります。"
+
+#: admin/siteguard-menu-rename-login.php:73
+msgid "Only letters, numbers, hyphens, and underscores can be used for the login path."
+msgstr "ログイン名には、英数字、ハイフン、アンダースコアのみを使用できます。"
+
+#: admin/siteguard-menu-protect-xmlrpc.php:143
+msgid "Prevents abuse by disabling pingbacks or all XML-RPC access through xmlrpc.php. If you disable all XML-RPC access, plugins and apps that rely on XML-RPC will stop working. If this causes problems, turn this feature off."
+msgstr "Pingback 機能を無効化する、あるいは、XML-RPC 全体 (xmlrpc.php) を無効化し、悪用を防止します。XML-RPC 全体を無効化すると、XML-RPC を使用したプラグインやアプリの使用ができなくなります。支障がある場合には、本機能を使わないでください。"
+
+#: admin/siteguard-menu-login-lock.php:148
+msgid "Reduces the risk of brute-force and password list attacks. If an IP address reaches the specified number of failed login attempts within the selected interval, it is locked for the selected time. User accounts are not locked."
+msgstr "ブルートフォース攻撃、リスト攻撃等の、不正にログインを試みる攻撃を受けにくくするための機能です。特に、機械的な攻撃から防御します。ログインの失敗が指定期間中に指定回数に達した接続元 IP アドレスを指定時間ブロックします。ユーザーアカウント毎のロックは行いません。"
+
+#: admin/siteguard-menu-login-history.php:38
+msgid "View recent login activity and check for suspicious entries. Up to 10,000 records are stored; when the limit is exceeded, the oldest records are deleted first."
+msgstr "ログインの履歴が参照できます。怪しい履歴がないか確認しましょう。履歴は、最大10,000件記錄され、10,000件を超えると古いものから削除されます。"
+
+#: admin/siteguard-menu-login-alert.php:111
+msgid "Sends an email notification when a user logs in, helping you notice unauthorized logins. If you receive a login alert for a login you do not recognize, check the account immediately. The subject and body can use these variables: Site Name:%SITENAME%, User Name:%USERNAME%, Date:%DATE%, Time:%TIME%, IP Address:%IPADDRESS%, User-Agent:%USERAGENT%, Referer:%REFERER%. XML-RPC logins are not reported."
+msgstr "不正なログインに気づきやすくするための機能です。ログインすると、ログインユーザーにメールが送信されます。ログインした心当たりがないのにメールを受信した場合は、不正なログインを疑ってください。サブジェクトとメール本文には、次の変数が使用できます。 (サイト名: %SITENAME%、ユーザ名: %USERNAME%、日付: %DATE%、時刻: %TIME%、IP アドレス: %IPADDRESS%、ユーザーエージェント: %USERAGENT%、リファラー: %REFERER%) XML-RPC によるアクセスは通知されません。"
+
+#: admin/siteguard-menu-fail-once.php:91
+msgid "Reduces the risk of password list attacks by forcing the first valid login attempt to fail. After the first failure, the user must try again between 5 and 60 seconds later with the correct credentials."
+msgstr "リスト攻撃を受けにくくするための機能です。正しいログイン情報を入力しても、1回だけログインが失敗します。5秒以降、60秒以内に再度正しいログイン情報を入力すると、ログインが成功します。"
+
+#: admin/siteguard-menu-dashboard.php:110
+msgid "Displays login history."
+msgstr "ログインの履歴が参照できます。"
+
+#: admin/siteguard-menu-dashboard.php:105
+msgid "Creates WAF exclusion rules for SiteGuard Server Edition."
+msgstr "WAF (SiteGuard Server Edition) の除外ルールを作成します。"
+
+#: admin/siteguard-menu-dashboard.php:100
+msgid "Sends administrators an email when WordPress core, plugins, or themes need updates."
+msgstr "WordPress、プラグイン、テーマの更新が必要になった場合に、管理者にメールで通知します。"
+
+#: admin/siteguard-menu-dashboard.php:99 admin/siteguard-menu-init.php:125
+#: admin/siteguard-menu-init.php:126 admin/siteguard-menu-updates-notify.php:93
+msgid "Update Notifications"
+msgstr "更新通知"
+
+#: admin/siteguard-menu-dashboard.php:95
+msgid "Blocks author queries that may expose usernames."
+msgstr "ユーザー名の漏えいを防ぎます。"
+
+#: admin/siteguard-menu-dashboard.php:90
+msgid "Prevents abuse of XML-RPC and pingbacks."
+msgstr "XML-RPC の悪用を防ぎます。"
+
+#: admin/siteguard-menu-dashboard.php:85
+msgid "Requires the first login attempt to fail, even when the credentials are correct."
+msgstr "正しい入力を行っても、ログインを一回失敗します。"
+
+#: admin/siteguard-menu-dashboard.php:80
+msgid "Sends an email notification when a user logs in."
+msgstr "ログインがあったことを、メールで通知します。"
+
+#: admin/siteguard-menu-dashboard.php:75
+msgid "Temporarily locks out IP addresses after repeated failed login attempts."
+msgstr "ログイン失敗を繰り返す接続元を一定期間ロックします。"
+
+#: admin/siteguard-menu-dashboard.php:70
+msgid "Displays a generic message instead of detailed login error messages."
+msgstr "ログインエラー時の詳細なエラーメッセージに変えて、単一のメッセージを返します。"
+
+#: admin/siteguard-menu-dashboard.php:65
+msgid "Adds CAPTCHA to login, comment, password reset, and user registration forms."
+msgstr "ログインページ、コメント投稿に画像認証を追加します。"
+
+#: admin/siteguard-menu-dashboard.php:60
+msgid "Changes the URL of the login page."
+msgstr "ログインページ名を変更します。"
+
+#: admin/siteguard-menu-dashboard.php:55
+msgid "Restricts wp-admin access to IP addresses that have successfully logged in."
+msgstr "ログインしていない接続元から管理ディレクトリ (/wp-admin/) を守ります。"
+
+#. translators: %1$s: Link to the SiteGuard WP Plugin page.
+#: admin/siteguard-menu-dashboard.php:38
+msgid "Documentation, FAQs, and more information about SiteGuard WP Plugin are available on the %1$s."
+msgstr "SiteGuard WP Plugin に関するドキュメント、FAQ、その他の情報は %1$s にあります。"
+
+#: admin/siteguard-menu-dashboard.php:9
+msgid "Disabled"
+msgstr "無効"
+
+#: admin/siteguard-menu-dashboard.php:9
+msgid "Enabled"
+msgstr "有効"
+
+#: admin/siteguard-menu-captcha.php:160
+msgid "Adds CAPTCHA to login, comment, password reset, and user registration forms. CAPTCHA can use either hiragana or alphanumeric characters."
+msgstr "ログインページ、コメント、パスワードリセット、ユーザー登録画面に画像認証を追加します。画像認証の文字は、ひらがなと英数字が選択できます。"
+
+#: admin/siteguard-menu-captcha.php:146
+msgid "Registration page"
+msgstr "ユーザー登録ページ"
+
+#. translators: %1$s: Example author query.
+#: admin/siteguard-menu-author-query.php:173
+msgid "Prevents username leakage through author queries such as %1$s. You can also disable the REST API to prevent username leakage through REST API requests. If disabling the REST API causes compatibility issues, add the affected REST API namespaces to the exclusion list."
+msgstr "%1$s のようなアクセスによるユーザー名の漏洩を防ぎます。REST API を無効にすることで、REST API 経由のユーザー名の漏洩も防ぐことができます。REST API の無効化によって動作しなくなるプラグインがある場合は、除外プラグインにそのプラグインの REST API ネームスペース、または、プラグイン名を追加してください。REST API ネームスペースは、有効になっている REST API ネームスペースの一覧から追加できます。"
+
+#: admin/siteguard-menu-admin-filter.php:107
+msgid "Blocks unauthorized access to the admin area. Only computers that have previously logged in are allowed through. Access is automatically removed after 24 hours. Note: This protection covers WordPress pages only, not static files such as images or stylesheets. You can specify paths to exclude from this protection."
+msgstr "管理ページ (/wp-admin/) への不正アクセスをブロックします。以前にログインしたことのあるコンピューターのみがアクセスを許可されます。アクセスは24時間後に自動的に削除されます。注: この保護は WordPress ページのみを対象とし、画像やスタイルシートなどの静的ファイルは対象外です。この保護から除外するパスを指定できます。"
+
+#: admin/siteguard-menu-admin-filter.php:101
+msgid "Enter the path after /wp-admin/ to exclude. One path per line."
+msgstr "/wp-admin/ の後の除外するパスを入力してください。1行に1つのパスを入力してください。"
+
+#. translators: %1$s: Link to the online documentation.
+#: admin/siteguard-menu-admin-filter.php:70
+#: admin/siteguard-menu-author-query.php:90 admin/siteguard-menu-captcha.php:82
+#: admin/siteguard-menu-fail-once.php:53
+#: admin/siteguard-menu-login-alert.php:64
+#: admin/siteguard-menu-login-history.php:22
+#: admin/siteguard-menu-login-lock.php:82
+#: admin/siteguard-menu-protect-xmlrpc.php:102
+#: admin/siteguard-menu-rename-login.php:294
+#: admin/siteguard-menu-same-error.php:54
+#: admin/siteguard-menu-updates-notify.php:98
+#: admin/siteguard-menu-waf-tuning-support.php:246
+msgid "See the %1$s."
+msgstr "%1$s を参照してください。"
+
+#: admin/siteguard-menu-admin-filter.php:66
+#: admin/siteguard-menu-author-query.php:86 admin/siteguard-menu-captcha.php:78
+#: admin/siteguard-menu-fail-once.php:49
+#: admin/siteguard-menu-login-alert.php:60
+#: admin/siteguard-menu-login-history.php:18
+#: admin/siteguard-menu-login-lock.php:78
+#: admin/siteguard-menu-protect-xmlrpc.php:98
+#: admin/siteguard-menu-rename-login.php:290
+#: admin/siteguard-menu-same-error.php:50
+#: admin/siteguard-menu-updates-notify.php:94
+#: admin/siteguard-menu-waf-tuning-support.php:242
+msgid "online documentation"
+msgstr "オンラインドキュメント"
+
+#: admin/siteguard-menu-admin-filter.php:57
+#: admin/siteguard-menu-rename-login.php:140
+#: admin/siteguard-menu-waf-tuning-support.php:26
+msgid "ERROR: Failed to update settings. Please try again."
+msgstr "エラー：設定の更新に失敗しました。もう一度お試しください。"
+
+#: admin/siteguard-login-history-table.php:201
+#: admin/siteguard-login-history-table.php:210
+msgid "is not"
+msgstr "不一致"
+
+#: admin/siteguard-login-history-table.php:200
+#: admin/siteguard-login-history-table.php:209
+msgid "is"
+msgstr "一致"
+
+#: admin/siteguard-login-history-table.php:77
+#: admin/siteguard-login-history-table.php:235
+msgid "Username"
+msgstr "ユーザー名"
+
+#. Description of the plugin
+#: siteguard.php
+msgid "Adds WordPress login and admin protections, including CAPTCHA, login lock, login alerts, renamed login URLs, and SiteGuard WAF tuning support."
+msgstr "画像認証、ログインロック、ログインアラート、ログイン URL の変更、SiteGuard WAF チューニングサポートなど、WordPress のログインおよび管理者保護機能を追加します。"
+
+#: classes/siteguard-updates-notify.php:178
+msgid "Changelog: %1$s%2$s"
+msgstr "変更履歴: %1$s%2$s"
+
+#. Author URI of the plugin
+#: siteguard.php
+msgid "https://www.eg-secure.co.jp/"
+msgstr "https://www.eg-secure.co.jp/"
+
+#: classes/siteguard-disable-author-query.php:58
+msgid "The REST API on this site has been disabled."
+msgstr "このサイトでは REST API は無効に設定されています。"
+
+#: admin/siteguard-menu-author-query.php:123
+msgid "Disable REST API"
+msgstr "REST API 無効化"
+
+#: admin/siteguard-menu-author-query.php:86
+msgid "https://www.jp-secure.com/siteguard_wp_plugin_en/howto/author_query/"
+msgstr "https://www.jp-secure.com/siteguard_wp_plugin/howto/author_query/"
+
+#: admin/siteguard-menu-author-query.php:85
+#: admin/siteguard-menu-dashboard.php:94 admin/siteguard-menu-init.php:115
+#: admin/siteguard-menu-init.php:116
+msgid "Block Author Query"
+msgstr "ユーザー名漏えい防御"
+
+#: admin/siteguard-menu-rename-login.php:344
+msgid "Do not redirect from the admin page to the login page."
+msgstr "管理画面 (/wp-admin/) からログイン画面にリダイレクトしない。"
+
+#: admin/siteguard-menu-author-query.php:120
+#: admin/siteguard-menu-rename-login.php:340
+msgid "Option"
+msgstr "オプション"
+
+#: admin/siteguard-menu-rename-login.php:290
+msgid "https://www.jp-secure.com/siteguard_wp_plugin_en/howto/rename_login/"
+msgstr "https://www.jp-secure.com/siteguard_wp_plugin/howto/rename_login/"
+
+#: admin/siteguard-menu-same-error.php:50
+msgid "https://www.jp-secure.com/siteguard_wp_plugin_en/howto/same_error/"
+msgstr "https://www.jp-secure.com/siteguard_wp_plugin/howto/same_error/"
+
+#: admin/siteguard-menu-captcha.php:78
+msgid "https://www.jp-secure.com/siteguard_wp_plugin_en/howto/captcha/"
+msgstr "https://www.jp-secure.com/siteguard_wp_plugin/howto/captcha/"
+
+#: admin/siteguard-menu-login-alert.php:60
+msgid "https://www.jp-secure.com/siteguard_wp_plugin_en/howto/login_alert/"
+msgstr "https://www.jp-secure.com/siteguard_wp_plugin/howto/login_alert/"
+
+#: admin/siteguard-menu-updates-notify.php:94
+msgid "https://www.jp-secure.com/siteguard_wp_plugin_en/howto/updates_notify/"
+msgstr "https://www.jp-secure.com/siteguard_wp_plugin/howto/updates_notify/"
+
+#: admin/siteguard-menu-login-lock.php:78
+msgid "https://www.jp-secure.com/siteguard_wp_plugin_en/howto/login_lock/"
+msgstr "https://www.jp-secure.com/siteguard_wp_plugin/howto/login_lock/"
+
+#: admin/siteguard-menu-admin-filter.php:66
+msgid "https://www.jp-secure.com/siteguard_wp_plugin_en/howto/admin_filter/"
+msgstr "https://www.jp-secure.com/siteguard_wp_plugin/howto/admin_filter/"
+
+#: admin/siteguard-menu-waf-tuning-support.php:242
+msgid "https://www.jp-secure.com/siteguard_wp_plugin_en/howto/waf_tuning_support/"
+msgstr "https://www.jp-secure.com/siteguard_wp_plugin/howto/waf_tuning_support/"
+
+#: admin/siteguard-menu-login-history.php:18
+msgid "https://www.jp-secure.com/siteguard_wp_plugin_en/howto/login_history/"
+msgstr "https://www.jp-secure.com/siteguard_wp_plugin/howto/login_history/"
+
+#: admin/siteguard-menu-fail-once.php:49
+msgid "https://www.jp-secure.com/siteguard_wp_plugin_en/howto/fail_once/"
+msgstr "https://www.jp-secure.com/siteguard_wp_plugin/howto/fail_once/"
+
+#: admin/siteguard-login-history-table.php:246
+msgid "All"
+msgstr "すべて"
+
+#: admin/siteguard-login-history-table.php:245
+msgid "Filter"
+msgstr "絞り込み"
+
+#: admin/siteguard-login-history-table.php:220
+#: classes/siteguard-login-history.php:146
+msgid "XML-RPC"
+msgstr "XML-RPC"
+
+#: admin/siteguard-login-history-table.php:219
+#: classes/siteguard-login-history.php:143
+msgid "Login Page"
+msgstr "ログインページ"
+
+#: admin/siteguard-login-history-table.php:218
+msgid "All Types"
+msgstr "すべてのタイプ"
+
+#: admin/siteguard-login-history-table.php:189
+msgid "All Operations"
+msgstr "すべての結果"
+
+#: admin/siteguard-menu-protect-xmlrpc.php:137
+msgid "Disable XML-RPC"
+msgstr "XML-RPC 無効化"
+
+#: admin/siteguard-login-history-table.php:79
+#: admin/siteguard-login-history-table.php:238
+#: admin/siteguard-menu-protect-xmlrpc.php:131
+msgid "Type"
+msgstr "タイプ"
+
+#: admin/siteguard-menu-protect-xmlrpc.php:98
+msgid "https://www.jp-secure.com/siteguard_wp_plugin_en/howto/xmlrpc/"
+msgstr "https://www.jp-secure.com/siteguard_wp_plugin/howto/xmlrpc/"
+
+#: admin/siteguard-menu-dashboard.php:89 admin/siteguard-menu-init.php:105
+#: admin/siteguard-menu-init.php:106 admin/siteguard-menu-protect-xmlrpc.php:97
+msgid "Protect XML-RPC"
+msgstr "XML-RPC 防御"
+
+#. Plugin URI of the plugin
+#: siteguard.php admin/siteguard-menu-dashboard.php:34
+msgid "https://www.jp-secure.com/siteguard_wp_plugin_en/"
+msgstr "https://www.jp-secure.com/siteguard_wp_plugin/"
+
+#. Author of the plugin
+#: siteguard.php
+msgid "JP-Secure"
+msgstr "ジェイピー・セキュア"
+
+#. Plugin Name of the plugin
+#: siteguard.php
+msgid "SiteGuard WP Plugin"
+msgstr "SiteGuard WP Plugin"
+
+#: siteguard.php:343
+msgid "new login URL"
+msgstr "新しいログインページ URL"
+
+#: classes/siteguard-waf-exclude-rule.php:64
+msgid "ERROR: Syntax Error in Signature"
+msgstr "エラー: シグネチャの指定が正しくありません。"
+
+#: classes/siteguard-waf-exclude-rule.php:55
+msgid "ERROR: Signature is required"
+msgstr "エラー: シグネチャが未入力です。"
+
+#: classes/siteguard-updates-notify.php:266
+msgid "WordPress: Updates available for %s"
+msgstr "WordPress: %s のアップデートが利用可能です。"
+
+#: classes/siteguard-updates-notify.php:187
+msgid "Compatibility: %s"
+msgstr "互換性: %s"
+
+#: classes/siteguard-updates-notify.php:185
+msgid "Compatibility with WordPress %1$s: Unknown"
+msgstr "WordPress %1$s との互換性: 不明"
+
+#: classes/siteguard-updates-notify.php:183
+msgid "Compatibility with WordPress %1$s: %2$d%% (%3$d \"works\" votes out of %4$d total)"
+msgstr "WordPress %1$sとの互換性: %2$d%% (合計%4$dのうち%3$dが「動作する」と投票)"
+
+#: classes/siteguard-updates-notify.php:180
+msgid "Compatibility with WordPress %1$s: 100%% (according to its author)"
+msgstr "WordPress %1$s との互換性: 100%% (作者による評価)"
+
+#: classes/siteguard-updates-notify.php:177
+msgid "Details: %s"
+msgstr "詳細: %s"
+
+#: classes/siteguard-updates-notify.php:125
+msgid "Please visit %s to update."
+msgstr "次のページで、更新を行なって下さい。: %s"
+
+#: classes/siteguard-updates-notify.php:124
+msgid "There are updates available for your WordPress site:"
+msgstr "あなたの WordPress サイトで、実行可能な更新があります。"
+
+#: classes/siteguard-rename-login.php:688
+msgid ""
+"Please bookmark the new login URL.\n"
+"\n"
+"%s\n"
+"\n"
+"--\n"
+"SiteGuard WP Plugin"
+msgstr ""
+"以下の新しいログインページ URL を、ブックマークしてください。\n"
+"\n"
+"%s\n"
+"\n"
+"--\n"
+"SiteGuard WP Plugin"
+
+#: classes/siteguard-rename-login.php:687
+msgid "WordPress: Login page URL changed"
+msgstr "WordPress: ログインページ URL が変更されました。"
+
+#: classes/siteguard-login-history.php:135
+#: classes/siteguard-login-history.php:149
+msgid "Unknown"
+msgstr "未定義"
+
+#: admin/siteguard-login-history-table.php:193
+#: classes/siteguard-login-history.php:132
+msgid "Locked"
+msgstr "ロック"
+
+#: admin/siteguard-login-history-table.php:190
+#: classes/siteguard-login-history.php:126
+msgid "Success"
+msgstr "成功"
+
+#: admin/siteguard-login-history-table.php:191
+#: classes/siteguard-login-history.php:123
+msgid "Failed"
+msgstr "失敗"
+
+#: classes/siteguard-login-alert.php:19
+msgid ""
+"%USERNAME% logged in at %DATE% %TIME%\n"
+"\n"
+"== Login information ==\n"
+"IP Address: %IPADDRESS%\n"
+"Referer: %REFERER%\n"
+"User-Agent: %USERAGENT%\n"
+"\n"
+"--\n"
+"SiteGuard WP Plugin"
+msgstr ""
+"%DATE% %TIME% に %USERNAME% がログインしました。\n"
+"\n"
+"== ログイン情報 ==\n"
+"IPアドレス: %IPADDRESS%\n"
+"リファラー: %REFERER%\n"
+"ユーザーエージェント: %USERAGENT%\n"
+"\n"
+"--\n"
+"SiteGuard WP Plugin"
+
+#: classes/siteguard-login-alert.php:18
+msgid "New login at %SITENAME%"
+msgstr "%SITENAME% にログインがありました"
+
+#: classes/siteguard-captcha.php:321 classes/siteguard-captcha.php:326
+#: classes/siteguard-captcha.php:345 classes/siteguard-captcha.php:360
+msgid "ERROR: Invalid CAPTCHA."
+msgstr "エラー: 画像認証が間違っています。"
+
+#: classes/siteguard-captcha.php:227 classes/siteguard-login-lock.php:103
+msgid "ERROR: LOGIN LOCKED"
+msgstr "エラー: ログインはロックされています。"
+
+#: admin/siteguard-waf-exclude-rule-table.php:37
+#: admin/siteguard-waf-exclude-rule-table.php:79
+msgid "Delete"
+msgstr "削除"
+
+#: admin/siteguard-waf-exclude-rule-table.php:36
+msgid "Edit"
+msgstr "編集"
+
+#: admin/siteguard-menu-waf-tuning-support.php:361
+msgid "There are no rules selected for deletion."
+msgstr "削除するルールが指定されていません。"
+
+#: admin/siteguard-menu-waf-tuning-support.php:359
+msgid "Confirm Deletion"
+msgstr "削除の確認"
+
+#: admin/siteguard-menu-waf-tuning-support.php:353
+#: admin/siteguard-waf-exclude-rule-table.php:63
+msgid "Comment"
+msgstr "コメント"
+
+#: admin/siteguard-menu-waf-tuning-support.php:353
+#: admin/siteguard-waf-exclude-rule-table.php:62
+msgid "Filename"
+msgstr "ファイル名"
+
+#: admin/siteguard-menu-waf-tuning-support.php:348
+msgid "You have specified this rule for deletion:"
+msgid_plural "You have specified these rules for deletion:"
+msgstr[0] "以下のルールを削除しようとしています。"
+
+#: admin/siteguard-menu-waf-tuning-support.php:334
+msgid "Save"
+msgstr "保存"
+
+#: admin/siteguard-menu-waf-tuning-support.php:322
+msgid "Comment (optional)"
+msgstr "コメント（任意）"
+
+#: admin/siteguard-menu-waf-tuning-support.php:315
+msgid "Filename (optional)"
+msgstr "ファイル名（任意）"
+
+#: admin/siteguard-menu-waf-tuning-support.php:308
+#: admin/siteguard-menu-waf-tuning-support.php:353
+#: admin/siteguard-waf-exclude-rule-table.php:61
+msgid "Signature"
+msgstr "シグネチャ"
+
+#: admin/siteguard-menu-waf-tuning-support.php:292
+msgid "Apply rules"
+msgstr "ルールを適用"
+
+#: admin/siteguard-menu-waf-tuning-support.php:241
+msgid "Add New"
+msgstr "新しいルールを追加"
+
+#: admin/siteguard-menu-waf-tuning-support.php:194
+msgid "Rules applied"
+msgstr "ルールを適用しました。"
+
+#: admin/siteguard-menu-waf-tuning-support.php:155
+msgid "Rule deleted"
+msgstr "ルールを削除しました。"
+
+#: admin/siteguard-menu-waf-tuning-support.php:134
+msgid "Rule updated"
+msgstr "ルールを更新しました。"
+
+#: admin/siteguard-menu-waf-tuning-support.php:109
+msgid "New rule created"
+msgstr "新しいルールを作成しました。"
+
+#: admin/siteguard-menu-updates-notify.php:156
+msgid "Active themes only"
+msgstr "アクティブなテーマのみ"
+
+#: admin/siteguard-menu-updates-notify.php:153
+msgid "All themes"
+msgstr "すべてのテーマ"
+
+#: admin/siteguard-menu-updates-notify.php:147
+msgid "Theme updates"
+msgstr "テーマの更新"
+
+#: admin/siteguard-menu-updates-notify.php:144
+msgid "Active plugins only"
+msgstr "アクティブなプラグインのみ"
+
+#: admin/siteguard-menu-updates-notify.php:141
+msgid "All plugins"
+msgstr "すべてのプラグイン"
+
+#: admin/siteguard-menu-updates-notify.php:135
+msgid "Plugin updates"
+msgstr "プラグインの更新"
+
+#: admin/siteguard-menu-updates-notify.php:132
+msgid "Enable"
+msgstr "有効"
+
+#: admin/siteguard-menu-updates-notify.php:126
+msgid "WordPress updates"
+msgstr "WordPress の更新"
+
+#: admin/siteguard-menu-rename-login.php:319
+msgid "New Login Path"
+msgstr "変更後のログインページ名"
+
+#: admin/siteguard-menu-login-lock.php:143
+msgid "5 minutes"
+msgstr "5分"
+
+#: admin/siteguard-menu-login-lock.php:140
+msgid "1 minute"
+msgstr "1分"
+
+#: admin/siteguard-menu-login-lock.php:134
+msgid "Lock Time"
+msgstr "ロック時間"
+
+#: admin/siteguard-menu-login-lock.php:131
+msgid "100 times"
+msgstr "100回"
+
+#: admin/siteguard-menu-login-lock.php:128
+msgid "10 times"
+msgstr "10回"
+
+#: admin/siteguard-menu-login-lock.php:125
+msgid "3 times"
+msgstr "3回"
+
+#: admin/siteguard-menu-login-lock.php:122
+msgid "Threshold"
+msgstr "回数"
+
+#: admin/siteguard-menu-login-lock.php:119
+#: admin/siteguard-menu-login-lock.php:137
+msgid "30 seconds"
+msgstr "30秒"
+
+#: admin/siteguard-menu-login-lock.php:116
+msgid "5 seconds"
+msgstr "5秒"
+
+#: admin/siteguard-menu-login-lock.php:113
+msgid "1 second"
+msgstr "1秒"
+
+#: admin/siteguard-menu-login-lock.php:110
+msgid "Interval"
+msgstr "期間"
+
+#: admin/siteguard-menu-login-alert.php:102
+msgid "Recipients"
+msgstr "受信者"
+
+#: admin/siteguard-menu-login-alert.php:97
+msgid "Body"
+msgstr "メール本文"
+
+#: admin/siteguard-menu-login-alert.php:92
+msgid "Subject"
+msgstr "サブジェクト"
+
+#: admin/siteguard-menu-init.php:13 admin/siteguard-menu-init.php:14
+msgid "SiteGuard"
+msgstr "SiteGuard"
+
+#: admin/siteguard-menu-fail-once.php:85
+#: admin/siteguard-menu-login-alert.php:105
+msgid "Admin only"
+msgstr "管理者のみ"
+
+#: admin/siteguard-menu-fail-once.php:82
+msgid "Target user"
+msgstr "対象ユーザー"
+
+#: admin/siteguard-menu-dashboard.php:109 admin/siteguard-menu-init.php:145
+#: admin/siteguard-menu-init.php:146 admin/siteguard-menu-login-history.php:17
+msgid "Login History"
+msgstr "ログイン履歴"
+
+#: admin/siteguard-menu-dashboard.php:104 admin/siteguard-menu-init.php:135
+#: admin/siteguard-menu-init.php:136
+#: admin/siteguard-menu-waf-tuning-support.php:241
+msgid "WAF Tuning Support"
+msgstr "WAF チューニングサポート"
+
+#: admin/siteguard-menu-protect-xmlrpc.php:134
+msgid "Disable Pingback"
+msgstr "ピンバック無効化"
+
+#: admin/siteguard-login-history-table.php:192
+#: admin/siteguard-menu-dashboard.php:84 admin/siteguard-menu-fail-once.php:48
+#: admin/siteguard-menu-init.php:95 admin/siteguard-menu-init.php:96
+#: classes/siteguard-login-history.php:129
+msgid "Fail Once"
+msgstr "フェールワンス"
+
+#: admin/siteguard-menu-dashboard.php:79 admin/siteguard-menu-init.php:85
+#: admin/siteguard-menu-init.php:86 admin/siteguard-menu-login-alert.php:59
+msgid "Login Alert"
+msgstr "ログインアラート"
+
+#: admin/siteguard-menu-dashboard.php:74 admin/siteguard-menu-init.php:75
+#: admin/siteguard-menu-init.php:76 admin/siteguard-menu-login-lock.php:77
+msgid "Login Lock"
+msgstr "ログインロック"
+
+#: admin/siteguard-menu-dashboard.php:69 admin/siteguard-menu-init.php:65
+#: admin/siteguard-menu-init.php:66 admin/siteguard-menu-same-error.php:49
+msgid "Same Login Error Message"
+msgstr "ログイン詳細エラーメッセージの無効化"
+
+#: admin/siteguard-menu-dashboard.php:59 admin/siteguard-menu-init.php:44
+#: admin/siteguard-menu-init.php:45 admin/siteguard-menu-rename-login.php:272
+msgid "Rename Login"
+msgstr "ログインページ変更"
+
+#: admin/siteguard-menu-dashboard.php:42
+msgid "Settings Status"
+msgstr "設定状況"
+
+#: admin/siteguard-menu-dashboard.php:34
+msgid "SiteGuard WP Plugin page"
+msgstr "SiteGuard WP Plugin 解説ページ"
+
+#: admin/siteguard-menu-dashboard.php:33 admin/siteguard-menu-init.php:24
+#: admin/siteguard-menu-init.php:25
+msgid "Dashboard"
+msgstr "ダッシュボード"
+
+#: admin/siteguard-menu-captcha.php:134
+msgid "Lost password page"
+msgstr "パスワード確認ページ"
+
+#: admin/siteguard-menu-captcha.php:122
+msgid "Comment page"
+msgstr "コメントページ"
+
+#: admin/siteguard-menu-captcha.php:119 admin/siteguard-menu-captcha.php:131
+#: admin/siteguard-menu-captcha.php:143 admin/siteguard-menu-captcha.php:155
+#: admin/siteguard-menu-updates-notify.php:129
+#: admin/siteguard-menu-updates-notify.php:138
+#: admin/siteguard-menu-updates-notify.php:150
+msgid "Disable"
+msgstr "無効"
+
+#: admin/siteguard-menu-captcha.php:116 admin/siteguard-menu-captcha.php:128
+#: admin/siteguard-menu-captcha.php:140 admin/siteguard-menu-captcha.php:152
+msgid "Alphanumeric"
+msgstr "英数字"
+
+#: admin/siteguard-menu-captcha.php:113 admin/siteguard-menu-captcha.php:125
+#: admin/siteguard-menu-captcha.php:137 admin/siteguard-menu-captcha.php:149
+msgid "Hiragana (Japanese)"
+msgstr "ひらがな"
+
+#: admin/siteguard-menu-captcha.php:110
+msgid "Login page"
+msgstr "ログインページ"
+
+#: admin/siteguard-menu-captcha.php:77 admin/siteguard-menu-dashboard.php:64
+#: admin/siteguard-menu-init.php:55 admin/siteguard-menu-init.php:56
+msgid "CAPTCHA"
+msgstr "画像認証"
+
+#: admin/siteguard-menu-admin-filter.php:99
+msgid "Exclude Path"
+msgstr "除外パス"
+
+#: admin/siteguard-menu-admin-filter.php:86
+#: admin/siteguard-menu-author-query.php:106
+#: admin/siteguard-menu-captcha.php:97 admin/siteguard-menu-fail-once.php:68
+#: admin/siteguard-menu-login-alert.php:79
+#: admin/siteguard-menu-login-lock.php:97
+#: admin/siteguard-menu-protect-xmlrpc.php:118
+#: admin/siteguard-menu-rename-login.php:309
+#: admin/siteguard-menu-same-error.php:69
+#: admin/siteguard-menu-updates-notify.php:113
+#: admin/siteguard-menu-waf-tuning-support.php:261
+msgid "OFF"
+msgstr "無効"
+
+#: admin/siteguard-menu-admin-filter.php:82
+#: admin/siteguard-menu-author-query.php:103
+#: admin/siteguard-menu-captcha.php:94 admin/siteguard-menu-fail-once.php:65
+#: admin/siteguard-menu-login-alert.php:76
+#: admin/siteguard-menu-login-lock.php:94
+#: admin/siteguard-menu-protect-xmlrpc.php:115
+#: admin/siteguard-menu-rename-login.php:306
+#: admin/siteguard-menu-same-error.php:66
+#: admin/siteguard-menu-updates-notify.php:110
+#: admin/siteguard-menu-waf-tuning-support.php:258
+msgid "ON"
+msgstr "有効"
+
+#: siteguard.php:344
+msgid "here"
+msgstr "こちら"
+
+#: admin/siteguard-menu-admin-filter.php:65
+#: admin/siteguard-menu-dashboard.php:54 admin/siteguard-menu-init.php:34
+#: admin/siteguard-menu-init.php:35
+msgid "Admin Page IP Filter"
+msgstr "管理ページアクセス制限"
+
+#: admin/siteguard-menu-admin-filter.php:48
+#: admin/siteguard-menu-author-query.php:78 admin/siteguard-menu-captcha.php:70
+#: admin/siteguard-menu-fail-once.php:41
+#: admin/siteguard-menu-login-alert.php:52
+#: admin/siteguard-menu-login-lock.php:70
+#: admin/siteguard-menu-protect-xmlrpc.php:90
+#: admin/siteguard-menu-rename-login.php:276
+#: admin/siteguard-menu-same-error.php:42
+#: admin/siteguard-menu-updates-notify.php:86
+msgid "Options saved."
+msgstr "設定を保存しました。"
+
+#: admin/siteguard-menu-admin-filter.php:27
+#: admin/siteguard-menu-author-query.php:57 admin/siteguard-menu-captcha.php:53
+#: admin/siteguard-menu-fail-once.php:26
+#: admin/siteguard-menu-login-alert.php:30
+#: admin/siteguard-menu-login-lock.php:55
+#: admin/siteguard-menu-protect-xmlrpc.php:71
+#: admin/siteguard-menu-rename-login.php:66
+#: admin/siteguard-menu-same-error.php:33
+#: admin/siteguard-menu-updates-notify.php:52
+#: admin/siteguard-menu-waf-tuning-support.php:183
+#: classes/siteguard-waf-exclude-rule.php:52
+#: classes/siteguard-waf-exclude-rule.php:151
+#: classes/siteguard-waf-exclude-rule.php:157
+msgid "ERROR: Invalid input value."
+msgstr "エラー: 入力値が不正です。"
+
+#: admin/siteguard-login-history-table.php:78
+#: admin/siteguard-login-history-table.php:241
+msgid "IP Address"
+msgstr "IP アドレス"
+
+#: admin/siteguard-login-history-table.php:76
+#: admin/siteguard-login-history-table.php:232
+msgid "Operation"
+msgstr "結果"
+
+#: admin/siteguard-login-history-table.php:75
+msgid "Date/Time"
+msgstr "日時"
