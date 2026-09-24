@@ -1,0 +1,7 @@
+# とびだす昔話：WordPress とは別の静的ページとして配信する
+DirectoryIndex index.html
+<IfModule mod_mime.c>
+  AddType image/svg+xml .svg
+  AddType application/json .json
+  AddType text/javascript .js
+</IfModule>

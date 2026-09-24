@@ -1,0 +1,59 @@
+{
+  "stories": [
+    {
+      "id": "momotaro",
+      "status": "ready",
+      "title": { "ja": "ももたろう", "en": "Momotaro" },
+      "subtitle": { "ja": "桃太郎", "en": "The Peach Boy" },
+      "summary": {
+        "ja": "桃から生まれた男の子が、犬・猿・キジといっしょに鬼ヶ島へ。",
+        "en": "A boy born from a peach sets off for the Island of Ogres with a dog, a monkey and a pheasant."
+      },
+      "sky": "#cfe6ee",
+      "thumb": [
+        { "src": "mountains-far.svg", "x": 50, "y": 22, "w": 106, "depth": 0.15 },
+        { "src": "hill.svg", "x": 50, "y": -10, "w": 106, "depth": 0.4 },
+        { "src": "peach.svg", "x": 24, "y": 10, "w": 20, "depth": 0.6, "anim": "float" },
+        { "src": "momotaro.svg", "x": 55, "y": 3, "w": 21, "depth": 0.8 },
+        { "src": "dog.svg", "x": 80, "y": 3, "w": 17, "depth": 0.8 },
+        { "src": "grass.svg", "x": 50, "y": -6, "w": 106, "depth": 1 }
+      ]
+    },
+    {
+      "id": "kachikachi-yama",
+      "status": "soon",
+      "title": { "ja": "かちかち山", "en": "Kachi-kachi Yama" },
+      "subtitle": { "ja": "かちかちやま", "en": "The Crackling Mountain" },
+      "summary": {
+        "ja": "いたずらなタヌキに、かしこいウサギが知恵でたちむかいます。",
+        "en": "A clever rabbit outwits a mischievous tanuki."
+      },
+      "sky": "#f3dcb8",
+      "thumb": [
+        { "src": "mountains-mid.svg", "x": 50, "y": 14, "w": 106, "depth": 0.25 },
+        { "src": "hill.svg", "x": 50, "y": -12, "w": 106, "depth": 0.4 },
+        { "src": "tree-pine.svg", "x": 22, "y": 8, "w": 18, "depth": 0.6 },
+        { "src": "brushwood.svg", "x": 62, "y": 10, "w": 22, "depth": 0.7 },
+        { "src": "grass.svg", "x": 50, "y": -6, "w": 106, "depth": 1 }
+      ]
+    },
+    {
+      "id": "urashima-taro",
+      "status": "soon",
+      "title": { "ja": "うらしまたろう", "en": "Urashima Taro" },
+      "subtitle": { "ja": "浦島太郎", "en": "The Fisherman and the Sea Palace" },
+      "summary": {
+        "ja": "カメをたすけた若者が、海の底の竜宮城へまねかれます。",
+        "en": "A young fisherman saves a turtle and is invited to the palace under the sea."
+      },
+      "sky": "#cde4f1",
+      "thumb": [
+        { "src": "sun.svg", "x": 80, "y": 58, "w": 12, "depth": 0.05 },
+        { "src": "cloud.svg", "x": 28, "y": 64, "w": 20, "depth": 0.1 },
+        { "src": "sea.svg", "x": 50, "y": -14, "w": 106, "depth": 0.35 },
+        { "src": "boat.svg", "x": 46, "y": 10, "w": 34, "depth": 0.6, "anim": "rock" },
+        { "src": "wave-front.svg", "x": 50, "y": -8, "w": 108, "depth": 1 }
+      ]
+    }
+  ]
+}

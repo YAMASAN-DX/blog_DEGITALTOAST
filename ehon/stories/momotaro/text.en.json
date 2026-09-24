@@ -1,0 +1,43 @@
+{
+  "title": "Momotaro",
+  "subtitle": "The Peach Boy",
+  "scenes": {
+    "cover": "Let's begin our story.\nPress Next, or swipe the picture to the left to turn the page.",
+    "s01": "Long, long ago, in a village at the foot of the mountains, there lived an old man and an old woman.",
+    "s02": "One day, the old man went up the mountain to gather firewood, and the old woman went down to the river to wash clothes.",
+    "s03": "While she was washing, a great big peach came bobbing down the river: donburako, donburako!",
+    "s04": "She carried the peach home. Just as they were about to cut it, it split open, and out came a healthy baby boy! He was born from a peach, or momo, so they named him Momotaro.",
+    "s05": "Momotaro grew up big and strong. One day he said, \"The ogres of Onigashima keep stealing the village's treasure. I will go and stop them.\"\nThe old woman made him the best kibi-dango in all Japan: sweet millet dumplings for the journey.",
+    "s06": "Along the road came a dog.\n\"Momotaro, may I have one of the dumplings at your waist?\"\n\"You may, if you come with me to stop the ogres.\"",
+    "s07": "A little further on, a monkey came along. The monkey got a dumpling too, and joined them.",
+    "s08": "Further still, a pheasant came gliding down from the sky. It got a dumpling as well, and joined the team.",
+    "s09": "Momotaro and his friends boarded a boat and sailed across the wide sea toward Onigashima, the Island of Ogres.",
+    "s10": "The dog bit, the monkey scratched, and the pheasant pecked.\n\"We give up! We give up! We will never do bad things again,\" cried the ogres.",
+    "s11": "Momotaro and his friends loaded the treasure onto a cart and brought it back to the village. The old man and the old woman were overjoyed."
+  },
+  "end": "And they all lived happily ever after.",
+  "say": {
+    "momotaro": "Leave it to me!",
+    "dog": "Woof!",
+    "monkey": "Ook-ook!",
+    "pheasant": "Kaaa!",
+    "grandpa": "Ho ho ho!",
+    "grandma": "Oh my!",
+    "baby": "Waaah!",
+    "peach": "Donburako…",
+    "oni": "We give up!",
+    "treasure": "Twinkle!"
+  },
+  "names": {
+    "momotaro": "Momotaro",
+    "dog": "Dog",
+    "monkey": "Monkey",
+    "pheasant": "Pheasant",
+    "grandpa": "Old man",
+    "grandma": "Old woman",
+    "baby": "Baby",
+    "peach": "Peach",
+    "oni": "Ogre",
+    "treasure": "Treasure"
+  }
+}

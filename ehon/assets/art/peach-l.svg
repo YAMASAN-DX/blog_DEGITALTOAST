@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+  <defs>
+    <radialGradient id="pg" cx="38%" cy="38%" r="70%"><stop offset="0" stop-color="#ffe7da"/><stop offset=".55" stop-color="#f9b2a3"/><stop offset="1" stop-color="#ec7f77"/></radialGradient>
+    <clipPath id="half"><rect x="0" y="0" width="120" height="240"/></clipPath>
+    <clipPath id="shape"><path d="M120 34C140 52 216 60 220 130C224 196 170 234 120 234C70 234 16 196 20 130C24 60 100 52 120 34Z"/></clipPath>
+  </defs>
+  <path d="M118 44C92 12 52 20 36 40C70 58 100 58 118 44Z" fill="#6aa84f" stroke="#4a3a30" stroke-width="3" stroke-linejoin="round"/>
+  <g clip-path="url(#half)">
+    <path d="M120 34C140 52 216 60 220 130C224 196 170 234 120 234C70 234 16 196 20 130C24 60 100 52 120 34Z" fill="url(#pg)" stroke="#4a3a30" stroke-width="3" stroke-linejoin="round"/>
+    <rect x="110" y="0" width="10" height="240" fill="#fff1d8" clip-path="url(#shape)"/>
+  </g>
+  <path d="M120 38V232" stroke="#4a3a30" stroke-width="3"/>
+</svg>

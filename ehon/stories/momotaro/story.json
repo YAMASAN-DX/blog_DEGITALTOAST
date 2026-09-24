@@ -1,0 +1,1143 @@
+{
+  "id": "momotaro",
+  "scenes": [
+    {
+      "id": "cover",
+      "text": "cover",
+      "sky": "#cfe6ee",
+      "layers": [
+        {
+          "src": "sun.svg",
+          "x": 86,
+          "y": 68,
+          "w": 9,
+          "depth": 0.05,
+          "enter": "fade"
+        },
+        {
+          "src": "cloud.svg",
+          "x": 14,
+          "y": 72,
+          "w": 14,
+          "depth": 0.1,
+          "anim": "drift",
+          "enter": "fade"
+        },
+        {
+          "src": "cloud.svg",
+          "x": 64,
+          "y": 82,
+          "w": 9,
+          "depth": 0.1,
+          "anim": "drift",
+          "enter": "fade"
+        },
+        {
+          "src": "mountains-far.svg",
+          "x": 50,
+          "y": 20,
+          "w": 106,
+          "depth": 0.15
+        },
+        {
+          "src": "mountains-mid.svg",
+          "x": 50,
+          "y": 10,
+          "w": 106,
+          "depth": 0.25
+        },
+        {
+          "src": "hill.svg",
+          "x": 50,
+          "y": -6,
+          "w": 106,
+          "depth": 0.4
+        },
+        {
+          "type": "title",
+          "x": 50,
+          "y": 60,
+          "w": 80,
+          "depth": 0.3
+        },
+        {
+          "src": "dog.svg",
+          "x": 30,
+          "y": 5,
+          "w": 13,
+          "depth": 0.7,
+          "flip": true,
+          "tap": "dog"
+        },
+        {
+          "src": "momotaro.svg",
+          "x": 49,
+          "y": 5,
+          "w": 16,
+          "depth": 0.75,
+          "anim": "bob",
+          "tap": "momotaro"
+        },
+        {
+          "src": "monkey.svg",
+          "x": 67,
+          "y": 5,
+          "w": 11,
+          "depth": 0.7,
+          "tap": "monkey"
+        },
+        {
+          "src": "pheasant.svg",
+          "x": 81,
+          "y": 32,
+          "w": 12,
+          "depth": 0.6,
+          "anim": "hover",
+          "tap": "pheasant"
+        },
+        {
+          "src": "grass.svg",
+          "x": 50,
+          "y": -3,
+          "w": 106,
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "id": "village",
+      "text": "s01",
+      "sky": "#d3eaf1",
+      "layers": [
+        {
+          "src": "cloud.svg",
+          "x": 28,
+          "y": 76,
+          "w": 13,
+          "depth": 0.1,
+          "anim": "drift",
+          "enter": "fade"
+        },
+        {
+          "src": "cloud.svg",
+          "x": 78,
+          "y": 82,
+          "w": 9,
+          "depth": 0.1,
+          "anim": "drift",
+          "enter": "fade"
+        },
+        {
+          "src": "mountains-far.svg",
+          "x": 50,
+          "y": 24,
+          "w": 106,
+          "depth": 0.15
+        },
+        {
+          "src": "mountains-mid.svg",
+          "x": 50,
+          "y": 14,
+          "w": 106,
+          "depth": 0.25
+        },
+        {
+          "src": "hill.svg",
+          "x": 50,
+          "y": -4,
+          "w": 106,
+          "depth": 0.4
+        },
+        {
+          "src": "tree-pine.svg",
+          "x": 11,
+          "y": 13,
+          "w": 14,
+          "depth": 0.5,
+          "anim": "sway"
+        },
+        {
+          "src": "house.svg",
+          "x": 57,
+          "y": 12,
+          "w": 38,
+          "depth": 0.5
+        },
+        {
+          "src": "tree-round.svg",
+          "x": 90,
+          "y": 12,
+          "w": 13,
+          "depth": 0.55,
+          "anim": "sway"
+        },
+        {
+          "src": "grandpa.svg",
+          "x": 27,
+          "y": 5,
+          "w": 10.5,
+          "depth": 0.75,
+          "tap": "grandpa"
+        },
+        {
+          "src": "grandma.svg",
+          "x": 38,
+          "y": 5,
+          "w": 10.5,
+          "depth": 0.75,
+          "tap": "grandma"
+        },
+        {
+          "src": "grass.svg",
+          "x": 50,
+          "y": -3,
+          "w": 106,
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "id": "mountain-river",
+      "text": "s02",
+      "sky": "#cfe6ee",
+      "layers": [
+        {
+          "src": "cloud.svg",
+          "x": 70,
+          "y": 80,
+          "w": 12,
+          "depth": 0.1,
+          "anim": "drift",
+          "enter": "fade"
+        },
+        {
+          "src": "mountains-far.svg",
+          "x": 50,
+          "y": 30,
+          "w": 106,
+          "depth": 0.15
+        },
+        {
+          "src": "mountains-mid.svg",
+          "x": 40,
+          "y": 20,
+          "w": 106,
+          "depth": 0.25
+        },
+        {
+          "src": "tree-pine.svg",
+          "x": 9,
+          "y": 28,
+          "w": 11,
+          "depth": 0.3,
+          "anim": "sway"
+        },
+        {
+          "src": "hill.svg",
+          "x": 50,
+          "y": 8,
+          "w": 106,
+          "depth": 0.35
+        },
+        {
+          "src": "brushwood.svg",
+          "x": 18,
+          "y": 25,
+          "w": 9,
+          "depth": 0.45
+        },
+        {
+          "src": "grandpa.svg",
+          "x": 28,
+          "y": 24,
+          "w": 9.5,
+          "depth": 0.5,
+          "tap": "grandpa"
+        },
+        {
+          "src": "tree-round.svg",
+          "x": 43,
+          "y": 26,
+          "w": 9,
+          "depth": 0.45,
+          "anim": "sway"
+        },
+        {
+          "src": "river.svg",
+          "x": 50,
+          "y": -2,
+          "w": 106,
+          "depth": 0.6,
+          "anim": "wave"
+        },
+        {
+          "src": "grass.svg",
+          "x": 50,
+          "y": -6,
+          "w": 106,
+          "depth": 0.9
+        },
+        {
+          "src": "tub.svg",
+          "x": 63,
+          "y": 2,
+          "w": 10,
+          "depth": 0.85
+        },
+        {
+          "src": "grandma.svg",
+          "x": 75,
+          "y": 1,
+          "w": 10.5,
+          "depth": 0.85,
+          "tap": "grandma"
+        }
+      ]
+    },
+    {
+      "id": "peach",
+      "text": "s03",
+      "sky": "#cfe6ee",
+      "layers": [
+        {
+          "src": "cloud.svg",
+          "x": 22,
+          "y": 78,
+          "w": 12,
+          "depth": 0.1,
+          "anim": "drift",
+          "enter": "fade"
+        },
+        {
+          "src": "mountains-far.svg",
+          "x": 50,
+          "y": 30,
+          "w": 106,
+          "depth": 0.15
+        },
+        {
+          "src": "mountains-mid.svg",
+          "x": 60,
+          "y": 20,
+          "w": 106,
+          "depth": 0.25
+        },
+        {
+          "src": "hill.svg",
+          "x": 50,
+          "y": 8,
+          "w": 106,
+          "depth": 0.35
+        },
+        {
+          "src": "tree-pine.svg",
+          "x": 12,
+          "y": 27,
+          "w": 10,
+          "depth": 0.4,
+          "anim": "sway"
+        },
+        {
+          "src": "tree-round.svg",
+          "x": 86,
+          "y": 27,
+          "w": 11,
+          "depth": 0.4,
+          "anim": "sway"
+        },
+        {
+          "src": "river.svg",
+          "x": 50,
+          "y": -2,
+          "w": 106,
+          "depth": 0.6,
+          "anim": "wave"
+        },
+        {
+          "src": "peach.svg",
+          "x": 42,
+          "y": 9,
+          "w": 15,
+          "depth": 0.7,
+          "anim": "peach",
+          "tap": "peach"
+        },
+        {
+          "src": "grass.svg",
+          "x": 50,
+          "y": -6,
+          "w": 106,
+          "depth": 0.9
+        },
+        {
+          "src": "tub.svg",
+          "x": 67,
+          "y": 2,
+          "w": 10,
+          "depth": 0.85
+        },
+        {
+          "src": "grandma.svg",
+          "x": 79,
+          "y": 1,
+          "w": 10.5,
+          "depth": 0.85,
+          "tap": "grandma"
+        }
+      ]
+    },
+    {
+      "id": "birth",
+      "text": "s04",
+      "sky": "#f2e4c7",
+      "layers": [
+        {
+          "src": "mountains-far.svg",
+          "x": 50,
+          "y": 26,
+          "w": 106,
+          "depth": 0.15
+        },
+        {
+          "src": "hill.svg",
+          "x": 50,
+          "y": -4,
+          "w": 106,
+          "depth": 0.3
+        },
+        {
+          "src": "house.svg",
+          "x": 50,
+          "y": 12,
+          "w": 46,
+          "depth": 0.4
+        },
+        {
+          "src": "grandpa.svg",
+          "x": 20,
+          "y": 5,
+          "w": 11,
+          "depth": 0.7,
+          "tap": "grandpa"
+        },
+        {
+          "src": "grandma.svg",
+          "x": 80,
+          "y": 5,
+          "w": 11,
+          "depth": 0.7,
+          "tap": "grandma"
+        },
+        {
+          "src": "baby.svg",
+          "x": 50,
+          "y": 7,
+          "w": 12,
+          "depth": 0.75,
+          "anim": "bob",
+          "tap": "baby"
+        },
+        {
+          "src": "peach-l.svg",
+          "x": 50,
+          "y": 5,
+          "w": 17,
+          "depth": 0.75,
+          "anim": "split-l"
+        },
+        {
+          "src": "peach-r.svg",
+          "x": 50,
+          "y": 5,
+          "w": 17,
+          "depth": 0.75,
+          "anim": "split-r"
+        },
+        {
+          "src": "grass.svg",
+          "x": 50,
+          "y": -3,
+          "w": 106,
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "id": "departure",
+      "text": "s05",
+      "sky": "#cfe6ee",
+      "layers": [
+        {
+          "src": "cloud.svg",
+          "x": 20,
+          "y": 76,
+          "w": 10,
+          "depth": 0.1,
+          "anim": "drift",
+          "enter": "fade"
+        },
+        {
+          "src": "cloud.svg",
+          "x": 62,
+          "y": 82,
+          "w": 12,
+          "depth": 0.1,
+          "anim": "drift",
+          "enter": "fade"
+        },
+        {
+          "src": "mountains-far.svg",
+          "x": 50,
+          "y": 24,
+          "w": 106,
+          "depth": 0.15
+        },
+        {
+          "src": "mountains-mid.svg",
+          "x": 50,
+          "y": 14,
+          "w": 106,
+          "depth": 0.25
+        },
+        {
+          "src": "hill.svg",
+          "x": 50,
+          "y": -4,
+          "w": 106,
+          "depth": 0.4
+        },
+        {
+          "src": "house.svg",
+          "x": 19,
+          "y": 12,
+          "w": 32,
+          "depth": 0.45
+        },
+        {
+          "src": "grandpa.svg",
+          "x": 35,
+          "y": 5,
+          "w": 10,
+          "depth": 0.7,
+          "tap": "grandpa"
+        },
+        {
+          "src": "grandma.svg",
+          "x": 46,
+          "y": 5,
+          "w": 10,
+          "depth": 0.7,
+          "tap": "grandma"
+        },
+        {
+          "src": "dango.svg",
+          "x": 57,
+          "y": 30,
+          "w": 6,
+          "depth": 0.75,
+          "anim": "float"
+        },
+        {
+          "src": "momotaro.svg",
+          "x": 70,
+          "y": 5,
+          "w": 15,
+          "depth": 0.8,
+          "anim": "bob",
+          "tap": "momotaro"
+        },
+        {
+          "src": "tree-pine.svg",
+          "x": 92,
+          "y": 12,
+          "w": 12,
+          "depth": 0.55,
+          "anim": "sway"
+        },
+        {
+          "src": "grass.svg",
+          "x": 50,
+          "y": -3,
+          "w": 106,
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "id": "dog",
+      "text": "s06",
+      "sky": "#d5ebf0",
+      "layers": [
+        {
+          "src": "cloud.svg",
+          "x": 30,
+          "y": 78,
+          "w": 12,
+          "depth": 0.1,
+          "anim": "drift",
+          "enter": "fade"
+        },
+        {
+          "src": "mountains-far.svg",
+          "x": 50,
+          "y": 22,
+          "w": 106,
+          "depth": 0.15
+        },
+        {
+          "src": "hill-path.svg",
+          "x": 50,
+          "y": -4,
+          "w": 106,
+          "depth": 0.4
+        },
+        {
+          "src": "tree-round.svg",
+          "x": 10,
+          "y": 15,
+          "w": 13,
+          "depth": 0.45,
+          "anim": "sway"
+        },
+        {
+          "src": "tree-pine.svg",
+          "x": 90,
+          "y": 15,
+          "w": 11,
+          "depth": 0.45,
+          "anim": "sway"
+        },
+        {
+          "src": "momotaro.svg",
+          "x": 34,
+          "y": 4,
+          "w": 15,
+          "depth": 0.75,
+          "anim": "bob",
+          "tap": "momotaro"
+        },
+        {
+          "src": "dango.svg",
+          "x": 50,
+          "y": 32,
+          "w": 6,
+          "depth": 0.75,
+          "anim": "float"
+        },
+        {
+          "src": "dog.svg",
+          "x": 64,
+          "y": 4,
+          "w": 15,
+          "depth": 0.75,
+          "anim": "hop",
+          "tap": "dog"
+        },
+        {
+          "src": "grass.svg",
+          "x": 50,
+          "y": -5,
+          "w": 106,
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "id": "monkey",
+      "text": "s07",
+      "sky": "#d5ebf0",
+      "layers": [
+        {
+          "src": "cloud.svg",
+          "x": 70,
+          "y": 80,
+          "w": 11,
+          "depth": 0.1,
+          "anim": "drift",
+          "enter": "fade"
+        },
+        {
+          "src": "mountains-far.svg",
+          "x": 50,
+          "y": 22,
+          "w": 106,
+          "depth": 0.15
+        },
+        {
+          "src": "mountains-mid.svg",
+          "x": 72,
+          "y": 12,
+          "w": 106,
+          "depth": 0.25
+        },
+        {
+          "src": "hill-path.svg",
+          "x": 50,
+          "y": -4,
+          "w": 106,
+          "depth": 0.4
+        },
+        {
+          "src": "tree-round.svg",
+          "x": 86,
+          "y": 15,
+          "w": 15,
+          "depth": 0.45,
+          "anim": "sway"
+        },
+        {
+          "src": "dog.svg",
+          "x": 17,
+          "y": 4,
+          "w": 12,
+          "depth": 0.7,
+          "flip": true,
+          "anim": "bob",
+          "tap": "dog"
+        },
+        {
+          "src": "momotaro.svg",
+          "x": 35,
+          "y": 4,
+          "w": 15,
+          "depth": 0.75,
+          "anim": "bob",
+          "tap": "momotaro"
+        },
+        {
+          "src": "dango.svg",
+          "x": 51,
+          "y": 32,
+          "w": 6,
+          "depth": 0.75,
+          "anim": "float"
+        },
+        {
+          "src": "monkey.svg",
+          "x": 66,
+          "y": 4,
+          "w": 13,
+          "depth": 0.75,
+          "anim": "hop",
+          "tap": "monkey"
+        },
+        {
+          "src": "grass.svg",
+          "x": 50,
+          "y": -5,
+          "w": 106,
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "id": "pheasant",
+      "text": "s08",
+      "sky": "#d5ebf0",
+      "layers": [
+        {
+          "src": "cloud.svg",
+          "x": 48,
+          "y": 80,
+          "w": 12,
+          "depth": 0.1,
+          "anim": "drift",
+          "enter": "fade"
+        },
+        {
+          "src": "mountains-far.svg",
+          "x": 50,
+          "y": 22,
+          "w": 106,
+          "depth": 0.15
+        },
+        {
+          "src": "hill-path.svg",
+          "x": 50,
+          "y": -4,
+          "w": 106,
+          "depth": 0.4
+        },
+        {
+          "src": "tree-pine.svg",
+          "x": 7,
+          "y": 15,
+          "w": 11,
+          "depth": 0.45,
+          "anim": "sway"
+        },
+        {
+          "src": "dog.svg",
+          "x": 15,
+          "y": 4,
+          "w": 11,
+          "depth": 0.7,
+          "flip": true,
+          "anim": "bob",
+          "tap": "dog"
+        },
+        {
+          "src": "monkey.svg",
+          "x": 27,
+          "y": 4,
+          "w": 10,
+          "depth": 0.7,
+          "flip": true,
+          "anim": "bob",
+          "tap": "monkey"
+        },
+        {
+          "src": "momotaro.svg",
+          "x": 43,
+          "y": 4,
+          "w": 15,
+          "depth": 0.75,
+          "anim": "bob",
+          "tap": "momotaro"
+        },
+        {
+          "src": "dango.svg",
+          "x": 58,
+          "y": 36,
+          "w": 6,
+          "depth": 0.75,
+          "anim": "float"
+        },
+        {
+          "src": "pheasant.svg",
+          "x": 73,
+          "y": 30,
+          "w": 16,
+          "depth": 0.7,
+          "anim": "hover",
+          "tap": "pheasant"
+        },
+        {
+          "src": "grass.svg",
+          "x": 50,
+          "y": -5,
+          "w": 106,
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "id": "sea",
+      "text": "s09",
+      "sky": "#cde4f1",
+      "layers": [
+        {
+          "src": "sun.svg",
+          "x": 15,
+          "y": 68,
+          "w": 9,
+          "depth": 0.05,
+          "enter": "fade"
+        },
+        {
+          "src": "cloud.svg",
+          "x": 55,
+          "y": 80,
+          "w": 12,
+          "depth": 0.1,
+          "anim": "drift",
+          "enter": "fade"
+        },
+        {
+          "src": "island.svg",
+          "x": 83,
+          "y": 18,
+          "w": 30,
+          "depth": 0.2
+        },
+        {
+          "src": "sea.svg",
+          "x": 50,
+          "y": -4,
+          "w": 106,
+          "depth": 0.35,
+          "anim": "wave"
+        },
+        {
+          "src": "dog.svg",
+          "x": 32,
+          "y": 17,
+          "w": 9.5,
+          "depth": 0.7,
+          "flip": true,
+          "anim": "rock",
+          "tap": "dog"
+        },
+        {
+          "src": "momotaro.svg",
+          "x": 43,
+          "y": 14,
+          "w": 11.5,
+          "depth": 0.7,
+          "anim": "rock",
+          "tap": "momotaro"
+        },
+        {
+          "src": "monkey.svg",
+          "x": 53,
+          "y": 16,
+          "w": 8.5,
+          "depth": 0.7,
+          "flip": true,
+          "anim": "rock",
+          "tap": "monkey"
+        },
+        {
+          "src": "boat.svg",
+          "x": 44,
+          "y": 5,
+          "w": 34,
+          "depth": 0.7,
+          "anim": "rock"
+        },
+        {
+          "src": "pheasant.svg",
+          "x": 67,
+          "y": 36,
+          "w": 10,
+          "depth": 0.65,
+          "flip": true,
+          "anim": "hover",
+          "tap": "pheasant"
+        },
+        {
+          "src": "wave-front.svg",
+          "x": 50,
+          "y": -4,
+          "w": 108,
+          "depth": 1,
+          "anim": "wave"
+        }
+      ]
+    },
+    {
+      "id": "battle",
+      "text": "s10",
+      "sky": "#d9cfe2",
+      "layers": [
+        {
+          "src": "gate.svg",
+          "x": 62,
+          "y": 18,
+          "w": 44,
+          "depth": 0.2
+        },
+        {
+          "src": "ground-rock.svg",
+          "x": 50,
+          "y": -6,
+          "w": 106,
+          "depth": 0.4
+        },
+        {
+          "src": "oni-blue.svg",
+          "x": 85,
+          "y": 5,
+          "w": 14,
+          "depth": 0.65,
+          "anim": "tremble",
+          "tap": "oni"
+        },
+        {
+          "src": "oni-red.svg",
+          "x": 70,
+          "y": 5,
+          "w": 17,
+          "depth": 0.7,
+          "anim": "tremble",
+          "tap": "oni"
+        },
+        {
+          "src": "momotaro.svg",
+          "x": 27,
+          "y": 5,
+          "w": 15,
+          "depth": 0.75,
+          "tap": "momotaro"
+        },
+        {
+          "src": "dog.svg",
+          "x": 47,
+          "y": 5,
+          "w": 11,
+          "depth": 0.8,
+          "flip": true,
+          "anim": "hop",
+          "tap": "dog"
+        },
+        {
+          "src": "monkey.svg",
+          "x": 57,
+          "y": 27,
+          "w": 9,
+          "depth": 0.8,
+          "flip": true,
+          "anim": "hop",
+          "tap": "monkey"
+        },
+        {
+          "src": "pheasant.svg",
+          "x": 60,
+          "y": 50,
+          "w": 11,
+          "depth": 0.8,
+          "flip": true,
+          "anim": "hover",
+          "tap": "pheasant"
+        }
+      ]
+    },
+    {
+      "id": "home",
+      "text": "s11",
+      "sky": "#f6d6ae",
+      "layers": [
+        {
+          "src": "sun.svg",
+          "x": 84,
+          "y": 56,
+          "w": 12,
+          "depth": 0.05,
+          "enter": "fade"
+        },
+        {
+          "src": "cloud.svg",
+          "x": 30,
+          "y": 80,
+          "w": 12,
+          "depth": 0.1,
+          "anim": "drift",
+          "enter": "fade"
+        },
+        {
+          "src": "mountains-far.svg",
+          "x": 50,
+          "y": 24,
+          "w": 106,
+          "depth": 0.15
+        },
+        {
+          "src": "mountains-mid.svg",
+          "x": 50,
+          "y": 14,
+          "w": 106,
+          "depth": 0.25
+        },
+        {
+          "src": "hill.svg",
+          "x": 50,
+          "y": -4,
+          "w": 106,
+          "depth": 0.4
+        },
+        {
+          "src": "house.svg",
+          "x": 20,
+          "y": 12,
+          "w": 34,
+          "depth": 0.45
+        },
+        {
+          "src": "pheasant.svg",
+          "x": 40,
+          "y": 50,
+          "w": 9,
+          "depth": 0.6,
+          "flip": true,
+          "anim": "hover",
+          "tap": "pheasant"
+        },
+        {
+          "src": "dog.svg",
+          "x": 40,
+          "y": 5,
+          "w": 10,
+          "depth": 0.7,
+          "flip": true,
+          "anim": "hop",
+          "tap": "dog"
+        },
+        {
+          "src": "grandpa.svg",
+          "x": 51,
+          "y": 5,
+          "w": 10,
+          "depth": 0.7,
+          "tap": "grandpa"
+        },
+        {
+          "src": "grandma.svg",
+          "x": 61,
+          "y": 5,
+          "w": 10,
+          "depth": 0.7,
+          "tap": "grandma"
+        },
+        {
+          "src": "momotaro.svg",
+          "x": 72,
+          "y": 5,
+          "w": 13,
+          "depth": 0.75,
+          "flip": true,
+          "tap": "momotaro"
+        },
+        {
+          "src": "cart.svg",
+          "x": 88,
+          "y": 5,
+          "w": 21,
+          "depth": 0.75,
+          "tap": "treasure"
+        },
+        {
+          "src": "monkey.svg",
+          "x": 91,
+          "y": 24,
+          "w": 8,
+          "depth": 0.8,
+          "anim": "hop",
+          "tap": "monkey"
+        },
+        {
+          "src": "grass.svg",
+          "x": 50,
+          "y": -3,
+          "w": 106,
+          "depth": 1
+        }
+      ]
+    }
+  ],
+  "credits": [
+    {
+      "id": "text",
+      "kind": "note",
+      "label": {
+        "ja": "文章",
+        "en": "Text"
+      },
+      "body": {
+        "ja": "日本の昔話「桃太郎」（伝承）をもとに、このサイトで子ども向けに書きおろしました。英語版もこのサイトによる再話です。",
+        "en": "Retold for this site from the traditional Japanese folktale Momotaro. The English version is also this site's own retelling."
+      }
+    },
+    {
+      "id": "art",
+      "kind": "note",
+      "label": {
+        "ja": "絵",
+        "en": "Illustrations"
+      },
+      "body": {
+        "ja": "このサイトで制作した、切り絵風のオリジナルイラストです。",
+        "en": "Original paper-cut style illustrations made for this site."
+      }
+    }
+  ]
+}

@@ -1,0 +1,761 @@
+/* とびだす昔話 ─ 藍の風呂敷の上に、切り絵の飛び出す絵本をひろげる */
+
+:root {
+  --cloth: #22304a;          /* 藍の風呂敷 */
+  --cloth-wave: #283856;     /* 青海波の線 */
+  --cloth-ink: #eef0f4;
+  --cloth-muted: #aeb8cb;
+  --cloth-line: rgba(238, 240, 244, 0.28);
+  --paper: #fbf6ea;          /* 和紙 */
+  --paper-edge: #e6dcc4;
+  --ink: #2f2620;
+  --ink-soft: #6b5d50;
+  --yamabuki: #efb73e;       /* 山吹：進むボタン */
+  --yamabuki-deep: #b8841f;
+  --yamabuki-ink: #2b2112;
+  --momo: #f29b93;           /* 桃色：いまのページ */
+  --shu: #d9534a;            /* 朱 */
+  --focus: #ffd98a;
+  --radius: 14px;
+  --gutter: 16px;
+  --font-ui: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "BIZ UDPGothic", Meiryo, system-ui, sans-serif;
+  --font-story: "Kiwi Maru", "Hiragino Mincho ProN", "Yu Mincho", Georgia, serif;
+  --font-display: "Yusei Magic", "Kiwi Maru", "Hiragino Maru Gothic ProN", sans-serif;
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .42 0 0 0 0 .36 0 0 0 0 .28 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  font-family: var(--font-ui);
+  color: var(--cloth-ink);
+  background-color: var(--cloth);
+  /* 青海波（せいがいは） */
+  background-image:
+    radial-gradient(circle at 100% 150%, var(--cloth) 24%, var(--cloth-wave) 24% 28%, var(--cloth) 28% 36%, var(--cloth-wave) 36% 40%, transparent 40%),
+    radial-gradient(circle at 0 150%, var(--cloth) 24%, var(--cloth-wave) 24% 28%, var(--cloth) 28% 36%, var(--cloth-wave) 36% 40%, transparent 40%),
+    radial-gradient(circle at 50% 100%, var(--cloth-wave) 10%, var(--cloth) 10% 23%, var(--cloth-wave) 23% 30%, var(--cloth) 30% 43%, var(--cloth-wave) 43% 50%, var(--cloth) 50% 63%, var(--cloth-wave) 63% 71%, transparent 71%),
+    radial-gradient(circle at 100% 50%, var(--cloth-wave) 5%, var(--cloth) 5% 15%, var(--cloth-wave) 15% 20%, var(--cloth) 20% 29%, var(--cloth-wave) 29% 34%, var(--cloth) 34% 44%, var(--cloth-wave) 44% 49%, transparent 49%),
+    radial-gradient(circle at 0 50%, var(--cloth-wave) 5%, var(--cloth) 5% 15%, var(--cloth-wave) 15% 20%, var(--cloth) 20% 29%, var(--cloth-wave) 29% 34%, var(--cloth) 34% 44%, var(--cloth-wave) 44% 49%, transparent 49%);
+  background-size: 96px 48px;
+}
+
+a { color: inherit; }
+button { font: inherit; }
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.noscript {
+  margin: 24px var(--gutter);
+  padding: 16px;
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: var(--radius);
+}
+
+/* ---------- 共通の小物 ---------- */
+
+.seg {
+  display: inline-flex;
+  padding: 3px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 0 0 1px var(--cloth-line);
+}
+.seg button {
+  border: 0;
+  border-radius: 999px;
+  padding: 0.4em 0.95em;
+  background: transparent;
+  color: var(--cloth-muted);
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.seg button[aria-pressed="true"] {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  border: 1.5px solid var(--cloth-line);
+  border-radius: 999px;
+  padding: 0.38em 0.85em;
+  background: transparent;
+  color: var(--cloth-muted);
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.chip::before {
+  content: "";
+  width: 0.6em;
+  height: 0.6em;
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+}
+.chip[aria-pressed="true"] {
+  border-color: var(--yamabuki);
+  color: var(--yamabuki);
+}
+.chip[aria-pressed="true"]::before { background: currentColor; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 1.2em;
+  border-radius: 999px;
+  border: 0;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn-primary {
+  background: var(--yamabuki);
+  color: var(--yamabuki-ink);
+  box-shadow: 0 3px 0 var(--yamabuki-deep);
+}
+.btn-quiet {
+  background: transparent;
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1.5px var(--paper-edge);
+}
+
+/* ---------- 舞台とレイヤー（一覧のサムネイルと共通） ---------- */
+
+.stage,
+.thumb {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  max-width: 100%;
+  overflow: hidden;
+  container-type: inline-size;
+  background-color: var(--sky, #cfe6ee);
+  transition: background-color 0.9s ease;
+  isolation: isolate;
+}
+.stage::before,
+.thumb::before {
+  /* 地平線のあたりを明るく */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 25%, rgba(255, 255, 255, 0.5) 72%);
+  pointer-events: none;
+}
+.stage::after,
+.thumb::after {
+  /* 紙の地合い */
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background-image: var(--grain);
+  opacity: 0.3;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.scene {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  perspective: 1100px;
+  perspective-origin: 50% -20%; /* 少し上からのぞきこむ */
+}
+
+.layer {
+  position: absolute;
+  transform-origin: 50% 100%; /* 下の辺を折り目にして起きあがる */
+  pointer-events: none;
+  transition: translate 0.5s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+.layer img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transform-origin: 50% 100%;
+  filter: drop-shadow(0 0.35cqw 0.3cqw rgba(50, 35, 20, 0.24));
+  -webkit-user-drag: none;
+  user-select: none;
+}
+.layer img.flip { scale: -1 1; }
+
+.layer.is-tappable {
+  pointer-events: auto;
+  cursor: pointer;
+  border-radius: 10px;
+  -webkit-tap-highlight-color: transparent;
+}
+.layer.is-tappable:focus-visible {
+  outline: 3px dashed var(--focus);
+  outline-offset: 3px;
+}
+.layer.is-speaking { z-index: 3; }
+
+.bubble {
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  translate: -50% -0.6cqw;
+  padding: 0.35em 0.85em;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: max(13px, 2.1cqw);
+  line-height: 1.2;
+  white-space: nowrap;
+  box-shadow: 0 0.3cqw 0 rgba(60, 40, 20, 0.18);
+  pointer-events: none;
+  animation: bubble-in 0.35s cubic-bezier(0.3, 1.6, 0.5, 1) both;
+}
+.bubble::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  translate: -50% -1px;
+  border: 0.8cqw solid transparent;
+  border-top-color: #fff;
+}
+@keyframes bubble-in {
+  from { opacity: 0; scale: 0.4; }
+}
+
+.title-card {
+  display: grid;
+  justify-items: center;
+  gap: 1cqw;
+}
+.title-main {
+  font-family: var(--font-display);
+  font-size: 7.4cqw;
+  line-height: 1.1;
+  color: #3a2a1f;
+  background: var(--paper);
+  padding: 0.16em 0.8em 0.22em;
+  border-radius: 0.25em;
+  box-shadow: 0 0.6cqw 0 rgba(90, 60, 30, 0.2);
+  outline: 0.35cqw solid var(--shu);
+  outline-offset: -1cqw;
+}
+.title-sub {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: max(10px, 2cqw);
+  letter-spacing: 0.25em;
+  color: #3a2a1f;
+  background: rgba(251, 246, 234, 0.85);
+  padding: 0.25em 1em;
+  border-radius: 999px;
+}
+.title-sub:empty { display: none; }
+
+/* 待機中のうごき（.idle に付ける。起きあがり・ずらしとは別の要素なので重ならない） */
+.idle { transform-origin: 50% 100%; }
+.anim-bob { animation: bob 2.6s ease-in-out infinite alternate; }
+.anim-hop { animation: hop 1.2s ease-in-out infinite; }
+.anim-sway { animation: sway 4.5s ease-in-out infinite alternate; }
+.anim-float { animation: float 3s ease-in-out infinite alternate; transform-origin: 50% 60%; }
+.anim-drift { animation: drift 16s ease-in-out infinite alternate; }
+.anim-hover { animation: hover 1.8s ease-in-out infinite alternate; }
+.anim-tremble { animation: tremble 0.16s linear infinite alternate; }
+.anim-rock { animation: rock 3.2s ease-in-out infinite alternate; transform-origin: 50% 80%; }
+.anim-wave { animation: wave 4s ease-in-out infinite alternate; }
+.anim-peach {
+  transform-origin: 50% 60%;
+  animation: drift-in 4s cubic-bezier(0.25, 0.6, 0.3, 1) 0.4s both, float 3s ease-in-out infinite alternate;
+}
+.anim-split-l { animation: split-l 0.9s cubic-bezier(0.3, 1.4, 0.5, 1) 1.5s both; }
+.anim-split-r { animation: split-r 0.9s cubic-bezier(0.3, 1.4, 0.5, 1) 1.5s both; }
+
+@keyframes bob { to { transform: translateY(-3%); } }
+@keyframes hop {
+  0%, 55%, 100% { transform: none; }
+  25% { transform: translateY(-9%); }
+}
+@keyframes sway {
+  from { transform: rotate(-1.5deg); }
+  to { transform: rotate(1.5deg); }
+}
+@keyframes float {
+  from { transform: translateY(0) rotate(-5deg); }
+  to { transform: translateY(-6%) rotate(5deg); }
+}
+@keyframes drift {
+  from { transform: translateX(-14%); }
+  to { transform: translateX(14%); }
+}
+@keyframes hover {
+  from { transform: translateY(0) rotate(-2deg); }
+  to { transform: translateY(-12%) rotate(2deg); }
+}
+@keyframes tremble {
+  from { transform: translateX(-1.2%); }
+  to { transform: translateX(1.2%); }
+}
+@keyframes rock {
+  from { transform: rotate(-2.5deg); }
+  to { transform: rotate(2.5deg) translateY(-2%); }
+}
+@keyframes wave {
+  from { transform: translateX(-1.2%); }
+  to { transform: translateX(1.2%); }
+}
+@keyframes drift-in { from { translate: -70% 0; } } /* 川上（左）から流れてくる */
+@keyframes split-l { to { transform: translateX(-52%) rotate(-24deg); } }
+@keyframes split-r { to { transform: translateX(52%) rotate(24deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .idle {
+    animation-duration: 0.01s !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+  }
+  .layer { transition: none; }
+  .bubble { animation: none; }
+}
+
+/* ---------- ビューア ---------- */
+
+.app {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 100dvh;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+  padding-block: 10px 14px;
+}
+
+.topbar {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 8px 16px;
+}
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  min-height: 40px;
+  padding: 0 0.9em 0 0.6em;
+  border-radius: 999px;
+  color: var(--cloth-ink);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  box-shadow: inset 0 0 0 1.5px var(--cloth-line);
+}
+.back-link svg,
+.nav-btn svg {
+  width: 1.1em;
+  height: 1.1em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.story-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.2rem, 1rem + 1vw, 1.7rem);
+  letter-spacing: 0.06em;
+  text-wrap: balance;
+}
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+.ja-tools {
+  display: flex;
+  gap: 6px;
+}
+
+.book {
+  /* 舞台の幅：画面の幅と、残りの高さから決まる 16:9 の幅の小さいほう */
+  --chrome: 20rem;
+  --w: min(100%, max(18rem, calc((100dvh - var(--chrome)) * 16 / 9)), 1180px);
+  flex: 1;
+  display: grid;
+  grid-template-columns: var(--w);
+  justify-content: center;
+  align-content: center;
+  gap: 12px;
+}
+
+.stage {
+  border-radius: var(--radius);
+  box-shadow:
+    0 0 0 6px var(--paper),
+    0 0 0 7px var(--paper-edge),
+    0 22px 40px -14px rgba(4, 8, 20, 0.7);
+  margin: 6px;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.text-panel {
+  position: relative;
+  margin-inline: 6px;
+  border-radius: var(--radius);
+  background: var(--paper) var(--grain);
+  background-blend-mode: multiply;
+  color: var(--ink);
+  color-scheme: light;
+  box-shadow: 0 14px 30px -16px rgba(4, 8, 20, 0.7);
+}
+.story-text {
+  margin: 0 auto;
+  max-width: 40em;
+  min-height: calc(3 * 1.9em);
+  padding: 16px 22px;
+  font-family: var(--font-story);
+  font-size: clamp(1.05rem, 0.85rem + 0.6vw, 1.35rem);
+  line-height: 1.9;
+  text-wrap: pretty;
+}
+body[data-lang="en"] .story-text { line-height: 1.65; }
+.story-text ruby rt {
+  font-family: var(--font-ui);
+  font-size: 0.5em;
+  color: var(--ink-soft);
+}
+.hide-ruby .story-text rt,
+.hide-ruby .story-text rp { display: none; }
+
+/* 縦書き：文章は右上から、段は右から左へ */
+.book.is-vertical .text-panel {
+  height: clamp(10rem, 34dvh, 18rem);
+}
+.book.is-vertical .story-text {
+  position: absolute;
+  inset: 0;
+  max-width: none;
+  min-height: 0;
+  padding: 22px 20px;
+  writing-mode: vertical-rl;
+  line-height: 2.05;
+  letter-spacing: 0.06em;
+  overflow: auto;
+}
+
+@media (min-width: 760px) and (min-aspect-ratio: 4 / 3) {
+  .book.is-vertical {
+    --tw: clamp(190px, 19vw, 290px);
+    --chrome: 10.5rem;
+    --w: min(calc(100% - var(--tw) - 12px), max(18rem, calc((100dvh - var(--chrome)) * 16 / 9)), 1100px);
+    grid-template-columns: var(--w) var(--tw);
+  }
+  .book.is-vertical .text-panel {
+    height: auto;
+    margin-block: 6px;
+    margin-inline: 0 6px;
+  }
+}
+
+.controls {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  margin-inline: 6px;
+}
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  min-height: 48px;
+  padding: 0 1.1em;
+  border-radius: 999px;
+  border: 0;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.nav-btn.prev {
+  background: transparent;
+  color: var(--cloth-ink);
+  box-shadow: inset 0 0 0 1.5px var(--cloth-line);
+}
+.nav-btn.next {
+  background: var(--yamabuki);
+  color: var(--yamabuki-ink);
+  box-shadow: 0 3px 0 var(--yamabuki-deep);
+}
+.nav-btn.next:active:not(:disabled) {
+  translate: 0 2px;
+  box-shadow: 0 1px 0 var(--yamabuki-deep);
+}
+.nav-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.progress-wrap {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  min-width: 0;
+}
+.progress {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.dot {
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(238, 240, 244, 0.32) 4px, transparent 4.5px);
+  cursor: pointer;
+}
+.dot[aria-current="step"] {
+  background: radial-gradient(circle, var(--momo) 6px, transparent 6.5px);
+}
+.is-end .dot {
+  background: radial-gradient(circle, rgba(239, 183, 62, 0.55) 4px, transparent 4.5px);
+}
+.is-end .dot[aria-current="step"] {
+  background: radial-gradient(circle, var(--yamabuki) 6px, transparent 6.5px);
+}
+.status {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 0.9em;
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--cloth-muted);
+}
+.page-count { font-variant-numeric: tabular-nums; }
+
+/* おしまい・出典のページ */
+.scene.endcard {
+  background: var(--paper);
+  color: var(--ink);
+  color-scheme: light;
+  overflow: auto;
+  perspective: none;
+}
+.endcard-inner {
+  display: grid;
+  justify-items: center;
+  gap: 2.4cqw;
+  padding: 4cqw 6cqw 5cqw;
+  min-height: 100%;
+  align-content: center;
+}
+.fin {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 8cqw, 5rem);
+  line-height: 1.1;
+  color: #3a2a1f;
+}
+.end-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+.credits {
+  width: min(100%, 46em);
+  padding-top: 1.6cqw;
+  border-top: 1.5px dashed var(--paper-edge);
+  font-size: clamp(0.78rem, 0.7rem + 0.3vw, 0.9rem);
+  line-height: 1.75;
+  color: var(--ink-soft);
+}
+.credits h2 {
+  margin: 0 0 0.4em;
+  font-size: 1em;
+  letter-spacing: 0.12em;
+  color: var(--ink);
+}
+.credit-list {
+  display: grid;
+  gap: 0.5em;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.credit-list p { margin: 0; }
+.credit-list a { overflow-wrap: anywhere; }
+
+@media (max-width: 640px) {
+  .topbar { grid-template-columns: auto 1fr; }
+  .tools {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+  }
+  .book {
+    --chrome: 23rem;
+    align-content: start;
+  }
+  /* 小さな画面では、おしまいのページだけ中身に合わせて伸ばし、出典を読みやすくする */
+  .book.is-end .stage {
+    aspect-ratio: auto;
+    min-height: calc((100vw - 2 * var(--gutter) - 12px) * 9 / 16);
+  }
+  .book.is-end .scene.endcard { position: relative; }
+}
+@media (max-width: 440px) {
+  .nav-label { display: none; }
+  .nav-btn { padding: 0 0.9em; }
+  .dot { width: 16px; height: 22px; }
+}
+
+/* ---------- お話一覧 ---------- */
+
+.library {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+  padding-block: 32px 48px;
+}
+.masthead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+}
+.masthead-text {
+  display: grid;
+  gap: 6px;
+}
+.site-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.2rem, 1.6rem + 3vw, 3.8rem);
+  line-height: 1.1;
+  letter-spacing: 0.04em;
+  text-wrap: balance;
+}
+.site-sub {
+  margin: 0;
+  color: var(--cloth-muted);
+  font-size: 1rem;
+}
+
+.shelf {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr));
+  gap: 22px;
+  margin: 30px 0;
+  padding: 0;
+  list-style: none;
+}
+.story-card {
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 18px 34px -18px rgba(4, 8, 20, 0.8);
+  overflow: hidden;
+}
+.card-link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+.thumb .layer { transition: translate 0.45s cubic-bezier(0.3, 1.5, 0.5, 1) calc(var(--i, 0) * 40ms); }
+a.card-link:hover .thumb .layer,
+a.card-link:focus-visible .thumb .layer { translate: 0 -3%; }
+a.card-link:focus-visible { outline-offset: -3px; }
+.badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 6;
+  padding: 0.3em 0.8em;
+  border-radius: 999px;
+  background: rgba(34, 48, 74, 0.85);
+  color: var(--cloth-ink);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+.is-soon .thumb .layer { filter: saturate(0.35); }
+.card-body {
+  display: grid;
+  align-content: start;
+  gap: 4px;
+  flex: 1;
+  padding: 14px 18px 18px;
+}
+.card-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 1.2;
+}
+.card-sub {
+  margin: 0;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+}
+.card-summary {
+  margin: 6px 0 0;
+  font-family: var(--font-story);
+  line-height: 1.7;
+}
+.cta {
+  justify-self: start;
+  margin-top: 10px;
+  padding: 0.45em 1.2em;
+  border-radius: 999px;
+  background: var(--yamabuki);
+  color: var(--yamabuki-ink);
+  font-weight: 700;
+  box-shadow: 0 3px 0 var(--yamabuki-deep);
+}
+.is-soon .card-body { color: var(--ink-soft); }
+.shelf-error {
+  padding: 16px;
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--ink);
+}
+.lib-note {
+  max-width: 44em;
+  color: var(--cloth-muted);
+  font-size: 0.88rem;
+  line-height: 1.8;
+}
+.lib-note p { margin: 0; }
