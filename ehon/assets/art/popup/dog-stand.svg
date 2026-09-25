@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 122">
+  <g stroke="#4a3a30" stroke-width="2.6" stroke-linejoin="round">
+    <!-- 奥の足 -->
+    <path d="M60 74C60 88 60 102 60 112C60 116 69 116 69 112C70 100 71 88 72 78Z" fill="#b8793a"/>
+    <path d="M112 72C122 80 125 92 121 102L123 112C123 116 132 116 132 112L131 98C133 88 129 78 124 72Z" fill="#b8793a"/>
+    <!-- 体 -->
+    <path d="M44 40C54 34 70 42 90 42C110 42 128 38 136 50C142 62 138 80 124 86C104 92 72 92 56 86C42 80 36 56 44 40Z" fill="#d99a52"/>
+    <!-- 手前の足 -->
+    <path d="M50 76C48 90 46 102 46 112C46 117 57 117 57 112C58 102 60 90 62 80Z" fill="#d99a52"/>
+    <path d="M98 74C108 82 111 94 107 104L109 112C109 117 120 117 120 112L119 100C123 90 119 80 112 74Z" fill="#d99a52"/>
+  </g>
+  <path d="M50 58C52 76 64 88 80 90C98 92 116 90 126 84C112 86 92 86 76 82C62 78 54 70 50 58Z" fill="#f7e6c8"/>
+  <path d="M96 44C112 44 128 42 134 52C138 62 136 74 128 82C132 70 130 58 122 52C114 48 104 46 96 44Z" fill="#b8793a" opacity=".6"/>
+  <g fill="#f7e6c8" stroke="#4a3a30" stroke-width="2"><ellipse cx="51" cy="113" rx="7" ry="4"/><ellipse cx="114" cy="113" rx="7" ry="4"/></g>
+  <!-- 首輪 -->
+  <path d="M40 38C46 48 56 52 64 50" fill="none" stroke="#4a3a30" stroke-width="8" stroke-linecap="round"/>
+  <path d="M40 38C46 48 56 52 64 50" fill="none" stroke="#d9534a" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="52" cy="52" r="4" fill="#efb73e" stroke="#4a3a30" stroke-width="1.6"/>
+</svg>

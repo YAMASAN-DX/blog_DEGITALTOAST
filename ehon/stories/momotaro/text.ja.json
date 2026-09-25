@@ -31,7 +31,10 @@
     "grandma-hello": "いいお天気だねえ",
     "grandma-go": "いってきます",
     "hen": "コッコッ",
-    "house": "わが家がいちばん"
+    "house": "わが家がいちばん",
+    "grandma-dango": "にっぽんいちの きびだんごだよ",
+    "dog-ask": "ひとつ くださいな",
+    "momotaro-deal": "ついてくるなら あげましょう"
   },
   "names": {
     "momotaro": "桃太郎",
@@ -48,6 +51,9 @@
     "grandma-hello": "おばあさん",
     "grandma-go": "おばあさん",
     "hen": "にわとり",
-    "house": "いえ"
+    "house": "いえ",
+    "grandma-dango": "おばあさん",
+    "dog-ask": "犬",
+    "momotaro-deal": "桃太郎"
   }
 }

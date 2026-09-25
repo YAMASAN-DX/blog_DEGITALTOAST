@@ -31,7 +31,10 @@
     "grandma-hello": "What a lovely day!",
     "grandma-go": "I'm off!",
     "hen": "Cluck, cluck!",
-    "house": "Home, sweet home."
+    "house": "Home, sweet home.",
+    "grandma-dango": "The best dumplings in Japan!",
+    "dog-ask": "May I have one?",
+    "momotaro-deal": "Come with me, and it's yours!"
   },
   "names": {
     "momotaro": "Momotaro",
@@ -48,6 +51,9 @@
     "grandma-hello": "Old woman",
     "grandma-go": "Old woman",
     "hen": "Hen",
-    "house": "House"
+    "house": "House",
+    "grandma-dango": "Old woman",
+    "dog-ask": "Dog",
+    "momotaro-deal": "Momotaro"
   }
 }

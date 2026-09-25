@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 104 320">
+  <path d="M13 12L21 12L21 316C21 319 13 319 13 316Z" fill="#9a7650" stroke="#4a3a30" stroke-width="2.4" stroke-linejoin="round"/>
+  <path d="M17 14L17 314" stroke="#7a5a3a" stroke-width="1.6"/>
+  <circle cx="17" cy="8" r="7" fill="#e2b13c" stroke="#4a3a30" stroke-width="2.2"/>
+  <path d="M20 26L100 26" stroke="#4a3a30" stroke-width="6" stroke-linecap="round"/>
+  <path d="M20 26L100 26" stroke="#9a7650" stroke-width="3" stroke-linecap="round"/>
+  <!-- のぼり（白地に桃） -->
+  <path d="M22 30L96 30L96 214C84 208 72 216 60 212C48 208 36 216 22 212Z" fill="#fbfaf5" stroke="#4a3a30" stroke-width="2.6" stroke-linejoin="round"/>
+  <path d="M84 32L96 30L96 214C92 212 88 212 84 212Z" fill="#e6e0d2"/>
+  <path d="M26 34L92 34L92 206C82 202 72 208 60 205C48 202 38 208 26 205Z" fill="none" stroke="#d9534a" stroke-width="4"/>
+  <g transform="translate(59 118)">
+    <path d="M0 -30C-20 -27 -28 -10 -26 6C-24 22 -10 32 0 35C10 32 24 22 26 6C28 -10 20 -27 0 -30Z" fill="#f6b5a4" stroke="#4a3a30" stroke-width="2.6" stroke-linejoin="round"/>
+    <path d="M0 -29C-1 -6 -2 14 0 34" fill="none" stroke="#d9776e" stroke-width="2.4"/>
+    <path d="M-12 -18C-18 -10 -20 0 -18 8" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".6"/>
+    <path d="M0 -30C-6 -42 -20 -42 -24 -36C-16 -30 -8 -29 0 -30ZM0 -30C6 -42 20 -42 24 -36C16 -30 8 -29 0 -30Z" fill="#7faa5a" stroke="#4a3a30" stroke-width="2" stroke-linejoin="round"/>
+  </g>
+  <g fill="#9a7650" stroke="#4a3a30" stroke-width="1.6"><circle cx="20" cy="60" r="3"/><circle cx="20" cy="110" r="3"/><circle cx="20" cy="160" r="3"/></g>
+</svg>

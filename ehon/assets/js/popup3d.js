@@ -1748,6 +1748,44 @@ function oscillate(c, t, list, calm) {
   }
 }
 
+// 関節の角度を、時間や出来事（ctx.flag）にあわせて切りかえる。
+// keys: [{ at|on+after, dur, ease, pose: { 部品: 角度, lean, y }, face: { 部品: 表情 }, show/hide: [部品], osc: [...], say, flag }]
+function applyPoses(c, t, st, ctx, p) {
+  const pose = {};
+  const vis = {};
+  let osc = p.osc ?? [];
+  let face = null;
+  (p.keys ?? []).forEach((key, i) => {
+    let t0 = key.at ?? 0;
+    if (key.on) {
+      const s = ctx.since(key.on);
+      if (s == null) return;
+      t0 = st - s + (key.after ?? 0);
+    }
+    const raw = i === 0 && !key.on && t0 <= 0 ? 1 : clamp01((st - t0) / (key.dur ?? 0.5));
+    if (raw <= 0) return;
+    const w = (ease[key.ease] ?? easeInOut)(raw);
+    for (const [k, v] of Object.entries(key.pose ?? {})) pose[k] = lerp(pose[k] ?? 0, v, w);
+    for (const id of key.show ?? []) vis[id] = true;
+    for (const id of key.hide ?? []) vis[id] = false;
+    if (key.osc) osc = key.osc;
+    if (key.face) face = { ...(face ?? {}), ...key.face };
+    if (key.say && !c.state[`said${i}`]) {
+      c.state[`said${i}`] = true;
+      ctx.say(c, typeof key.say === 'string' ? key.say : undefined);
+    }
+    if (key.flag && raw >= 1) ctx.flag(key.flag);
+  });
+  for (const [k, g] of Object.entries(c.parts)) {
+    g.rotation.z = (g.userData.rest ?? 0) + (pose[k] ?? 0);
+    g.visible = vis[k] ?? !g.userData.hidden;
+  }
+  c.inner.rotation.z = pose.lean ?? 0;
+  c.inner.position.y = pose.y ?? 0;
+  oscillate(c, t, osc, ctx.calm);
+  if (face) for (const [part, name] of Object.entries(face)) ctx.face(c, part, name);
+}
+
 const BEHAVIORS = {
   sway(c, t) { c.inner.rotation.z = Math.sin(t * 0.9 + c.phase) * 0.025; },
   drift(c, t) { c.inner.position.x = Math.sin(t * 0.22 + c.phase) * 0.9; },
@@ -1755,36 +1793,7 @@ const BEHAVIORS = {
 
   // 関節の角度を、時間や出来事（ctx.flag）にあわせて切りかえる。
   // keys: [{ at|on+after, dur, ease, pose: { 部品: 角度, lean, y }, face: { 部品: 表情 }, osc: [...], say }]
-  poses(c, t, st, dt, ctx) {
-    const p = c.spec.params ?? {};
-    const pose = {};
-    let osc = p.osc ?? [];
-    let face = null;
-    (p.keys ?? []).forEach((key, i) => {
-      let t0 = key.at ?? 0;
-      if (key.on) {
-        const s = ctx.since(key.on);
-        if (s == null) return;
-        t0 = st - s + (key.after ?? 0);
-      }
-      const raw = i === 0 && !key.on && t0 <= 0 ? 1 : clamp01((st - t0) / (key.dur ?? 0.5));
-      if (raw <= 0) return;
-      const w = (ease[key.ease] ?? easeInOut)(raw);
-      for (const [k, v] of Object.entries(key.pose ?? {})) pose[k] = lerp(pose[k] ?? 0, v, w);
-      if (key.osc) osc = key.osc;
-      if (key.face) face = key.face;
-      if (key.say && !c.state[`said${i}`]) {
-        c.state[`said${i}`] = true;
-        ctx.say(c, typeof key.say === 'string' ? key.say : undefined);
-      }
-      if (key.flag && raw >= 1) ctx.flag(key.flag);
-    });
-    for (const [k, g] of Object.entries(c.parts)) g.rotation.z = (g.userData.rest ?? 0) + (pose[k] ?? 0);
-    c.inner.rotation.z = pose.lean ?? 0;
-    c.inner.position.y = pose.y ?? 0;
-    oscillate(c, t, osc, ctx.calm);
-    if (face) for (const [part, name] of Object.entries(face)) ctx.face(c, part, name);
-  },
+  poses(c, t, st, dt, ctx) { applyPoses(c, t, st, ctx, c.spec.params ?? {}); },
 
   // 道にそって歩く（足・腕をふり、体を上下）。着いたら idle の動き
   walk(c, t, st, dt, ctx) {
@@ -1810,9 +1819,13 @@ const BEHAVIORS = {
     for (const [id, part] of Object.entries(c.parts)) part.rotation.z = part.userData.rest ?? 0;
     (p.legs ?? []).forEach((id, n) => { if (c.parts[id]) c.parts[id].rotation.z += (n ? -g : g) * p.stride; });
     (p.arms ?? []).forEach((a, n) => { if (c.parts[a.part]) c.parts[a.part].rotation.z += (a.base ?? 0) + (n % 2 ? g : -g) * (a.amp ?? 0.3); });
-    c.inner.position.y = Math.abs(Math.sin(ph)) * p.bob * env;
-    c.inner.rotation.z = -p.lean * env;
-    if (!env) oscillate(c, t, p.idle, ctx.calm);
+    if (env) {
+      c.inner.position.y = Math.abs(Math.sin(ph)) * p.bob * env;
+      c.inner.rotation.z = -p.lean * env;
+    } else {
+      // 立ち止まっているあいだは、ポーズ（keys）とゆれ（idle）
+      applyPoses(c, t, st, ctx, { keys: p.keys, osc: p.idle });
+    }
     if (k >= 1 && !c.state.arrived) {
       c.state.arrived = true;
       if (p.arrive) ctx.flag(p.arrive);
@@ -2155,6 +2168,8 @@ export async function createPopupBook(container, { base = '', speak = () => '', 
           }
           if (p.rot) g.rotation.z = p.rot;
           g.userData.rest = g.rotation.z;
+          g.userData.hidden = Boolean(p.hidden); // 最初はかくしておく部品（手わたす物など）
+          g.visible = !p.hidden;
           (parent ?? inner).add(g);
           card.parts[p.id] = g;
         }
@@ -2298,7 +2313,8 @@ export async function createPopupBook(container, { base = '', speak = () => '', 
       const box = new THREE.Box3().setFromObject(card.inner);
       tmp.set((box.min.x + box.max.x) / 2, box.max.y + 0.3, (box.min.z + box.max.z) / 2).project(camera);
       b.el.style.left = `${((tmp.x + 1) / 2) * rect.width}px`;
-      b.el.style.top = `${((1 - tmp.y) / 2) * rect.height}px`;
+      // 絵の上の端より外へは出さない（吹き出しの下の端の位置）
+      b.el.style.top = `${Math.max(b.el.offsetHeight + 6, ((1 - tmp.y) / 2) * rect.height)}px`;
     }
   }
 
@@ -2351,7 +2367,7 @@ export async function createPopupBook(container, { base = '', speak = () => '', 
       c.inner.position.set(0, 0, 0);
       c.inner.rotation.set(0, 0, 0);
       c.inner.scale.set(1, 1, 1);
-      for (const g of Object.values(c.parts)) g.rotation.z = g.userData.rest ?? 0;
+      for (const g of Object.values(c.parts)) { g.rotation.z = g.userData.rest ?? 0; g.visible = !g.userData.hidden; }
       for (const set of Object.values(c.faces)) for (const [k, m] of Object.entries(set)) m.visible = k === 'normal';
     }
     page.particles.clear();

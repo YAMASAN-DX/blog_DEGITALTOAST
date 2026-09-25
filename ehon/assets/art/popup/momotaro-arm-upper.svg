@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 88">
+  <defs>
+    <pattern id="asa" width="12" height="12" patternUnits="userSpaceOnUse">
+      <rect width="12" height="12" fill="#f1e0a8"/><path d="M6 1L6 11M1 6L11 6M2.5 2.5L9.5 9.5M9.5 2.5L2.5 9.5" stroke="#d9c07a" stroke-width="1" opacity=".7"/>
+    </pattern>
+    <clipPath id="sode"><path d="M14 16C16 4 46 2 50 14C54 30 53 52 49 72C47 80 40 84 32 84C24 84 17 80 15 72C11 54 11 32 14 16Z"/></clipPath>
+  </defs>
+  <path d="M14 16C16 4 46 2 50 14C54 30 53 52 49 72C47 80 40 84 32 84C24 84 17 80 15 72C11 54 11 32 14 16Z" fill="url(#asa)"/>
+  <g clip-path="url(#sode)">
+    <path d="M42 6C52 26 54 56 48 86H64V0Z" fill="#b8994e" opacity=".4"/>
+    <path d="M12 66C24 72 40 72 54 66V90H12Z" fill="#c9453a"/>
+    <path d="M12 66C24 72 40 72 54 66" fill="none" stroke="#e2b13c" stroke-width="3"/>
+  </g>
+  <path d="M14 16C16 4 46 2 50 14C54 30 53 52 49 72C47 80 40 84 32 84C24 84 17 80 15 72C11 54 11 32 14 16Z" fill="none" stroke="#4a3a30" stroke-width="2.8" stroke-linejoin="round"/>
+</svg>

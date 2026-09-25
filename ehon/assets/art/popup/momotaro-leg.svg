@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 122">
+  <path d="M10 4L60 4L64 96L6 98Z" fill="#3c4f7c" stroke="#4a3a30" stroke-width="2.6" stroke-linejoin="round"/>
+  <path d="M46 6L60 4L64 96L50 97Z" fill="#26365a" opacity=".6"/>
+  <g fill="none" stroke="#24345a" stroke-width="2" stroke-linecap="round"><path d="M24 20L22 94M38 20L38 94"/></g>
+  <path d="M6 90C24 94 46 94 64 90L64 97L6 98Z" fill="#1f2c4a" opacity=".5"/>
+  <!-- 足首（脚絆）と、わらじ -->
+  <path d="M22 96L46 96L46 108L22 108Z" fill="#f3ecdc" stroke="#4a3a30" stroke-width="2.2"/>
+  <path d="M22 106C30 104 40 104 46 108C52 110 58 112 62 116L22 116Z" fill="#f1cda9" stroke="#4a3a30" stroke-width="2.2" stroke-linejoin="round"/>
+  <path d="M14 114C28 111 50 111 66 115C66 120 60 121 54 121L20 121C14 121 11 117 14 114Z" fill="#d9c089" stroke="#4a3a30" stroke-width="2.2" stroke-linejoin="round"/>
+  <path d="M32 114C34 110 40 108 46 110" fill="none" stroke="#7a5a3a" stroke-width="2" stroke-linecap="round"/>
+</svg>

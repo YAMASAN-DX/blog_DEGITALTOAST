@@ -4,7 +4,7 @@
 WordPress とは別の静的ページとして `/ehon/` に置いています（ビルド不要。立体版だけ three.js を同梱）。
 
 - `index.html` … お話一覧（本棚）
-- `story3d.html?id=momotaro` … 立体版のビューア（1〜4場面）
+- `story3d.html?id=momotaro` … 立体版のビューア（1〜6場面）
 - `story.html?id=momotaro&lang=ja` … お話ビューア（`#p5` で5ページ目から）
 
 ## 見かた（ローカル）
@@ -123,8 +123,8 @@ ehon/
 
 ## 立体版（制作中）
 
-`story3d.html?id=momotaro` は、three.js の立体舞台で読む版です。いまは 1〜4場面（村のふたり → 山と川へ → 桃が流れてくる → 桃太郎の誕生）。
-5場面目からは、最後のページのリンクで平面の絵本（`story.html#p6`）につながります。一覧のカードの「立体版で読む」からも開けます。
+`story3d.html?id=momotaro` は、three.js の立体舞台で読む版です。いまは 1〜6場面（村のふたり → 山と川へ → 桃が流れてくる → 桃太郎の誕生 → 旅立ち → 犬がなかまに）。
+7場面目からは、最後のページのリンクで平面の絵本（`story.html#p8`）につながります。一覧のカードの「立体版で読む」からも開けます。
 
 - **めくり**：本は、のど（背のページと台紙の折り目）で綴じてある。めくると、いまの台紙がのどを軸に起きあがって背のページに重なり、
   その裏に刷った次の場面の空（またはかべ）が、新しい背のページになる。下から出てくる次の台紙のパーツは、起きあがるページに
@@ -164,8 +164,9 @@ ehon/
 | `parts` | 部品で組んだ人物。`parent` + `anchor`（親の原画上の関節の位置）、`pivot`（自分の関節）、`z`（前後）、`rot`（最初の角度）、`alts`（表情の差しかえ）、`flip`、`shade`（奥の手足を暗く） |
 | `flip` | 左右反転（向きを変える） |
 | `pop` | `"grow"`（大きくなって出る）・`false`（動きで出す） |
+| `hidden`（部品） | 最初はかくしておく部品。`poses` の `show`・`hide` で出し入れ（手わたす物など） |
 | `attach: "back"` | 背のページに貼る（雲など） |
-| `behavior` + `params` | 動き：`sway` `drift` `peck`、`walk`（道にそって歩く）、`poses`（時間や出来事で関節の角度・表情・セリフを切りかえる）、`peach-drift` `grandma-wash` `peach-split` `baby-birth` |
+| `behavior` + `params` | 動き：`sway` `drift` `peck`、`walk`（道にそって歩き、止まったら `keys` のポーズ）、`poses`（時間や出来事で関節の角度・表情・セリフを切りかえる）、`peach-drift` `grandma-wash` `peach-split` `baby-birth` |
 | `tap` | タップしたときのセリフのキー（`say`） |
 
 `poses` の `keys` は `{ "at": 秒 }` か `{ "on": "出来事", "after": 秒 }` で始まり、`pose`（部品ごとの角度、`lean`、`y`）・`face`・`osc`（ゆれ）・`say` を持ちます。出来事は `peach-arrived`（桃が着いた）・`peach-split`（桃が割れた）など。

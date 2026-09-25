@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 122">
+  <g stroke="#4a3a30" stroke-width="2.6" stroke-linejoin="round">
+    <!-- 奥の前足 -->
+    <path d="M64 70L62 112C62 116 72 116 72 112L74 72Z" fill="#b8793a"/>
+    <!-- 体（おすわり） -->
+    <path d="M42 40C52 32 66 36 78 44C96 56 116 66 124 84C130 98 124 114 108 116L64 116C54 112 48 96 46 80C44 66 38 52 42 40Z" fill="#d99a52"/>
+    <!-- 後ろ足（ももと足先） -->
+    <path d="M88 84C100 78 118 84 120 100C122 112 112 118 100 116L84 116C80 104 80 90 88 84Z" fill="#d99a52"/>
+    <!-- 手前の前足 -->
+    <path d="M50 72L46 112C46 117 58 117 58 112L62 76Z" fill="#d99a52"/>
+  </g>
+  <path d="M46 56C48 74 54 90 60 100C62 88 60 72 56 60Z" fill="#f7e6c8"/>
+  <path d="M96 60C110 68 122 80 124 92C120 84 112 76 100 70Z" fill="#b8793a" opacity=".6"/>
+  <g fill="#f7e6c8" stroke="#4a3a30" stroke-width="2"><ellipse cx="52" cy="113" rx="8" ry="4"/><ellipse cx="80" cy="113" rx="10" ry="4"/></g>
+  <path d="M40 38C46 48 56 52 64 50" fill="none" stroke="#4a3a30" stroke-width="8" stroke-linecap="round"/>
+  <path d="M40 38C46 48 56 52 64 50" fill="none" stroke="#d9534a" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="52" cy="52" r="4" fill="#efb73e" stroke="#4a3a30" stroke-width="1.6"/>
+</svg>

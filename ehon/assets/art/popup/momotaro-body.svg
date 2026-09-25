@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 240">
+  <defs>
+    <pattern id="hakama" width="16" height="40" patternUnits="userSpaceOnUse">
+      <rect width="16" height="40" fill="#3c4f7c"/><rect x="0" width="1.6" height="40" fill="#2c3c62" opacity=".7"/>
+    </pattern>
+    <clipPath id="haka"><path d="M66 116C94 112 128 112 152 116L162 206L58 208Z"/></clipPath>
+    <clipPath id="baori"><path d="M66 46C84 34 122 32 140 42C152 50 156 74 154 100L156 150C130 146 96 148 64 154C60 120 58 70 66 46Z"/></clipPath>
+  </defs>
+  <!-- はかま -->
+  <path d="M66 116C94 112 128 112 152 116L162 206L58 208Z" fill="url(#hakama)"/>
+  <g clip-path="url(#haka)">
+    <path d="M138 112L166 208H140Z" fill="#1f2c4a" opacity=".45"/>
+    <g fill="none" stroke="#24345a" stroke-width="2.2" stroke-linecap="round"><path d="M88 150L84 206M110 150L110 206M130 150L134 206"/></g>
+    <path d="M58 196C92 202 128 202 162 196V210H58Z" fill="#1f2c4a" opacity=".4"/>
+  </g>
+  <path d="M66 116C94 112 128 112 152 116L162 206L58 208Z" fill="none" stroke="#4a3a30" stroke-width="2.8" stroke-linejoin="round"/>
+  <!-- 着物（胸元） -->
+  <path d="M84 40C96 34 116 34 128 40L124 118L88 120Z" fill="#f1e0a8" stroke="#4a3a30" stroke-width="2.4" stroke-linejoin="round"/>
+  <path d="M96 38L110 74L122 40" fill="none" stroke="#fbf6ea" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M96 38L110 74L122 40" fill="none" stroke="#4a3a30" stroke-width="2"/>
+  <!-- 陣羽織（朱、金のふち） -->
+  <path d="M66 46C84 34 98 36 100 40C102 70 104 110 100 150C88 150 76 152 64 154C60 120 58 70 66 46Z" fill="#c9453a"/>
+  <path d="M120 38C130 36 136 38 140 42C152 50 156 74 154 100L156 150C146 148 132 148 120 148C118 110 118 70 120 38Z" fill="#c9453a"/>
+  <g clip-path="url(#baori)">
+    <path d="M136 40C156 56 160 100 156 150H140C146 110 146 70 136 40Z" fill="#8f2a24" opacity=".55"/>
+    <path d="M70 50C80 42 92 38 98 40C90 46 82 54 76 64Z" fill="#ef8a7c" opacity=".55"/>
+    <path d="M62 140C92 136 126 136 158 140V160H62Z" fill="#8f2a24" opacity=".35"/>
+  </g>
+  <g fill="none" stroke="#e2b13c" stroke-width="5" stroke-linecap="round">
+    <path d="M100 42C102 72 104 112 100 150"/><path d="M120 40C118 72 118 112 120 148"/>
+    <path d="M64 153C76 151 88 150 100 150M120 148C132 148 146 148 156 150"/>
+  </g>
+  <!-- 陣羽織の桃のしるし -->
+  <g transform="translate(78 92)">
+    <path d="M0 -12C-8 -11 -12 -4 -11 3C-10 10 -4 14 0 15C4 14 10 10 11 3C12 -4 8 -11 0 -12Z" fill="#f6b5a4" stroke="#4a3a30" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M0 -12C-3 -18 -9 -18 -11 -15C-7 -12 -3 -12 0 -12Z" fill="#7faa5a" stroke="#4a3a30" stroke-width="1.5" stroke-linejoin="round"/>
+    <path d="M0 -11C0 -2 -1 6 0 14" fill="none" stroke="#d9776e" stroke-width="1.5"/>
+  </g>
+  <!-- 帯（白） -->
+  <path d="M86 112C98 110 112 110 124 112L124 122C112 120 98 120 86 122Z" fill="#fbf6ea" stroke="#4a3a30" stroke-width="2"/>
+  <!-- 刀（左の腰に、さやは後ろへ） -->
+  <path d="M146 116L42 176" stroke="#4a3a30" stroke-width="11" stroke-linecap="round"/>
+  <path d="M146 116L42 176" stroke="#2e2a28" stroke-width="7" stroke-linecap="round"/>
+  <path d="M130 124L58 166" stroke="#6a6460" stroke-width="1.6" stroke-linecap="round"/>
+  <ellipse cx="150" cy="114" rx="5" ry="9" transform="rotate(-30 150 114)" fill="#d9b34a" stroke="#4a3a30" stroke-width="2"/>
+  <path d="M154 111L180 96" stroke="#4a3a30" stroke-width="10" stroke-linecap="round"/>
+  <path d="M154 111L180 96" stroke="#f3ecdc" stroke-width="6" stroke-linecap="round"/>
+  <path d="M160 104l4 6M166 101l4 6M172 98l4 6" stroke="#2e2a28" stroke-width="2.2"/>
+  <!-- りんかく -->
+  <path d="M66 46C84 34 98 36 100 40M120 38C130 36 136 38 140 42C152 50 156 74 154 100L156 150M64 154C60 120 58 70 66 46" fill="none" stroke="#4a3a30" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+</svg>

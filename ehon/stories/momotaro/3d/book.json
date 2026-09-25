@@ -4,9 +4,11 @@
     "village.json",
     "fork.json",
     "peach.json",
-    "birth.json"
+    "birth.json",
+    "departure.json",
+    "dog.json"
   ],
   "continue": {
-    "page": 6
+    "page": 8
   }
 }

@@ -1,0 +1,546 @@
+{
+  "id": "dog",
+  "text": "s06",
+  "camera": {
+    "fov": 34,
+    "position": [
+      0.4,
+      7.0,
+      21.5
+    ],
+    "target": [
+      0.6,
+      3.2,
+      -1.5
+    ]
+  },
+  "settle": 12,
+  "sky": {
+    "top": "#b3d5e5",
+    "bottom": "#eef3e6",
+    "sun": [
+      0.7,
+      0.3
+    ]
+  },
+  "paths": [
+    {
+      "points": [
+        [
+          -17.6,
+          2.9
+        ],
+        [
+          -8,
+          2.5
+        ],
+        [
+          2,
+          3.1
+        ],
+        [
+          10,
+          2.7
+        ],
+        [
+          17.6,
+          2.3
+        ]
+      ],
+      "width": 2.4
+    }
+  ],
+  "cards": [
+    {
+      "id": "cloud1",
+      "src": "popup/cloud.svg",
+      "attach": "back",
+      "x": -7.5,
+      "y": 9.8,
+      "z": 0.3,
+      "unit": 0.022,
+      "behavior": "drift"
+    },
+    {
+      "id": "cloud2",
+      "src": "popup/cloud.svg",
+      "attach": "back",
+      "x": 4.5,
+      "y": 9.3,
+      "z": 0.25,
+      "w": 3.4,
+      "behavior": "drift"
+    },
+    {
+      "id": "mt-far",
+      "src": "popup/mountains-far.svg",
+      "x": 0,
+      "z": -11,
+      "unit": 0.022,
+      "blur": 2,
+      "haze": 0.3,
+      "border": 0.05
+    },
+    {
+      "id": "mt-mid",
+      "src": "popup/mountains-mid.svg",
+      "x": 1,
+      "z": -9,
+      "unit": 0.022,
+      "blur": 0.8,
+      "haze": 0.12,
+      "border": 0.06
+    },
+    {
+      "id": "hill",
+      "src": "popup/hill-plain.svg",
+      "x": 2.5,
+      "z": -6.6,
+      "unit": 0.022
+    },
+    {
+      "id": "pine",
+      "src": "popup/tree-pine.svg",
+      "x": -13.4,
+      "z": -3.6,
+      "unit": 0.022,
+      "behavior": "sway"
+    },
+    {
+      "id": "tree",
+      "src": "popup/tree-round.svg",
+      "x": 9.2,
+      "z": -4.6,
+      "unit": 0.022,
+      "behavior": "sway"
+    },
+    {
+      "id": "tree2",
+      "src": "popup/tree-round.svg",
+      "x": 14.4,
+      "z": -1.8,
+      "unit": 0.018,
+      "behavior": "sway"
+    },
+    {
+      "id": "momotaro",
+      "x": -13,
+      "z": 2.9,
+      "unit": 0.022,
+      "tap": "momotaro",
+      "behavior": "walk",
+      "parts": [
+        {
+          "id": "body",
+          "src": "popup/momotaro-body.svg",
+          "pivot": [
+            0.55,
+            0.79
+          ],
+          "at": [
+            0,
+            2.53
+          ]
+        },
+        {
+          "id": "legF",
+          "parent": "body",
+          "anchor": [
+            96,
+            188
+          ],
+          "src": "popup/momotaro-leg.svg",
+          "pivot": [
+            0.47,
+            0.05
+          ],
+          "z": -0.024,
+          "shade": 0.2
+        },
+        {
+          "id": "legN",
+          "parent": "body",
+          "anchor": [
+            122,
+            188
+          ],
+          "src": "popup/momotaro-leg.svg",
+          "pivot": [
+            0.47,
+            0.05
+          ],
+          "z": -0.012
+        },
+        {
+          "id": "armF",
+          "parent": "body",
+          "anchor": [
+            82,
+            52
+          ],
+          "src": "popup/momotaro-arm-upper.svg",
+          "pivot": [
+            0.5,
+            0.136
+          ],
+          "z": -0.034,
+          "shade": 0.22,
+          "rot": 0.3
+        },
+        {
+          "id": "foreF",
+          "parent": "armF",
+          "anchor": [
+            32,
+            76
+          ],
+          "src": "popup/grandpa-arm-fore.svg",
+          "pivot": [
+            0.48,
+            0.085
+          ],
+          "z": -0.012,
+          "shade": 0.22,
+          "rot": 0.35
+        },
+        {
+          "id": "flag",
+          "parent": "foreF",
+          "anchor": [
+            29,
+            72
+          ],
+          "src": "popup/momotaro-flag.svg",
+          "pivot": [
+            0.154,
+            0.78
+          ],
+          "z": -0.006,
+          "border": 0.05,
+          "rot": -0.65
+        },
+        {
+          "id": "pouch",
+          "parent": "body",
+          "anchor": [
+            146,
+            122
+          ],
+          "src": "popup/momotaro-pouch.svg",
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "z": 0.02,
+          "border": 0.05,
+          "hidden": false
+        },
+        {
+          "id": "head",
+          "parent": "body",
+          "anchor": [
+            106,
+            38
+          ],
+          "src": "popup/momotaro-head.svg",
+          "unit": 0.0198,
+          "pivot": [
+            0.55,
+            0.93
+          ],
+          "z": 0.05,
+          "border": 0.05,
+          "alts": {
+            "shout": "popup/momotaro-head-shout.svg",
+            "happy": "popup/momotaro-head-happy.svg"
+          }
+        },
+        {
+          "id": "upper",
+          "parent": "body",
+          "anchor": [
+            126,
+            52
+          ],
+          "src": "popup/momotaro-arm-upper.svg",
+          "pivot": [
+            0.5,
+            0.136
+          ],
+          "z": 0.1,
+          "border": 0.05,
+          "rot": -0.1
+        },
+        {
+          "id": "fore",
+          "parent": "upper",
+          "anchor": [
+            32,
+            76
+          ],
+          "src": "popup/grandpa-arm-fore.svg",
+          "pivot": [
+            0.48,
+            0.085
+          ],
+          "z": -0.012,
+          "border": 0.05,
+          "rot": 0.25
+        },
+        {
+          "id": "dango",
+          "parent": "fore",
+          "anchor": [
+            29,
+            80
+          ],
+          "src": "popup/kibidango.svg",
+          "pivot": [
+            0.5,
+            0.5
+          ],
+          "z": 0.012,
+          "border": 0.05,
+          "hidden": true
+        }
+      ],
+      "params": {
+        "path": [
+          [
+            -13,
+            2.9
+          ],
+          [
+            -4.4,
+            2.9
+          ]
+        ],
+        "delay": 0.2,
+        "duration": 3.4,
+        "legs": [
+          "legN",
+          "legF"
+        ],
+        "arms": [
+          {
+            "part": "upper",
+            "amp": 0.35
+          }
+        ],
+        "stride": 0.42,
+        "step": 0.62,
+        "keys": [
+          {
+            "on": "dog-sat",
+            "after": 1.3,
+            "dur": 0.5,
+            "pose": {
+              "upper": 1.05,
+              "fore": 0.35,
+              "head": 0.08
+            },
+            "show": [
+              "dango"
+            ],
+            "say": "momotaro-deal"
+          },
+          {
+            "on": "dog-sat",
+            "after": 3.0,
+            "dur": 0.4,
+            "pose": {
+              "upper": 0,
+              "fore": 0,
+              "head": 0
+            },
+            "hide": [
+              "dango"
+            ]
+          },
+          {
+            "on": "dog-sat",
+            "after": 3.4,
+            "dur": 0.4,
+            "face": {
+              "head": "happy"
+            }
+          }
+        ],
+        "idle": [
+          {
+            "part": "head",
+            "amp": 0.03,
+            "speed": 1.5
+          }
+        ]
+      }
+    },
+    {
+      "id": "dog",
+      "x": 12.5,
+      "z": 3.2,
+      "unit": 0.022,
+      "tap": "dog",
+      "behavior": "walk",
+      "parts": [
+        {
+          "id": "body",
+          "src": "popup/dog-stand.svg",
+          "pivot": [
+            0.5,
+            1
+          ],
+          "alts": {
+            "sit": "popup/dog-sit.svg"
+          }
+        },
+        {
+          "id": "tail",
+          "parent": "body",
+          "anchor": [
+            130,
+            48
+          ],
+          "src": "popup/dog-tail.svg",
+          "pivot": [
+            0.2,
+            0.9
+          ],
+          "z": -0.01
+        },
+        {
+          "id": "tail2",
+          "parent": "body",
+          "anchor": [
+            118,
+            100
+          ],
+          "src": "popup/dog-tail.svg",
+          "pivot": [
+            0.2,
+            0.9
+          ],
+          "z": -0.01,
+          "hidden": true
+        },
+        {
+          "id": "head",
+          "parent": "body",
+          "anchor": [
+            46,
+            40
+          ],
+          "src": "popup/dog-head.svg",
+          "pivot": [
+            0.625,
+            0.88
+          ],
+          "z": 0.04,
+          "border": 0.05,
+          "alts": {
+            "happy": "popup/dog-head-happy.svg"
+          }
+        }
+      ],
+      "params": {
+        "path": [
+          [
+            12.5,
+            3.2
+          ],
+          [
+            3.2,
+            3.2
+          ]
+        ],
+        "delay": 1.3,
+        "duration": 2.4,
+        "bob": 0.3,
+        "step": 0.9,
+        "stride": 0,
+        "lean": 0,
+        "arrive": "dog-arrived",
+        "keys": [
+          {
+            "on": "dog-arrived",
+            "dur": 0.25,
+            "face": {
+              "body": "sit"
+            },
+            "hide": [
+              "tail"
+            ],
+            "show": [
+              "tail2"
+            ],
+            "flag": "dog-sat",
+            "say": "dog-ask",
+            "pose": {
+              "head": -0.08
+            }
+          },
+          {
+            "on": "dog-sat",
+            "after": 3.1,
+            "dur": 0.3,
+            "ease": "back",
+            "pose": {
+              "head": 0.12
+            },
+            "face": {
+              "body": "sit",
+              "head": "happy"
+            },
+            "hide": [
+              "tail"
+            ],
+            "show": [
+              "tail2"
+            ],
+            "say": true,
+            "osc": [
+              {
+                "part": "tail2",
+                "amp": 0.45,
+                "speed": 13
+              },
+              {
+                "part": "head",
+                "amp": 0.05,
+                "speed": 4
+              }
+            ]
+          }
+        ],
+        "idle": [
+          {
+            "part": "tail",
+            "amp": 0.3,
+            "speed": 9
+          },
+          {
+            "part": "tail2",
+            "amp": 0.25,
+            "speed": 9
+          }
+        ]
+      }
+    },
+    {
+      "id": "reeds",
+      "src": "popup/reeds.svg",
+      "x": -9.8,
+      "z": 5.0,
+      "unit": 0.018,
+      "behavior": "sway"
+    },
+    {
+      "id": "near-bank",
+      "src": "popup/grass-near.svg",
+      "x": 0,
+      "z": 5.3,
+      "unit": 0.022,
+      "border": 0.03
+    }
+  ]
+}
