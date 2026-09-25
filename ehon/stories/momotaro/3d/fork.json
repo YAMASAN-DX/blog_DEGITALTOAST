@@ -343,7 +343,7 @@
           ],
           "z": -0.006,
           "border": 0.05,
-          "rot": -0.2
+          "rot": 2.45
         }
       ],
       "params": {
@@ -494,6 +494,23 @@
           "rot": -0.05
         },
         {
+          "id": "tub",
+          "parent": "body",
+          "src": "popup/grandma-tub.svg",
+          "anchor": [
+            72,
+            238
+          ],
+          "pivot": [
+            0.5,
+            0.35
+          ],
+          "z": 0.05,
+          "unit": 0.023,
+          "border": 0.05,
+          "rot": 0
+        },
+        {
           "id": "upper",
           "parent": "body",
           "anchor": [
@@ -524,21 +541,6 @@
           "z": -0.012,
           "border": 0.05,
           "rot": -0.1
-        },
-        {
-          "id": "tub",
-          "parent": "body",
-          "type": "tub",
-          "anchor": [
-            92,
-            232
-          ],
-          "z": 1.12,
-          "r": 0.95,
-          "h": 0.6,
-          "water": 0,
-          "load": "laundry",
-          "rot": 0
         }
       ],
       "params": {

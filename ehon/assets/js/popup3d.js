@@ -1907,13 +1907,30 @@ const BEHAVIORS = {
 /* ---------- 本 ---------- */
 
 const PAGE_T = 0.06; // 1枚の紙の厚み
-const CLOSE_TIME = 0.75; // パーツがたおれ、台紙が背のページに重なって閉じるまで
-const FLIP_TIME = 1.1; // 閉じたページが左へめくれるまで
+const TURN_TIME = 1.8; // ページが、のどを軸に起きあがって背のページに重なるまで
 const AMBIENT = new Set(['sway', 'drift', 'ripple', 'peck', 'rig']); // 動きを減らす設定では止める動き
 
 // 本（机・表紙・紙の束）はそのままに、ページだけを差しかえる。
-// めくるとき：パーツがたおれ、台紙が起きあがって背のページに重なり（閉じる）、
-// 閉じたページが立てた本のページのように左へめくれ、うしろの次のページが開く。
+// 本は、のど（背のページと台紙の折り目）で綴じてある。めくると、いまの台紙がのどを軸に起きあがって
+// 背のページに重なり、その裏が次の場面の背のページになる。下から出てくる次の台紙のパーツは、
+// 起きあがるページにぶつからない角度で、いっしょに立ちあがる（本物の飛び出す絵本と同じ）。
+
+// のどから d の所に立つ高さ h のパーツが、角度 W のすきま（上にかぶさるページとの間）に収まる最大の角度
+function riseAngle(d, h, W) {
+  if (W >= Math.PI / 2 - 1e-4) return Math.PI / 2;
+  const lim = W - 0.035;
+  if (lim <= 0) return 0;
+  if (d <= 0.05) return lim;
+  const tip = (a) => Math.atan2(h * Math.sin(a), d + h * Math.cos(a));
+  if (tip(Math.PI / 2) <= lim) return Math.PI / 2;
+  let lo = 0;
+  let hi = Math.PI / 2;
+  for (let i = 0; i < 16; i++) {
+    const m = (lo + hi) / 2;
+    if (tip(m) <= lim) lo = m; else hi = m;
+  }
+  return lo;
+}
 export async function createPopupBook(container, { base = '', speak = () => '', reduceMotion = false, onSwipe = null } = {}) {
   const renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
@@ -1971,6 +1988,7 @@ export async function createPopupBook(container, { base = '', speak = () => '', 
   const edgeMat = new THREE.MeshLambertMaterial({ color: '#efe4cc' });
   const endMat = new THREE.MeshLambertMaterial({ map: makeTex(paintEndpaper(), [3, 3]) });
   const midZ = BACK_Z + PAGE_D / 2;
+  const underGeo = new THREE.PlaneGeometry(PAGE_W, PAGE_D);
   const cover = new THREE.Mesh(new THREE.BoxGeometry(PAGE_W + 1.6, 0.5, PAGE_D + 0.8), coverMat);
   cover.position.set(0, -0.6, midZ + 0.2);
   const block = new THREE.Mesh(new THREE.BoxGeometry(PAGE_W, 0.34 - PAGE_T, PAGE_D), [edgeMat, edgeMat, endMat, edgeMat, edgeMat, edgeMat]);
@@ -2046,9 +2064,9 @@ export async function createPopupBook(container, { base = '', speak = () => '', 
     }
 
     const page = {
-      def, pivot, root, ground, stage, leaf, bin, flowTex,
+      def, pivot, root, ground, stage, leaf, bin, flowTex, backMat,
       cards: [], byId: new Map(), standing: [], flags: new Map(), particles: null,
-      time: 0, started: false, closeAt: null,
+      time: 0, started: false, leafAt: -99, turnLift: null, cover: null, fullAt: null,
     };
     page.particles = createParticles(stage, tex);
 
@@ -2161,10 +2179,16 @@ export async function createPopupBook(container, { base = '', speak = () => '', 
       page.byId.set(spec.id, card);
     }));
 
-    // 奥のパーツから順に起きあがる
-    page.standing = page.cards.filter((c) => c.spec.attach !== 'back' && c.spec.pop !== false).sort((a, b) => a.spec.z - b.spec.z);
-    page.standing.forEach((c, rank) => { c.popDelay = 0.3 + rank * 0.07; c.rank = rank; });
-    foldPage(page, 0);
+    // パーツの高さと奥の端（起きあがる角度の計算に使う）
+    root.updateMatrixWorld(true);
+    const box = new THREE.Box3();
+    for (const c of page.cards) {
+      if (c.spec.attach === 'back') continue;
+      box.setFromObject(c.inner);
+      c.h = Math.max(0.2, box.max.y - c.hinge.position.y);
+      c.backZ = Math.min(box.min.z, c.hinge.position.z);
+    }
+    foldPage(page);
     return page;
   }
 
@@ -2208,34 +2232,44 @@ export async function createPopupBook(container, { base = '', speak = () => '', 
 
   /* ---------- 起きあがる・たおれる ---------- */
 
-  // 開く・閉じる。パーツごとの時間差は page.time から計算する
-  function foldPage(page, dt) {
+  // 台紙の起きぐあい（lift：0 = 開いて水平、π/2 = 起きて背のページに重なる）と、
+  // パーツが立てるすきまの角度（W）から、すべてのパーツの角度を決める
+  function foldPage(page) {
     const t = page.time;
-    const open = page.started ? easeInOut(clamp01(t / OPEN_TIME)) : 0;
-    const closing = page.closeAt == null ? -1 : t - page.closeAt;
-    const n = page.standing.length;
-    const shut = closing < 0 ? 0 : easeInOut(clamp01((closing - 0.3) / 0.5));
-    // 台紙：閉じると、のどを軸に起きあがって背のページに重なる（たおれたパーツをはさむ）
-    const g = Math.max(1 - open, shut);
-    page.ground.rotation.x = (-Math.PI / 2) * g;
-    page.ground.position.z = BACK_Z + 0.16 * g;
+    const Q = Math.PI / 2;
+    // めくりで下にあるページ（cover がある）は、台紙はずっと水平
+    const lift = page.turnLift ?? (page.cover != null ? 0 : page.started ? Q * (1 - easeInOut(clamp01(t / OPEN_TIME))) : Q);
+    const W = page.cover ?? Q - lift;
+    page.ground.rotation.x = -lift;
+    page.ground.position.z = BACK_Z + 0.16 * (lift / Q);
+    const full = W > Q - 0.005;
+    if (!full) page.fullAt = null;
+    else if (page.fullAt == null) page.fullAt = t;
+    // 開ききったとき、紙が少しゆれて止まる
+    const since = page.fullAt == null ? 9 : t - page.fullAt;
+    const wob = since < 2 ? Math.sin(since * 10) * Math.exp(-5 * since) : 0;
     for (const c of page.cards) {
-      let s;
-      if (c.spec.attach === 'back') s = page.started ? spring(clamp01((t - 0.55) / 0.8)) : 0;
-      else if (c.spec.pop === false) s = 1;
-      else s = page.started ? spring(clamp01((t - c.popDelay) / 0.8)) : 0;
-      if (closing >= 0) {
-        const order = c.rank == null ? 0 : (n - 1 - c.rank) / Math.max(1, n);
-        s *= 1 - easeInOut(clamp01((closing - order * 0.2) / 0.32));
-      }
-      if (c.spec.attach === 'back' || c.spec.pop === 'grow' || c.spec.pop === false) {
-        const k = Math.max(0.001, s);
-        c.closer.scale.set(c.spec.pop === 'grow' ? 1 + (1 - k) * 0.12 : k, k, c.spec.pop === 'grow' ? 1 + (1 - k) * 0.12 : k);
-        c.hinge.visible = s > 0.002;
+      if (c.spec.attach === 'back') {
+        // 背のページの雲など：台紙が起きてくる前に、たたんでしまう
+        const k = Math.min(easeOutBack(clamp01((Q - lift - 0.25) / 0.6)), spring(clamp01((t - page.leafAt) / 0.8)));
+        c.closer.scale.setScalar(Math.max(0.001, k));
+        c.hinge.visible = k > 0.002 && page.leaf.visible;
+      } else if (c.spec.pop === false) {
+        // 動きで登場するもの（流れてくる桃など）は、開ききってから
+        c.closer.scale.setScalar(1);
+        c.hinge.visible = full;
+      } else if (c.spec.pop === 'grow') {
+        const d = c.backZ - BACK_Z;
+        const k = full ? 1 + wob * 0.06 : clamp01((d * Math.tan(W)) / c.h);
+        c.closer.scale.set(1 + (1 - Math.min(1, k)) * 0.12, Math.max(0.001, k), 1 + (1 - Math.min(1, k)) * 0.12);
+        c.hinge.visible = k > 0.01;
       } else {
-        // 手前へたおれて台紙に重なる
-        c.hinge.rotation.x = (Math.PI / 2) * (1 - s);
-        c.hinge.visible = s > 0.015;
+        // 手前へたおれて台紙に重なる／上のページにふれない角度まで起きる
+        const a = riseAngle(c.hinge.position.z - BACK_Z, c.h, W) + (full ? wob * 0.1 : 0);
+        c.hinge.rotation.x = Q - a;
+        c.hinge.visible = a > 0.03;
+        // 人物が持つ立体の小道具（たらいなど）は、紙がたおれる前にしまう（台紙をつきぬけないように）
+        if (c.spec.parts) for (const pr of c.props) pr.group.scale.setScalar(Math.max(0.001, clamp01((a - 0.7) / 0.6)));
       }
     }
   }
@@ -2310,7 +2344,7 @@ export async function createPopupBook(container, { base = '', speak = () => '', 
   function resetPage(page) {
     page.time = 0;
     page.flags.clear();
-    page.closeAt = null;
+    page.fullAt = null;
     for (const c of page.cards) {
       c.state = {};
       c.hinge.position.copy(c.base);
@@ -2326,7 +2360,7 @@ export async function createPopupBook(container, { base = '', speak = () => '', 
   }
 
   function stepPage(page, dt) {
-    if (!page.started) { foldPage(page, dt); return; }
+    if (!page.started) { foldPage(page); return; }
     page.time += dt;
     const t = page.time;
     const st = t - OPEN_TIME;
@@ -2345,7 +2379,7 @@ export async function createPopupBook(container, { base = '', speak = () => '', 
     }
     if (page.flowTex && !reduceMotion) page.flowTex.offset.x -= dt * (page.def.stream ? 0.12 : 0.035);
     page.particles.update(t, dt);
-    foldPage(page, dt);
+    foldPage(page);
   }
 
   function startPage(page) {
@@ -2433,39 +2467,49 @@ export async function createPopupBook(container, { base = '', speak = () => '', 
       return;
     }
     clearBubbles();
-    current.closeAt = current.time;
-    // もどるときは、左にめくってあったページが手前にもどってくる
-    next.pivot.rotation.y = dir > 0 ? 0 : -Math.PI;
-    next.pivot.position.z = dir > 0 ? BACK_Z : BACK_Z + 0.3;
-    next.pivot.visible = dir < 0;
-    turn = { from: current, to: next, dir, t: 0, fromDef: current.def };
-    current = next;
+    current.particles.petals = false;
+    current.particles.clear();
+    // A：のどを軸に起きる／ふせるページ（進むときは今のページ、もどるときは前のページ）
+    // B：その下にある、あとのページ。B の背のページは A の台紙の裏に刷ってある
+    const A = dir > 0 ? current : next;
+    const B = dir > 0 ? next : current;
+    A.under = new THREE.Mesh(underGeo, B.backMat);
+    A.under.rotation.x = Math.PI / 2;
+    A.under.position.set(0, -PAGE_T - 0.03, midZ);
+    A.stage.add(A.under);
+    B.leaf.visible = false;
     resetPage(next);
+    next.started = true;
+    next.time = OPEN_TIME - TURN_TIME; // めくり終わると同時に、場面の動きが始まる
+    turn = { A, B, from: current, to: next, dir, t: 0, fromDef: current.def };
+    current = next;
+    stepTurn(0);
   }
 
   function stepTurn(dt) {
     turn.t += dt;
-    const f = clamp01((turn.t - CLOSE_TIME) / FLIP_TIME);
-    const e = easeInOut(f);
-    const { from, to, dir } = turn;
-    if (dir > 0) {
-      from.pivot.rotation.y = -e * Math.PI;
-      to.pivot.visible = e > 0.02;
-      if (f >= 0.5 && !to.started) startPage(to);
-    } else {
-      to.pivot.rotation.y = -(1 - e) * Math.PI;
-      if (f >= 1 && !to.started) startPage(to);
-    }
+    const { A, B, from, to, dir } = turn;
+    const k = clamp01(turn.t / TURN_TIME);
+    const e = easeInOut(k);
+    const lift = (Math.PI / 2) * (dir > 0 ? e : 1 - e);
+    A.turnLift = lift;
+    B.cover = lift; // B のパーツは、上にかぶさる A の台紙にふれない角度まで起きる
+    B.pivot.visible = lift > 0.004;
     // めくるあいだは、少し引いて本全体を見せる
     const d = Math.sin(e * Math.PI);
-    dolly.set(0, 1.6 * d, 7 * d);
+    dolly.set(0, 0.8 * d, 3 * d);
     applyView(to.def, turn.fromDef, e);
     stepPage(from, dt);
-    if (f >= 1) {
+    if (k >= 1) {
+      A.under.removeFromParent();
+      A.under = null;
+      A.turnLift = null;
+      B.cover = null;
+      B.leaf.visible = true;
+      B.leafAt = B.time;
+      B.pivot.visible = true;
       disposePage(from);
       dolly.set(0, 0, 0);
-      to.pivot.position.z = BACK_Z;
-      if (!to.started) startPage(to);
       turn = null;
       if (pending) {
         const p = pending;

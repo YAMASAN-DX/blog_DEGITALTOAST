@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 124 86">
+  <defs>
+    <clipPath id="oke"><path d="M8 30L116 30L106 80C104 84 100 85 96 85L28 85C24 85 20 84 18 80Z"/></clipPath>
+  </defs>
+  <!-- せんたく物（ふちの上にふんわり） -->
+  <g stroke="#4a3a30" stroke-width="2.4" stroke-linejoin="round">
+    <path d="M18 30C16 14 34 6 48 14C54 6 70 6 74 16L70 30Z" fill="#4f6b9a"/>
+    <path d="M52 30C50 12 70 4 84 12C94 6 108 14 104 30Z" fill="#f3ecdc"/>
+    <path d="M40 30C40 20 50 16 58 20C64 16 72 20 70 30Z" fill="#c0453a"/>
+  </g>
+  <g fill="#c9d6ea" opacity=".8"><circle cx="30" cy="20" r="2"/><circle cx="40" cy="15" r="2"/><circle cx="60" cy="14" r="2"/></g>
+  <path d="M62 16C72 12 86 12 94 18" fill="none" stroke="#d8cfbd" stroke-width="2" stroke-linecap="round"/>
+  <!-- たらい（側板・たが） -->
+  <path d="M8 30L116 30L106 80C104 84 100 85 96 85L28 85C24 85 20 84 18 80Z" fill="#c9985c"/>
+  <g clip-path="url(#oke)">
+    <g stroke="#9c7446" stroke-width="2">
+      <path d="M22 30L28 86M36 30L40 86M50 30L52 86M64 30L64 86M78 30L76 86M92 30L88 86M106 30L100 86"/>
+    </g>
+    <path d="M86 30L116 30L104 86H80Z" fill="#8a6035" opacity=".35"/>
+    <path d="M16 36L26 86H32L22 36Z" fill="#f0d3a0" opacity=".45"/>
+    <g fill="#b3894d" stroke="#4a3a30" stroke-width="2.2">
+      <rect x="0" y="40" width="124" height="8"/>
+      <rect x="0" y="66" width="124" height="8"/>
+    </g>
+    <g stroke="#8f6a2c" stroke-width="1.6"><path d="M4 40l6 8M16 40l6 8M28 40l6 8M40 40l6 8M52 40l6 8M64 40l6 8M76 40l6 8M88 40l6 8M100 40l6 8M112 40l6 8M4 66l6 8M16 66l6 8M28 66l6 8M40 66l6 8M52 66l6 8M64 66l6 8M76 66l6 8M88 66l6 8M100 66l6 8M112 66l6 8"/></g>
+  </g>
+  <!-- 縁 -->
+  <path d="M4 30C4 25 10 24 16 24L108 24C114 24 120 25 120 30C120 35 114 36 108 36L16 36C10 36 4 35 4 30Z" fill="#dcb67f" stroke="#4a3a30" stroke-width="2.6" stroke-linejoin="round"/>
+  <path d="M8 29C40 27 84 27 116 29" fill="none" stroke="#f3dcae" stroke-width="2" stroke-linecap="round"/>
+  <path d="M8 30L18 80C20 84 24 85 28 85L96 85C100 85 104 84 106 80L116 30" fill="none" stroke="#4a3a30" stroke-width="2.8" stroke-linejoin="round"/>
+</svg>
