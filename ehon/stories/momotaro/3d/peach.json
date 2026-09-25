@@ -29,17 +29,17 @@
   "cards": [
     {
       "id": "cloud1",
-      "src": "cloud.svg",
+      "src": "popup/cloud.svg",
       "attach": "back",
       "x": -6.5,
       "y": 9.4,
       "z": 0.3,
-      "w": 5,
+      "unit": 0.022,
       "behavior": "drift"
     },
     {
       "id": "cloud2",
-      "src": "cloud.svg",
+      "src": "popup/cloud.svg",
       "attach": "back",
       "x": 3.4,
       "y": 9.9,
@@ -49,62 +49,61 @@
     },
     {
       "id": "mt-far",
-      "src": "mountains-far.svg",
+      "src": "popup/mountains-far.svg",
       "x": 0,
       "z": -11,
-      "w": 33,
+      "unit": 0.022,
       "blur": 2,
-      "haze": 0.35,
+      "haze": 0.3,
       "border": 0.05
     },
     {
       "id": "mt-mid",
-      "src": "mountains-mid.svg",
-      "x": 2,
+      "src": "popup/mountains-mid.svg",
+      "x": 1,
       "z": -9,
-      "w": 33,
-      "blur": 1,
-      "haze": 0.15,
+      "unit": 0.022,
+      "blur": 0.8,
+      "haze": 0.12,
       "border": 0.06
     },
     {
       "id": "hill",
-      "src": "hill.svg",
+      "src": "popup/hill.svg",
       "x": 0,
       "z": -6.6,
-      "w": 33,
-      "sy": 0.8
+      "unit": 0.022
     },
     {
       "id": "pine",
-      "src": "tree-pine.svg",
-      "x": -12.4,
+      "src": "popup/tree-pine.svg",
+      "x": -11.8,
       "z": -5.2,
-      "w": 3.8,
+      "unit": 0.022,
       "behavior": "sway"
     },
     {
       "id": "tree",
-      "src": "tree-round.svg",
-      "x": 12.6,
+      "src": "popup/tree-round.svg",
+      "x": 12.2,
       "z": -5.5,
-      "w": 4,
+      "unit": 0.022,
       "behavior": "sway"
     },
     {
       "id": "far-bank",
-      "src": "grass.svg",
+      "src": "popup/grass-far.svg",
       "x": 0,
       "z": -3.8,
-      "w": 33,
-      "sy": 0.7
+      "unit": 0.022,
+      "border": 0.03
     },
     {
       "id": "peach",
-      "src": "peach.svg",
-      "x": -2.5,
-      "z": -0.4,
-      "w": 3.8,
+      "type": "peach",
+      "r": 1.8,
+      "x": -5.0,
+      "z": -1.2,
       "pop": false,
       "tap": "peach",
       "behavior": "peach-drift",
@@ -113,17 +112,24 @@
         "to": -5.0,
         "delay": 0.3,
         "duration": 5.5,
-        "lift": -0.55
+        "lift": 0.5
       }
     },
     {
-      "id": "ripple-front",
-      "src": "wave-front.svg",
+      "id": "ripples",
+      "src": "popup/ripples.svg",
       "x": 0,
       "z": 0.8,
-      "w": 33,
-      "sy": 0.32,
-      "behavior": "ripple"
+      "unit": 0.022,
+      "behavior": "ripple",
+      "border": 0
+    },
+    {
+      "id": "stones",
+      "src": "popup/stones.svg",
+      "x": 0,
+      "z": 1.25,
+      "unit": 0.022
     },
     {
       "id": "grandma",
@@ -135,7 +141,7 @@
       "parts": [
         {
           "id": "body",
-          "src": "grandma-body.svg",
+          "src": "popup/grandma-body.svg",
           "pivot": [
             0.5,
             1
@@ -148,8 +154,8 @@
             184,
             94
           ],
-          "src": "grandma-head.svg",
-          "alt": "grandma-head-surprise.svg",
+          "src": "popup/grandma-head.svg",
+          "alt": "popup/grandma-head-surprise.svg",
           "unit": 0.0198,
           "pivot": [
             0.575,
@@ -165,7 +171,7 @@
             160,
             112
           ],
-          "src": "grandma-arm-upper.svg",
+          "src": "popup/grandma-arm-upper.svg",
           "pivot": [
             0.833,
             0.222
@@ -180,12 +186,12 @@
             26,
             62
           ],
-          "src": "grandma-arm-fore.svg",
+          "src": "popup/grandma-arm-fore.svg",
           "pivot": [
             0.891,
             0.225
           ],
-          "z": 0.01,
+          "z": -0.012,
           "border": 0.05
         },
         {
@@ -195,12 +201,12 @@
             20,
             66
           ],
-          "src": "grandma-cloth.svg",
+          "src": "popup/grandma-cloth.svg",
           "pivot": [
             0.378,
             0.068
           ],
-          "z": -0.02,
+          "z": -0.01,
           "border": 0.04
         }
       ]
@@ -217,18 +223,18 @@
     },
     {
       "id": "near-bank",
-      "src": "grass.svg",
+      "src": "popup/grass-near.svg",
       "x": 0,
       "z": 5.3,
-      "w": 33,
-      "sy": 0.5
+      "unit": 0.022,
+      "border": 0.03
     },
     {
       "id": "reeds",
-      "src": "reeds.svg",
+      "src": "popup/reeds.svg",
       "x": -8.3,
       "z": 5.4,
-      "w": 3.6,
+      "unit": 0.022,
       "blur": 1.2,
       "behavior": "sway"
     }

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 44">
+  <clipPath id="leaf"><path d="M4 22C24 4 64 2 96 20C64 40 26 40 4 22Z"/></clipPath>
+  <path d="M4 22C24 4 64 2 96 20C64 40 26 40 4 22Z" fill="#7bb85e"/>
+  <g clip-path="url(#leaf)"><path d="M0 22L96 20L100 44H0Z" fill="#5e9a48"/></g>
+  <path d="M6 22L94 20" stroke="#4a7a3a" stroke-width="2" stroke-linecap="round"/>
+  <path d="M26 21L36 11M46 21L56 9M66 20L74 10M26 22L36 31M46 22L56 33M66 21L74 30" fill="none" stroke="#4a7a3a" stroke-width="1.4" stroke-linecap="round" opacity=".8"/>
+  <path d="M4 22C24 4 64 2 96 20C64 40 26 40 4 22Z" fill="none" stroke="#4a3a30" stroke-width="2.5" stroke-linejoin="round"/>
+</svg>

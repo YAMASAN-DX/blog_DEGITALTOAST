@@ -164,6 +164,28 @@ function paintSky(def) {
     ctx.arc(x, y, 46, 0, Math.PI * 2);
     ctx.fill();
   }
+  // うすい雲のすじ
+  ctx.filter = 'blur(8px)';
+  ctx.fillStyle = 'rgba(255,255,255,.45)';
+  for (const [x, y, rx, ry] of [[0.18, 0.3, 160, 14], [0.42, 0.22, 120, 10], [0.62, 0.4, 190, 16], [0.3, 0.46, 140, 11]]) {
+    ctx.beginPath();
+    ctx.ellipse(x * c.width, y * c.height, rx, ry, 0, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.filter = 'none';
+  // 遠くを飛ぶ鳥
+  ctx.strokeStyle = 'rgba(74,58,48,.55)';
+  ctx.lineWidth = 3;
+  ctx.lineCap = 'round';
+  for (const [x, y, s] of [[0.3, 0.36, 1], [0.34, 0.33, 0.8], [0.37, 0.38, 0.7]]) {
+    const bx = x * c.width;
+    const by = y * c.height;
+    ctx.beginPath();
+    ctx.moveTo(bx - 12 * s, by - 2 * s);
+    ctx.quadraticCurveTo(bx - 5 * s, by - 8 * s, bx, by);
+    ctx.quadraticCurveTo(bx + 5 * s, by - 8 * s, bx + 12 * s, by - 2 * s);
+    ctx.stroke();
+  }
   // うすく刷った遠山
   ctx.filter = 'blur(3px)';
   ctx.fillStyle = 'rgba(160,190,196,.55)';
@@ -189,33 +211,84 @@ function paintGround(def) {
   const d = 40;
   const c = makeCanvas(PAGE_W * d, PAGE_D * d);
   const ctx = c.getContext('2d');
+  const W = c.width;
+  const H = c.height;
   const row = (z) => (z - BACK_Z) * d;
-  const g = ctx.createLinearGradient(0, 0, 0, c.height);
+  const g = ctx.createLinearGradient(0, 0, 0, H);
   g.addColorStop(0, '#86b36a');
   g.addColorStop(1, '#a3c97f');
   ctx.fillStyle = g;
-  ctx.fillRect(0, 0, c.width, c.height);
-  // 草のむら
-  for (let k = 0; k < 900; k++) {
-    ctx.fillStyle = Math.random() < 0.5 ? 'rgba(120,165,90,.35)' : 'rgba(180,210,140,.3)';
-    const x = Math.random() * c.width;
-    const y = Math.random() * c.height;
+  ctx.fillRect(0, 0, W, H);
+  // 草むらの濃淡
+  for (let k = 0; k < 700; k++) {
+    ctx.fillStyle = Math.random() < 0.5 ? 'rgba(115,160,85,.35)' : 'rgba(180,210,140,.3)';
     ctx.beginPath();
-    ctx.ellipse(x, y, 6 + Math.random() * 14, 2 + Math.random() * 4, 0, 0, Math.PI * 2);
+    ctx.ellipse(Math.random() * W, Math.random() * H, 8 + Math.random() * 16, 2 + Math.random() * 5, 0, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  // 草の葉（手前ほど長く太い）
+  ctx.lineCap = 'round';
+  const blades = ['rgba(90,140,72,.6)', 'rgba(128,178,98,.55)', 'rgba(168,208,128,.5)'];
+  for (let k = 0; k < 5200; k++) {
+    const x = Math.random() * W;
+    const y = Math.random() * H;
+    const depth = 0.6 + y / H;
+    const l = (4 + Math.random() * 6) * depth;
+    ctx.strokeStyle = blades[k % 3];
+    ctx.lineWidth = depth;
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.quadraticCurveTo(x + 1, y - l * 0.6, x + (Math.random() - 0.5) * 5, y - l);
+    ctx.stroke();
+  }
+  // 野の花
+  const petals = ['#fffaf0', '#f3cf4a', '#f2a6b9', '#c9b3e6'];
+  for (let k = 0; k < 170; k++) {
+    const x = Math.random() * W;
+    const y = Math.random() * H;
+    const z = y / d + BACK_Z;
+    if (def.river && z > def.river.far - 0.9 && z < def.river.near + 0.9) continue;
+    const r = 2 + Math.random() * 2;
+    ctx.fillStyle = petals[k % petals.length];
+    for (let p = 0; p < 5; p++) {
+      const a = (p / 5) * Math.PI * 2;
+      ctx.beginPath();
+      ctx.arc(x + Math.cos(a) * r, y + Math.sin(a) * r * 0.6, r * 0.7, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.fillStyle = '#e9a93a';
+    ctx.beginPath();
+    ctx.arc(x, y, r * 0.5, 0, Math.PI * 2);
     ctx.fill();
   }
   const river = def.river;
   if (river) {
-    // 川べりの砂
-    ctx.fillStyle = '#dccb98';
-    ctx.fillRect(0, row(river.far) - 22, c.width, 30);
-    ctx.fillRect(0, row(river.near) - 8, c.width, 34);
-    ctx.fillStyle = 'rgba(160,140,95,.35)';
-    for (let k = 0; k < 160; k++) {
-      const y = Math.random() < 0.5 ? row(river.far) - 18 + Math.random() * 22 : row(river.near) + Math.random() * 24;
+    // 川べりの砂（ふちは波うたせる）
+    const band = (top, bottom, seed) => {
       ctx.beginPath();
-      ctx.arc(Math.random() * c.width, y, 1 + Math.random() * 2.5, 0, Math.PI * 2);
+      ctx.moveTo(0, top(0));
+      for (let x = 0; x <= W; x += 16) ctx.lineTo(x, top(x) + Math.sin(x / 37 + seed) * 4);
+      for (let x = W; x >= 0; x -= 16) ctx.lineTo(x, bottom(x) + Math.sin(x / 29 + seed * 2) * 5);
+      ctx.closePath();
       ctx.fill();
+    };
+    ctx.fillStyle = '#dccb98';
+    band(() => row(river.far) - 24, () => row(river.far) + 6, 1);
+    band(() => row(river.near) - 6, () => row(river.near) + 28, 2);
+    // 小石
+    const stones = ['#b9b2a4', '#a39c8f', '#c9c1b0', '#948d80'];
+    for (let k = 0; k < 220; k++) {
+      const onFar = k % 2 === 0;
+      const x = Math.random() * W;
+      const y = onFar ? row(river.far) - 20 + Math.random() * 22 : row(river.near) + Math.random() * 26;
+      const r = 1.6 + Math.random() * 3.4;
+      ctx.fillStyle = stones[k % stones.length];
+      ctx.strokeStyle = 'rgba(74,58,48,.55)';
+      ctx.lineWidth = 1.2;
+      ctx.beginPath();
+      ctx.ellipse(x, y, r * 1.4, r, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.stroke();
     }
   }
   // のどの陰
@@ -223,35 +296,83 @@ function paintGround(def) {
   gutter.addColorStop(0, 'rgba(60,45,30,.3)');
   gutter.addColorStop(1, 'rgba(60,45,30,0)');
   ctx.fillStyle = gutter;
-  ctx.fillRect(0, 0, c.width, 70);
-  applyGrain(ctx, c.width, c.height, 0.7);
+  ctx.fillRect(0, 0, W, 70);
+  applyGrain(ctx, W, H, 0.7);
   return c;
 }
 
 function paintRiver() {
-  const c = makeCanvas(1024, 200);
+  const c = makeCanvas(1024, 256);
   const ctx = c.getContext('2d');
-  const g = ctx.createLinearGradient(0, 0, 0, c.height);
-  g.addColorStop(0, '#a6d2e4');
-  g.addColorStop(1, '#5f9fc6');
+  const W = c.width;
+  const H = c.height;
+  const g = ctx.createLinearGradient(0, 0, 0, H);
+  g.addColorStop(0, '#b3dbe8');
+  g.addColorStop(0.45, '#8cc3dc');
+  g.addColorStop(1, '#5896bf');
   ctx.fillStyle = g;
-  ctx.fillRect(0, 0, c.width, c.height);
-  ctx.strokeStyle = 'rgba(255,255,255,.75)';
+  ctx.fillRect(0, 0, W, H);
+  // 空のうつりこみ
+  const sky = ctx.createLinearGradient(0, H * 0.12, 0, H * 0.58);
+  sky.addColorStop(0, 'rgba(255,255,255,0)');
+  sky.addColorStop(0.5, 'rgba(255,255,255,.22)');
+  sky.addColorStop(1, 'rgba(255,255,255,0)');
+  ctx.fillStyle = sky;
+  ctx.fillRect(0, 0, W, H);
+  // 流れのすじ（左右がつながるように3回ずつ描く）
   ctx.lineCap = 'round';
-  for (let k = 0; k < 46; k++) {
-    const x = Math.random() * c.width;
-    const y = 12 + Math.random() * (c.height - 24);
-    const s = 0.6 + (y / c.height) * 0.8; // 手前ほど大きい波
-    ctx.lineWidth = 2.5 * s;
-    for (const dx of [0, -c.width, c.width]) {
+  for (let k = 0; k < 70; k++) {
+    const y = 8 + Math.random() * (H - 16);
+    const x = Math.random() * W;
+    const len = 60 + Math.random() * 160;
+    const s = 0.5 + y / H; // 手前ほど太い
+    ctx.strokeStyle = `rgba(255,255,255,${0.16 + Math.random() * 0.22})`;
+    ctx.lineWidth = 1.2 * s + Math.random();
+    for (const dx of [-W, 0, W]) {
       ctx.beginPath();
       ctx.moveTo(x + dx, y);
-      ctx.quadraticCurveTo(x + dx + 10 * s, y - 7 * s, x + dx + 20 * s, y);
-      ctx.quadraticCurveTo(x + dx + 30 * s, y - 7 * s, x + dx + 40 * s, y);
+      ctx.bezierCurveTo(x + dx + len * 0.3, y - 3 * s, x + dx + len * 0.7, y + 3 * s, x + dx + len, y);
       ctx.stroke();
     }
   }
-  applyGrain(ctx, c.width, c.height, 0.5);
+  // 波がしら
+  for (let k = 0; k < 26; k++) {
+    const y = 20 + Math.random() * (H - 36);
+    const x = Math.random() * W;
+    const s = 0.6 + y / H;
+    ctx.strokeStyle = 'rgba(255,255,255,.8)';
+    ctx.lineWidth = 2.4 * s;
+    for (const dx of [-W, 0, W]) {
+      for (let j = 0; j < 2; j++) {
+        ctx.beginPath();
+        ctx.arc(x + dx + j * 16 * s, y, 8 * s, Math.PI * 1.15, Math.PI * 1.85);
+        ctx.stroke();
+      }
+    }
+  }
+  // 岸ぎわの陰
+  const far = ctx.createLinearGradient(0, 0, 0, 26);
+  far.addColorStop(0, 'rgba(40,70,60,.35)');
+  far.addColorStop(1, 'rgba(40,70,60,0)');
+  ctx.fillStyle = far;
+  ctx.fillRect(0, 0, W, 26);
+  const near = ctx.createLinearGradient(0, H, 0, H - 30);
+  near.addColorStop(0, 'rgba(30,60,80,.4)');
+  near.addColorStop(1, 'rgba(30,60,80,0)');
+  ctx.fillStyle = near;
+  ctx.fillRect(0, H - 30, W, 30);
+  // きらめき
+  ctx.fillStyle = '#ffffff';
+  for (let k = 0; k < 30; k++) {
+    const x = Math.random() * W;
+    const y = Math.random() * H * 0.6;
+    const r = 2 + Math.random() * 3;
+    ctx.beginPath();
+    ctx.moveTo(x, y - r * 2); ctx.lineTo(x + r * 0.5, y); ctx.lineTo(x, y + r * 2); ctx.lineTo(x - r * 0.5, y);
+    ctx.moveTo(x - r * 2, y); ctx.lineTo(x, y + r * 0.5); ctx.lineTo(x + r * 2, y); ctx.lineTo(x, y - r * 0.5);
+    ctx.fill();
+  }
+  applyGrain(ctx, W, H, 0.4);
   return c;
 }
 
@@ -544,6 +665,77 @@ function buildTub(spec, tex) {
   };
 }
 
+/* ---------- 立体の桃 ---------- */
+
+// 桃の形：下は丸く、上は少しとがる。割れ目（縫合線）のところを少しへこませる
+function peachGeometry(R, groove) {
+  const profile = [[0, -0.95], [0.35, -0.9], [0.62, -0.76], [0.82, -0.54], [0.95, -0.27], [1, 0], [0.97, 0.28], [0.88, 0.54],
+    [0.72, 0.77], [0.5, 0.95], [0.26, 1.07], [0.09, 1.15], [0, 1.19]];
+  const geo = new THREE.LatheGeometry(profile.map(([r, y]) => new THREE.Vector2(r * R, y * R)), 72);
+  const pos = geo.attributes.position;
+  const v = new THREE.Vector3();
+  for (let i = 0; i < pos.count; i++) {
+    v.fromBufferAttribute(pos, i);
+    let d = Math.atan2(v.x, v.z) - groove;
+    d = Math.atan2(Math.sin(d), Math.cos(d));
+    const fade = THREE.MathUtils.smoothstep(v.y / R, -0.85, 0.1);
+    const k = 1 - 0.09 * Math.exp(-(d * d) / (2 * 0.11 * 0.11)) * fade + 0.025 * Math.exp(-((Math.abs(d) - 0.4) ** 2) / 0.05) * fade;
+    pos.setXYZ(i, v.x * k, v.y, v.z * k);
+  }
+  geo.computeVertexNormals();
+  return geo;
+}
+
+function paintPeach(groove) {
+  const W = 1024;
+  const H = 512;
+  const c = makeCanvas(W, H);
+  const ctx = c.getContext('2d');
+  // 下はクリーム色、上ほど桃色から紅へ
+  const g = ctx.createLinearGradient(0, H, 0, 0);
+  g.addColorStop(0, '#f6ddb0');
+  g.addColorStop(0.35, '#f9c7a6');
+  g.addColorStop(0.7, '#f39a8e');
+  g.addColorStop(1, '#e8716c');
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, W, H);
+  // 赤みのまだら
+  for (let k = 0; k < 44; k++) {
+    const x = Math.random() * W;
+    const y = Math.random() * H * 0.65;
+    const r = 30 + Math.random() * 90;
+    for (const dx of [-W, 0, W]) {
+      const rg = ctx.createRadialGradient(x + dx, y, 0, x + dx, y, r);
+      rg.addColorStop(0, 'rgba(225,85,85,.26)');
+      rg.addColorStop(1, 'rgba(225,85,85,0)');
+      ctx.fillStyle = rg;
+      ctx.fillRect(x + dx - r, y - r, r * 2, r * 2);
+    }
+  }
+  // 割れ目のすじ
+  const gx = ((((groove / (Math.PI * 2)) % 1) + 1) % 1) * W;
+  ctx.strokeStyle = 'rgba(185,70,70,.6)';
+  ctx.lineWidth = 5;
+  ctx.lineCap = 'round';
+  ctx.beginPath();
+  ctx.moveTo(gx, 0);
+  for (let y = 0; y <= H * 0.85; y += 16) ctx.lineTo(gx + Math.sin(y / 60) * 4, y);
+  ctx.stroke();
+  // 産毛と小さな斑点
+  for (let k = 0; k < 3200; k++) {
+    ctx.fillStyle = `rgba(255,255,255,${0.1 + Math.random() * 0.2})`;
+    ctx.fillRect(Math.random() * W, Math.random() * H, 1.6, 1.6);
+  }
+  ctx.fillStyle = 'rgba(170,80,60,.25)';
+  for (let k = 0; k < 160; k++) {
+    ctx.beginPath();
+    ctx.arc(Math.random() * W, Math.random() * H * 0.7, 1.2 + Math.random(), 0, Math.PI * 2);
+    ctx.fill();
+  }
+  applyGrain(ctx, W, H, 0.5);
+  return c;
+}
+
 /* ---------- 舞台 ---------- */
 
 export async function createPopupStage(container, def, { base = '', speak = () => '', reduceMotion = false } = {}) {
@@ -668,6 +860,63 @@ export async function createPopupStage(container, def, { base = '', speak = () =
     return mesh;
   };
 
+  // 立体の桃：トゥーン調の陰影と線画のりんかく、紙の葉。川に浮かぶと水面で下半分がかくれ、まわりに波紋
+  async function buildPeach(spec, card) {
+    const R = spec.r ?? 1.8;
+    const groove = spec.groove ?? -0.5;
+    const gradientMap = toonGradient();
+    const group = new THREE.Group();
+    const geo = peachGeometry(R, groove);
+    const skin = new THREE.Mesh(geo, new THREE.MeshToonMaterial({ map: tex(paintPeach(groove)), gradientMap }));
+    skin.castShadow = true;
+    skin.receiveShadow = true;
+    const hull = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ color: INK, side: THREE.BackSide }));
+    hull.scale.setScalar(1.035);
+    const stem = new THREE.Mesh(new THREE.CylinderGeometry(0.05 * R, 0.08 * R, 0.3 * R, 10), new THREE.MeshToonMaterial({ color: '#7b5a41', gradientMap }));
+    stem.position.set(0, 1.22 * R, 0);
+    stem.rotation.z = -0.25;
+    stem.castShadow = true;
+    group.add(skin, hull, stem);
+    for (const [rz, ry, flip] of [[0.45, 0.5, 1], [-0.5, -0.45, -1]]) {
+      const leaf = await makePart({ src: spec.leaf ?? 'popup/leaf.svg', w: R * 1.15, border: 0.05, density: 100 }, [0.04, 0.5]);
+      const g = new THREE.Group();
+      g.position.set(0, 1.2 * R, 0.03);
+      g.rotation.set(0, ry, rz);
+      g.scale.x = flip;
+      g.add(leaf);
+      group.add(g);
+    }
+    const ringGeo = new THREE.RingGeometry(0.93, 1, 64).rotateX(-Math.PI / 2);
+    const rings = Array.from({ length: 5 }, () => {
+      const m = new THREE.Mesh(ringGeo, new THREE.MeshBasicMaterial({ color: '#ffffff', transparent: true, opacity: 0, depthWrite: false }));
+      m.visible = false;
+      scene.add(m);
+      return { m, t0: 0 };
+    });
+    let lastRing = -9;
+    return {
+      group,
+      update(t) {
+        const p = card.hinge.position;
+        if (p.y > -R * 0.4 && t - lastRing > 0.85) {
+          lastRing = t;
+          const r = rings.find((q) => !q.m.visible) ?? rings[0];
+          r.m.position.set(p.x, 0.03, p.z);
+          r.t0 = t;
+          r.m.visible = true;
+        }
+        for (const r of rings) {
+          if (!r.m.visible) continue;
+          const k = (t - r.t0) / 1.6;
+          if (k >= 1 || k < 0) { r.m.visible = false; continue; }
+          const s = R * (0.95 + k * 0.9);
+          r.m.scale.set(s, 1, s);
+          r.m.material.opacity = 0.55 * (1 - k);
+        }
+      },
+    };
+  }
+
   const cards = [];
   const byId = new Map();
   await Promise.all(def.cards.map(async (spec, index) => {
@@ -701,6 +950,9 @@ export async function createPopupStage(container, def, { base = '', speak = () =
       }
     } else if (spec.type === 'tub') {
       card.prop = buildTub(spec, tex);
+      inner.add(card.prop.group);
+    } else if (spec.type === 'peach') {
+      card.prop = await buildPeach(spec, card);
       inner.add(card.prop.group);
     } else {
       inner.add(await makePart(spec));
@@ -763,6 +1015,7 @@ export async function createPopupStage(container, def, { base = '', speak = () =
       c.hinge.position.x = lerp(p.from, p.to, easeOut(k));
       c.hinge.position.y = lerp(-3.2, p.lift, rise) + Math.sin(t * 2.2) * 0.12;
       c.inner.rotation.z = Math.sin(t * 1.7) * 0.07 + (1 - k) * Math.sin(t * 3.1) * 0.05;
+      if (c.prop) c.inner.rotation.y = Math.sin(t * 0.45) * 0.4;
       if (k >= 1 && !c.state.arrived) {
         c.state.arrived = true;
         emit('peach-arrived');

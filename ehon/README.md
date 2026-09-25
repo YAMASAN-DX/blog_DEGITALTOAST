@@ -129,6 +129,9 @@ ehon/
 - おばあさんは体・頭・腕の部品に分け、関節で動かす（せんたく → 桃に気づいて顔をあげる）
 - マウスや指でなぞると、視点が少しまわりこむ
 - 場面の定義：`stories/momotaro/3d/peach.json`（単位は cm。台紙は x: -17〜17、z: -12〜6）
+- 立体版の絵は `assets/art/popup/`。背景・草・石・木・雲などは `tools/gen_popup_art.py` で生成（おばあさんの部品は手描き）。
+  原画の1単位 = 0.022cm（`"unit": 0.022`）にそろえ、線の太さが場面の中で同じに見えるようにしている
+- たらいと桃は立体（`"type": "tub"` / `"type": "peach"`）。人物は部品（`parts`）を関節（`anchor`）でつないで動かす
 - 仕組み：`assets/js/popup3d.js`、ライブラリ：`assets/vendor/three/`（three.js r170、MIT ライセンス）
 
 `scene3d.html?debug` で開くと、コンソールから `ehonStage.seek(秒)` で任意の時点に進められます。
