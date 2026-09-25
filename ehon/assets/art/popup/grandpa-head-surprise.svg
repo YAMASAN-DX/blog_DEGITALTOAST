@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 170">
+  <!-- 後ろ髪（白い綿毛） -->
+  <path d="M46 62C30 58 20 72 26 84C16 90 18 106 30 108C26 120 38 130 50 122C58 114 58 98 54 88Z" fill="#eeeae1" stroke="#4a3a30" stroke-width="2.8" stroke-linejoin="round"/>
+  <path d="M34 78C30 86 32 94 36 98M36 106C36 112 40 116 46 116" fill="none" stroke="#c9c2b4" stroke-width="1.8" stroke-linecap="round"/>
+
+  <!-- 頭と顔（はげ頭、右向き） -->
+  <path d="M44 72C40 42 64 20 94 20C124 20 142 42 140 70C139 82 138 90 140 100C142 118 130 134 112 140C96 145 76 144 62 138C48 132 42 118 42 102C42 92 44 82 44 72Z" fill="#f6d7b8" stroke="#4a3a30" stroke-width="2.8" stroke-linejoin="round"/>
+  <path d="M140 100C142 118 130 134 112 140C96 145 76 144 64 138C80 142 102 138 116 128C128 118 134 106 136 94Z" fill="#e8bd98"/>
+  <ellipse cx="80" cy="38" rx="17" ry="7" transform="rotate(-24 80 38)" fill="#ffffff" opacity=".55"/>
+  <g fill="none" stroke="#d2a784" stroke-width="1.8" stroke-linecap="round">
+    <path d="M96 44C104 41 114 41 122 45"/><path d="M100 52C107 50 114 50 120 53"/>
+  </g>
+  <path d="M92 22C88 12 98 6 102 14C104 18 100 20 98 18" fill="none" stroke="#4a3a30" stroke-width="2" stroke-linecap="round"/>
+  <!-- 耳 -->
+  <path d="M56 80C44 74 36 88 42 100C46 108 56 106 58 98Z" fill="#f1cda9" stroke="#4a3a30" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M50 86C46 90 46 96 50 99" fill="none" stroke="#b98e6c" stroke-width="1.6" stroke-linecap="round"/>
+  <!-- 鼻 -->
+  <path d="M136 84C146 82 152 90 150 98C148 104 140 106 134 102" fill="#f3c9a6" stroke="#4a3a30" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- 白い太まゆ -->
+  <g fill="#f7f4ee" stroke="#4a3a30" stroke-width="2.2" stroke-linejoin="round" transform="translate(0 -7)">
+    <path d="M82 74C84 62 98 58 110 64C106 68 100 70 94 72C90 72 86 74 82 74Z"/>
+    <path d="M116 66C120 58 132 58 138 66C132 68 126 70 120 70Z"/>
+  </g>
+  <g fill="#2b2622"><ellipse cx="95" cy="84" rx="5" ry="6.5"/><ellipse cx="125" cy="82" rx="4" ry="5.5"/></g>
+  <g fill="#fff"><circle cx="96.5" cy="82" r="1.7"/><circle cx="126.3" cy="80.2" r="1.4"/></g>
+  <path d="M20 44l-8-4M26 34l-6-8M38 26l-2-9" fill="none" stroke="#3a2d25" stroke-width="2.2" stroke-linecap="round"/>
+  <g fill="#f2a3a0" opacity=".6"><ellipse cx="94" cy="98" rx="10" ry="6"/><ellipse cx="136" cy="112" rx="4" ry="3"/></g>
+  <!-- あごひげ -->
+  <path d="M62 118C68 134 78 150 94 162C102 168 112 164 114 154C118 162 128 160 130 150C136 140 140 124 138 110C130 116 120 118 112 114C100 120 82 122 62 118Z" fill="#f3efe6" stroke="#4a3a30" stroke-width="2.8" stroke-linejoin="round"/>
+  <g fill="none" stroke="#cfc8bb" stroke-width="1.7" stroke-linecap="round">
+    <path d="M76 128C82 140 90 150 98 156"/><path d="M92 126C96 138 102 146 108 152"/><path d="M110 124C114 134 120 142 124 146"/><path d="M126 120C130 128 132 136 130 142"/>
+  </g>
+  <ellipse cx="122" cy="124" rx="6.5" ry="7" fill="#8a3b35" stroke="#3a2d25" stroke-width="2.2"/>
+  <!-- 口ひげ -->
+  <path d="M106 106C112 98 124 98 132 104C138 98 148 100 152 108C146 116 134 114 128 110C120 116 108 116 106 106Z" fill="#f7f4ee" stroke="#4a3a30" stroke-width="2.4" stroke-linejoin="round"/>
+</svg>

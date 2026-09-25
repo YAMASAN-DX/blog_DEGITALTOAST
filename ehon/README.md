@@ -1,9 +1,10 @@
 # とびだす昔話（プロトタイプ）
 
 ページをめくると切り絵の絵が起きあがる、日本の昔話のインタラクティブ絵本です。
-WordPress とは別の静的ページとして `/ehon/` に置いています（ビルド不要・外部 JS ライブラリなし）。
+WordPress とは別の静的ページとして `/ehon/` に置いています（ビルド不要。立体版だけ three.js を同梱）。
 
 - `index.html` … お話一覧（本棚）
+- `story3d.html?id=momotaro` … 立体版のビューア（1〜4場面）
 - `story.html?id=momotaro&lang=ja` … お話ビューア（`#p5` で5ページ目から）
 
 ## 見かた（ローカル）
@@ -120,18 +121,54 @@ ehon/
 
 文章は伝承をもとにした書きおろし、絵はすべてこのサイトのオリジナル（SVG）です。国立国会図書館の画像はまだ使っていません。
 
-## 立体版（試作中）
+## 立体版（制作中）
 
-`scene3d.html` は、1場面（川上から桃が流れてくる）を three.js の立体舞台で見せる試作です。
+`story3d.html?id=momotaro` は、three.js の立体舞台で読む版です。いまは 1〜4場面（村のふたり → 山と川へ → 桃が流れてくる → 桃太郎の誕生）。
+5場面目からは、最後のページのリンクで平面の絵本（`story.html#p6`）につながります。一覧のカードの「立体版で読む」からも開けます。
 
-- 本が開き、台紙に立てた紙のパーツが起きあがる。左手前上からの光で、手前の紙が奥の紙や台紙に影を落とす
-- 絵は読みこむときに「白い切り口」「和紙の地合い」「遠くのかすみ・ぼかし」を加えて紙のパーツにする
-- おばあさんは体・頭・腕の部品に分け、関節で動かす（せんたく → 桃に気づいて顔をあげる）
-- マウスや指でなぞると、視点が少しまわりこむ
-- 場面の定義：`stories/momotaro/3d/peach.json`（単位は cm。台紙は x: -17〜17、z: -12〜6）
-- 立体版の絵は `assets/art/popup/`。背景・草・石・木・雲などは `tools/gen_popup_art.py` で生成（おばあさんの部品は手描き）。
+- **めくり**：パーツが台紙へたおれ、台紙が起きて背のページに重なり（閉じる）、閉じたページが左へめくれて、うしろの次のページが開く。
+  「つぎへ」・左へはらう・→キーで右へ進む（もどるときは、左にめくったページが手前にもどる）
+- 左手前上からの光で、紙のパーツや立体の小道具が影を落とす。絵は読みこむときに「白い切り口」「和紙の地合い」「かすみ・ぼかし」を加える
+- 人物は部品（体・頭・腕・足）を関節でつなぎ、表情を差しかえて動かす。タップするとセリフ
+- マウスや指でなぞると、視点が少しまわりこむ。動きを減らす設定では、完成した場面をそのまま見せる
+- WebGL が使えない端末では、平面の絵本に切りかわる
+
+### ファイル
+
+- `stories/momotaro/3d/book.json` … 場面の順番（`scenes`）と、つづきの平面ページ（`continue.page`）
+- `stories/momotaro/3d/*.json` … 1場面の定義（単位は cm。台紙は x: -17〜17、z: -12（のど）〜6（手前））
+- `assets/art/popup/` … 立体版の絵。背景・草・木・柵などは `tools/gen_popup_art.py` で生成、人物・小道具は手描き SVG。
   原画の1単位 = 0.022cm（`"unit": 0.022`）にそろえ、線の太さが場面の中で同じに見えるようにしている
-- たらいと桃は立体（`"type": "tub"` / `"type": "peach"`）。人物は部品（`parts`）を関節（`anchor`）でつないで動かす
-- 仕組み：`assets/js/popup3d.js`、ライブラリ：`assets/vendor/three/`（three.js r170、MIT ライセンス）
+- `assets/js/popup3d.js`（仕組み）、`assets/js/story3d.js`（ビューア）、`assets/vendor/three/`（three.js r170、MIT ライセンス）
 
-`scene3d.html?debug` で開くと、コンソールから `ehonStage.seek(秒)` で任意の時点に進められます。
+### 場面の定義（おもなキー）
+
+| キー | 意味 |
+|---|---|
+| `text` | 文章のキー（`text.*.json` の `scenes`） |
+| `camera` / `light` | 視点（`position`・`target`・`fov`）と光の強さ（`ambient`・`sun`） |
+| `sky` / `back: "interior"` | 背のページ：空（`top`・`bottom`・`sun`）か、家の中のかべ |
+| `floor: "tatami"` | 台紙をたたみにする（家の中） |
+| `river` / `stream` / `paths` | 全幅の川（`far`・`near`）、曲がる小川（`points`・`width`）、土の道（`points`・`width`） |
+| `settle` | 動きを減らす設定のとき、何秒後の場面を見せるか |
+| `cards` | 台紙に立てるもの（下の表） |
+
+`cards` の1つ：
+
+| キー | 意味 |
+|---|---|
+| `src` + `unit`（または `w`） | 紙のパーツ。`x`・`z` が足もとの位置、`lift` で持ちあげる |
+| `type` | 立体の小道具：`tub`（たらい）・`peach`（流れる桃）・`split-peach`（割れる桃）・`house`（かやぶきの家）・`cushion`（ざぶとん） |
+| `parts` | 部品で組んだ人物。`parent` + `anchor`（親の原画上の関節の位置）、`pivot`（自分の関節）、`z`（前後）、`rot`（最初の角度）、`alts`（表情の差しかえ）、`flip`、`shade`（奥の手足を暗く） |
+| `flip` | 左右反転（向きを変える） |
+| `pop` | `"grow"`（大きくなって出る）・`false`（動きで出す） |
+| `attach: "back"` | 背のページに貼る（雲など） |
+| `behavior` + `params` | 動き：`sway` `drift` `peck`、`walk`（道にそって歩く）、`poses`（時間や出来事で関節の角度・表情・セリフを切りかえる）、`peach-drift` `grandma-wash` `peach-split` `baby-birth` |
+| `tap` | タップしたときのセリフのキー（`say`） |
+
+`poses` の `keys` は `{ "at": 秒 }` か `{ "on": "出来事", "after": 秒 }` で始まり、`pose`（部品ごとの角度、`lean`、`y`）・`face`・`osc`（ゆれ）・`say` を持ちます。出来事は `peach-arrived`（桃が着いた）・`peach-split`（桃が割れた）など。
+
+### 確認用
+
+- `story3d.html?debug#p2` … コンソールから `ehonStage.seek(秒)`、`ehonStage.freeze()`（時間を止める）、`ehonStage.seekTurn(秒)`（めくりの途中）
+- `scene3d.html?scene=birth` … 1場面だけを表示する

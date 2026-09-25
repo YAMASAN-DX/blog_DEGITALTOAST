@@ -1,0 +1,605 @@
+{
+  "id": "fork",
+  "text": "s02",
+  "camera": {
+    "fov": 34,
+    "position": [
+      0.4,
+      7.0,
+      21.5
+    ],
+    "target": [
+      0.6,
+      3.2,
+      -1.5
+    ]
+  },
+  "settle": 9,
+  "sky": {
+    "top": "#b3d5e5",
+    "bottom": "#eef3e6",
+    "sun": [
+      0.52,
+      0.3
+    ]
+  },
+  "stream": {
+    "points": [
+      [
+        8.4,
+        -12
+      ],
+      [
+        9.4,
+        -8
+      ],
+      [
+        8.6,
+        -4.6
+      ],
+      [
+        9.8,
+        -1.2
+      ],
+      [
+        12.2,
+        2.4
+      ],
+      [
+        14.6,
+        6.2
+      ]
+    ],
+    "width": 3.0
+  },
+  "paths": [
+    {
+      "points": [
+        [
+          -0.6,
+          6.2
+        ],
+        [
+          -0.3,
+          3.8
+        ],
+        [
+          -0.6,
+          1.6
+        ],
+        [
+          -2.9,
+          -0.4
+        ],
+        [
+          -5.9,
+          -2.9
+        ],
+        [
+          -8.2,
+          -5.2
+        ]
+      ],
+      "width": 1.5
+    },
+    {
+      "points": [
+        [
+          -0.6,
+          1.6
+        ],
+        [
+          2.4,
+          1.0
+        ],
+        [
+          5.2,
+          0.6
+        ],
+        [
+          7.8,
+          0.3
+        ]
+      ],
+      "width": 1.4
+    }
+  ],
+  "cards": [
+    {
+      "id": "cloud1",
+      "src": "popup/cloud.svg",
+      "attach": "back",
+      "x": -3.5,
+      "y": 9.6,
+      "z": 0.3,
+      "unit": 0.022,
+      "behavior": "drift"
+    },
+    {
+      "id": "cloud2",
+      "src": "popup/cloud.svg",
+      "attach": "back",
+      "x": 8.0,
+      "y": 9.9,
+      "z": 0.25,
+      "w": 3.4,
+      "behavior": "drift"
+    },
+    {
+      "id": "mt-far",
+      "src": "popup/mountains-far.svg",
+      "x": 0,
+      "z": -11,
+      "unit": 0.022,
+      "blur": 2,
+      "haze": 0.3,
+      "border": 0.05
+    },
+    {
+      "id": "mt-mid",
+      "src": "popup/mountains-mid.svg",
+      "x": 1,
+      "z": -9,
+      "unit": 0.022,
+      "blur": 0.8,
+      "haze": 0.12,
+      "border": 0.06
+    },
+    {
+      "id": "mountain",
+      "src": "popup/mountain-near.svg",
+      "x": -9.6,
+      "z": -7.8,
+      "unit": 0.022,
+      "border": 0.06
+    },
+    {
+      "id": "hill",
+      "src": "popup/hill.svg",
+      "x": 0,
+      "z": -6.6,
+      "unit": 0.022
+    },
+    {
+      "id": "pine",
+      "src": "popup/tree-pine.svg",
+      "x": -14.2,
+      "z": -2.6,
+      "unit": 0.022,
+      "behavior": "sway"
+    },
+    {
+      "id": "tree",
+      "src": "popup/tree-round.svg",
+      "x": 4.4,
+      "z": -4.6,
+      "unit": 0.022,
+      "behavior": "sway"
+    },
+    {
+      "id": "grandpa",
+      "x": -1.6,
+      "z": 2.0,
+      "unit": 0.022,
+      "flip": true,
+      "tap": "grandpa",
+      "behavior": "walk",
+      "parts": [
+        {
+          "id": "body",
+          "src": "popup/grandpa-body.svg",
+          "pivot": [
+            0.54,
+            0.744
+          ],
+          "at": [
+            0,
+            2.22
+          ],
+          "rot": 0
+        },
+        {
+          "id": "shoiko",
+          "parent": "body",
+          "anchor": [
+            76,
+            48
+          ],
+          "src": "popup/grandpa-shoiko.svg",
+          "pivot": [
+            0.5,
+            0.03
+          ],
+          "z": -0.05,
+          "rot": 0.12
+        },
+        {
+          "id": "legF",
+          "parent": "body",
+          "anchor": [
+            96,
+            186
+          ],
+          "src": "popup/grandpa-leg.svg",
+          "pivot": [
+            0.467,
+            0.055
+          ],
+          "z": -0.024,
+          "shade": 0.22,
+          "rot": 0
+        },
+        {
+          "id": "legN",
+          "parent": "body",
+          "anchor": [
+            120,
+            186
+          ],
+          "src": "popup/grandpa-leg.svg",
+          "pivot": [
+            0.467,
+            0.055
+          ],
+          "z": -0.012,
+          "rot": 0
+        },
+        {
+          "id": "armF",
+          "parent": "body",
+          "anchor": [
+            82,
+            54
+          ],
+          "src": "popup/grandpa-arm-upper.svg",
+          "pivot": [
+            0.5,
+            0.136
+          ],
+          "z": -0.034,
+          "shade": 0.22,
+          "rot": 0
+        },
+        {
+          "id": "foreF",
+          "parent": "armF",
+          "anchor": [
+            32,
+            76
+          ],
+          "src": "popup/grandpa-arm-fore.svg",
+          "pivot": [
+            0.48,
+            0.085
+          ],
+          "z": -0.012,
+          "shade": 0.22,
+          "rot": 0.2
+        },
+        {
+          "id": "head",
+          "parent": "body",
+          "anchor": [
+            108,
+            36
+          ],
+          "src": "popup/grandpa-head.svg",
+          "unit": 0.0198,
+          "pivot": [
+            0.54,
+            0.81
+          ],
+          "z": 0.05,
+          "border": 0.05,
+          "alts": {
+            "surprise": "popup/grandpa-head-surprise.svg",
+            "happy": "popup/grandpa-head-happy.svg"
+          },
+          "rot": 0
+        },
+        {
+          "id": "upper",
+          "parent": "body",
+          "anchor": [
+            126,
+            52
+          ],
+          "src": "popup/grandpa-arm-upper.svg",
+          "pivot": [
+            0.5,
+            0.136
+          ],
+          "z": 0.1,
+          "border": 0.05,
+          "rot": 0.2
+        },
+        {
+          "id": "fore",
+          "parent": "upper",
+          "anchor": [
+            32,
+            76
+          ],
+          "src": "popup/grandpa-arm-fore.svg",
+          "pivot": [
+            0.48,
+            0.085
+          ],
+          "z": -0.012,
+          "border": 0.05,
+          "rot": 0.5
+        },
+        {
+          "id": "tool",
+          "parent": "fore",
+          "anchor": [
+            29,
+            72
+          ],
+          "src": "popup/grandpa-sickle.svg",
+          "pivot": [
+            0.225,
+            0.7
+          ],
+          "z": -0.006,
+          "border": 0.05,
+          "rot": -0.2
+        }
+      ],
+      "params": {
+        "path": [
+          [
+            -1.6,
+            2.0
+          ],
+          [
+            -3.4,
+            0.2
+          ],
+          [
+            -5.8,
+            -2.3
+          ],
+          [
+            -7.4,
+            -4.1
+          ]
+        ],
+        "delay": 0.7,
+        "duration": 7.5,
+        "legs": [
+          "legN",
+          "legF"
+        ],
+        "arms": [
+          {
+            "part": "armF",
+            "amp": 0.35
+          }
+        ],
+        "stride": 0.42,
+        "step": 0.62,
+        "idle": [
+          {
+            "part": "head",
+            "amp": 0.04,
+            "speed": 1.5
+          }
+        ]
+      }
+    },
+    {
+      "id": "grandma",
+      "x": 2.0,
+      "z": 2.8,
+      "unit": 0.022,
+      "flip": true,
+      "tap": "grandma-go",
+      "behavior": "walk",
+      "parts": [
+        {
+          "id": "body",
+          "src": "popup/grandma-stand.svg",
+          "pivot": [
+            0.53,
+            0.986
+          ],
+          "at": [
+            0,
+            0.3
+          ],
+          "rot": 0
+        },
+        {
+          "id": "footF",
+          "parent": "body",
+          "anchor": [
+            114,
+            284
+          ],
+          "src": "popup/grandma-foot.svg",
+          "pivot": [
+            0.65,
+            0.14
+          ],
+          "z": -0.02,
+          "shade": 0.2,
+          "unit": 0.028,
+          "rot": 0
+        },
+        {
+          "id": "footN",
+          "parent": "body",
+          "anchor": [
+            92,
+            284
+          ],
+          "src": "popup/grandma-foot.svg",
+          "pivot": [
+            0.65,
+            0.14
+          ],
+          "z": 0.01,
+          "unit": 0.028,
+          "rot": 0
+        },
+        {
+          "id": "armF",
+          "parent": "body",
+          "anchor": [
+            126,
+            62
+          ],
+          "src": "popup/grandma-arm-upper.svg",
+          "pivot": [
+            0.833,
+            0.222
+          ],
+          "z": -0.034,
+          "shade": 0.22,
+          "rot": 0
+        },
+        {
+          "id": "foreF",
+          "parent": "armF",
+          "anchor": [
+            26,
+            62
+          ],
+          "src": "popup/grandma-arm-fore.svg",
+          "pivot": [
+            0.891,
+            0.225
+          ],
+          "z": -0.012,
+          "shade": 0.22,
+          "rot": -0.3
+        },
+        {
+          "id": "head",
+          "parent": "body",
+          "anchor": [
+            102,
+            42
+          ],
+          "src": "popup/grandma-head.svg",
+          "alt": "popup/grandma-head-surprise.svg",
+          "unit": 0.0198,
+          "pivot": [
+            0.575,
+            0.85
+          ],
+          "z": 0.05,
+          "border": 0.05,
+          "rot": -0.05
+        },
+        {
+          "id": "upper",
+          "parent": "body",
+          "anchor": [
+            106,
+            62
+          ],
+          "src": "popup/grandma-arm-upper.svg",
+          "pivot": [
+            0.833,
+            0.222
+          ],
+          "z": 0.1,
+          "border": 0.05,
+          "rot": 0.95
+        },
+        {
+          "id": "fore",
+          "parent": "upper",
+          "anchor": [
+            26,
+            62
+          ],
+          "src": "popup/grandma-arm-fore.svg",
+          "pivot": [
+            0.891,
+            0.225
+          ],
+          "z": -0.012,
+          "border": 0.05,
+          "rot": -0.1
+        },
+        {
+          "id": "tub",
+          "parent": "body",
+          "type": "tub",
+          "anchor": [
+            92,
+            232
+          ],
+          "z": 1.12,
+          "r": 0.95,
+          "h": 0.6,
+          "water": 0,
+          "load": "laundry",
+          "rot": 0
+        }
+      ],
+      "params": {
+        "path": [
+          [
+            2.0,
+            2.8
+          ],
+          [
+            3.9,
+            1.8
+          ],
+          [
+            5.9,
+            1.2
+          ],
+          [
+            7.1,
+            1.0
+          ]
+        ],
+        "delay": 0.9,
+        "duration": 6.5,
+        "legs": [
+          "footN",
+          "footF"
+        ],
+        "arms": [
+          {
+            "part": "armF",
+            "amp": 0.3,
+            "base": 0.9
+          }
+        ],
+        "stride": 0.35,
+        "step": 0.45,
+        "bob": 0.06,
+        "idle": [
+          {
+            "part": "head",
+            "amp": 0.04,
+            "speed": 1.4
+          }
+        ]
+      }
+    },
+    {
+      "id": "reeds",
+      "src": "popup/reeds.svg",
+      "x": 10.2,
+      "z": 4.2,
+      "unit": 0.022,
+      "behavior": "sway"
+    },
+    {
+      "id": "near-bank",
+      "src": "popup/grass-near.svg",
+      "x": 0,
+      "z": 5.3,
+      "unit": 0.022,
+      "border": 0.03
+    }
+  ]
+}

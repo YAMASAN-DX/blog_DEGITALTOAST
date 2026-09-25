@@ -213,7 +213,7 @@ def little_house(x, y):
   <path d="M{x + 18} {y - 78}c-8 -10 8 -16 0 -26s8 -16 2 -24" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" opacity=".75"/>'''
 
 
-def hill():
+def hill(name='hill.svg', house=True):
     W, H = 1500, 250
     pts = [(-20, 96), (150, 62), (330, 84), (520, 46), (720, 74), (900, 42), (1100, 66), (1300, 52), (1520, 78)]
     top = catmull(pts, 16)
@@ -244,14 +244,14 @@ def hill():
     <g fill="#7aa85e" opacity=".45">{shade}</g>
     <path d="{smooth([(x, y + 8) for x, y in pts])}" fill="none" stroke="#c0dd9c" stroke-width="7" opacity=".7"/>
     <path d="{''.join(grass)}" fill="none" stroke="#6f9d52" stroke-width="2" stroke-linecap="round" opacity=".8"/>
-    <path d="{lane}" fill="#e6d4a4" stroke="#b89f6c" stroke-width="2"/>
+    {f'<path d="{lane}" fill="#e6d4a4" stroke="#b89f6c" stroke-width="2"/>' if house else ''}
     {flowers}
   </g>
   <path d="{smooth(pts)}" fill="none" stroke="{INK}" stroke-width="3" stroke-linejoin="round"/>
   {bushes}
-  {little_house(480, fy(480) + 8)}
+  {little_house(480, fy(480) + 8) if house else ''}
   {bush(566, fy(566) + 10, 17, rnd)}'''
-    write('hill.svg', W, H, body, defs, top=48)
+    write(name, W, H, body, defs, top=48 if house else 0)
 
 
 # ---------------------------------------------------------------- 松
@@ -474,9 +474,76 @@ def leaf():
     write('leaf.svg', W, H, body)
 
 
+# ---------------------------------------------------------------- 近くの山（おじいさんが、しばかりに行く山）
+def mountain_near():
+    W, H = 760, 460
+    pts = [(-20, 200), (70, 120), (170, 60), (250, 44), (330, 80), (420, 150), (520, 250), (620, 340), (700, 400), (780, 440)]
+    curve = catmull(pts, 16)
+    fy = lambda x: y_at(curve, x)
+    rnd = random.Random(31)
+    edge = scallop_path(fy, -20, 780, rnd, step=(18, 30))
+    sil = edge + f'L780 {H}L-20 {H}Z'
+    rows = []
+    for k in range(1, 18):
+        x = -20 + rnd.uniform(0, 20)
+        while x < 780:
+            sz = rnd.uniform(20, 32)
+            y = fy(x + sz / 2) + 24 * k + rnd.uniform(-5, 5)
+            if y < H - 10:
+                rows.append(f'M{f(x)} {f(y)}A{f(sz * 0.55)} {f(sz * 0.5)} 0 0 1 {f(x + sz)} {f(y)}')
+            x += sz + rnd.uniform(2, 10)
+    # 尾根の杉
+    cedars = []
+    for x in [60, 120, 200, 290, 360, 440]:
+        y = fy(x) + 6
+        h = rnd.uniform(46, 64)
+        w = h * 0.42
+        cedars.append(f'<path d="M{f(x)} {f(y - h)}L{f(x + w / 2)} {f(y)}L{f(x - w / 2)} {f(y)}Z" fill="#4f7f55" stroke="{INK}" stroke-width="2.4" stroke-linejoin="round"/>'
+                      f'<path d="M{f(x)} {f(y - h)}L{f(x + w / 2)} {f(y)}L{f(x + w * 0.08)} {f(y)}Z" fill="#3f6a47"/>')
+    # 山道（つづら折り）
+    trail = [(560, 460), (470, 400), (560, 360), (430, 300), (500, 250), (390, 200), (430, 160)]
+    shade = slope_shadows(pts, H, '#4f7f55', .45)
+    mist = ''.join(f'<ellipse cx="{f(x)}" cy="{f(H - 24 + rnd.uniform(-8, 8))}" rx="{f(rnd.uniform(90, 140))}" ry="{f(rnd.uniform(16, 24))}"/>'
+                   for x in range(0, 800, 120))
+    defs = (f'    <clipPath id="mt"><path d="{sil}"/></clipPath>\n'
+            '    <filter id="mist" x="-20%" y="-60%" width="140%" height="220%"><feGaussianBlur stdDeviation="8"/></filter>')
+    body = f'''  <path d="{sil}" fill="#7aa672"/>
+  <g clip-path="url(#mt)">
+    <path d="{''.join(rows)}" fill="none" stroke="#5e8d5e" stroke-width="2.2" stroke-linecap="round" opacity=".9"/>
+    {shade}
+    <path d="{edge}" transform="translate(0 9)" fill="none" stroke="#a4c894" stroke-width="6" opacity=".7"/>
+    <path d="{smooth(trail)}" fill="none" stroke="#b89f6c" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="{smooth(trail)}" fill="none" stroke="#e3d0a0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  {''.join(cedars)}
+  <path d="{edge}" fill="none" stroke="#3f5a45" stroke-width="3" stroke-linejoin="round"/>
+  <g fill="#ffffff" opacity=".4" filter="url(#mist)">{mist}</g>'''
+    write('mountain-near.svg', W, H, body, defs, top=70)
+
+
+# ---------------------------------------------------------------- 竹垣（四つ目垣）
+def fence():
+    W, H = 420, 110
+    rnd = random.Random(41)
+    poles = []
+    for x in range(14, W, 34):
+        top = rnd.uniform(8, 16)
+        poles.append(f'<rect x="{x - 5}" y="{f(top)}" width="10" height="{f(H - top)}" rx="4" fill="#cdb56c" stroke="{INK}" stroke-width="2.4"/>'
+                     f'<path d="M{x - 5} {f(top + 30)}h10M{x - 5} {f(top + 62)}h10" stroke="#a88c45" stroke-width="2"/>'
+                     f'<rect x="{x + 1}" y="{f(top + 2)}" width="2.5" height="{f(H - top - 4)}" fill="#e7d596" opacity=".8"/>')
+    bars = ''.join(f'<rect x="2" y="{y}" width="{W - 4}" height="9" rx="4" fill="#c2a95e" stroke="{INK}" stroke-width="2.4"/>'
+                   f'<rect x="4" y="{y + 2}" width="{W - 8}" height="2" fill="#e7d596" opacity=".8"/>' for y in [36, 74])
+    knots = ''.join(f'<path d="M{x - 6} {y - 4}l12 16M{x + 6} {y - 4}l-12 16" stroke="#2f2a26" stroke-width="3" stroke-linecap="round"/>'
+                    for x in range(14, W, 34) for y in [38, 76])
+    write('fence.svg', W, H, '  ' + ''.join(poles) + bars + knots)
+
+
 mountains_far()
 mountains_mid()
 hill()
+hill('hill-plain.svg', house=False)
+mountain_near()
+fence()
 pine()
 round_tree()
 grass_strip('grass-far.svg', 1500, 70, 18, 48, 51, 30)

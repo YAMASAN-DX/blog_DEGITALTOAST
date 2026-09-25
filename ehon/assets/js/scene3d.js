@@ -4,7 +4,7 @@ import { createPopupStage } from './popup3d.js';
 
 const $ = (sel) => document.querySelector(sel);
 const STORY = 'momotaro';
-const SCENE = 'peach';
+const SCENE = new URLSearchParams(location.search).get('scene')?.replace(/[^a-z0-9-]/g, '') || 'peach';
 const base = `stories/${STORY}/`;
 const EXTRA = {
   ja: { loading: 'よみこみ中…', replay: 'もういちど', hint3d: '絵をタップしたり、なぞったりしてみてね', noWebGL: 'この端末では立体表示ができません。' },

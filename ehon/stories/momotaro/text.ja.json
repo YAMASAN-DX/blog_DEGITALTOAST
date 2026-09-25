@@ -27,7 +27,11 @@
     "peach": "どんぶらこ〜",
     "oni": "まいった〜！",
     "treasure": "キラキラ！",
-    "tub": "じゃぶじゃぶ"
+    "tub": "じゃぶじゃぶ",
+    "grandma-hello": "いいお天気だねえ",
+    "grandma-go": "いってきます",
+    "hen": "コッコッ",
+    "house": "わが家がいちばん"
   },
   "names": {
     "momotaro": "桃太郎",
@@ -40,6 +44,10 @@
     "peach": "桃",
     "oni": "鬼",
     "treasure": "宝物",
-    "tub": "たらい"
+    "tub": "たらい",
+    "grandma-hello": "おばあさん",
+    "grandma-go": "おばあさん",
+    "hen": "にわとり",
+    "house": "いえ"
   }
 }

@@ -1,0 +1,465 @@
+{
+  "id": "birth",
+  "text": "s04",
+  "back": "interior",
+  "floor": "tatami",
+  "settle": 10,
+  "camera": {
+    "fov": 34,
+    "position": [
+      0.4,
+      7.4,
+      21.0
+    ],
+    "target": [
+      0.4,
+      3.3,
+      -1.5
+    ]
+  },
+  "light": {
+    "ambient": 1.95,
+    "sun": 2.0
+  },
+  "cards": [
+    {
+      "id": "andon",
+      "src": "popup/andon.svg",
+      "x": -12.6,
+      "z": -9.6,
+      "unit": 0.026
+    },
+    {
+      "id": "tansu",
+      "src": "popup/tansu.svg",
+      "x": 12.3,
+      "z": -10.6,
+      "unit": 0.022
+    },
+    {
+      "id": "cushion-l",
+      "type": "cushion",
+      "x": -5.4,
+      "z": 0.3,
+      "w": 3.6,
+      "d": 3.2,
+      "color": "#3f4f7a",
+      "pop": "grow"
+    },
+    {
+      "id": "cushion-r",
+      "type": "cushion",
+      "x": 8.6,
+      "z": 0.3,
+      "w": 3.8,
+      "d": 3.2,
+      "color": "#8f3a3a",
+      "pop": "grow"
+    },
+    {
+      "id": "peach",
+      "type": "split-peach",
+      "r": 2.1,
+      "x": 0.9,
+      "z": -1.7,
+      "pop": "grow",
+      "tap": "peach",
+      "behavior": "peach-split",
+      "params": {
+        "shake": 1.6,
+        "split": 2.9
+      }
+    },
+    {
+      "id": "baby",
+      "x": 0.9,
+      "z": -1.6,
+      "lift": 0.35,
+      "unit": 0.021,
+      "pop": false,
+      "tap": "baby",
+      "behavior": "baby-birth",
+      "parts": [
+        {
+          "id": "body",
+          "src": "popup/baby-body.svg",
+          "pivot": [
+            0.5,
+            1
+          ]
+        },
+        {
+          "id": "armL",
+          "parent": "body",
+          "anchor": [
+            36,
+            38
+          ],
+          "src": "popup/baby-arm.svg",
+          "pivot": [
+            0.5,
+            0.93
+          ],
+          "z": -0.01,
+          "rot": 0.55
+        },
+        {
+          "id": "armR",
+          "parent": "body",
+          "anchor": [
+            94,
+            38
+          ],
+          "src": "popup/baby-arm.svg",
+          "pivot": [
+            0.5,
+            0.93
+          ],
+          "z": -0.01,
+          "rot": -0.55,
+          "flip": true
+        },
+        {
+          "id": "head",
+          "parent": "body",
+          "anchor": [
+            65,
+            26
+          ],
+          "src": "popup/baby-head.svg",
+          "pivot": [
+            0.5,
+            0.92
+          ],
+          "z": 0.03,
+          "alts": {
+            "smile": "popup/baby-head-smile.svg"
+          }
+        }
+      ],
+      "params": {
+        "osc": [
+          {
+            "part": "armL",
+            "amp": 0.35,
+            "speed": 7
+          },
+          {
+            "part": "armR",
+            "amp": 0.35,
+            "speed": 7,
+            "phase": 1.6
+          },
+          {
+            "part": "head",
+            "amp": 0.08,
+            "speed": 3.5
+          }
+        ]
+      }
+    },
+    {
+      "id": "grandpa",
+      "x": -5.8,
+      "z": 0.3,
+      "lift": 0.36,
+      "unit": 0.022,
+      "tap": "grandpa",
+      "behavior": "poses",
+      "parts": [
+        {
+          "id": "body",
+          "src": "popup/grandpa-kneel.svg",
+          "pivot": [
+            0.5,
+            0.982
+          ]
+        },
+        {
+          "id": "armF",
+          "parent": "body",
+          "anchor": [
+            114,
+            56
+          ],
+          "src": "popup/grandpa-arm-upper.svg",
+          "pivot": [
+            0.5,
+            0.136
+          ],
+          "z": -0.034,
+          "shade": 0.22
+        },
+        {
+          "id": "foreF",
+          "parent": "armF",
+          "anchor": [
+            32,
+            76
+          ],
+          "src": "popup/grandpa-arm-fore.svg",
+          "pivot": [
+            0.48,
+            0.085
+          ],
+          "z": -0.012,
+          "shade": 0.22
+        },
+        {
+          "id": "head",
+          "parent": "body",
+          "anchor": [
+            140,
+            36
+          ],
+          "src": "popup/grandpa-head.svg",
+          "unit": 0.0198,
+          "pivot": [
+            0.54,
+            0.81
+          ],
+          "z": 0.05,
+          "border": 0.05,
+          "alts": {
+            "surprise": "popup/grandpa-head-surprise.svg",
+            "happy": "popup/grandpa-head-happy.svg"
+          }
+        },
+        {
+          "id": "upper",
+          "parent": "body",
+          "anchor": [
+            156,
+            52
+          ],
+          "src": "popup/grandpa-arm-upper.svg",
+          "pivot": [
+            0.5,
+            0.136
+          ],
+          "z": 0.1,
+          "border": 0.05
+        },
+        {
+          "id": "fore",
+          "parent": "upper",
+          "anchor": [
+            32,
+            76
+          ],
+          "src": "popup/grandpa-arm-fore.svg",
+          "pivot": [
+            0.48,
+            0.085
+          ],
+          "z": -0.012,
+          "border": 0.05
+        },
+        {
+          "id": "knife",
+          "parent": "fore",
+          "anchor": [
+            29,
+            72
+          ],
+          "src": "popup/grandpa-knife.svg",
+          "pivot": [
+            0.167,
+            0.5
+          ],
+          "z": -0.006,
+          "border": 0.05
+        }
+      ],
+      "params": {
+        "keys": [
+          {
+            "at": 0,
+            "pose": {
+              "upper": 0.3,
+              "fore": 0.9,
+              "knife": -0.9,
+              "armF": 0.35,
+              "foreF": 0.5
+            }
+          },
+          {
+            "at": 0.2,
+            "dur": 1.3,
+            "pose": {
+              "upper": 2.4,
+              "fore": 0.35,
+              "knife": -0.4,
+              "lean": 0.03
+            }
+          },
+          {
+            "on": "peach-split",
+            "dur": 0.45,
+            "ease": "back",
+            "pose": {
+              "upper": 1.5,
+              "fore": 1.2,
+              "knife": -0.4,
+              "lean": 0.1,
+              "head": 0.1,
+              "armF": 1.2
+            },
+            "face": {
+              "head": "surprise"
+            }
+          },
+          {
+            "on": "peach-split",
+            "after": 2.2,
+            "dur": 0.6,
+            "pose": {
+              "upper": 0.2,
+              "fore": 1.7,
+              "knife": -0.9,
+              "lean": 0.0,
+              "head": -0.04,
+              "armF": 0.35
+            },
+            "face": {
+              "head": "happy"
+            },
+            "say": true,
+            "osc": [
+              {
+                "part": "head",
+                "amp": 0.05,
+                "speed": 2.4
+              },
+              {
+                "part": "lean",
+                "amp": 0.015,
+                "speed": 2.4
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "grandma",
+      "x": 7.2,
+      "z": 0.3,
+      "lift": 0.36,
+      "unit": 0.022,
+      "tap": "grandma",
+      "behavior": "poses",
+      "parts": [
+        {
+          "id": "body",
+          "src": "popup/grandma-body.svg",
+          "pivot": [
+            0.5,
+            1
+          ]
+        },
+        {
+          "id": "head",
+          "parent": "body",
+          "anchor": [
+            184,
+            94
+          ],
+          "src": "popup/grandma-head.svg",
+          "alt": "popup/grandma-head-surprise.svg",
+          "unit": 0.0198,
+          "pivot": [
+            0.575,
+            0.85
+          ],
+          "z": 0.05,
+          "border": 0.05
+        },
+        {
+          "id": "upper",
+          "parent": "body",
+          "anchor": [
+            160,
+            112
+          ],
+          "src": "popup/grandma-arm-upper.svg",
+          "pivot": [
+            0.833,
+            0.222
+          ],
+          "z": 0.1,
+          "border": 0.05
+        },
+        {
+          "id": "fore",
+          "parent": "upper",
+          "anchor": [
+            26,
+            62
+          ],
+          "src": "popup/grandma-arm-fore.svg",
+          "pivot": [
+            0.891,
+            0.225
+          ],
+          "z": -0.012,
+          "border": 0.05
+        }
+      ],
+      "params": {
+        "keys": [
+          {
+            "at": 0,
+            "pose": {
+              "upper": 0.6,
+              "fore": -0.7,
+              "head": 0.06
+            }
+          },
+          {
+            "on": "peach-split",
+            "after": 0.1,
+            "dur": 0.45,
+            "ease": "back",
+            "pose": {
+              "upper": -0.6,
+              "fore": -0.5,
+              "head": -0.16,
+              "lean": -0.02
+            },
+            "face": {
+              "head": "surprise"
+            },
+            "say": true
+          },
+          {
+            "on": "peach-split",
+            "after": 2.4,
+            "dur": 0.6,
+            "pose": {
+              "upper": 0.2,
+              "fore": -1.1,
+              "head": 0.05,
+              "lean": 0
+            },
+            "face": {
+              "head": "normal"
+            },
+            "osc": [
+              {
+                "part": "fore",
+                "amp": 0.12,
+                "speed": 8
+              },
+              {
+                "part": "head",
+                "amp": 0.04,
+                "speed": 2.2
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

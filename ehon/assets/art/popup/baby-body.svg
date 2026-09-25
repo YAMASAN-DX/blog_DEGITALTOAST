@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 122">
+  <g stroke="#4a3a30" stroke-width="2.6" stroke-linejoin="round">
+    <!-- 足 -->
+    <path d="M32 78C18 84 8 98 12 110C16 119 32 120 42 111C48 104 50 92 46 84Z" fill="#f8dcc0"/>
+    <path d="M98 78C112 84 122 98 118 110C114 119 98 120 88 111C82 104 80 92 84 84Z" fill="#f8dcc0"/>
+    <!-- 体 -->
+    <path d="M40 26C52 18 78 18 90 26C102 36 104 60 100 80C96 96 34 96 30 80C26 60 28 36 40 26Z" fill="#f9dfc4"/>
+  </g>
+  <path d="M90 28C100 40 102 62 98 80C92 90 76 94 62 94C78 88 92 76 94 56C95 44 94 34 90 28Z" fill="#efc6a2"/>
+  <g fill="none" stroke="#e0a988" stroke-width="2" stroke-linecap="round">
+    <path d="M16 104C20 110 26 112 32 110"/><path d="M114 104C110 110 104 112 98 110"/>
+    <path d="M30 94C34 96 38 96 42 94"/><path d="M100 94C96 96 92 96 88 94"/>
+  </g>
+  <!-- 腹掛け -->
+  <path d="M54 24L44 32M76 24L86 32" stroke="#4a3a30" stroke-width="5" stroke-linecap="round"/>
+  <path d="M54 24L44 32M76 24L86 32" stroke="#efb73e" stroke-width="2.6" stroke-linecap="round"/>
+  <path d="M42 30L88 30C95 46 97 66 90 86C80 95 50 95 40 86C33 66 35 46 42 30Z" fill="#d9534a" stroke="#4a3a30" stroke-width="2.6" stroke-linejoin="round"/>
+  <path d="M46 36L84 36C89 50 90 66 85 81C76 88 54 88 45 81C40 66 41 50 46 36Z" fill="none" stroke="#efb73e" stroke-width="2.4"/>
+  <path d="M86 34C92 50 92 70 88 84L90 86C97 66 95 46 88 30Z" fill="#a83a34"/>
+  <!-- 桃のしるし -->
+  <path d="M65 48C58 50 54 56 55 63C56 70 61 74 65 76C69 74 74 70 75 63C76 56 72 50 65 48Z" fill="#f6b5a4" stroke="#4a3a30" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M65 49C65 58 64 66 65 75" fill="none" stroke="#d9776e" stroke-width="1.6"/>
+  <path d="M65 48C62 42 56 42 54 44C58 48 62 48 65 48ZM65 48C68 42 74 42 76 44C72 48 68 48 65 48Z" fill="#7faa5a" stroke="#4a3a30" stroke-width="1.6" stroke-linejoin="round"/>
+</svg>

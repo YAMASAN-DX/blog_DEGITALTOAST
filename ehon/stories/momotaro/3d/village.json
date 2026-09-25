@@ -1,0 +1,495 @@
+{
+  "id": "village",
+  "text": "s01",
+  "camera": {
+    "fov": 34,
+    "position": [
+      0.2,
+      7.8,
+      23.8
+    ],
+    "target": [
+      0.0,
+      3.8,
+      -1.5
+    ]
+  },
+  "sky": {
+    "top": "#b0d3e6",
+    "bottom": "#f0f2e2",
+    "sun": [
+      0.2,
+      0.36
+    ]
+  },
+  "paths": [
+    {
+      "points": [
+        [
+          -5.0,
+          -0.8
+        ],
+        [
+          -4.2,
+          1.6
+        ],
+        [
+          -2.4,
+          4.0
+        ],
+        [
+          -0.4,
+          6.2
+        ]
+      ],
+      "width": 2.4
+    }
+  ],
+  "cards": [
+    {
+      "id": "cloud1",
+      "src": "popup/cloud.svg",
+      "attach": "back",
+      "x": -1.5,
+      "y": 9.8,
+      "z": 0.3,
+      "unit": 0.022,
+      "behavior": "drift"
+    },
+    {
+      "id": "cloud2",
+      "src": "popup/cloud.svg",
+      "attach": "back",
+      "x": 7.5,
+      "y": 9.2,
+      "z": 0.25,
+      "w": 3.4,
+      "behavior": "drift"
+    },
+    {
+      "id": "mt-far",
+      "src": "popup/mountains-far.svg",
+      "x": 0,
+      "z": -11,
+      "unit": 0.022,
+      "blur": 2,
+      "haze": 0.3,
+      "border": 0.05
+    },
+    {
+      "id": "mt-mid",
+      "src": "popup/mountains-mid.svg",
+      "x": 1,
+      "z": -9,
+      "unit": 0.022,
+      "blur": 0.8,
+      "haze": 0.12,
+      "border": 0.06
+    },
+    {
+      "id": "hill",
+      "src": "popup/hill-plain.svg",
+      "x": 0,
+      "z": -6.6,
+      "unit": 0.022
+    },
+    {
+      "id": "pine",
+      "src": "popup/tree-pine.svg",
+      "x": -14.0,
+      "z": -5.0,
+      "unit": 0.022,
+      "behavior": "sway"
+    },
+    {
+      "id": "tree",
+      "src": "popup/tree-round.svg",
+      "x": 12.6,
+      "z": -4.8,
+      "unit": 0.022,
+      "behavior": "sway"
+    },
+    {
+      "id": "house",
+      "type": "house",
+      "x": -4.2,
+      "z": -3.5,
+      "w": 10.5,
+      "d": 4.6,
+      "h": 3.7,
+      "roofH": 4.3,
+      "eave": 1.2,
+      "pop": "grow",
+      "tap": "house"
+    },
+    {
+      "id": "fence",
+      "src": "popup/fence.svg",
+      "x": -13.4,
+      "z": 0.9,
+      "unit": 0.022
+    },
+    {
+      "id": "hen1",
+      "src": "popup/hen.svg",
+      "x": -7.4,
+      "z": 2.9,
+      "unit": 0.018,
+      "behavior": "peck",
+      "tap": "hen"
+    },
+    {
+      "id": "hen2",
+      "src": "popup/hen-brown.svg",
+      "x": -10.8,
+      "z": 3.9,
+      "unit": 0.018,
+      "flip": true,
+      "behavior": "peck",
+      "tap": "hen",
+      "params": {
+        "range": 0.5
+      }
+    },
+    {
+      "id": "grandpa",
+      "x": 2.0,
+      "z": 3.1,
+      "unit": 0.022,
+      "tap": "grandpa",
+      "behavior": "poses",
+      "parts": [
+        {
+          "id": "body",
+          "src": "popup/grandpa-body.svg",
+          "pivot": [
+            0.54,
+            0.744
+          ],
+          "at": [
+            0,
+            2.22
+          ]
+        },
+        {
+          "id": "legF",
+          "parent": "body",
+          "anchor": [
+            96,
+            186
+          ],
+          "src": "popup/grandpa-leg.svg",
+          "pivot": [
+            0.467,
+            0.055
+          ],
+          "z": -0.024,
+          "shade": 0.22
+        },
+        {
+          "id": "legN",
+          "parent": "body",
+          "anchor": [
+            120,
+            186
+          ],
+          "src": "popup/grandpa-leg.svg",
+          "pivot": [
+            0.467,
+            0.055
+          ],
+          "z": -0.012
+        },
+        {
+          "id": "armF",
+          "parent": "body",
+          "anchor": [
+            82,
+            54
+          ],
+          "src": "popup/grandpa-arm-upper.svg",
+          "pivot": [
+            0.5,
+            0.136
+          ],
+          "z": -0.034,
+          "shade": 0.22
+        },
+        {
+          "id": "foreF",
+          "parent": "armF",
+          "anchor": [
+            32,
+            76
+          ],
+          "src": "popup/grandpa-arm-fore.svg",
+          "pivot": [
+            0.48,
+            0.085
+          ],
+          "z": -0.012,
+          "shade": 0.22
+        },
+        {
+          "id": "head",
+          "parent": "body",
+          "anchor": [
+            108,
+            36
+          ],
+          "src": "popup/grandpa-head.svg",
+          "unit": 0.0198,
+          "pivot": [
+            0.54,
+            0.81
+          ],
+          "z": 0.05,
+          "border": 0.05,
+          "alts": {
+            "surprise": "popup/grandpa-head-surprise.svg",
+            "happy": "popup/grandpa-head-happy.svg"
+          }
+        },
+        {
+          "id": "upper",
+          "parent": "body",
+          "anchor": [
+            126,
+            52
+          ],
+          "src": "popup/grandpa-arm-upper.svg",
+          "pivot": [
+            0.5,
+            0.136
+          ],
+          "z": 0.1,
+          "border": 0.05
+        },
+        {
+          "id": "fore",
+          "parent": "upper",
+          "anchor": [
+            32,
+            76
+          ],
+          "src": "popup/grandpa-arm-fore.svg",
+          "pivot": [
+            0.48,
+            0.085
+          ],
+          "z": -0.012,
+          "border": 0.05
+        },
+        {
+          "id": "tool",
+          "parent": "fore",
+          "anchor": [
+            29,
+            72
+          ],
+          "src": "popup/grandpa-staff.svg",
+          "pivot": [
+            0.44,
+            0.153
+          ],
+          "z": -0.006,
+          "border": 0.05
+        }
+      ],
+      "params": {
+        "keys": [
+          {
+            "at": 0,
+            "pose": {
+              "upper": 0.28,
+              "fore": 0.22,
+              "tool": -0.5,
+              "armF": -0.12,
+              "foreF": 0.25,
+              "head": 0.04
+            }
+          }
+        ],
+        "osc": [
+          {
+            "part": "head",
+            "amp": 0.05,
+            "speed": 1.6
+          },
+          {
+            "part": "lean",
+            "amp": 0.012,
+            "speed": 1.1
+          }
+        ]
+      }
+    },
+    {
+      "id": "grandma",
+      "x": 7.6,
+      "z": 3.3,
+      "unit": 0.022,
+      "tap": "grandma-hello",
+      "behavior": "poses",
+      "parts": [
+        {
+          "id": "body",
+          "src": "popup/grandma-stand.svg",
+          "pivot": [
+            0.53,
+            0.986
+          ],
+          "at": [
+            0,
+            0.3
+          ]
+        },
+        {
+          "id": "footF",
+          "parent": "body",
+          "anchor": [
+            114,
+            284
+          ],
+          "src": "popup/grandma-foot.svg",
+          "pivot": [
+            0.65,
+            0.14
+          ],
+          "z": -0.02,
+          "shade": 0.2,
+          "unit": 0.028
+        },
+        {
+          "id": "footN",
+          "parent": "body",
+          "anchor": [
+            92,
+            284
+          ],
+          "src": "popup/grandma-foot.svg",
+          "pivot": [
+            0.65,
+            0.14
+          ],
+          "z": 0.01,
+          "unit": 0.028
+        },
+        {
+          "id": "armF",
+          "parent": "body",
+          "anchor": [
+            126,
+            62
+          ],
+          "src": "popup/grandma-arm-upper.svg",
+          "pivot": [
+            0.833,
+            0.222
+          ],
+          "z": -0.034,
+          "shade": 0.22
+        },
+        {
+          "id": "foreF",
+          "parent": "armF",
+          "anchor": [
+            26,
+            62
+          ],
+          "src": "popup/grandma-arm-fore.svg",
+          "pivot": [
+            0.891,
+            0.225
+          ],
+          "z": -0.012,
+          "shade": 0.22
+        },
+        {
+          "id": "head",
+          "parent": "body",
+          "anchor": [
+            102,
+            42
+          ],
+          "src": "popup/grandma-head.svg",
+          "alt": "popup/grandma-head-surprise.svg",
+          "unit": 0.0198,
+          "pivot": [
+            0.575,
+            0.85
+          ],
+          "z": 0.05,
+          "border": 0.05
+        },
+        {
+          "id": "upper",
+          "parent": "body",
+          "anchor": [
+            106,
+            62
+          ],
+          "src": "popup/grandma-arm-upper.svg",
+          "pivot": [
+            0.833,
+            0.222
+          ],
+          "z": 0.1,
+          "border": 0.05
+        },
+        {
+          "id": "fore",
+          "parent": "upper",
+          "anchor": [
+            26,
+            62
+          ],
+          "src": "popup/grandma-arm-fore.svg",
+          "pivot": [
+            0.891,
+            0.225
+          ],
+          "z": -0.012,
+          "border": 0.05
+        }
+      ],
+      "params": {
+        "keys": [
+          {
+            "at": 0,
+            "pose": {
+              "upper": 0.75,
+              "fore": -1.0,
+              "armF": 0.75,
+              "foreF": -0.9,
+              "head": -0.05,
+              "lean": 0.02
+            }
+          }
+        ],
+        "osc": [
+          {
+            "part": "head",
+            "amp": 0.05,
+            "speed": 1.3,
+            "phase": 1
+          },
+          {
+            "part": "lean",
+            "amp": 0.012,
+            "speed": 1.0,
+            "phase": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "near-bank",
+      "src": "popup/grass-near.svg",
+      "x": 0,
+      "z": 5.3,
+      "unit": 0.022,
+      "border": 0.03
+    }
+  ]
+}

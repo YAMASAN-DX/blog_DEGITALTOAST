@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 112">
+  <!-- 足 -->
+  <g fill="none" stroke="#c98f2e" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M58 86L56 104M56 104l-8 4M56 104l6 5M56 104l-2 6"/>
+    <path d="M72 86L74 104M74 104l-6 5M74 104l8 3M74 104l2 6"/>
+  </g>
+  <!-- しっぽ -->
+  <path d="M30 56C18 44 16 26 24 14C30 24 32 30 36 36C36 24 40 16 46 12C46 26 48 38 52 48Z" fill="#fbf8f0" stroke="#4a3a30" stroke-width="2.6" stroke-linejoin="round"/>
+  <!-- 体 -->
+  <path d="M26 58C24 44 40 40 56 46C68 50 76 46 82 40L96 50C100 64 96 80 82 88C66 96 40 94 30 80C27 74 26 66 26 58Z" fill="#fbf8f0" stroke="#4a3a30" stroke-width="2.8" stroke-linejoin="round"/>
+  <path d="M30 76C42 90 66 94 82 86C94 80 98 68 96 56C96 72 84 84 68 86C52 88 38 84 30 76Z" fill="#e3ddd0"/>
+  <!-- つばさ -->
+  <path d="M42 60C52 54 68 56 74 64C70 76 56 80 44 76C38 72 38 64 42 60Z" fill="#f0ebe0" stroke="#4a3a30" stroke-width="2.4" stroke-linejoin="round"/>
+  <path d="M48 70C54 72 62 72 68 68M50 64C56 66 62 66 68 63" fill="none" stroke="#bdb5a6" stroke-width="1.7" stroke-linecap="round"/>
+  <!-- 頭 -->
+  <path d="M80 44C78 30 86 22 96 24C104 26 108 34 106 44C104 52 96 56 88 54Z" fill="#fbf8f0" stroke="#4a3a30" stroke-width="2.6" stroke-linejoin="round"/>
+  <path d="M86 24C84 16 90 12 94 16C96 10 102 10 104 16C108 14 112 20 106 26C100 26 92 26 86 24Z" fill="#e0483f" stroke="#4a3a30" stroke-width="2.2" stroke-linejoin="round"/>
+  <path d="M104 36L116 40L104 44Z" fill="#f0b53c" stroke="#4a3a30" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M102 46C106 48 106 56 101 56C98 54 98 48 102 46Z" fill="#e0483f" stroke="#4a3a30" stroke-width="2" stroke-linejoin="round"/>
+  <circle cx="97" cy="34" r="3" fill="#2b2622"/><circle cx="98" cy="33" r="1" fill="#fff"/>
+</svg>

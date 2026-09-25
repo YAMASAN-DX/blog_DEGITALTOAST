@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 88">
+  <defs>
+    <pattern id="shima" width="11" height="40" patternUnits="userSpaceOnUse" patternTransform="rotate(4)">
+      <rect width="11" height="40" fill="#a98b5d"/>
+      <rect x="0" width="1.6" height="40" fill="#7f6038" opacity=".3"/>
+      <rect x="5.5" width="1" height="40" fill="#c9ad7c" opacity=".45"/>
+    </pattern>
+        <clipPath id="sode"><path d="M14 16C16 4 46 2 50 14C54 30 53 52 49 72C47 80 40 84 32 84C24 84 17 80 15 72C11 54 11 32 14 16Z"/></clipPath>
+  </defs>
+  <path d="M14 16C16 4 46 2 50 14C54 30 53 52 49 72C47 80 40 84 32 84C24 84 17 80 15 72C11 54 11 32 14 16Z" fill="url(#shima)"/>
+  <g clip-path="url(#sode)">
+    <path d="M42 6C52 26 54 56 48 86H64V0Z" fill="#5d4428" opacity=".42"/>
+    <path d="M18 18C22 36 22 54 20 70" fill="none" stroke="#e2c894" stroke-width="3" opacity=".45"/>
+    <path d="M12 66C24 72 40 72 54 66V90H12Z" fill="#6d5233" opacity=".75"/>
+    <path d="M22 40C28 44 36 44 42 40M24 52C30 55 36 55 40 52" fill="none" stroke="#5d4428" stroke-width="1.8" stroke-linecap="round" opacity=".6"/>
+  </g>
+  <path d="M15 68C26 73 40 73 50 68" fill="none" stroke="#4a3a30" stroke-width="2"/>
+  <path d="M14 16C16 4 46 2 50 14C54 30 53 52 49 72C47 80 40 84 32 84C24 84 17 80 15 72C11 54 11 32 14 16Z" fill="none" stroke="#4a3a30" stroke-width="2.8" stroke-linejoin="round"/>
+</svg>

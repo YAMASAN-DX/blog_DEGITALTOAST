@@ -60,5 +60,11 @@ function card(story) {
   if (ready) body.append(h('span', 'cta', ui.read));
   wrap.append(thumb, body);
   li.append(wrap);
+  // 立体版（試作）があれば、別のリンクで
+  if (ready && story.pop3d) {
+    const a3 = h('a', 'card-3d', ui.read3d);
+    a3.href = `${story.pop3d}?id=${encodeURIComponent(story.id)}&lang=${lang}`;
+    li.append(a3);
+  }
   return li;
 }

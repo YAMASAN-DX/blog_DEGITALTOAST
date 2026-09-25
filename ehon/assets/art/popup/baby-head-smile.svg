@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 112 104">
+  <!-- 顔 -->
+  <circle cx="56" cy="58" r="40" fill="#f9dfc4" stroke="#4a3a30" stroke-width="2.8"/>
+  <path d="M92 50C98 72 86 94 62 98C80 92 92 76 90 56Z" fill="#efc6a2"/>
+  <g fill="#f8d6ba" stroke="#4a3a30" stroke-width="2.4"><circle cx="15" cy="62" r="8"/><circle cx="97" cy="62" r="8"/></g>
+  <!-- 髪（ちょこんと） -->
+  <path d="M42 24C40 12 52 4 60 10C66 4 76 8 72 18C68 24 58 22 56 20C52 26 44 28 42 24Z" fill="#3a2d25" stroke="#4a3a30" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M46 22C50 16 56 14 60 16" fill="none" stroke="#6b5a4c" stroke-width="1.6" stroke-linecap="round"/>
+  <g fill="#f2a3a0" opacity=".65"><ellipse cx="30" cy="70" rx="8" ry="5"/><ellipse cx="82" cy="70" rx="8" ry="5"/></g>
+  <g fill="#2b2622"><ellipse cx="38" cy="56" rx="5" ry="6.5"/><ellipse cx="74" cy="56" rx="5" ry="6.5"/></g>
+  <g fill="#fff"><circle cx="39.8" cy="53.6" r="2"/><circle cx="75.8" cy="53.6" r="2"/></g>
+  <path d="M44 72C50 80 62 80 68 72" fill="none" stroke="#3a2d25" stroke-width="2.8" stroke-linecap="round"/>
+</svg>

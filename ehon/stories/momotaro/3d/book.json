@@ -1,0 +1,12 @@
+{
+  "story": "momotaro",
+  "scenes": [
+    "village.json",
+    "fork.json",
+    "peach.json",
+    "birth.json"
+  ],
+  "continue": {
+    "page": 6
+  }
+}

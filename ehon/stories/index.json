@@ -3,6 +3,7 @@
     {
       "id": "momotaro",
       "status": "ready",
+      "pop3d": "story3d.html",
       "title": { "ja": "ももたろう", "en": "Momotaro" },
       "subtitle": { "ja": "桃太郎", "en": "The Peach Boy" },
       "summary": {

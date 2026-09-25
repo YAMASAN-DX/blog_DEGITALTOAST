@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 250">
+  <defs>
+    <pattern id="shima" width="11" height="40" patternUnits="userSpaceOnUse" patternTransform="rotate(4)">
+      <rect width="11" height="40" fill="#a98b5d"/>
+      <rect x="0" width="1.6" height="40" fill="#7f6038" opacity=".3"/>
+      <rect x="5.5" width="1" height="40" fill="#c9ad7c" opacity=".45"/>
+    </pattern>
+    <clipPath id="kimono">
+      <path d="M70 46C86 34 118 32 138 42C152 50 156 74 154 100L152 130L154 204L66 206C60 176 60 150 64 130C56 104 58 66 70 46Z"/>
+    </clipPath>
+  </defs>
+  <!-- 奥の袖口（体のうしろに少し見える） -->
+  <path d="M64 58C54 72 52 96 58 112L72 108C70 92 72 74 76 62Z" fill="#7d6140" stroke="#4a3a30" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- 着物（茶の縞、すそをからげて帯にはさむ） -->
+  <path d="M70 46C86 34 118 32 138 42C152 50 156 74 154 100L152 130L154 204L66 206C60 176 60 150 64 130C56 104 58 66 70 46Z" fill="url(#shima)"/>
+  <g clip-path="url(#kimono)">
+    <!-- 陰（光は左上から） -->
+    <path d="M136 40C156 54 160 96 156 130L160 210H134C142 170 146 100 136 40Z" fill="#5d4428" opacity=".45"/>
+    <path d="M60 176C90 186 130 186 160 176V210H60Z" fill="#5d4428" opacity=".3"/>
+    <path d="M74 50C90 40 110 36 126 38C110 44 92 52 80 62Z" fill="#e2c894" opacity=".45"/>
+    <!-- 前身ごろの重なり -->
+    <path d="M118 62C114 100 112 150 118 206" fill="none" stroke="#5d4428" stroke-width="2.4" opacity=".8"/>
+    <!-- からげたすその折り返し -->
+    <path d="M64 150C92 146 126 146 154 152L154 170C126 164 92 164 64 168Z" fill="#6d5233" opacity=".55"/>
+    <g fill="none" stroke="#5d4428" stroke-width="2" stroke-linecap="round" opacity=".7">
+      <path d="M82 170C86 182 88 194 86 204"/><path d="M140 172C142 184 142 194 140 204"/><path d="M96 80C104 88 112 92 124 92"/>
+    </g>
+  </g>
+  <!-- 襟 -->
+  <path d="M96 34L112 70L124 38Z" fill="#efe6d2" stroke="#4a3a30" stroke-width="2.2" stroke-linejoin="round"/>
+  <path d="M90 38C98 50 106 62 112 74" fill="none" stroke="#4a3a2a" stroke-width="9" stroke-linecap="round"/>
+  <path d="M130 40C124 52 118 64 112 74" fill="none" stroke="#4a3a2a" stroke-width="9" stroke-linecap="round"/>
+  <!-- 帯と、こしの手ぬぐい -->
+  <g stroke="#4a3a30" stroke-width="2.4" stroke-linejoin="round">
+    <path d="M62 122C92 116 126 116 156 120L156 138C126 134 92 134 62 140Z" fill="#3f4e63"/>
+    <path d="M60 126C50 122 44 132 50 138C44 146 54 152 62 144Z" fill="#35425a"/>
+    <path d="M140 132C146 130 152 132 154 136L150 162C146 166 140 164 138 160Z" fill="#f3ecdc"/>
+  </g>
+  <path d="M62 128C92 123 126 123 156 126" fill="none" stroke="#6d7d96" stroke-width="1.8"/>
+  <path d="M142 144l8 1M141 152l7 1" stroke="#7da1c9" stroke-width="2" stroke-linecap="round"/>
+  <!-- りんかく -->
+  <path d="M70 46C86 34 118 32 138 42C152 50 156 74 154 100L152 130L154 204L66 206C60 176 60 150 64 130C56 104 58 66 70 46Z" fill="none" stroke="#4a3a30" stroke-width="3" stroke-linejoin="round"/>
+</svg>

@@ -27,7 +27,11 @@
     "peach": "Donburako…",
     "oni": "We give up!",
     "treasure": "Twinkle!",
-    "tub": "Splish, splash!"
+    "tub": "Splish, splash!",
+    "grandma-hello": "What a lovely day!",
+    "grandma-go": "I'm off!",
+    "hen": "Cluck, cluck!",
+    "house": "Home, sweet home."
   },
   "names": {
     "momotaro": "Momotaro",
@@ -40,6 +44,10 @@
     "peach": "Peach",
     "oni": "Ogre",
     "treasure": "Treasure",
-    "tub": "Washtub"
+    "tub": "Washtub",
+    "grandma-hello": "Old woman",
+    "grandma-go": "Old woman",
+    "hen": "Hen",
+    "house": "House"
   }
 }
