@@ -15,10 +15,11 @@ def f(v):
     return s[:-2] if s.endswith('.0') else s
 
 
-def write(name, w, h, body, defs=''):
+def write(name, w, h, body, defs='', top=0):
+    # top：上にはみだす絵（屋根や煙など）のための余白。下端（地面）の位置は変わらない
     d = f'  <defs>\n{defs}\n  </defs>\n' if defs else ''
     open(OUT + name, 'w').write(
-        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}">\n{d}{body}\n</svg>\n')
+        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 {-top} {w} {h + top}">\n{d}{body}\n</svg>\n')
 
 
 def catmull(pts, samples=10):
@@ -246,11 +247,11 @@ def hill():
     <path d="{lane}" fill="#e6d4a4" stroke="#b89f6c" stroke-width="2"/>
     {flowers}
   </g>
+  <path d="{smooth(pts)}" fill="none" stroke="{INK}" stroke-width="3" stroke-linejoin="round"/>
   {bushes}
   {little_house(480, fy(480) + 8)}
-  {bush(566, fy(566) + 10, 17, rnd)}
-  <path d="{smooth(pts)}" fill="none" stroke="{INK}" stroke-width="3" stroke-linejoin="round"/>'''
-    write('hill.svg', W, H, body, defs)
+  {bush(566, fy(566) + 10, 17, rnd)}'''
+    write('hill.svg', W, H, body, defs, top=48)
 
 
 # ---------------------------------------------------------------- 松

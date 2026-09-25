@@ -134,7 +134,7 @@
     {
       "id": "grandma",
       "x": 6.7,
-      "z": 3.0,
+      "z": 2.7,
       "unit": 0.022,
       "tap": "grandma",
       "behavior": "grandma-wash",
@@ -214,10 +214,10 @@
     {
       "id": "tub",
       "type": "tub",
-      "x": 2.0,
+      "x": 2.3,
       "z": 3.3,
       "r": 1.9,
-      "h": 1.6,
+      "h": 1.15,
       "pop": "grow",
       "tap": "tub"
     },

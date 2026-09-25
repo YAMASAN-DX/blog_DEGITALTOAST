@@ -1028,8 +1028,9 @@ export async function createPopupStage(container, def, { base = '', speak = () =
       const w = 1 - n;
       const a = t * 5.2;
       const { upper, fore, cloth, head } = c.parts;
-      if (upper) upper.rotation.z = (0.05 + Math.sin(a) * 0.07) * w - react * 0.55;
-      if (fore) fore.rotation.z = Math.sin(a + 0.7) * 0.16 * w - react * 0.5;
+      // 腕はたらいの縁をこえた先で上下させる（縁より下がると、腕が縁につきささって見える）
+      if (upper) upper.rotation.z = (0.02 + Math.sin(a) * 0.045) * w - react * 0.55;
+      if (fore) fore.rotation.z = (0.02 + Math.sin(a + 0.7) * 0.12) * w - react * 0.5;
       // 手ぬぐいは腕の回転を打ち消して、いつも下にたれる
       if (cloth) cloth.rotation.z = -((upper?.rotation.z ?? 0) + (fore?.rotation.z ?? 0)) * 0.9 + Math.sin(t * 2.6) * 0.06;
       if (head) head.rotation.z = (0.1 + Math.sin(a + 1.2) * 0.025) * w - react * 0.14;
