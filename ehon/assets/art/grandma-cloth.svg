@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 118">
+  <defs>
+    <pattern id="mame" width="14" height="14" patternUnits="userSpaceOnUse">
+      <circle cx="4" cy="4" r="2.4" fill="#2f4d7a"/><circle cx="11" cy="11" r="2.4" fill="#2f4d7a"/>
+    </pattern>
+    <linearGradient id="wet" x1="0" y1="0" x2="0" y2="1">
+      <stop offset=".35" stop-color="#6fa6c6" stop-opacity="0"/><stop offset="1" stop-color="#6fa6c6" stop-opacity=".6"/>
+    </linearGradient>
+    <clipPath id="cloth"><path d="M26 4C34 1 44 3 47 9C55 30 63 56 61 84C60 92 56 100 50 104C44 99 38 105 30 102C24 106 18 100 16 94C12 70 18 40 26 12Z"/></clipPath>
+  </defs>
+  <path d="M26 4C34 1 44 3 47 9C55 30 63 56 61 84C60 92 56 100 50 104C44 99 38 105 30 102C24 106 18 100 16 94C12 70 18 40 26 12Z" fill="#f4f7f8"/>
+  <g clip-path="url(#cloth)">
+    <rect width="90" height="118" fill="url(#mame)"/>
+    <rect width="90" height="118" fill="url(#wet)"/>
+    <g fill="none" stroke="#8fa6b4" stroke-width="1.6" stroke-linecap="round">
+      <path d="M34 14C32 40 34 70 38 96"/><path d="M44 16C48 40 52 70 50 96"/><path d="M26 20C22 44 22 70 24 92"/>
+    </g>
+  </g>
+  <path d="M26 4C34 1 44 3 47 9C55 30 63 56 61 84C60 92 56 100 50 104C44 99 38 105 30 102C24 106 18 100 16 94C12 70 18 40 26 12Z" fill="none" stroke="#4a3a30" stroke-width="2.6" stroke-linejoin="round"/>
+  <g fill="#cfe8f3" stroke="#4a3a30" stroke-width="1.5">
+    <path d="M40 106C42 110 44 112 42 114C40 116 37 114 38 111Z"/>
+    <path d="M24 106C25 109 26 111 25 112C23 113 21 112 22 110Z"/>
+  </g>
+</svg>

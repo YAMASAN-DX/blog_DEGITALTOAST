@@ -26,7 +26,8 @@
     "baby": "Waaah!",
     "peach": "Donburako…",
     "oni": "We give up!",
-    "treasure": "Twinkle!"
+    "treasure": "Twinkle!",
+    "tub": "Splish, splash!"
   },
   "names": {
     "momotaro": "Momotaro",
@@ -38,6 +39,7 @@
     "baby": "Baby",
     "peach": "Peach",
     "oni": "Ogre",
-    "treasure": "Treasure"
+    "treasure": "Treasure",
+    "tub": "Washtub"
   }
 }

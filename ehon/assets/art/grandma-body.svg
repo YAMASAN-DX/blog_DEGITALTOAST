@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 260">
+  <defs>
+    <filter id="kasuri-blur" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation=".45"/></filter>
+    <pattern id="kasuri" width="19" height="19" patternUnits="userSpaceOnUse" patternTransform="rotate(-6)">
+      <g fill="none" stroke="#c9d6ea" stroke-width="1.5" stroke-linecap="round" opacity=".7" filter="url(#kasuri-blur)">
+        <path d="M3 5.5h5M3 8.5h5M4.5 4v6M6.5 4v6"/>
+        <path d="M12.5 14h4M14.5 12v4"/>
+      </g>
+    </pattern>
+    <clipPath id="kimono">
+      <path d="M150 196C144 164 146 134 160 114C174 96 198 86 222 84C262 82 290 110 295 148C299 176 298 198 293 208L150 208Z"/>
+      <path d="M156 188C120 190 92 196 78 205C60 214 56 238 66 251C70 256 76 258 86 258L290 258C304 258 308 236 302 214C298 200 292 192 282 188Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- 奥の腕（たすきで袖をあげ、たらいに手を入れている） -->
+  <g stroke="#4a3a30" stroke-width="2.8" stroke-linejoin="round">
+    <path d="M114 152C96 160 72 170 54 176L58 190C78 184 102 174 120 166Z" fill="#e9c29e"/>
+    <path d="M60 176C48 172 36 178 32 188C30 196 36 202 44 198C50 204 60 200 62 190Z" fill="#edc7a4"/>
+    <path d="M176 118C154 126 126 142 110 152C100 158 104 172 116 170C136 162 162 148 182 136Z" fill="#435b88"/>
+  </g>
+  <path d="M112 152C104 158 104 166 110 170" fill="none" stroke="#f3ecdc" stroke-width="5" stroke-linecap="round"/>
+  <path d="M36 190C40 194 46 194 50 190" fill="none" stroke="#7a5a45" stroke-width="1.6" stroke-linecap="round"/>
+
+  <!-- 草履（すわった足のうら） -->
+  <g stroke="#4a3a30" stroke-width="2.5" stroke-linejoin="round">
+    <ellipse cx="318" cy="240" rx="16" ry="8" fill="#c9ad74" transform="rotate(-18 318 240)"/>
+    <ellipse cx="302" cy="248" rx="20" ry="9" fill="#d9c089" transform="rotate(-10 302 248)"/>
+  </g>
+  <g fill="none" stroke="#a88c55" stroke-width="1.4" stroke-linecap="round">
+    <path d="M288 248l8-6M296 252l10-8M306 252l8-7M312 234l7-5M320 238l6-5"/>
+  </g>
+
+  <!-- 着物（藍の絣） -->
+  <g fill="#4f6b9a">
+    <path d="M150 196C144 164 146 134 160 114C174 96 198 86 222 84C262 82 290 110 295 148C299 176 298 198 293 208L150 208Z"/>
+    <path d="M156 188C120 190 92 196 78 205C60 214 56 238 66 251C70 256 76 258 86 258L290 258C304 258 308 236 302 214C298 200 292 192 282 188Z"/>
+  </g>
+  <g clip-path="url(#kimono)">
+    <rect width="340" height="260" fill="url(#kasuri)"/>
+    <!-- 陰（光は左上から） -->
+    <path d="M246 84C284 98 300 146 297 206L304 258H262C272 208 270 130 246 84Z" fill="#26395c" opacity=".55"/>
+    <path d="M150 150C160 170 176 184 204 190L150 198Z" fill="#26395c" opacity=".4"/>
+    <ellipse cx="222" cy="200" rx="74" ry="8" fill="#26395c" opacity=".45"/>
+    <rect x="50" y="238" width="270" height="22" fill="#26395c" opacity=".3"/>
+    <!-- 光 -->
+    <path d="M84 204C110 196 136 192 156 190V198C134 200 110 204 90 210Z" fill="#9ab1d4" opacity=".45"/>
+    <path d="M162 112C176 96 200 88 222 86C204 92 184 102 170 118Z" fill="#9ab1d4" opacity=".5"/>
+    <!-- しわ -->
+    <g fill="none" stroke="#243656" stroke-width="2" stroke-linecap="round" opacity=".8">
+      <path d="M96 214C120 208 150 208 176 214"/>
+      <path d="M104 232C130 226 164 228 196 236"/>
+      <path d="M72 222C78 228 80 236 78 244"/>
+      <path d="M248 214C256 228 258 242 256 254"/>
+      <path d="M262 120C272 132 278 146 280 160"/>
+      <path d="M168 158C176 162 186 164 196 164"/>
+    </g>
+  </g>
+
+  <!-- 首と襟 -->
+  <path d="M168 98C172 86 190 80 206 86L204 100C192 98 180 100 170 106Z" fill="#edc7a4" stroke="#4a3a30" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M210 90C192 86 170 94 158 110C148 124 144 140 144 154" fill="none" stroke="#2f4468" stroke-width="11" stroke-linecap="round"/>
+  <path d="M206 96C192 94 176 101 166 112C158 122 153 134 151 148" fill="none" stroke="#f3ecdc" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- 帯と結び目 -->
+  <g stroke="#4a3a30" stroke-width="2.5" stroke-linejoin="round">
+    <path d="M146 178C190 170 250 166 296 168L298 192C252 190 192 194 148 200Z" fill="#cf9f45"/>
+    <path d="M290 164C306 158 316 170 306 178C316 186 308 200 292 192Z" fill="#c38f38"/>
+    <rect x="288" y="172" width="12" height="12" rx="3" fill="#b48132"/>
+  </g>
+  <path d="M147 184C192 177 251 173 296 175" fill="none" stroke="#e7c679" stroke-width="1.6"/>
+  <path d="M148 191C192 185 252 181 297 182" fill="none" stroke="#9c7430" stroke-width="2.4"/>
+
+  <!-- たすき（背中をななめに通るひも） -->
+  <path d="M204 88C232 104 262 128 290 152" fill="none" stroke="#7a2a24" stroke-width="7" stroke-linecap="round"/>
+  <path d="M204 88C232 104 262 128 290 152" fill="none" stroke="#c0453a" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- りんかく -->
+  <g fill="none" stroke="#4a3a30" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M150 196C144 164 146 134 160 114C174 96 198 86 222 84C262 82 290 110 295 148C299 176 298 198 293 208"/>
+    <path d="M156 188C120 190 92 196 78 205C60 214 56 238 66 251C70 256 76 258 86 258L290 258C304 258 308 236 302 214C298 200 292 192 282 188"/>
+  </g>
+</svg>

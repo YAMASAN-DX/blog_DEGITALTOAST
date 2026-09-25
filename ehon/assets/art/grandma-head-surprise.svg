@@ -1,15 +1,43 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 130">
-  <g stroke="#4a3a30" stroke-width="3" stroke-linejoin="round">
-    <circle cx="96" cy="28" r="17" fill="#d6d1c8"/>
-    <circle cx="62" cy="70" r="44" fill="#f6d7b8"/>
-    <ellipse cx="100" cy="78" rx="7" ry="10" fill="#f0c9a6"/>
-    <path d="M19 68C14 32 44 20 70 22C102 24 114 46 108 74C103 62 96 54 86 50C70 45 44 46 27 60Z" fill="#d6d1c8"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
+  <!-- まげ・くし・かんざし -->
+  <g stroke="#4a3a30" stroke-width="2.8" stroke-linejoin="round">
+    <circle cx="126" cy="36" r="22" fill="#d8d2c6"/>
   </g>
-  <path d="M40 36Q66 28 92 40" fill="none" stroke="#bfb9ae" stroke-width="3" stroke-linecap="round"/>
-  <path d="M80 12L114 34" stroke="#b5563f" stroke-width="5" stroke-linecap="round"/>
-  <circle cx="114" cy="34" r="4" fill="#e9b949"/>
-  <path d="M31 60Q39 53 47 60M55 60Q63 53 71 60" fill="none" stroke="#bfb9ae" stroke-width="3.5" stroke-linecap="round"/><g fill="#2b2622"><circle cx="39" cy="73" r="5.5"/><circle cx="63" cy="73" r="5.5"/></g><g fill="#fff"><circle cx="41" cy="71" r="1.8"/><circle cx="65" cy="71" r="1.8"/></g>
-  <ellipse cx="50" cy="84" rx="4" ry="3" fill="#e5b08e"/>
-  <ellipse cx="51" cy="97" rx="5" ry="6" fill="#c65a5a" stroke="#3a2d25" stroke-width="2"/>
-  <g fill="#f2a3a0" opacity=".75"><ellipse cx="30" cy="87" rx="7" ry="4.5"/><ellipse cx="76" cy="87" rx="7" ry="4.5"/></g>
+  <path d="M110 30C116 18 136 16 142 30M112 44C124 52 140 48 146 38" fill="none" stroke="#b3ab9d" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M118 52L152 22" stroke="#4a3a30" stroke-width="5.5" stroke-linecap="round"/>
+  <path d="M118 52L152 22" stroke="#d2ab52" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="153" cy="21" r="5.5" fill="#d9534a" stroke="#4a3a30" stroke-width="2.2"/>
+
+  <!-- 顔 -->
+  <path d="M46 52C34 64 30 82 32 98C34 114 42 128 58 136C70 142 90 142 104 134C118 126 126 112 128 96C130 78 124 60 110 50Z" fill="#f6d7b8" stroke="#4a3a30" stroke-width="2.8" stroke-linejoin="round"/>
+  <path d="M104 134C118 126 126 112 128 96C126 112 116 126 100 132C92 136 80 138 70 138C82 140 96 138 104 134Z" fill="#e8bd98"/>
+  <!-- 耳 -->
+  <path d="M112 80C124 78 128 94 122 104C118 110 110 106 110 100Z" fill="#f1cda9" stroke="#4a3a30" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M116 88C120 92 118 98 115 100" fill="none" stroke="#b98e6c" stroke-width="1.6" stroke-linecap="round"/>
+
+  <!-- 髪 -->
+  <path d="M38 70C36 44 62 24 92 22C120 20 142 40 140 66C140 82 134 96 124 104C124 90 120 78 110 72C96 64 70 60 52 64C46 66 42 70 38 70Z" fill="#dcd6ca" stroke="#4a3a30" stroke-width="2.8" stroke-linejoin="round"/>
+  <path d="M112 30C132 38 142 56 138 78C134 90 128 98 124 104C124 90 120 78 110 72C120 60 120 42 112 30Z" fill="#c4bcae"/>
+  <g fill="none" stroke="#b3ab9d" stroke-width="1.6" stroke-linecap="round">
+    <path d="M50 62C64 44 92 36 118 40"/>
+    <path d="M62 64C78 50 102 46 126 52"/>
+    <path d="M78 66C94 58 112 58 130 66"/>
+  </g>
+  <!-- くし -->
+  <path d="M100 32C106 16 128 8 144 16L140 25C128 19 112 23 108 35Z" fill="#8f3f30" stroke="#4a3a30" stroke-width="2.4" stroke-linejoin="round"/>
+  <path d="M110 26C118 20 128 18 136 20" fill="none" stroke="#c4705c" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- 表情（にっこり） -->
+  <g fill="none" stroke-linecap="round">
+    <path d="M36 69C41 63 48 63 53 67M60 66C67 60 77 61 83 67" stroke="#c9c1b3" stroke-width="3.5"/>
+    <path d="M20 52l-8-4M24 42l-6-8M34 36l-2-9" stroke="#3a2d25" stroke-width="2.2"/>
+    <path d="M85 83l4-1.5M85 87l4 1.5" stroke="#b8977d" stroke-width="1.1"/>
+    <path d="M44 93C42 99 44 103 49 103" stroke="#b98e6c" stroke-width="2"/>
+    <path d="M40 106C38 111 40 116 44 119" stroke="#d9a888" stroke-width="1.5"/>
+
+  </g>
+  <g fill="#f2a3a0" opacity=".6"><ellipse cx="40" cy="103" rx="6" ry="4"/><ellipse cx="78" cy="102" rx="10" ry="6"/></g>
+  <g fill="#2b2622"><ellipse cx="45" cy="85" rx="4" ry="5.5"/><ellipse cx="71" cy="84" rx="5" ry="6.5"/></g>
+  <g fill="#fff"><circle cx="46.5" cy="83" r="1.5"/><circle cx="73" cy="82" r="1.8"/></g>
+  <ellipse cx="55" cy="117" rx="5" ry="6" fill="#b8574f" stroke="#3a2d25" stroke-width="2"/>
 </svg>

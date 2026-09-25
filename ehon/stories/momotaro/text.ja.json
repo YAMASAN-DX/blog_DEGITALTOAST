@@ -26,7 +26,8 @@
     "baby": "おぎゃあ！",
     "peach": "どんぶらこ〜",
     "oni": "まいった〜！",
-    "treasure": "キラキラ！"
+    "treasure": "キラキラ！",
+    "tub": "じゃぶじゃぶ"
   },
   "names": {
     "momotaro": "桃太郎",
@@ -38,6 +39,7 @@
     "baby": "赤ちゃん",
     "peach": "桃",
     "oni": "鬼",
-    "treasure": "宝物"
+    "treasure": "宝物",
+    "tub": "たらい"
   }
 }

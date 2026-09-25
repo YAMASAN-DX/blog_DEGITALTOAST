@@ -277,6 +277,273 @@ function paintCloth() {
   return c;
 }
 
+/* ---------- 立体の小道具：木のたらい ---------- */
+
+const INK = '#4a3a30';
+
+function toonGradient() {
+  // 3段の陰影（イラストの塗りに合わせる）
+  const data = new Uint8Array([150, 150, 150, 255, 210, 210, 210, 255, 255, 255, 255, 255]);
+  const t = new THREE.DataTexture(data, 3, 1, THREE.RGBAFormat);
+  t.minFilter = t.magFilter = THREE.NearestFilter;
+  t.generateMipmaps = false;
+  t.needsUpdate = true;
+  return t;
+}
+
+function paintStaves(inside = false) {
+  const c = makeCanvas(1024, 256);
+  const ctx = c.getContext('2d');
+  const n = 24;
+  const w = c.width / n;
+  const tones = inside ? ['#9c7446', '#a67c4c', '#94693f'] : ['#c0935c', '#cda06a', '#b58853'];
+  for (let i = 0; i < n; i++) {
+    const x = i * w;
+    ctx.fillStyle = tones[i % 3];
+    ctx.fillRect(x, 0, w + 1, c.height);
+    // 木目
+    ctx.strokeStyle = 'rgba(95,60,28,.3)';
+    ctx.lineWidth = 1.3;
+    for (let k = 0; k < 4; k++) {
+      const x0 = x + 5 + ((k * 37 + i * 13) % Math.max(1, w - 10));
+      ctx.beginPath();
+      for (let y = 0; y <= c.height; y += 12) {
+        const xx = x0 + Math.sin(y / 34 + k * 1.7 + i) * 2.4;
+        if (y) ctx.lineTo(xx, y); else ctx.moveTo(xx, y);
+      }
+      ctx.stroke();
+    }
+    // 節
+    if ((i * 7) % 5 === 0) {
+      ctx.strokeStyle = 'rgba(95,60,28,.45)';
+      ctx.beginPath();
+      ctx.ellipse(x + w / 2, 60 + ((i * 53) % 130), 3.5, 8, 0, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+    ctx.fillStyle = 'rgba(55,32,14,.65)'; // 板の継ぎ目
+    ctx.fillRect(x, 0, 2.5, c.height);
+    ctx.fillStyle = 'rgba(255,238,205,.18)'; // 板の角に当たる光
+    ctx.fillRect(x + 3, 0, 4, c.height);
+  }
+  if (inside) {
+    ctx.fillStyle = 'rgba(35,20,8,.22)';
+    ctx.fillRect(0, 0, c.width, c.height);
+  }
+  applyGrain(ctx, c.width, c.height, 0.6);
+  return c;
+}
+
+function paintHoop() {
+  // 竹を編んだ「たが」
+  const c = makeCanvas(128, 32);
+  const ctx = c.getContext('2d');
+  ctx.fillStyle = '#c29a52';
+  ctx.fillRect(0, 0, c.width, c.height);
+  ctx.strokeStyle = '#8f6a2c';
+  ctx.lineWidth = 3;
+  for (let x = -32; x < c.width + 32; x += 12) {
+    ctx.beginPath();
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x + 16, c.height);
+    ctx.stroke();
+  }
+  ctx.fillStyle = 'rgba(255,240,200,.3)';
+  ctx.fillRect(0, 9, c.width, 4);
+  applyGrain(ctx, c.width, c.height, 0.5);
+  return c;
+}
+
+function paintWater() {
+  const c = makeCanvas(512, 512);
+  const ctx = c.getContext('2d');
+  const g = ctx.createRadialGradient(236, 226, 20, 256, 256, 256);
+  g.addColorStop(0, '#d6eef5');
+  g.addColorStop(0.7, '#9fcde1');
+  g.addColorStop(1, '#6aa3c2');
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, 512, 512);
+  // 空のうつりこみ
+  ctx.fillStyle = 'rgba(255,255,255,.3)';
+  ctx.beginPath();
+  ctx.ellipse(200, 180, 150, 46, -0.35, 0, Math.PI * 2);
+  ctx.fill();
+  // さざなみ
+  ctx.strokeStyle = 'rgba(255,255,255,.6)';
+  ctx.lineCap = 'round';
+  for (let k = 0; k < 14; k++) {
+    const a = k * 2.39;
+    const d = 60 + ((k * 71) % 150);
+    ctx.lineWidth = 2.5 + (k % 3);
+    ctx.beginPath();
+    ctx.arc(256 + Math.cos(a) * d, 256 + Math.sin(a) * d, 14 + (k % 4) * 6, a, a + 1.3);
+    ctx.stroke();
+  }
+  // ふちの陰
+  const e = ctx.createRadialGradient(256, 256, 180, 256, 256, 256);
+  e.addColorStop(0, 'rgba(20,50,70,0)');
+  e.addColorStop(1, 'rgba(20,50,70,.4)');
+  ctx.fillStyle = e;
+  ctx.fillRect(0, 0, 512, 512);
+  applyGrain(ctx, 512, 512, 0.4);
+  return c;
+}
+
+function paintDrop() {
+  const c = makeCanvas(64, 64);
+  const ctx = c.getContext('2d');
+  ctx.fillStyle = '#e6f5fb';
+  ctx.strokeStyle = INK;
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.moveTo(32, 6);
+  ctx.bezierCurveTo(40, 22, 52, 32, 52, 42);
+  ctx.bezierCurveTo(52, 54, 43, 60, 32, 60);
+  ctx.bezierCurveTo(21, 60, 12, 54, 12, 42);
+  ctx.bezierCurveTo(12, 32, 24, 22, 32, 6);
+  ctx.fill();
+  ctx.stroke();
+  ctx.fillStyle = '#ffffff';
+  ctx.beginPath();
+  ctx.arc(25, 40, 5, 0, Math.PI * 2);
+  ctx.fill();
+  return c;
+}
+
+function buildTub(spec, tex) {
+  const r = spec.r ?? 1.9; // 口の半径
+  const h = spec.h ?? 1.6;
+  const rb = r * 0.88; // 底の半径
+  const waterY = h * (spec.water ?? 0.68);
+  const radiusAt = (y) => rb + (r - rb) * (y / h);
+  const gradientMap = toonGradient();
+  const toon = (opt) => new THREE.MeshToonMaterial({ gradientMap, ...opt });
+  const inkMat = new THREE.MeshBasicMaterial({ color: INK, side: THREE.BackSide });
+  const group = new THREE.Group();
+  const add = (mesh, { cast = true, receive = true } = {}) => {
+    mesh.castShadow = cast;
+    mesh.receiveShadow = receive;
+    group.add(mesh);
+    return mesh;
+  };
+
+  // 側板（外・内）と、線画のようなりんかく
+  const wall = new THREE.CylinderGeometry(r, rb, h, 64, 1, true).translate(0, h / 2, 0);
+  add(new THREE.Mesh(wall, toon({ map: tex(paintStaves(false)) })));
+  add(new THREE.Mesh(wall, toon({ map: tex(paintStaves(true)), side: THREE.BackSide })));
+  const hull = add(new THREE.Mesh(wall, inkMat), { cast: false, receive: false });
+  hull.scale.set(1 + 0.07 / r, 1, 1 + 0.07 / r);
+
+  // 縁
+  const ring = (radius, tube, y) => new THREE.TorusGeometry(radius, tube, 10, 72).rotateX(Math.PI / 2).translate(0, y, 0);
+  add(new THREE.Mesh(ring(r, 0.09, h), toon({ color: '#dcb67f' })));
+  add(new THREE.Mesh(ring(r, 0.13, h), inkMat), { cast: false, receive: false });
+
+  // たが（2本）
+  const hoopTex = tex(paintHoop(), [22, 1]);
+  for (const k of [0.24, 0.7]) {
+    const y = h * k;
+    const rr = radiusAt(y) + 0.035;
+    add(new THREE.Mesh(ring(rr, 0.08, y), toon({ map: hoopTex })));
+    add(new THREE.Mesh(ring(rr, 0.115, y), inkMat), { cast: false, receive: false });
+  }
+
+  // 底と水
+  add(new THREE.Mesh(new THREE.CircleGeometry(rb, 48).rotateX(-Math.PI / 2).translate(0, 0.02, 0), toon({ color: '#7a5634' })), { cast: false });
+  const waterTex = tex(paintWater());
+  waterTex.center.set(0.5, 0.5);
+  add(new THREE.Mesh(
+    new THREE.CircleGeometry(radiusAt(waterY) - 0.015, 64).rotateX(-Math.PI / 2).translate(0, waterY, 0),
+    new THREE.MeshLambertMaterial({ map: waterTex, emissive: '#ffffff', emissiveMap: waterTex, emissiveIntensity: 0.3 }),
+  ), { cast: false });
+
+  // 波紋としぶき
+  const ringGeo = new THREE.RingGeometry(0.8, 1, 40).rotateX(-Math.PI / 2);
+  const ripples = Array.from({ length: 8 }, () => {
+    const m = new THREE.Mesh(ringGeo, new THREE.MeshBasicMaterial({ color: '#ffffff', transparent: true, opacity: 0, depthWrite: false }));
+    m.visible = false;
+    group.add(m);
+    return { m, t0: 0, size: 1 };
+  });
+  const dropMat = new THREE.SpriteMaterial({ map: tex(paintDrop()), transparent: true, depthWrite: false });
+  const drops = Array.from({ length: 18 }, () => {
+    const sprite = new THREE.Sprite(dropMat);
+    sprite.scale.set(0.15, 0.15, 1);
+    sprite.visible = false;
+    group.add(sprite);
+    return { sprite, v: new THREE.Vector3(), alive: false };
+  });
+
+  let now = 0;
+  let wobbleAt = null;
+  const clampIn = (x, z, margin) => {
+    const d = Math.hypot(x, z);
+    const max = radiusAt(waterY) - margin;
+    return d > max ? [(x * max) / d, (z * max) / d] : [x, z];
+  };
+  function ripple(x, z, size = 1) {
+    const rp = ripples.find((q) => !q.m.visible) ?? ripples[0];
+    const [px, pz] = clampIn(x, z, 0.6 * size);
+    rp.m.position.set(px, waterY + 0.012, pz);
+    rp.t0 = now;
+    rp.size = size;
+    rp.m.visible = true;
+  }
+  function splash(x, z, strength = 1) {
+    ripple(x, z, 0.6 + 0.4 * strength);
+    const n = Math.round(2 + strength * 3);
+    for (let i = 0; i < n; i++) {
+      const d = drops.find((q) => !q.alive);
+      if (!d) break;
+      const [px, pz] = clampIn(x, z, 0.25);
+      d.sprite.position.set(px, waterY + 0.05, pz);
+      d.v.set((Math.random() - 0.5) * 1.3, 1.3 + Math.random() * 1.1 * strength, (Math.random() - 0.3) * 0.8);
+      d.alive = d.sprite.visible = true;
+    }
+  }
+  function drip(local) {
+    const d = drops.find((q) => !q.alive);
+    if (!d) return;
+    d.sprite.position.copy(local);
+    d.v.set(0, -0.3, 0);
+    d.alive = d.sprite.visible = true;
+  }
+
+  return {
+    group,
+    splash,
+    drip,
+    tap(t) {
+      wobbleAt = t;
+      splash((Math.random() - 0.5) * r, (Math.random() - 0.5) * r, 1.8);
+    },
+    update(t, dt) {
+      now = t;
+      waterTex.rotation += dt * 0.04;
+      for (const rp of ripples) {
+        if (!rp.m.visible) continue;
+        const k = (t - rp.t0) / 0.9;
+        if (k >= 1 || k < 0) { rp.m.visible = false; continue; }
+        const s = (0.08 + k * 0.55) * rp.size;
+        rp.m.scale.set(s, 1, s);
+        rp.m.material.opacity = 0.75 * (1 - k);
+      }
+      for (const d of drops) {
+        if (!d.alive) continue;
+        d.v.y -= 7 * dt;
+        d.sprite.position.addScaledVector(d.v, dt);
+        const p = d.sprite.position;
+        const inTub = Math.hypot(p.x, p.z) < radiusAt(waterY);
+        if (p.y < (inTub ? waterY : 0)) {
+          d.alive = d.sprite.visible = false;
+          if (inTub) ripple(p.x, p.z, 0.35);
+        }
+      }
+      const k = wobbleAt == null ? 1 : clamp01((t - wobbleAt) / 0.7);
+      group.rotation.z = Math.sin(k * Math.PI * 4) * 0.05 * (1 - k);
+    },
+  };
+}
+
 /* ---------- 舞台 ---------- */
 
 export async function createPopupStage(container, def, { base = '', speak = () => '', reduceMotion = false } = {}) {
@@ -376,9 +643,10 @@ export async function createPopupStage(container, def, { base = '', speak = () =
   /* 紙のパーツ */
   const makePart = async (spec, pivot = [0.5, 1]) => {
     const art = await loadArt(artURL(spec.src, base));
+    const widthCm = spec.w ?? art.w * spec.unit; // unit：原画1単位あたりの cm（部品どうしの線の太さをそろえる）
     const paper = cutPaper(art, {
-      widthCm: spec.w,
-      density: spec.density ?? (spec.w > 20 ? 48 : 80),
+      widthCm,
+      density: spec.density ?? (widthCm > 20 ? 48 : 80),
       border: spec.border ?? 0.1,
       blur: spec.blur ?? 0,
       haze: spec.haze ?? 0,
@@ -395,6 +663,7 @@ export async function createPopupStage(container, def, { base = '', speak = () =
     mesh.castShadow = true;
     mesh.receiveShadow = true;
     mesh.userData.paper = c;
+    mesh.userData.frame = { scale: widthCm / art.w, pivot: [pivot[0] * art.w, pivot[1] * art.h] };
     if (spec.sy) mesh.scale.y = spec.sy;
     return mesh;
   };
@@ -407,20 +676,32 @@ export async function createPopupStage(container, def, { base = '', speak = () =
     hinge.add(inner);
     const card = { spec, index, hinge, inner, parts: {}, alt: {}, state: {}, phase: (index * 1.7) % (Math.PI * 2) };
     if (spec.parts) {
+      // 部品は親の関節（anchor：親の原画上の位置）にとめる。親が回ると子もいっしょに動く
       for (const p of spec.parts) {
+        const opt = { ...p, unit: p.unit ?? spec.unit, border: p.border ?? spec.border, density: p.density ?? 100 };
         const g = new THREE.Group();
-        g.position.set(p.at?.[0] ?? 0, p.at?.[1] ?? 0, p.z ?? 0);
-        const mesh = await makePart({ ...p, border: p.border ?? spec.border }, p.pivot);
+        const mesh = await makePart(opt, p.pivot);
         g.add(mesh);
+        g.userData.frame = mesh.userData.frame;
         if (p.alt) {
-          const altMesh = await makePart({ ...p, src: p.alt }, p.pivot);
+          const altMesh = await makePart({ ...opt, src: p.alt }, p.pivot);
           altMesh.visible = false;
           g.add(altMesh);
           card.alt[p.id] = { normal: mesh, alt: altMesh };
         }
-        inner.add(g);
+        const parent = p.parent ? card.parts[p.parent] : null;
+        if (parent && p.anchor) {
+          const f = parent.userData.frame;
+          g.position.set((p.anchor[0] - f.pivot[0]) * f.scale, (f.pivot[1] - p.anchor[1]) * f.scale, p.z ?? 0);
+        } else {
+          g.position.set(p.at?.[0] ?? 0, p.at?.[1] ?? 0, p.z ?? 0);
+        }
+        (parent ?? inner).add(g);
         card.parts[p.id] = g;
       }
+    } else if (spec.type === 'tub') {
+      card.prop = buildTub(spec, tex);
+      inner.add(card.prop.group);
     } else {
       inner.add(await makePart(spec));
     }
@@ -487,14 +768,50 @@ export async function createPopupStage(container, def, { base = '', speak = () =
         emit('peach-arrived');
       }
     },
-    // せんたく → 桃に気づいて顔をあげる
-    'grandma-wash'(c, t) {
-      const n = c.state.noticeAt == null ? 0 : clamp01((t - c.state.noticeAt) / 0.55);
+    // せんたく（肩とひじでこする）→ 桃に気づいて手ぬぐいを持ちあげ、顔をあげる
+    'grandma-wash'(c, t, st, dt, ctx) {
+      const n = c.state.noticeAt == null ? 0 : clamp01((t - c.state.noticeAt) / 0.6);
       const react = n ? easeOutBack(n) : 0;
-      const scrub = Math.sin(t * 5.5) * (1 - n);
-      if (c.parts.arm) c.parts.arm.rotation.z = scrub * 0.13 - react * 0.45;
-      if (c.parts.head) c.parts.head.rotation.z = Math.sin(t * 5.5 + 0.8) * 0.035 * (1 - n) - react * 0.2;
-      c.inner.rotation.z = Math.sin(t * 5.5) * 0.008 * (1 - n) - react * 0.03;
+      const w = 1 - n;
+      const a = t * 5.2;
+      const { upper, fore, cloth, head } = c.parts;
+      if (upper) upper.rotation.z = (0.05 + Math.sin(a) * 0.07) * w - react * 0.55;
+      if (fore) fore.rotation.z = Math.sin(a + 0.7) * 0.16 * w - react * 0.5;
+      // 手ぬぐいは腕の回転を打ち消して、いつも下にたれる
+      if (cloth) cloth.rotation.z = -((upper?.rotation.z ?? 0) + (fore?.rotation.z ?? 0)) * 0.9 + Math.sin(t * 2.6) * 0.06;
+      if (head) head.rotation.z = (0.1 + Math.sin(a + 1.2) * 0.025) * w - react * 0.14;
+      c.inner.rotation.z = (0.012 + Math.sin(a) * 0.006) * w - react * 0.02;
+      if (st > 0 && w > 0.6) {
+        const beat = Math.floor(a / Math.PI); // こするたびに、しぶき
+        if (beat !== c.state.beat) {
+          c.state.beat = beat;
+          ctx.splashFrom(cloth, 0.8);
+        }
+      } else if (n >= 1 && t - (c.state.dripAt ?? 0) > 0.45) {
+        c.state.dripAt = t; // 持ちあげた手ぬぐいから、しずく
+        ctx.dripFrom(cloth, [0, -2.1, 0.02]);
+      }
+    },
+  };
+
+  // 動きどうしの連携（しぶきは、たらいの水面に）
+  const v3 = new THREE.Vector3();
+  const tubOf = () => [...byId.values()].find((c) => c.prop?.splash);
+  const ctx = {
+    splashFrom(obj, strength = 1) {
+      const tub = tubOf();
+      if (!tub || !obj) return;
+      obj.getWorldPosition(v3);
+      tub.inner.worldToLocal(v3);
+      tub.prop.splash(v3.x, v3.z, strength);
+    },
+    dripFrom(obj, offset) {
+      const tub = tubOf();
+      if (!tub || !obj) return;
+      v3.set(...offset);
+      obj.localToWorld(v3);
+      tub.inner.worldToLocal(v3);
+      tub.prop.drip(v3);
     },
   };
 
@@ -533,16 +850,25 @@ export async function createPopupStage(container, def, { base = '', speak = () =
     backPage.rotation.x = (1 - open) * 1.35;
     for (const c of standing) {
       const k = clamp01((time - c.popDelay) / 0.8);
-      c.hinge.rotation.x = -Math.PI / 2 * (1 - spring(k));
+      if (c.spec.pop === 'grow') {
+        const s = spring(k);
+        c.inner.scale.set(1 + (1 - s) * 0.12, Math.max(0.001, s), 1 + (1 - s) * 0.12);
+      } else {
+        c.hinge.rotation.x = -Math.PI / 2 * (1 - spring(k));
+      }
     }
     const st = time - OPEN_TIME;
     for (const c of cards) {
       const fn = BEHAVIORS[c.spec.behavior];
-      if (fn && !(reduceMotion && c.spec.behavior !== 'peach-drift' && c.spec.behavior !== 'grandma-wash')) fn(c, time, st);
+      if (fn && !(reduceMotion && c.spec.behavior !== 'peach-drift' && c.spec.behavior !== 'grandma-wash')) fn(c, time, st, dt, ctx);
+      c.prop?.update(time, dt);
       if (c.state.jumpAt != null) {
         const j = clamp01((time - c.state.jumpAt) / 0.5);
         c.inner.position.y = Math.sin(j * Math.PI) * 0.8;
       }
+      // 部品で組んだ人物は、はねずに体をゆらす
+      const wk = c.state.wiggleAt == null ? 1 : clamp01((time - c.state.wiggleAt) / 0.6);
+      c.hinge.rotation.z = Math.sin(wk * Math.PI * 3) * 0.035 * (1 - wk);
     }
     if (riverTex && !reduceMotion) riverTex.offset.x -= dt * 0.035;
 
@@ -573,6 +899,7 @@ export async function createPopupStage(container, def, { base = '', speak = () =
     for (const hit of hits) {
       // 透明なところは素通りさせる（紙の形どおりにタップを判定）
       const c = hit.object.userData.paper;
+      if (!c) return meshes.find(([m]) => m === hit.object)[1];
       hit.object.userData.alpha ??= c.getContext('2d').getImageData(0, 0, c.width, c.height).data;
       const x = Math.min(c.width - 1, Math.floor(hit.uv.x * c.width));
       const y = Math.min(c.height - 1, Math.floor((1 - hit.uv.y) * c.height));
@@ -599,7 +926,9 @@ export async function createPopupStage(container, def, { base = '', speak = () =
     if (moved) return;
     const c = pick(e);
     if (!c) return;
-    c.state.jumpAt = time;
+    if (c.prop?.tap) c.prop.tap(time);
+    else if (c.spec.parts) c.state.wiggleAt = time;
+    else c.state.jumpAt = time;
     say(c, c.spec.tap);
   });
 
