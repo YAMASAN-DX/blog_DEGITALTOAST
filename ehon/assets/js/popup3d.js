@@ -234,6 +234,62 @@ function paintSky(def) {
   return c;
 }
 
+// 鬼ヶ島の岩場（草のかわりに、ごつごつした岩と割れ目）
+function paintRock(def) {
+  const d = 40;
+  const c = makeCanvas(PAGE_W * d, PAGE_D * d);
+  const ctx = c.getContext('2d');
+  const W = c.width;
+  const H = c.height;
+  const g = ctx.createLinearGradient(0, 0, 0, H);
+  g.addColorStop(0, '#6f6660');
+  g.addColorStop(1, '#8d8378');
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, W, H);
+  for (let k = 0; k < 900; k++) {
+    ctx.fillStyle = ['rgba(60,52,48,.35)', 'rgba(170,158,142,.3)', 'rgba(120,108,98,.35)'][k % 3];
+    ctx.beginPath();
+    ctx.ellipse(Math.random() * W, Math.random() * H, 6 + Math.random() * 26, 3 + Math.random() * 10, Math.random() * 3, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  // 割れ目
+  ctx.strokeStyle = 'rgba(40,34,30,.55)';
+  ctx.lineCap = 'round';
+  for (let k = 0; k < 60; k++) {
+    let x = Math.random() * W;
+    let y = Math.random() * H;
+    ctx.lineWidth = 1.5 + Math.random() * 2;
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    for (let j = 0; j < 4; j++) {
+      x += (Math.random() - 0.5) * 60;
+      y += (Math.random() - 0.3) * 24;
+      ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+  }
+  // 小石
+  for (let k = 0; k < 260; k++) {
+    const x = Math.random() * W;
+    const y = Math.random() * H;
+    const r = 2 + Math.random() * 4;
+    ctx.fillStyle = ['#9a9086', '#7e746b', '#b0a598'][k % 3];
+    ctx.strokeStyle = 'rgba(40,34,30,.6)';
+    ctx.lineWidth = 1.3;
+    ctx.beginPath();
+    ctx.ellipse(x, y, r * 1.4, r, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+  }
+  const gutter = ctx.createLinearGradient(0, 0, 0, 70);
+  gutter.addColorStop(0, 'rgba(30,24,20,.35)');
+  gutter.addColorStop(1, 'rgba(30,24,20,0)');
+  ctx.fillStyle = gutter;
+  ctx.fillRect(0, 0, W, 70);
+  applyGrain(ctx, W, H, 0.7);
+  return c;
+}
+
 function paintGround(def) {
   const d = 40;
   const c = makeCanvas(PAGE_W * d, PAGE_D * d);
@@ -1782,7 +1838,8 @@ function applyPoses(c, t, st, ctx, p) {
   }
   c.inner.rotation.z = pose.lean ?? 0;
   c.inner.position.y = pose.y ?? 0;
-  c.inner.position.x = pose.x ?? 0; // 木からとびおりる・空からまいおりる
+  // 木からとびおりる・空からまいおりる。x は向き（flip）によらず、台紙の右が＋
+  c.inner.position.x = (pose.x ?? 0) * Math.sign(c.hinge.scale.x || 1);
   oscillate(c, t, osc, ctx.calm);
   if (face) for (const [part, name] of Object.entries(face)) ctx.face(c, part, name);
 }
@@ -2038,7 +2095,7 @@ export async function createPopupBook(container, { base = '', speak = () => '', 
 
     // ページの裏（見返しと同じ紙）。閉じるとき光の当たらない向きになっても暗く沈まないように
     const paperBack = new THREE.MeshLambertMaterial({ map: endMat.map, emissive: '#ffffff', emissiveMap: endMat.map, emissiveIntensity: 0.45 });
-    const groundTex = tex(def.floor === 'tatami' ? paintTatami(def) : paintGround(def));
+    const groundTex = tex(def.floor === 'tatami' ? paintTatami(def) : def.floor === 'rock' ? paintRock(def) : paintGround(def));
     const groundMat = new THREE.MeshLambertMaterial({ map: groundTex });
     const backTex = tex(def.back === 'interior' ? paintInterior(def) : paintSky(def));
     // 背のページは印刷の色が沈まないよう、少し自分で明るくする
@@ -2065,7 +2122,7 @@ export async function createPopupBook(container, { base = '', speak = () => '', 
     let flowTex = null;
     if (def.river) {
       const depth = def.river.near - def.river.far;
-      flowTex = tex(paintRiver(), [2.2, 1]);
+      flowTex = tex(paintRiver(), def.river.repeat ?? [2.2, 1]);
       const river = new THREE.Mesh(new THREE.PlaneGeometry(PAGE_W - 0.4, depth), new THREE.MeshStandardMaterial({ map: flowTex, roughness: 0.35, metalness: 0 }));
       river.rotation.x = -Math.PI / 2;
       river.position.set(0, 0.015, def.river.far + depth / 2);
@@ -2168,6 +2225,7 @@ export async function createPopupBook(container, { base = '', speak = () => '', 
             g.position.set(p.at?.[0] ?? 0, p.at?.[1] ?? 0, p.z ?? 0);
           }
           if (p.rot) g.rotation.z = p.rot;
+          if (p.mirror) g.scale.x = -1; // この部品から先（つながった部品ごと）左右反転（船にのる犬・猿の向きなど）
           g.userData.rest = g.rotation.z;
           g.userData.hidden = Boolean(p.hidden); // 最初はかくしておく部品（手わたす物など）
           g.visible = !p.hidden;

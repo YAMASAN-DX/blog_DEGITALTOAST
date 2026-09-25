@@ -37,7 +37,10 @@
     "momotaro-deal": "Come with me, and it's yours!",
     "monkey-ask": "One for me, too!",
     "kiji-ask": "May I have one, too?",
-    "momotaro-here": "Here you go!"
+    "momotaro-here": "Here you go!",
+    "momotaro-island": "There's Onigashima!",
+    "monkey-row": "Heave-ho, heave-ho!",
+    "momotaro-attack": "Charge!"
   },
   "names": {
     "momotaro": "Momotaro",
@@ -60,6 +63,9 @@
     "momotaro-deal": "Momotaro",
     "monkey-ask": "Monkey",
     "kiji-ask": "Pheasant",
-    "momotaro-here": "Momotaro"
+    "momotaro-here": "Momotaro",
+    "momotaro-island": "Momotaro",
+    "monkey-row": "Monkey",
+    "momotaro-attack": "Momotaro"
   }
 }

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 170">
+  <defs><clipPath id="hull"><path d="M20 44L500 44C528 42 548 24 554 6C560 32 552 62 530 92C500 132 430 152 330 152L140 152C80 152 40 122 24 84Z"/></clipPath></defs>
+  <path d="M20 44L500 44C528 42 548 24 554 6C560 32 552 62 530 92C500 132 430 152 330 152L140 152C80 152 40 122 24 84Z" fill="#b07a44"/>
+  <g clip-path="url(#hull)">
+    <g fill="none" stroke="#8a5a2e" stroke-width="2.4"><path d="M0 78H560M0 108H560M0 134H560"/></g>
+    <g stroke="#8a5a2e" stroke-width="2"><path d="M120 44V160M260 44V160M400 44V160"/></g>
+    <path d="M0 120C160 132 380 132 560 100V170H0Z" fill="#6e4726" opacity=".5"/>
+    <path d="M0 50H560V58H0Z" fill="#f0c98e" opacity=".45"/>
+  </g>
+  <!-- 船べり -->
+  <path d="M14 38L500 38C526 36 546 20 552 2L558 8C552 30 530 50 500 52L16 52Z" fill="#8a5a2e" stroke="#4a3a30" stroke-width="2.6" stroke-linejoin="round"/>
+  <!-- 船の横の桃のしるし -->
+  <g transform="translate(300 94)">
+    <circle r="26" fill="#fbf6ea" stroke="#4a3a30" stroke-width="2.4"/>
+    <path d="M0 -16C-10 -15 -15 -6 -14 2C-13 10 -6 15 0 17C6 15 13 10 14 2C15 -6 10 -15 0 -16Z" fill="#f39a8e" stroke="#4a3a30" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M0 -16C-3 -22 -10 -22 -12 -19C-8 -16 -4 -16 0 -16Z" fill="#7faa5a"/>
+  </g>
+  <path d="M20 44L500 44C528 42 548 24 554 6C560 32 552 62 530 92C500 132 430 152 330 152L140 152C80 152 40 122 24 84Z" fill="none" stroke="#4a3a30" stroke-width="3" stroke-linejoin="round"/>
+</svg>

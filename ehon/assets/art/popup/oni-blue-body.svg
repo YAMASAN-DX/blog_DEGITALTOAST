@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230 300">
+  <defs>
+    <pattern id="tora" width="40" height="30" patternUnits="userSpaceOnUse" patternTransform="rotate(-8)">
+      <rect width="40" height="30" fill="#efb73e"/>
+      <path d="M4 0C10 8 8 16 2 22M22 4C28 12 26 20 20 26" fill="none" stroke="#2b2622" stroke-width="5" stroke-linecap="round"/>
+    </pattern>
+  </defs>
+  <!-- 奥のうで -->
+  <path d="M172 62C194 72 206 110 202 150C200 164 196 172 188 172C180 172 176 164 178 154C180 124 176 98 164 78Z" fill="#3f68a8" stroke="#4a3a30" stroke-width="2.8" stroke-linejoin="round"/>
+  <path d="M178 156C176 168 182 178 192 178C202 178 206 168 202 156Z" fill="#3f68a8" stroke="#4a3a30" stroke-width="2.4" stroke-linejoin="round"/>
+  <!-- 足 -->
+  <g stroke="#4a3a30" stroke-width="2.8" stroke-linejoin="round">
+    <path d="M120 220L162 220L164 280C164 286 158 290 150 290L120 290Z" fill="#3f68a8"/>
+    <path d="M68 220L112 220L112 280L112 292L58 292C48 292 46 282 56 278L70 276Z" fill="#5a86c9"/>
+  </g>
+  <!-- 体（広い肩、厚い胸、丸いおなか） -->
+  <path d="M40 74C46 50 84 40 114 40C150 40 182 50 188 74C192 96 184 118 178 134C184 150 180 172 166 186C154 196 88 198 72 190C54 180 48 160 54 140C44 122 36 96 40 74Z" fill="#5a86c9" stroke="#4a3a30" stroke-width="2.8" stroke-linejoin="round"/>
+  <path d="M170 60C188 82 186 112 176 132C184 150 178 172 164 184C170 164 172 146 166 132C176 110 178 84 170 60Z" fill="#3f68a8" opacity=".7"/>
+  <path d="M56 64C74 50 96 46 116 46C98 54 80 64 68 80Z" fill="#86aee0" opacity=".7"/>
+  <g fill="none" stroke="#2e4f86" stroke-width="2.6" stroke-linecap="round">
+    <path d="M62 102C78 114 100 114 112 102"/><path d="M116 102C130 114 150 112 164 100"/>
+    <path d="M70 146C92 136 142 136 162 146"/>
+  </g>
+  <circle cx="116" cy="162" r="3.5" fill="#2e4f86"/>
+  <!-- 虎の腰巻き -->
+  <path d="M54 176C90 168 140 168 172 176L176 232C140 238 90 238 50 232Z" fill="url(#tora)" stroke="#4a3a30" stroke-width="2.8" stroke-linejoin="round"/>
+  <path d="M54 176C90 168 140 168 172 176L172 186C140 180 90 180 54 188Z" fill="#8f5f31" stroke="#4a3a30" stroke-width="2.2"/>
+  <path d="M52 232L60 222L68 234L78 222L88 236L98 222L108 236L118 222L128 236L138 222L148 236L158 222L168 234L176 224" fill="none" stroke="#4a3a30" stroke-width="2.2"/>
+</svg>

@@ -1,0 +1,549 @@
+{
+  "id": "sea",
+  "text": "s09",
+  "settle": 9,
+  "camera": {
+    "fov": 34,
+    "position": [
+      0.4,
+      7.6,
+      22.0
+    ],
+    "target": [
+      0.6,
+      3.4,
+      -1.5
+    ]
+  },
+  "sky": {
+    "top": "#9cc9e4",
+    "bottom": "#eef4ee",
+    "sun": [
+      0.2,
+      0.26
+    ]
+  },
+  "river": {
+    "far": -11.95,
+    "near": 5.95,
+    "repeat": [
+      2.2,
+      3
+    ]
+  },
+  "cards": [
+    {
+      "id": "cloud1",
+      "src": "popup/cloud.svg",
+      "attach": "back",
+      "x": -6.5,
+      "y": 9.9,
+      "z": 0.3,
+      "unit": 0.022,
+      "behavior": "drift"
+    },
+    {
+      "id": "cloud2",
+      "src": "popup/cloud.svg",
+      "attach": "back",
+      "x": 2.5,
+      "y": 10.2,
+      "z": 0.25,
+      "w": 3.4,
+      "behavior": "drift"
+    },
+    {
+      "id": "island",
+      "src": "popup/onigashima.svg",
+      "x": 9.4,
+      "z": -9.8,
+      "unit": 0.022,
+      "blur": 0.6,
+      "haze": 0.18,
+      "border": 0.05
+    },
+    {
+      "id": "waves-far",
+      "src": "popup/waves-far.svg",
+      "x": 0,
+      "z": -7.5,
+      "unit": 0.022,
+      "blur": 0.6,
+      "haze": 0.1,
+      "border": 0.03,
+      "behavior": "ripple"
+    },
+    {
+      "id": "waves-mid",
+      "src": "popup/waves-far.svg",
+      "x": 1.5,
+      "z": -2.5,
+      "unit": 0.022,
+      "border": 0.03,
+      "behavior": "ripple"
+    },
+    {
+      "id": "pheasant",
+      "x": 8.2,
+      "z": 0.2,
+      "unit": 0.022,
+      "pop": false,
+      "flip": true,
+      "tap": "pheasant",
+      "behavior": "poses",
+      "parts": [
+        {
+          "id": "body",
+          "src": "popup/pheasant-body.svg",
+          "pivot": [
+            0.3,
+            1
+          ]
+        },
+        {
+          "id": "wingF",
+          "parent": "body",
+          "anchor": [
+            96,
+            50
+          ],
+          "src": "popup/pheasant-wing.svg",
+          "pivot": [
+            0.9,
+            0.2
+          ],
+          "z": -0.02,
+          "shade": 0.2
+        },
+        {
+          "id": "head",
+          "parent": "body",
+          "anchor": [
+            42,
+            24
+          ],
+          "src": "popup/pheasant-head.svg",
+          "pivot": [
+            0.55,
+            0.85
+          ],
+          "z": 0.03,
+          "border": 0.05,
+          "alts": {
+            "happy": "popup/pheasant-head-happy.svg"
+          }
+        },
+        {
+          "id": "wing",
+          "parent": "body",
+          "anchor": [
+            96,
+            50
+          ],
+          "src": "popup/pheasant-wing.svg",
+          "pivot": [
+            0.9,
+            0.2
+          ],
+          "z": 0.03,
+          "border": 0.05
+        }
+      ],
+      "params": {
+        "keys": [
+          {
+            "at": 0,
+            "pose": {
+              "y": 5.2,
+              "wing": -0.6,
+              "wingF": -0.4,
+              "lean": 0.05
+            }
+          }
+        ],
+        "osc": [
+          {
+            "part": "wing",
+            "amp": 0.7,
+            "speed": 14
+          },
+          {
+            "part": "wingF",
+            "amp": 0.7,
+            "speed": 14,
+            "phase": 0.3
+          },
+          {
+            "part": "y",
+            "amp": 0.4,
+            "speed": 1.6
+          }
+        ]
+      }
+    },
+    {
+      "id": "boat",
+      "x": -1.5,
+      "z": 1.7,
+      "lift": -1.0,
+      "unit": 0.022,
+      "tap": "momotaro-island",
+      "behavior": "poses",
+      "parts": [
+        {
+          "id": "hull",
+          "src": "popup/boat-hull.svg",
+          "pivot": [
+            0.5,
+            1
+          ]
+        },
+        {
+          "id": "d-body",
+          "src": "popup/dog-sit.svg",
+          "pivot": [
+            0.5,
+            1
+          ],
+          "alts": {},
+          "parent": "hull",
+          "anchor": [
+            262,
+            70
+          ],
+          "z": -0.22,
+          "mirror": true
+        },
+        {
+          "id": "d-tail2",
+          "parent": "d-body",
+          "anchor": [
+            118,
+            100
+          ],
+          "src": "popup/dog-tail.svg",
+          "pivot": [
+            0.2,
+            0.9
+          ],
+          "z": -0.01,
+          "hidden": false
+        },
+        {
+          "id": "d-head",
+          "parent": "d-body",
+          "anchor": [
+            46,
+            40
+          ],
+          "src": "popup/dog-head.svg",
+          "pivot": [
+            0.625,
+            0.88
+          ],
+          "z": 0.04,
+          "border": 0.05,
+          "alts": {
+            "happy": "popup/dog-head-happy.svg"
+          }
+        },
+        {
+          "id": "k-body",
+          "src": "popup/monkey-body.svg",
+          "pivot": [
+            0.5,
+            1
+          ],
+          "parent": "hull",
+          "anchor": [
+            110,
+            74
+          ],
+          "z": -0.3,
+          "mirror": true
+        },
+        {
+          "id": "k-tail",
+          "parent": "k-body",
+          "anchor": [
+            100,
+            108
+          ],
+          "src": "popup/monkey-tail.svg",
+          "pivot": [
+            0.08,
+            0.85
+          ],
+          "z": -0.01
+        },
+        {
+          "id": "k-head",
+          "parent": "k-body",
+          "anchor": [
+            52,
+            38
+          ],
+          "src": "popup/monkey-head.svg",
+          "pivot": [
+            0.55,
+            0.9
+          ],
+          "z": 0.04,
+          "border": 0.05,
+          "alts": {
+            "happy": "popup/monkey-head-happy.svg"
+          }
+        },
+        {
+          "id": "k-arm",
+          "parent": "k-body",
+          "anchor": [
+            56,
+            50
+          ],
+          "src": "popup/monkey-arm.svg",
+          "pivot": [
+            0.5,
+            0.09
+          ],
+          "z": 0.02,
+          "border": 0.05,
+          "rot": 0.1
+        },
+        {
+          "id": "oar",
+          "parent": "k-arm",
+          "anchor": [
+            16,
+            62
+          ],
+          "src": "popup/oar.svg",
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "z": 0.34,
+          "rot": 0.55,
+          "border": 0.05
+        },
+        {
+          "id": "m-body",
+          "src": "popup/momotaro-body.svg",
+          "pivot": [
+            0.55,
+            0.79
+          ],
+          "parent": "hull",
+          "anchor": [
+            420,
+            88
+          ],
+          "z": -0.34
+        },
+        {
+          "id": "m-armF",
+          "parent": "m-body",
+          "anchor": [
+            82,
+            52
+          ],
+          "src": "popup/momotaro-arm-upper.svg",
+          "pivot": [
+            0.5,
+            0.136
+          ],
+          "z": -0.034,
+          "shade": 0.22,
+          "rot": 0.3
+        },
+        {
+          "id": "m-foreF",
+          "parent": "m-armF",
+          "anchor": [
+            32,
+            76
+          ],
+          "src": "popup/grandpa-arm-fore.svg",
+          "pivot": [
+            0.48,
+            0.085
+          ],
+          "z": -0.012,
+          "shade": 0.22,
+          "rot": 0.35
+        },
+        {
+          "id": "m-flag",
+          "parent": "m-foreF",
+          "anchor": [
+            29,
+            72
+          ],
+          "src": "popup/momotaro-flag.svg",
+          "pivot": [
+            0.154,
+            0.78
+          ],
+          "z": -0.006,
+          "border": 0.05,
+          "rot": -0.65
+        },
+        {
+          "id": "m-pouch",
+          "parent": "m-body",
+          "anchor": [
+            146,
+            122
+          ],
+          "src": "popup/momotaro-pouch.svg",
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "z": 0.02,
+          "border": 0.05,
+          "hidden": false
+        },
+        {
+          "id": "m-head",
+          "parent": "m-body",
+          "anchor": [
+            106,
+            38
+          ],
+          "src": "popup/momotaro-head.svg",
+          "unit": 0.0198,
+          "pivot": [
+            0.55,
+            0.93
+          ],
+          "z": 0.05,
+          "border": 0.05,
+          "alts": {
+            "shout": "popup/momotaro-head-shout.svg",
+            "happy": "popup/momotaro-head-happy.svg"
+          }
+        },
+        {
+          "id": "m-upper",
+          "parent": "m-body",
+          "anchor": [
+            126,
+            52
+          ],
+          "src": "popup/momotaro-arm-upper.svg",
+          "pivot": [
+            0.5,
+            0.136
+          ],
+          "z": 0.1,
+          "border": 0.05,
+          "rot": -0.1
+        },
+        {
+          "id": "m-fore",
+          "parent": "m-upper",
+          "anchor": [
+            32,
+            76
+          ],
+          "src": "popup/grandpa-arm-fore.svg",
+          "pivot": [
+            0.48,
+            0.085
+          ],
+          "z": -0.012,
+          "border": 0.05,
+          "rot": 0.25
+        }
+      ],
+      "params": {
+        "keys": [
+          {
+            "at": 0,
+            "pose": {
+              "m-upper": 0.2,
+              "m-fore": 0.2,
+              "k-arm": 0.6
+            }
+          },
+          {
+            "at": 0.8,
+            "dur": 0.6,
+            "ease": "back",
+            "pose": {
+              "m-upper": 2.1,
+              "m-fore": 0.1,
+              "k-arm": 0.6
+            },
+            "face": {
+              "m-head": "shout"
+            },
+            "say": "momotaro-island"
+          },
+          {
+            "at": 3.6,
+            "dur": 0.6,
+            "pose": {
+              "m-upper": 0.2,
+              "m-fore": 0.2,
+              "k-arm": 0.6
+            },
+            "face": {
+              "m-head": "normal"
+            }
+          },
+          {
+            "at": 4.6,
+            "dur": 0.1,
+            "say": "monkey-row"
+          },
+          {
+            "at": 0,
+            "dur": 12,
+            "ease": "linear",
+            "pose": {
+              "x": 3.0
+            }
+          }
+        ],
+        "osc": [
+          {
+            "part": "lean",
+            "amp": 0.03,
+            "speed": 1.3
+          },
+          {
+            "part": "y",
+            "amp": 0.14,
+            "speed": 1.3
+          },
+          {
+            "part": "k-arm",
+            "amp": 0.45,
+            "speed": 3.2
+          },
+          {
+            "part": "d-tail2",
+            "amp": 0.3,
+            "speed": 9
+          },
+          {
+            "part": "d-head",
+            "amp": 0.05,
+            "speed": 1.8
+          }
+        ]
+      }
+    },
+    {
+      "id": "waves-near",
+      "src": "popup/waves-near.svg",
+      "x": 0,
+      "z": 4.6,
+      "unit": 0.022,
+      "border": 0.03,
+      "behavior": "ripple"
+    }
+  ]
+}

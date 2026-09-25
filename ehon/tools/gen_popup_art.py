@@ -538,6 +538,109 @@ def fence():
     write('fence.svg', W, H, '  ' + ''.join(poles) + bars + knots)
 
 
+# ---------------------------------------------------------------- 海の波（青海波ふうの波がしら）
+def waves(name, W, H, seed, dark='#3f84b3', mid='#6fa9cf', light='#a9d3e8'):
+    rnd = random.Random(seed)
+    rows = []
+    for y0, amp, col in [(H * 0.35, 12, light), (H * 0.6, 14, mid), (H * 0.86, 16, dark)]:
+        d = f'M-20 {H}L-20 {f(y0)}'
+        x = -20
+        crests = []
+        while x < W + 20:
+            s = rnd.uniform(46, 70)
+            d += f'Q{f(x + s * 0.5)} {f(y0 - amp * 2)} {f(x + s)} {f(y0)}'
+            crests.append((x + s * 0.5, y0 - amp))
+            x += s
+        d += f'L{W + 20} {H}Z'
+        foam = ''.join(f'<path d="M{f(cx - 14)} {f(cy + 4)}q8 -12 18 -6q-6 2 -6 8" fill="none" stroke="#fbfaf5" stroke-width="3" stroke-linecap="round"/>'
+                       for cx, cy in crests if rnd.random() < 0.8)
+        rows.append(f'<path d="{d}" fill="{col}" stroke="{INK}" stroke-width="2.4" stroke-linejoin="round"/>{foam}')
+    write(name, W, H, '  ' + '\n  '.join(rows))
+
+
+# ---------------------------------------------------------------- 鬼ヶ島（遠くに見える岩の島）
+def onigashima():
+    W, H = 620, 380
+    rnd = random.Random(61)
+    rock = [(-10, 330), (40, 250), (90, 200), (130, 120), (170, 150), (220, 70), (270, 110), (330, 40), (380, 100), (430, 80),
+            (480, 160), (540, 210), (590, 280), (630, 330)]
+    sil = smooth(rock) + f'L630 {H}L-10 {H}Z'
+    cracks = ''.join(f'<path d="M{f(x)} {f(y)}l{f(rnd.uniform(-20, 20))} {f(rnd.uniform(20, 50))}l{f(rnd.uniform(-14, 14))} {f(rnd.uniform(16, 40))}"/>'
+                     for x, y in [(130, 140), (220, 100), (330, 70), (430, 110), (500, 190), (90, 220), (280, 150), (380, 140)])
+    clouds = ''.join(f'<ellipse cx="{x}" cy="{y}" rx="{rx}" ry="{ry}"/>' for x, y, rx, ry in
+                     [(150, 40, 70, 22), (230, 24, 80, 24), (400, 30, 90, 26), (500, 50, 60, 18), (320, 8, 60, 18)])
+    castle = (f'<g stroke="{INK}" stroke-width="2.4" stroke-linejoin="round">'
+              '<rect x="296" y="70" width="70" height="44" fill="#5a4a44"/>'
+              '<path d="M286 72L331 42L376 72Z" fill="#2e2a2c"/>'
+              '<rect x="310" y="36" width="42" height="22" fill="#5a4a44"/>'
+              '<path d="M302 38L331 16L360 38Z" fill="#2e2a2c"/>'
+              '<rect x="318" y="86" width="26" height="28" fill="#8f2a24"/></g>')
+    defs = (f'    <clipPath id="isl"><path d="{sil}"/></clipPath>\n'
+            '    <filter id="mist" x="-20%" y="-60%" width="140%" height="220%"><feGaussianBlur stdDeviation="7"/></filter>')
+    body = (f'  <g fill="#5d5566" opacity=".75" filter="url(#mist)">{clouds}</g>\n'
+            f'  <path d="{sil}" fill="#6d6468"/>\n'
+            f'  <g clip-path="url(#isl)">{slope_shadows(rock, H, "#4d4650", .55)}'
+            f'<g fill="none" stroke="#3e383c" stroke-width="2.4" stroke-linecap="round">{cracks}</g></g>\n'
+            f'  {castle}\n'
+            f'  <path d="{smooth(rock)}" fill="none" stroke="{INK}" stroke-width="3" stroke-linejoin="round"/>\n'
+            f'  <g fill="#ffffff" opacity=".45" filter="url(#mist)"><ellipse cx="310" cy="{H - 20}" rx="320" ry="26"/></g>')
+    write('onigashima.svg', W, H, body, defs, top=10)
+
+
+# ---------------------------------------------------------------- 岩（ごつごつ）
+def rocks():
+    W, H = 360, 150
+    rnd = random.Random(71)
+    out = []
+    for cx, cy, rx, ry in [(80, 120, 70, 50), (190, 110, 90, 70), (300, 125, 60, 40), (140, 140, 60, 24)]:
+        pts = []
+        for k in range(8):
+            a = k / 8 * math.tau + rnd.uniform(-0.15, 0.15)
+            r = rnd.uniform(0.8, 1.05)
+            pts.append((cx + math.cos(a) * rx * r, min(H, cy + math.sin(a) * ry * r)))
+        d = 'M' + 'L'.join(f'{f(x)} {f(y)}' for x, y in pts) + 'Z'
+        out.append(f'<path d="{d}" fill="#857b72" stroke="{INK}" stroke-width="2.6" stroke-linejoin="round"/>'
+                   f'<path d="M{f(cx - rx * 0.5)} {f(cy - ry * 0.4)}L{f(cx - rx * 0.1)} {f(cy - ry * 0.7)}L{f(cx + rx * 0.3)} {f(cy - ry * 0.3)}" fill="none" stroke="#b3a898" stroke-width="4" stroke-linecap="round"/>'
+                   f'<path d="M{f(cx + rx * 0.2)} {f(cy)}L{f(cx + rx * 0.7)} {f(cy + ry * 0.5)}L{f(cx + rx * 0.2)} {f(cy + ry * 0.9)}Z" fill="#5f564f" opacity=".6"/>')
+    write('rocks.svg', W, H, '  ' + ''.join(out))
+
+
+# ---------------------------------------------------------------- 鬼の城の門
+def oni_gate():
+    W, H = 640, 440
+    rnd = random.Random(81)
+    stones = []
+    for row, y in enumerate(range(250, 440, 38)):
+        x = -30 + (row % 2) * 40
+        while x < W:
+            w = rnd.uniform(60, 90)
+            if not (170 < x + w / 2 < 470):
+                stones.append(f'<rect x="{f(x)}" y="{y}" width="{f(w - 4)}" height="34" rx="8" fill="{rnd.choice(["#8a8078", "#958b82", "#7d736b"])}" stroke="{INK}" stroke-width="2.2"/>')
+            x += w
+    studs = ''.join(f'<circle cx="{x}" cy="{y}" r="5" fill="#2e2a28" stroke="#8a7a60" stroke-width="1.4"/>'
+                    for x in [220, 260, 300, 340, 380, 420] for y in [230, 290, 350, 410])
+    body = (f'  {"".join(stones)}\n'
+            f'  <g stroke="{INK}" stroke-width="2.8" stroke-linejoin="round">'
+            '<path d="M110 150C170 140 470 140 530 150L500 110C420 96 220 96 140 110Z" fill="#2e2a2c"/>'
+            '<path d="M150 112C210 84 430 84 490 112L460 80C400 64 240 64 180 80Z" fill="#3a3538"/>'
+            '<rect x="186" y="150" width="268" height="36" fill="#5a2a24"/></g>\n'
+            '  <g stroke="#1e1a1c" stroke-width="2"><path d="M150 140H490M170 124H470M200 96H440"/></g>\n'
+            f'  <g stroke="{INK}" stroke-width="2.8" stroke-linejoin="round">'
+            '<rect x="170" y="186" width="28" height="254" fill="#6b2a24"/>'
+            '<rect x="442" y="186" width="28" height="254" fill="#6b2a24"/>'
+            '<rect x="198" y="196" width="122" height="244" fill="#9c3a30"/>'
+            '<rect x="320" y="196" width="122" height="244" fill="#9c3a30"/></g>\n'
+            '  <path d="M320 196V440" stroke="#4a1a16" stroke-width="3"/>\n'
+            f'  {studs}\n'
+            '  <g fill="none" stroke="#2e2a28" stroke-width="7" stroke-linecap="round"><path d="M290 316h-20M350 316h20"/></g>\n'
+            f'  <g transform="translate(320 168)" stroke="{INK}" stroke-width="2.2" stroke-linejoin="round">'
+            '<path d="M-16 -8L-22 -28L-6 -14ZM16 -8L22 -28L6 -14Z" fill="#f3ecdc"/>'
+            '<circle r="16" fill="#e2b13c"/>'
+            f'<circle cx="-6" cy="-2" r="3" fill="{INK}"/><circle cx="6" cy="-2" r="3" fill="{INK}"/>'
+            '<path d="M-7 7Q0 12 7 7" fill="none"/></g>')
+    write('oni-gate.svg', W, H, body)
+
+
 mountains_far()
 mountains_mid()
 hill()
@@ -553,4 +656,9 @@ ripples()
 reeds()
 cloud()
 leaf()
+waves('waves-far.svg', 1500, 70, 91)
+waves('waves-near.svg', 1500, 90, 92)
+onigashima()
+rocks()
+oni_gate()
 print('ok')

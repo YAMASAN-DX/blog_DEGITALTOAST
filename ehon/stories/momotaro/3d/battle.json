@@ -1,0 +1,907 @@
+{
+  "id": "battle",
+  "text": "s10",
+  "floor": "rock",
+  "settle": 10,
+  "camera": {
+    "fov": 34,
+    "position": [
+      0.8,
+      7.8,
+      23.0
+    ],
+    "target": [
+      1.0,
+      3.9,
+      -1.5
+    ]
+  },
+  "sky": {
+    "top": "#8f8aa8",
+    "bottom": "#eadccb"
+  },
+  "light": {
+    "ambient": 1.9,
+    "sun": 2.1
+  },
+  "cards": [
+    {
+      "id": "cloud1",
+      "src": "popup/cloud.svg",
+      "attach": "back",
+      "x": -7.5,
+      "y": 10.2,
+      "z": 0.3,
+      "unit": 0.022,
+      "behavior": "drift"
+    },
+    {
+      "id": "cloud2",
+      "src": "popup/cloud.svg",
+      "attach": "back",
+      "x": 8.5,
+      "y": 9.6,
+      "z": 0.25,
+      "w": 3.4,
+      "behavior": "drift"
+    },
+    {
+      "id": "island",
+      "src": "popup/onigashima.svg",
+      "x": -8.5,
+      "z": -11,
+      "unit": 0.026,
+      "blur": 1.5,
+      "haze": 0.3,
+      "border": 0.05
+    },
+    {
+      "id": "gate",
+      "src": "popup/oni-gate.svg",
+      "x": 5.5,
+      "z": -8.2,
+      "unit": 0.025
+    },
+    {
+      "id": "rocks-l",
+      "src": "popup/rocks.svg",
+      "x": -11.5,
+      "z": -3.5,
+      "unit": 0.022
+    },
+    {
+      "id": "rocks-r",
+      "src": "popup/rocks.svg",
+      "x": 14,
+      "z": 0.5,
+      "unit": 0.018,
+      "flip": true
+    },
+    {
+      "id": "oni-blue",
+      "x": 10.4,
+      "z": -1.2,
+      "unit": 0.024,
+      "tap": "oni",
+      "behavior": "poses",
+      "parts": [
+        {
+          "id": "body",
+          "src": "popup/oni-blue-body.svg",
+          "pivot": [
+            0.5,
+            0.973
+          ]
+        },
+        {
+          "id": "head",
+          "parent": "body",
+          "anchor": [
+            106,
+            46
+          ],
+          "src": "popup/oni-blue-head.svg",
+          "unit": 0.023,
+          "pivot": [
+            0.53,
+            0.95
+          ],
+          "z": 0.05,
+          "border": 0.05,
+          "alts": {
+            "cry": "popup/oni-blue-head-cry.svg"
+          }
+        },
+        {
+          "id": "arm",
+          "parent": "body",
+          "anchor": [
+            70,
+            72
+          ],
+          "src": "popup/oni-blue-arm.svg",
+          "pivot": [
+            0.5,
+            0.07
+          ],
+          "z": 0.08,
+          "border": 0.05
+        },
+        {
+          "id": "club",
+          "parent": "arm",
+          "anchor": [
+            32,
+            128
+          ],
+          "src": "popup/kanabo.svg",
+          "pivot": [
+            0.5,
+            0.87
+          ],
+          "z": -0.01,
+          "border": 0.05,
+          "rot": -0.5
+        }
+      ],
+      "params": {
+        "keys": [
+          {
+            "at": 0,
+            "pose": {
+              "arm": 0.9,
+              "club": -0.5
+            },
+            "osc": [
+              {
+                "part": "arm",
+                "amp": 0.18,
+                "speed": 3
+              },
+              {
+                "part": "head",
+                "amp": 0.05,
+                "speed": 2
+              }
+            ]
+          },
+          {
+            "on": "attack",
+            "after": 0.9,
+            "dur": 0.4,
+            "ease": "back",
+            "pose": {
+              "arm": -0.2,
+              "club": 0,
+              "lean": -0.06,
+              "head": -0.1
+            },
+            "osc": [
+              {
+                "part": "lean",
+                "amp": 0.04,
+                "speed": 16
+              }
+            ]
+          },
+          {
+            "on": "attack",
+            "after": 2.3,
+            "dur": 0.5,
+            "pose": {
+              "arm": 0.15,
+              "club": 2.7,
+              "lean": 0.16,
+              "head": 0.25
+            },
+            "face": {
+              "head": "cry"
+            },
+            "say": "oni",
+            "osc": [
+              {
+                "part": "head",
+                "amp": 0.05,
+                "speed": 6
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "oni-red",
+      "x": 4.6,
+      "z": 1.0,
+      "unit": 0.024,
+      "tap": "oni",
+      "behavior": "poses",
+      "parts": [
+        {
+          "id": "body",
+          "src": "popup/oni-body.svg",
+          "pivot": [
+            0.5,
+            0.973
+          ]
+        },
+        {
+          "id": "head",
+          "parent": "body",
+          "anchor": [
+            106,
+            46
+          ],
+          "src": "popup/oni-head.svg",
+          "unit": 0.023,
+          "pivot": [
+            0.53,
+            0.95
+          ],
+          "z": 0.05,
+          "border": 0.05,
+          "alts": {
+            "cry": "popup/oni-head-cry.svg"
+          }
+        },
+        {
+          "id": "arm",
+          "parent": "body",
+          "anchor": [
+            70,
+            72
+          ],
+          "src": "popup/oni-arm.svg",
+          "pivot": [
+            0.5,
+            0.07
+          ],
+          "z": 0.08,
+          "border": 0.05
+        },
+        {
+          "id": "club",
+          "parent": "arm",
+          "anchor": [
+            32,
+            128
+          ],
+          "src": "popup/kanabo.svg",
+          "pivot": [
+            0.5,
+            0.87
+          ],
+          "z": -0.01,
+          "border": 0.05,
+          "rot": -0.5
+        }
+      ],
+      "params": {
+        "keys": [
+          {
+            "at": 0,
+            "pose": {
+              "arm": 0.9,
+              "club": -0.5
+            },
+            "osc": [
+              {
+                "part": "arm",
+                "amp": 0.18,
+                "speed": 3
+              },
+              {
+                "part": "head",
+                "amp": 0.05,
+                "speed": 2
+              }
+            ]
+          },
+          {
+            "on": "attack",
+            "after": 0.5,
+            "dur": 0.4,
+            "ease": "back",
+            "pose": {
+              "arm": -0.2,
+              "club": 0,
+              "lean": -0.06,
+              "head": -0.1
+            },
+            "osc": [
+              {
+                "part": "lean",
+                "amp": 0.04,
+                "speed": 16
+              }
+            ]
+          },
+          {
+            "on": "attack",
+            "after": 1.9,
+            "dur": 0.5,
+            "pose": {
+              "arm": 0.15,
+              "club": 2.7,
+              "lean": 0.16,
+              "head": 0.25
+            },
+            "face": {
+              "head": "cry"
+            },
+            "say": "oni",
+            "osc": [
+              {
+                "part": "head",
+                "amp": 0.05,
+                "speed": 6
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "momotaro",
+      "x": -6.4,
+      "z": 2.8,
+      "unit": 0.022,
+      "tap": "momotaro",
+      "behavior": "poses",
+      "parts": [
+        {
+          "id": "body",
+          "src": "popup/momotaro-body.svg",
+          "pivot": [
+            0.55,
+            0.79
+          ],
+          "at": [
+            0,
+            2.53
+          ]
+        },
+        {
+          "id": "legF",
+          "parent": "body",
+          "anchor": [
+            96,
+            188
+          ],
+          "src": "popup/momotaro-leg.svg",
+          "pivot": [
+            0.47,
+            0.05
+          ],
+          "z": -0.024,
+          "shade": 0.2
+        },
+        {
+          "id": "legN",
+          "parent": "body",
+          "anchor": [
+            122,
+            188
+          ],
+          "src": "popup/momotaro-leg.svg",
+          "pivot": [
+            0.47,
+            0.05
+          ],
+          "z": -0.012
+        },
+        {
+          "id": "armF",
+          "parent": "body",
+          "anchor": [
+            82,
+            52
+          ],
+          "src": "popup/momotaro-arm-upper.svg",
+          "pivot": [
+            0.5,
+            0.136
+          ],
+          "z": -0.034,
+          "shade": 0.22,
+          "rot": 0.3
+        },
+        {
+          "id": "foreF",
+          "parent": "armF",
+          "anchor": [
+            32,
+            76
+          ],
+          "src": "popup/grandpa-arm-fore.svg",
+          "pivot": [
+            0.48,
+            0.085
+          ],
+          "z": -0.012,
+          "shade": 0.22,
+          "rot": 0.35
+        },
+        {
+          "id": "flag",
+          "parent": "foreF",
+          "anchor": [
+            29,
+            72
+          ],
+          "src": "popup/momotaro-flag.svg",
+          "pivot": [
+            0.154,
+            0.78
+          ],
+          "z": -0.006,
+          "border": 0.05,
+          "rot": -0.65
+        },
+        {
+          "id": "pouch",
+          "parent": "body",
+          "anchor": [
+            146,
+            122
+          ],
+          "src": "popup/momotaro-pouch.svg",
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "z": 0.02,
+          "border": 0.05,
+          "hidden": false
+        },
+        {
+          "id": "head",
+          "parent": "body",
+          "anchor": [
+            106,
+            38
+          ],
+          "src": "popup/momotaro-head.svg",
+          "unit": 0.0198,
+          "pivot": [
+            0.55,
+            0.93
+          ],
+          "z": 0.05,
+          "border": 0.05,
+          "alts": {
+            "shout": "popup/momotaro-head-shout.svg",
+            "happy": "popup/momotaro-head-happy.svg"
+          }
+        },
+        {
+          "id": "upper",
+          "parent": "body",
+          "anchor": [
+            126,
+            52
+          ],
+          "src": "popup/momotaro-arm-upper.svg",
+          "pivot": [
+            0.5,
+            0.136
+          ],
+          "z": 0.1,
+          "border": 0.05,
+          "rot": -0.1
+        },
+        {
+          "id": "fore",
+          "parent": "upper",
+          "anchor": [
+            32,
+            76
+          ],
+          "src": "popup/grandpa-arm-fore.svg",
+          "pivot": [
+            0.48,
+            0.085
+          ],
+          "z": -0.012,
+          "border": 0.05,
+          "rot": 0.25
+        }
+      ],
+      "params": {
+        "keys": [
+          {
+            "at": 0.6,
+            "dur": 0.45,
+            "ease": "back",
+            "pose": {
+              "upper": 2.0,
+              "fore": 0.1,
+              "armF": 0.6,
+              "flag": -0.5,
+              "lean": 0.03
+            },
+            "face": {
+              "head": "shout"
+            },
+            "say": "momotaro-attack",
+            "flag": "attack"
+          },
+          {
+            "on": "attack",
+            "after": 3.4,
+            "dur": 0.6,
+            "pose": {
+              "upper": 0,
+              "fore": 0,
+              "armF": 0,
+              "flag": 0,
+              "lean": 0
+            },
+            "face": {
+              "head": "happy"
+            }
+          }
+        ],
+        "osc": [
+          {
+            "part": "head",
+            "amp": 0.03,
+            "speed": 1.5
+          }
+        ]
+      }
+    },
+    {
+      "id": "dog",
+      "x": -3.4,
+      "z": 3.4,
+      "unit": 0.022,
+      "flip": true,
+      "tap": "dog",
+      "behavior": "poses",
+      "parts": [
+        {
+          "id": "body",
+          "src": "popup/dog-stand.svg",
+          "pivot": [
+            0.5,
+            1
+          ],
+          "alts": {
+            "sit": "popup/dog-sit.svg"
+          }
+        },
+        {
+          "id": "tail",
+          "parent": "body",
+          "anchor": [
+            130,
+            48
+          ],
+          "src": "popup/dog-tail.svg",
+          "pivot": [
+            0.2,
+            0.9
+          ],
+          "z": -0.01
+        },
+        {
+          "id": "tail2",
+          "parent": "body",
+          "anchor": [
+            118,
+            100
+          ],
+          "src": "popup/dog-tail.svg",
+          "pivot": [
+            0.2,
+            0.9
+          ],
+          "z": -0.01,
+          "hidden": true
+        },
+        {
+          "id": "head",
+          "parent": "body",
+          "anchor": [
+            46,
+            40
+          ],
+          "src": "popup/dog-head.svg",
+          "pivot": [
+            0.625,
+            0.88
+          ],
+          "z": 0.04,
+          "border": 0.05,
+          "alts": {
+            "happy": "popup/dog-head-happy.svg"
+          }
+        }
+      ],
+      "params": {
+        "keys": [
+          {
+            "on": "attack",
+            "after": 0.2,
+            "dur": 0.55,
+            "ease": "out",
+            "pose": {
+              "x": 5.9,
+              "y": 0.9,
+              "head": -0.25,
+              "lean": -0.15
+            }
+          },
+          {
+            "on": "attack",
+            "after": 0.75,
+            "dur": 0.2,
+            "pose": {
+              "x": 6.0,
+              "y": 0.5,
+              "head": -0.3,
+              "lean": -0.1
+            },
+            "face": {
+              "head": "happy"
+            },
+            "osc": [
+              {
+                "part": "head",
+                "amp": 0.12,
+                "speed": 18
+              },
+              {
+                "part": "tail",
+                "amp": 0.4,
+                "speed": 12
+              }
+            ]
+          }
+        ],
+        "osc": [
+          {
+            "part": "tail",
+            "amp": 0.3,
+            "speed": 9
+          }
+        ]
+      }
+    },
+    {
+      "id": "monkey",
+      "x": -9.0,
+      "z": 1.9,
+      "unit": 0.022,
+      "flip": true,
+      "tap": "monkey",
+      "behavior": "poses",
+      "parts": [
+        {
+          "id": "body",
+          "src": "popup/monkey-body.svg",
+          "pivot": [
+            0.5,
+            1
+          ]
+        },
+        {
+          "id": "tail",
+          "parent": "body",
+          "anchor": [
+            100,
+            108
+          ],
+          "src": "popup/monkey-tail.svg",
+          "pivot": [
+            0.08,
+            0.85
+          ],
+          "z": -0.01
+        },
+        {
+          "id": "head",
+          "parent": "body",
+          "anchor": [
+            52,
+            38
+          ],
+          "src": "popup/monkey-head.svg",
+          "pivot": [
+            0.55,
+            0.9
+          ],
+          "z": 0.04,
+          "border": 0.05,
+          "alts": {
+            "happy": "popup/monkey-head-happy.svg"
+          }
+        },
+        {
+          "id": "arm",
+          "parent": "body",
+          "anchor": [
+            56,
+            50
+          ],
+          "src": "popup/monkey-arm.svg",
+          "pivot": [
+            0.5,
+            0.09
+          ],
+          "z": 0.02,
+          "border": 0.05,
+          "rot": 0.1
+        }
+      ],
+      "params": {
+        "keys": [
+          {
+            "on": "attack",
+            "after": 0.3,
+            "dur": 0.9,
+            "ease": "out",
+            "pose": {
+              "x": 18.2,
+              "y": 6.8,
+              "arm": -2.4,
+              "lean": -0.3
+            }
+          },
+          {
+            "on": "attack",
+            "after": 1.2,
+            "dur": 0.2,
+            "pose": {
+              "x": 18.0,
+              "y": 6.4,
+              "arm": -2.0,
+              "lean": -0.2
+            },
+            "face": {
+              "head": "happy"
+            },
+            "osc": [
+              {
+                "part": "arm",
+                "amp": 0.6,
+                "speed": 16
+              },
+              {
+                "part": "tail",
+                "amp": 0.3,
+                "speed": 8
+              }
+            ]
+          }
+        ],
+        "osc": [
+          {
+            "part": "tail",
+            "amp": 0.2,
+            "speed": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "pheasant",
+      "x": -1.0,
+      "z": 2.3,
+      "unit": 0.022,
+      "pop": false,
+      "flip": true,
+      "tap": "pheasant",
+      "behavior": "poses",
+      "parts": [
+        {
+          "id": "body",
+          "src": "popup/pheasant-body.svg",
+          "pivot": [
+            0.3,
+            1
+          ]
+        },
+        {
+          "id": "wingF",
+          "parent": "body",
+          "anchor": [
+            96,
+            50
+          ],
+          "src": "popup/pheasant-wing.svg",
+          "pivot": [
+            0.9,
+            0.2
+          ],
+          "z": -0.02,
+          "shade": 0.2
+        },
+        {
+          "id": "head",
+          "parent": "body",
+          "anchor": [
+            42,
+            24
+          ],
+          "src": "popup/pheasant-head.svg",
+          "pivot": [
+            0.55,
+            0.85
+          ],
+          "z": 0.03,
+          "border": 0.05,
+          "alts": {
+            "happy": "popup/pheasant-head-happy.svg"
+          }
+        },
+        {
+          "id": "wing",
+          "parent": "body",
+          "anchor": [
+            96,
+            50
+          ],
+          "src": "popup/pheasant-wing.svg",
+          "pivot": [
+            0.9,
+            0.2
+          ],
+          "z": 0.03,
+          "border": 0.05
+        }
+      ],
+      "params": {
+        "keys": [
+          {
+            "at": 0,
+            "pose": {
+              "y": 5.8,
+              "wing": -0.6,
+              "wingF": -0.4
+            }
+          },
+          {
+            "on": "attack",
+            "after": 0.1,
+            "dur": 0.7,
+            "ease": "out",
+            "pose": {
+              "x": 3.4,
+              "y": 7.2,
+              "wing": -0.6,
+              "wingF": -0.4,
+              "lean": -0.25
+            },
+            "osc": [
+              {
+                "part": "lean",
+                "amp": 0.18,
+                "speed": 14
+              }
+            ]
+          }
+        ],
+        "osc": [
+          {
+            "part": "wing",
+            "amp": 0.7,
+            "speed": 14
+          },
+          {
+            "part": "wingF",
+            "amp": 0.7,
+            "speed": 14,
+            "phase": 0.3
+          },
+          {
+            "part": "y",
+            "amp": 0.25,
+            "speed": 2
+          }
+        ]
+      }
+    }
+  ]
+}
