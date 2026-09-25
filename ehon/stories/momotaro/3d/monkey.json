@@ -136,6 +136,7 @@
       "x": -15.5,
       "z": 3.7,
       "unit": 0.022,
+      "flip": true,
       "tap": "dog",
       "behavior": "walk",
       "parts": [
