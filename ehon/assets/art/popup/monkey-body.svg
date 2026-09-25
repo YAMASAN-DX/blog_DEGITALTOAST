@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 120">
+  <g stroke="#4a3a30" stroke-width="2.6" stroke-linejoin="round">
+    <!-- 奥のうで（ひざの上） -->
+    <path d="M60 50C54 64 50 78 52 90L62 92C62 80 66 66 70 56Z" fill="#7c5f44"/>
+    <!-- 体（すわる） -->
+    <path d="M44 34C60 26 84 32 96 48C108 64 110 88 102 104C96 114 80 118 64 116C46 114 36 102 36 86C36 66 34 44 44 34Z" fill="#9a7a5a"/>
+    <!-- ひざ・足 -->
+    <path d="M40 88C50 80 70 82 76 94C80 104 72 116 58 116L34 116C26 114 26 104 32 98Z" fill="#9a7a5a"/>
+    <path d="M22 108C24 102 34 102 38 106L40 116L22 116C18 114 18 110 22 108Z" fill="#ec9a8a"/>
+  </g>
+  <path d="M46 52C44 70 48 86 58 96C50 94 42 84 40 70C40 62 42 56 46 52Z" fill="#b99a78" opacity=".8"/>
+  <path d="M92 50C104 64 106 88 98 104C104 90 102 70 92 50Z" fill="#7c5f44" opacity=".7"/>
+  <g fill="none" stroke="#7c5f44" stroke-width="1.8" stroke-linecap="round"><path d="M70 44l6 4M82 58l6 3M60 64l5 5M88 80l6 2"/></g>
+  <path d="M26 110l2 4M31 109l1 5" stroke="#b86a5c" stroke-width="1.6" stroke-linecap="round"/>
+</svg>

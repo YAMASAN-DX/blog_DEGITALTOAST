@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 92 84">
+  <!-- 耳 -->
+  <g fill="#ec9a8a" stroke="#4a3a30" stroke-width="2.2"><circle cx="70" cy="40" r="9"/></g>
+  <!-- 頭（毛） -->
+  <path d="M20 34C22 14 44 4 60 8C78 12 86 28 82 46C80 62 70 74 54 76C36 78 20 66 18 52Z" fill="#9a7a5a" stroke="#4a3a30" stroke-width="2.6" stroke-linejoin="round"/>
+  <path d="M30 10C38 6 48 6 54 10C46 10 40 12 34 16Z" fill="#b99a78"/>
+  <path d="M78 34C82 48 78 64 66 72C72 60 74 46 70 34Z" fill="#7c5f44" opacity=".7"/>
+  <!-- 顔（赤い） -->
+  <path d="M14 36C20 24 40 22 50 30C58 38 58 56 50 64C42 72 22 72 14 62C8 54 8 44 14 36Z" fill="#ec9a8a" stroke="#4a3a30" stroke-width="2.4" stroke-linejoin="round"/>
+  <path d="M12 52C20 58 34 60 46 58C40 66 24 68 16 62Z" fill="#d97f70"/>
+  <g fill="#b86a5c"><ellipse cx="17" cy="50" rx="1.6" ry="1.2"/><ellipse cx="22" cy="50" rx="1.6" ry="1.2"/></g>
+  <g fill="#2b2622"><ellipse cx="22" cy="40" rx="3.6" ry="4.6"/><ellipse cx="40" cy="39" rx="3.6" ry="4.6"/></g>
+  <g fill="#fff"><circle cx="23.2" cy="38.5" r="1.3"/><circle cx="41.2" cy="37.5" r="1.3"/></g>
+  <path d="M20 58C24 61 30 61 34 58" fill="none" stroke="#4a3a30" stroke-width="2" stroke-linecap="round"/>
+</svg>

@@ -34,7 +34,10 @@
     "house": "Home, sweet home.",
     "grandma-dango": "The best dumplings in Japan!",
     "dog-ask": "May I have one?",
-    "momotaro-deal": "Come with me, and it's yours!"
+    "momotaro-deal": "Come with me, and it's yours!",
+    "monkey-ask": "One for me, too!",
+    "kiji-ask": "May I have one, too?",
+    "momotaro-here": "Here you go!"
   },
   "names": {
     "momotaro": "Momotaro",
@@ -54,6 +57,9 @@
     "house": "House",
     "grandma-dango": "Old woman",
     "dog-ask": "Dog",
-    "momotaro-deal": "Momotaro"
+    "momotaro-deal": "Momotaro",
+    "monkey-ask": "Monkey",
+    "kiji-ask": "Pheasant",
+    "momotaro-here": "Momotaro"
   }
 }

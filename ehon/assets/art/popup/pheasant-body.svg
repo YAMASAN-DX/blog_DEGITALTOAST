@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 120">
+  <!-- 足 -->
+  <g fill="none" stroke="#b07a3a" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M62 80L58 110M58 110l-8 4M58 110l6 5M58 110l-2 6"/><path d="M78 80L80 110M80 110l-6 5M80 110l8 3"/>
+  </g>
+  <!-- 長いしっぽ -->
+  <g stroke="#4a3a30" stroke-width="2.4" stroke-linejoin="round">
+    <path d="M100 58C140 50 180 40 216 20L218 30C184 52 146 68 104 74Z" fill="#b8874a"/>
+    <path d="M100 64C136 62 176 58 210 46L210 56C176 68 138 76 102 78Z" fill="#9c6d36"/>
+  </g>
+  <g stroke="#6b4a24" stroke-width="1.6"><path d="M130 58l4 8M150 52l4 8M170 46l4 8M190 38l4 8M136 70l3 6M160 66l3 6M184 60l3 6"/></g>
+  <!-- 体（胸は緑、背は茶の斑） -->
+  <path d="M36 44C46 36 62 38 78 42C98 46 112 54 110 66C108 80 90 88 70 86C50 84 36 74 32 60C30 54 32 48 36 44Z" fill="#c09257" stroke="#4a3a30" stroke-width="2.6" stroke-linejoin="round"/>
+  <path d="M34 50C38 44 46 42 54 44C52 58 54 72 62 84C48 80 38 72 34 62Z" fill="#2f6b5a"/>
+  <g fill="#8a6030"><path d="M70 50c4 -2 8 0 8 4c-4 2 -8 0 -8 -4z"/><path d="M86 56c4 -2 8 0 8 4c-4 2 -8 0 -8 -4z"/><path d="M76 66c4 -2 8 0 8 4c-4 2 -8 0 -8 -4z"/><path d="M92 70c4 -2 8 0 8 4c-4 2 -8 0 -8 -4z"/></g>
+  <!-- 首（青緑）と白い首輪 -->
+  <path d="M32 50C28 40 30 26 36 20L50 22C48 30 48 40 54 46Z" fill="#2c5f7a" stroke="#4a3a30" stroke-width="2.4" stroke-linejoin="round"/>
+  <path d="M32 48C38 50 48 50 54 46" fill="none" stroke="#fbfaf5" stroke-width="4" stroke-linecap="round"/>
+</svg>

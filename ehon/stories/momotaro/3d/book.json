@@ -6,9 +6,11 @@
     "peach.json",
     "birth.json",
     "departure.json",
-    "dog.json"
+    "dog.json",
+    "monkey.json",
+    "pheasant.json"
   ],
   "continue": {
-    "page": 8
+    "page": 10
   }
 }

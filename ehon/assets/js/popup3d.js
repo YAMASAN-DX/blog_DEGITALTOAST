@@ -1782,6 +1782,7 @@ function applyPoses(c, t, st, ctx, p) {
   }
   c.inner.rotation.z = pose.lean ?? 0;
   c.inner.position.y = pose.y ?? 0;
+  c.inner.position.x = pose.x ?? 0; // 木からとびおりる・空からまいおりる
   oscillate(c, t, osc, ctx.calm);
   if (face) for (const [part, name] of Object.entries(face)) ctx.face(c, part, name);
 }

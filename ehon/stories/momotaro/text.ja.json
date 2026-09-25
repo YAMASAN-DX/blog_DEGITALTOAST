@@ -34,7 +34,10 @@
     "house": "わが家がいちばん",
     "grandma-dango": "にっぽんいちの きびだんごだよ",
     "dog-ask": "ひとつ くださいな",
-    "momotaro-deal": "ついてくるなら あげましょう"
+    "momotaro-deal": "ついてくるなら あげましょう",
+    "monkey-ask": "ぼくにも ひとつ！",
+    "kiji-ask": "わたしにも ひとつ！",
+    "momotaro-here": "はい、どうぞ"
   },
   "names": {
     "momotaro": "桃太郎",
@@ -54,6 +57,9 @@
     "house": "いえ",
     "grandma-dango": "おばあさん",
     "dog-ask": "犬",
-    "momotaro-deal": "桃太郎"
+    "momotaro-deal": "桃太郎",
+    "monkey-ask": "猿",
+    "kiji-ask": "キジ",
+    "momotaro-here": "桃太郎"
   }
 }
