@@ -30,6 +30,7 @@ async function init() {
       base,
       reduceMotion: reduceMotion(),
       speak: (key) => state.text[state.lang].say?.[key] ?? '',
+      label: (key) => state.text[state.lang][key] ?? (key === 'end-title' ? 'めでたし めでたし' : ''),
     });
     $('.stage3d-status')?.remove();
     if (new URLSearchParams(location.search).has('debug')) window.ehonStage = stage;

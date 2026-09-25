@@ -40,7 +40,9 @@
     "momotaro-here": "はい、どうぞ",
     "momotaro-island": "あれが 鬼ヶ島だ！",
     "monkey-row": "よいしょ、よいしょ",
-    "momotaro-attack": "かかれ！"
+    "momotaro-attack": "かかれ！",
+    "grandma-joy": "まあ、なんと りっぱな！",
+    "momotaro-home": "ただいま！"
   },
   "names": {
     "momotaro": "桃太郎",
@@ -66,6 +68,8 @@
     "momotaro-here": "桃太郎",
     "momotaro-island": "桃太郎",
     "monkey-row": "猿",
-    "momotaro-attack": "桃太郎"
+    "momotaro-attack": "桃太郎",
+    "grandma-joy": "おばあさん",
+    "momotaro-home": "桃太郎"
   }
 }

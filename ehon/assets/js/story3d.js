@@ -1,5 +1,5 @@
 // 立体版のお話ビューア：場面ごとに、ページをふせて左へめくり、次の場面が起きあがる
-import { UI, LANGS, detectLang, rememberLang, store, fetchJSON, rubyHTML, reduceMotion, h } from './common.js';
+import { UI, LANGS, detectLang, rememberLang, store, fetchJSON, rubyHTML, reduceMotion, h, pick, isCreditVerified } from './common.js';
 import { createPopupBook } from './popup3d.js';
 
 const $ = (sel) => document.querySelector(sel);
@@ -11,6 +11,7 @@ const EXTRA = {
     noWebGL: 'この端末では立体表示ができません。平面の絵本をひらきます…',
     more: 'この先は、立体版を制作中です。',
     moreLink: '平面の絵本で、つづきを読む',
+    endTitle: 'めでたし めでたし',
   },
   en: {
     loading: 'Loading…',
@@ -19,23 +20,26 @@ const EXTRA = {
     noWebGL: 'This device cannot show the 3D pop-up. Opening the flat picture book…',
     more: 'The rest of the 3D book is still being made.',
     moreLink: 'Read on in the flat picture book',
+    endTitle: 'The End',
   },
 };
 
 const params = new URLSearchParams(location.search);
 const id = /^[a-z0-9-]+$/.test(params.get('id') ?? '') ? params.get('id') : 'momotaro';
 const base = `stories/${id}/`;
-const state = { lang: detectLang(), ruby: store.get('ruby', '1') === '1', text: {}, defs: [], book: null, index: -1, cont: null };
+const state = { lang: detectLang(), ruby: store.get('ruby', '1') === '1', text: {}, defs: [], book: null, index: -1, credits: [] };
 const ui = (key) => EXTRA[state.lang][key] ?? UI[state.lang][key];
 let stage = null;
 
 async function init() {
-  const [book, ...texts] = await Promise.all([
+  const [book, story, ...texts] = await Promise.all([
     fetchJSON(`${base}3d/book.json`),
+    fetchJSON(`${base}story.json`).catch(() => ({})),
     ...LANGS.map((l) => fetchJSON(`${base}text.${l}.json`)),
   ]);
   LANGS.forEach((l, k) => { state.text[l] = texts[k]; });
   state.book = book;
+  state.credits = story.credits ?? [];
   state.defs = await Promise.all(book.scenes.map((f) => fetchJSON(`${base}3d/${f}`)));
   buildDots();
   bind();
@@ -45,6 +49,8 @@ async function init() {
       base,
       reduceMotion: reduceMotion(),
       speak: (key) => state.text[state.lang].say?.[key] ?? '',
+      // 題字の札の文字（表紙の題名、おしまいの「めでたし めでたし」）
+      label: (key) => (key === 'end-title' ? ui('endTitle') : state.text[state.lang][key] ?? ''),
       onSwipe: (dir) => go(state.index + dir, dir),
     });
   } catch (err) {
@@ -100,7 +106,10 @@ function render() {
   $('[data-act="prev"]').setAttribute('aria-label', ui('prev'));
   $('[data-act="next"]').setAttribute('aria-label', ui('next'));
   if (!def) return;
-  $('.story-text').innerHTML = rubyHTML(t.scenes[def.text] ?? '');
+  $('.story-text').innerHTML = rubyHTML((def.end ? t.end : t.scenes[def.text]) ?? '');
+  // おしまいのページ：素材・出典
+  $('.credits')?.remove();
+  if (def.end) $('.continue-note').before(renderCredits());
   $('.page-count').textContent = `${state.index + 1} / ${state.defs.length}`;
   document.querySelectorAll('.dot').forEach((d, k) => {
     if (k === state.index) d.setAttribute('aria-current', 'step'); else d.removeAttribute('aria-current');
@@ -117,6 +126,34 @@ function render() {
     a.href = `story.html?id=${id}&lang=${state.lang}#p${cont.page}`;
     note.replaceChildren(h('span', null, `${ui('more')} `), a);
   }
+}
+
+function renderCredits() {
+  const L = state.lang;
+  const u = UI[L];
+  const section = h('section', 'credits');
+  const heading = h('h2', null, u.credits);
+  const list = h('ul', 'credit-list');
+  for (const c of state.credits) {
+    if (!isCreditVerified(c)) continue;
+    const li = h('li');
+    if (c.kind === 'ndl') {
+      const [before, after] = u.ndl.format((L !== 'ja' && c.titleEn) || c.title, c.year);
+      const link = h('a', null, c.url);
+      link.href = c.url;
+      link.target = '_blank';
+      link.rel = 'noopener';
+      const p = h('p');
+      p.append(before, link, after);
+      li.append(p);
+      if (c.modified) li.append(h('p', null, u.ndl.modified));
+    } else {
+      li.append(h('p', null, u.creditLine(pick(c.label, L), pick(c.body, L))));
+    }
+    list.append(li);
+  }
+  section.append(heading, list);
+  return section;
 }
 
 function syncURL() {
@@ -136,6 +173,7 @@ function bind() {
     rememberLang(state.lang);
     render();
     syncURL();
+    stage?.relabel();
   }));
   $('[data-toggle="ruby"]').addEventListener('click', () => {
     state.ruby = !state.ruby;

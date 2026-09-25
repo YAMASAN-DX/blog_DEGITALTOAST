@@ -822,3 +822,8 @@ a.card-link:focus-visible { outline-offset: -3px; }
 }
 .card-3d:hover,
 .card-3d:focus-visible { background: rgba(239, 183, 62, 0.18); }
+.text-panel .credits {
+  margin: 0 1.2rem;
+  padding: 0.6rem 0 2.6rem;
+  border-top: 1px dashed rgba(74, 58, 48, 0.3);
+}

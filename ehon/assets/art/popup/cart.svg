@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 210">
+  <!-- 宝物の山 -->
+  <g stroke="#4a3a30" stroke-width="2.6" stroke-linejoin="round">
+    <!-- さんご -->
+    <path d="M222 110C220 80 212 60 204 44M214 72C226 62 232 50 232 40M210 90C198 84 190 72 188 62" fill="none" stroke="#e0615a" stroke-width="7" stroke-linecap="round"/>
+    <!-- 千両箱 -->
+    <path d="M70 80L170 80L170 124L70 124Z" fill="#6b4226"/>
+    <path d="M64 70C64 60 176 60 176 70L176 84L64 84Z" fill="#8a5a2e"/>
+    <path d="M70 96H170M70 110H170" stroke="#2e2a28" stroke-width="3"/>
+    <rect x="110" y="84" width="20" height="18" rx="3" fill="#e2b13c"/>
+    <!-- 米俵ふうの宝の袋 -->
+    <path d="M168 118C160 96 176 78 196 80C214 82 226 100 218 120Z" fill="#e3c98f"/>
+    <!-- 打ち出の小づち -->
+    <path d="M252 72L286 42" stroke="#8a5a2e" stroke-width="8" stroke-linecap="round"/>
+    <path d="M270 40C270 28 300 26 304 36L312 58C316 68 290 74 284 64Z" fill="#c0453a"/>
+    <path d="M282 44L298 40M286 54L304 50" stroke="#e2b13c" stroke-width="3"/>
+  </g>
+  <!-- 小判の山 -->
+  <g stroke="#4a3a30" stroke-width="2.2">
+    <ellipse cx="236" cy="104" rx="16" ry="10" fill="#efc84a"/><ellipse cx="258" cy="110" rx="16" ry="10" fill="#e8bb36"/>
+    <ellipse cx="246" cy="92" rx="16" ry="10" fill="#f4d364"/><ellipse cx="270" cy="96" rx="16" ry="10" fill="#efc84a"/>
+    <ellipse cx="222" cy="118" rx="16" ry="10" fill="#e8bb36"/><ellipse cx="280" cy="116" rx="16" ry="10" fill="#f4d364"/>
+  </g>
+  <g fill="none" stroke="#b8902a" stroke-width="1.6"><path d="M236 98v12M258 104v12M246 86v12M270 90v12"/></g>
+  <!-- 宝石 -->
+  <g stroke="#4a3a30" stroke-width="2">
+    <path d="M90 64L98 52L106 64L98 72Z" fill="#6fb4e0"/><path d="M142 62L150 50L158 62L150 70Z" fill="#7ccf8f"/><path d="M196 74L204 62L212 74L204 82Z" fill="#c98ae0"/>
+  </g>
+  <g fill="#fff"><circle cx="96" cy="58" r="2"/><circle cx="148" cy="56" r="2"/><circle cx="202" cy="68" r="2"/><circle cx="244" cy="88" r="2.4"/></g>
+  <!-- 荷台と、引く棒 -->
+  <g stroke="#4a3a30" stroke-width="2.8" stroke-linejoin="round">
+    <path d="M300 128L376 116L378 124L302 138Z" fill="#9a6d3c"/>
+    <path d="M40 120L310 120L304 150L46 150Z" fill="#b07a44"/>
+    <path d="M36 114L314 114L314 124L36 124Z" fill="#8a5a2e"/>
+  </g>
+  <g stroke="#8a5a2e" stroke-width="2"><path d="M100 124V150M170 124V150M240 124V150"/></g>
+</svg>

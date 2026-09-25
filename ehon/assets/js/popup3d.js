@@ -181,6 +181,19 @@ function paintSky(def) {
     const [sx, sy] = def.sky.sun;
     const x = sx * c.width;
     const y = sy * c.height;
+    if (def.sky.rays) {
+      // 表紙などの、おめでたい光の筋
+      ctx.fillStyle = 'rgba(255,244,200,.28)';
+      for (let k = 0; k < 16; k += 2) {
+        const a0 = (k / 16) * Math.PI * 2;
+        const a1 = ((k + 1) / 16) * Math.PI * 2;
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.lineTo(x + Math.cos(a0) * 2000, y + Math.sin(a0) * 2000);
+        ctx.lineTo(x + Math.cos(a1) * 2000, y + Math.sin(a1) * 2000);
+        ctx.fill();
+      }
+    }
     const glow = ctx.createRadialGradient(x, y, 20, x, y, 150);
     glow.addColorStop(0, 'rgba(255,236,170,.9)');
     glow.addColorStop(1, 'rgba(255,236,170,0)');
@@ -1645,6 +1658,106 @@ function buildCushion(spec, tex) {
   return { group };
 }
 
+/* ---------- 題字の札（表紙・おしまい） ---------- */
+
+let fontsReady = null;
+function loadFonts() {
+  // 題字のフォントを待つ（読めない環境では、そのまま代わりのフォントで）
+  fontsReady ??= Promise.race([
+    Promise.all(['"Yusei Magic"', '"Kiwi Maru"'].map((f) => document.fonts?.load(`64px ${f}`) ?? null)).catch(() => {}),
+    new Promise((r) => setTimeout(r, 2500)),
+  ]);
+  return fontsReady;
+}
+
+function paintPlaque(lines, W = 1200, H = 500) {
+  const c = makeCanvas(W, H);
+  const ctx = c.getContext('2d');
+  const box = (m, r) => { ctx.beginPath(); ctx.roundRect(m, m, W - m * 2, H - m * 2, r); };
+  // 朱塗りのわく、金の内わく、和紙
+  box(8, 40);
+  ctx.fillStyle = '#b8392f';
+  ctx.fill();
+  ctx.lineWidth = 7;
+  ctx.strokeStyle = INK;
+  ctx.stroke();
+  const lac = ctx.createLinearGradient(0, 0, 0, H);
+  lac.addColorStop(0, 'rgba(255,255,255,.18)');
+  lac.addColorStop(0.5, 'rgba(255,255,255,0)');
+  ctx.fillStyle = lac;
+  ctx.fill();
+  box(34, 26);
+  ctx.lineWidth = 8;
+  ctx.strokeStyle = '#e2b13c';
+  ctx.stroke();
+  box(50, 18);
+  ctx.fillStyle = '#fbf6ea';
+  ctx.fill();
+  ctx.save();
+  ctx.clip();
+  // すみに、うすい青海波
+  ctx.strokeStyle = 'rgba(60,79,124,.16)';
+  ctx.lineWidth = 3;
+  for (const [cx0, cy0] of [[50, H - 50], [W - 50, H - 50]]) {
+    for (let col = -3; col <= 3; col++) {
+      for (let k = 4; k >= 1; k--) {
+        ctx.beginPath();
+        ctx.arc(cx0 + col * 60, cy0, 30 * (k / 4) + 10, Math.PI, 0);
+        ctx.stroke();
+      }
+    }
+  }
+  ctx.restore();
+  // 左右の桃のしるし
+  for (const [px, flip] of [[132, 1], [W - 132, -1]]) {
+    ctx.save();
+    ctx.translate(px, H / 2 + 6);
+    ctx.scale(flip * 1.3, 1.3);
+    ctx.fillStyle = '#7faa5a';
+    ctx.strokeStyle = INK;
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(0, -30); ctx.bezierCurveTo(-8, -46, -30, -46, -34, -38); ctx.bezierCurveTo(-22, -30, -10, -29, 0, -30);
+    ctx.fill(); ctx.stroke();
+    ctx.fillStyle = '#f6b0a0';
+    ctx.beginPath();
+    ctx.moveTo(0, -30); ctx.bezierCurveTo(-26, -28, -34, -6, -30, 10); ctx.bezierCurveTo(-26, 26, -10, 34, 0, 36);
+    ctx.bezierCurveTo(10, 34, 26, 26, 30, 10); ctx.bezierCurveTo(34, -6, 26, -28, 0, -30);
+    ctx.fill(); ctx.stroke();
+    ctx.strokeStyle = '#d9776e';
+    ctx.beginPath(); ctx.moveTo(0, -28); ctx.quadraticCurveTo(-4, 4, 0, 34); ctx.stroke();
+    ctx.fillStyle = 'rgba(255,255,255,.55)';
+    ctx.beginPath(); ctx.ellipse(-14, -6, 5, 11, 0.3, 0, Math.PI * 2); ctx.fill();
+    ctx.restore();
+  }
+  // 文字（行ごとに大きさをかえ、札の幅におさめる）
+  const total = lines.reduce((a, l) => a + l.size, 0);
+  const avail = H - 150;
+  let y = (H - avail) / 2;
+  for (const l of lines) {
+    const jp = /[ぁ-んァ-ヶ一-龥]/.test(l.text);
+    let px = (avail / total) * l.size * 0.86;
+    const fam = jp ? '"Yusei Magic", "Kiwi Maru", "Hiragino Maru Gothic ProN", sans-serif' : '"Kiwi Maru", Georgia, serif';
+    ctx.font = `${px}px ${fam}`;
+    const maxW = W - 360;
+    const mw = ctx.measureText(l.text).width;
+    if (mw > maxW) { px *= maxW / mw; ctx.font = `${px}px ${fam}`; }
+    const lineH = (avail / total) * l.size;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = l.color ?? '#3a2d25';
+    if (!l.color) {
+      ctx.fillStyle = 'rgba(184,57,47,.25)';
+      ctx.fillText(l.text, W / 2 + 4, y + lineH / 2 + 5);
+      ctx.fillStyle = '#3a2d25';
+    }
+    ctx.fillText(l.text, W / 2, y + lineH / 2);
+    y += lineH;
+  }
+  applyGrain(ctx, W, H, 0.5);
+  return c;
+}
+
 /* ---------- 光のつぶ・花びら ---------- */
 
 function paintStar() {
@@ -1831,6 +1944,10 @@ function applyPoses(c, t, st, ctx, p) {
       ctx.say(c, typeof key.say === 'string' ? key.say : undefined);
     }
     if (key.flag && raw >= 1) ctx.flag(key.flag);
+    if (key.burst && !c.state[`burst${i}`]) {
+      c.state[`burst${i}`] = true;
+      ctx.burst(c.inner, { count: 30, speed: 3.4, size: 0.6, lift: key.burst });
+    }
   });
   for (const [k, g] of Object.entries(c.parts)) {
     g.rotation.z = (g.userData.rest ?? 0) + (pose[k] ?? 0);
@@ -1877,6 +1994,8 @@ const BEHAVIORS = {
     for (const [id, part] of Object.entries(c.parts)) part.rotation.z = part.userData.rest ?? 0;
     (p.legs ?? []).forEach((id, n) => { if (c.parts[id]) c.parts[id].rotation.z += (n ? -g : g) * p.stride; });
     (p.arms ?? []).forEach((a, n) => { if (c.parts[a.part]) c.parts[a.part].rotation.z += (a.base ?? 0) + (n % 2 ? g : -g) * (a.amp ?? 0.3); });
+    // 車輪は進んだ道のりだけ回る
+    for (const w of p.wheels ?? []) if (c.parts[w.part]) c.parts[w.part].rotation.z -= dist / w.r;
     if (env) {
       c.inner.position.y = Math.abs(Math.sin(ph)) * p.bob * env;
       c.inner.rotation.z = -p.lean * env;
@@ -2002,7 +2121,7 @@ function riseAngle(d, h, W) {
   }
   return lo;
 }
-export async function createPopupBook(container, { base = '', speak = () => '', reduceMotion = false, onSwipe = null } = {}) {
+export async function createPopupBook(container, { base = '', speak = () => '', label = (k) => k, reduceMotion = false, onSwipe = null } = {}) {
   const renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -2173,6 +2292,36 @@ export async function createPopupBook(container, { base = '', speak = () => '', 
       return mesh;
     };
 
+    // 題字の札：いまの言語の文字を紙に刷る（言語を切りかえたら刷りなおす）
+    const buildTitle = async (spec) => {
+      await loadFonts();
+      const group = new THREE.Group();
+      const mat = new THREE.MeshLambertMaterial({ alphaTest: 0.5, alphaToCoverage: true, side: THREE.DoubleSide });
+      const mesh = new THREE.Mesh(undefined, mat);
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+      group.add(mesh);
+      bin.push(mat);
+      const draw = () => {
+        const lines = spec.lines.map((l) => ({ ...l, text: label(l.key) }));
+        const cv = paintPlaque(lines);
+        const paper = cutPaper({ img: cv, w: cv.width, h: cv.height }, { widthCm: spec.w ?? 14, density: 64, border: 0.12 });
+        const { canvas: c, W, H, pad, density } = paper;
+        mesh.geometry?.dispose();
+        mesh.geometry = new THREE.PlaneGeometry(c.width / density, c.height / density)
+          .translate(0, (pad + H - c.height / 2) / density, 0); // 札の下の辺が足もと
+        const old = mat.map;
+        mat.map = tex(c);
+        mat.needsUpdate = true;
+        old?.dispose();
+        mesh.customDepthMaterial = new THREE.MeshDepthMaterial({ depthPacking: THREE.RGBADepthPacking, map: mat.map, alphaTest: 0.5 });
+        mesh.userData.paper = c;
+        mesh.userData.alpha = null;
+      };
+      draw();
+      return { group, relabel: draw };
+    };
+
     const buildProp = async (spec, card) => {
       switch (spec.type) {
         case 'tub': return buildTub(spec, tex);
@@ -2180,6 +2329,7 @@ export async function createPopupBook(container, { base = '', speak = () => '', 
         case 'split-peach': return buildSplitPeach(spec, makePart, tex);
         case 'house': return buildHouse(spec, tex);
         case 'cushion': return buildCushion(spec, tex);
+        case 'title': return buildTitle(spec);
         default: return null;
       }
     };
@@ -2371,7 +2521,9 @@ export async function createPopupBook(container, { base = '', speak = () => '', 
       if (clock > b.until) { b.el.remove(); bubbles.delete(card); continue; }
       const box = new THREE.Box3().setFromObject(card.inner);
       tmp.set((box.min.x + box.max.x) / 2, box.max.y + 0.3, (box.min.z + box.max.z) / 2).project(camera);
-      b.el.style.left = `${((tmp.x + 1) / 2) * rect.width}px`;
+      // 絵の左右の端からもはみださない
+      const half = b.el.offsetWidth / 2 + 6;
+      b.el.style.left = `${Math.min(rect.width - half, Math.max(half, ((tmp.x + 1) / 2) * rect.width))}px`;
       // 絵の上の端より外へは出さない（吹き出しの下の端の位置）
       b.el.style.top = `${Math.max(b.el.offsetHeight + 6, ((1 - tmp.y) / 2) * rect.height)}px`;
     }
@@ -2407,9 +2559,10 @@ export async function createPopupBook(container, { base = '', speak = () => '', 
         tub.inner.worldToLocal(v3);
         tub.prop.drip(v3);
       },
-      burst(obj, opts) {
+      burst(obj, opts = {}) {
         obj.getWorldPosition(v3);
         page.stage.worldToLocal(v3);
+        v3.y += opts.lift ?? 0;
         page.particles.burst(v3, opts);
       },
       petals(on) { page.particles.petals = on && !reduceMotion; },
@@ -2430,6 +2583,7 @@ export async function createPopupBook(container, { base = '', speak = () => '', 
       for (const set of Object.values(c.faces)) for (const [k, m] of Object.entries(set)) m.visible = k === 'normal';
     }
     page.particles.clear();
+    page.particles.petals = Boolean(page.def.petals) && !reduceMotion;
     if (page === current) clearBubbles();
     page.ctx = contextFor(page);
   }
@@ -2693,6 +2847,13 @@ export async function createPopupBook(container, { base = '', speak = () => '', 
     show,
     prepare(def) { prepare(def).catch((err) => console.error(err)); },
     get busy() { return Boolean(turn); },
+    // 言語を切りかえたとき：題字の札を刷りなおす
+    relabel() {
+      for (const pg of new Set([current, turn?.from, turn?.to])) {
+        for (const c of pg?.cards ?? []) for (const p of c.props) p.relabel?.();
+      }
+      for (const [def, p] of prepared) { prepared.delete(def); p.then(disposePage, () => {}); }
+    },
     // 確認用：いまのページとめくりの状態
     get debug() { return { current, turn, camera }; },
     replay() {

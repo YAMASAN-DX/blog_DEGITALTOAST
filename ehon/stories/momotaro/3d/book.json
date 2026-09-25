@@ -1,6 +1,7 @@
 {
   "story": "momotaro",
   "scenes": [
+    "cover.json",
     "village.json",
     "fork.json",
     "peach.json",
@@ -10,9 +11,8 @@
     "monkey.json",
     "pheasant.json",
     "sea.json",
-    "battle.json"
-  ],
-  "continue": {
-    "page": 12
-  }
+    "battle.json",
+    "home.json",
+    "end.json"
+  ]
 }

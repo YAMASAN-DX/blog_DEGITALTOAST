@@ -40,7 +40,9 @@
     "momotaro-here": "Here you go!",
     "momotaro-island": "There's Onigashima!",
     "monkey-row": "Heave-ho, heave-ho!",
-    "momotaro-attack": "Charge!"
+    "momotaro-attack": "Charge!",
+    "grandma-joy": "Oh my, how wonderful!",
+    "momotaro-home": "We're home!"
   },
   "names": {
     "momotaro": "Momotaro",
@@ -66,6 +68,8 @@
     "momotaro-here": "Momotaro",
     "momotaro-island": "Momotaro",
     "monkey-row": "Monkey",
-    "momotaro-attack": "Momotaro"
+    "momotaro-attack": "Momotaro",
+    "grandma-joy": "Old woman",
+    "momotaro-home": "Momotaro"
   }
 }

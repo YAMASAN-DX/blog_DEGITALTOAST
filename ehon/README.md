@@ -4,7 +4,7 @@
 WordPress とは別の静的ページとして `/ehon/` に置いています（ビルド不要。立体版だけ three.js を同梱）。
 
 - `index.html` … お話一覧（本棚）
-- `story3d.html?id=momotaro` … 立体版のビューア（1〜10場面）
+- `story3d.html?id=momotaro` … 立体版のビューア（表紙・1〜11場面・おしまい）
 - `story.html?id=momotaro&lang=ja` … お話ビューア（`#p5` で5ページ目から）
 
 ## 見かた（ローカル）
@@ -123,8 +123,8 @@ ehon/
 
 ## 立体版（制作中）
 
-`story3d.html?id=momotaro` は、three.js の立体舞台で読む版です。いまは 1〜10場面（村のふたり → 山と川へ → 桃が流れてくる → 桃太郎の誕生 → 旅立ち → 犬・猿・キジがなかまに → 船で鬼ヶ島へ → 鬼たいじ）。
-11場面目からは、最後のページのリンクで平面の絵本（`story.html#p12`）につながります。一覧のカードの「立体版で読む」からも開けます。
+`story3d.html?id=momotaro` は、three.js の立体舞台で読む版です。表紙から、11場面（村のふたり → 山と川へ → 桃が流れてくる → 桃太郎の誕生 → 旅立ち → 犬・猿・キジがなかまに → 船で鬼ヶ島へ → 鬼たいじ → 宝物をもって村へ）、
+おしまい（「めでたし めでたし」と素材・出典）まで、すべて立体で読めます。一覧のカードの「立体版で読む」からも開けます。
 
 - **めくり**：本は、のど（背のページと台紙の折り目）で綴じてある。めくると、いまの台紙がのどを軸に起きあがって背のページに重なり、
   その裏に刷った次の場面の空（またはかべ）が、新しい背のページになる。下から出てくる次の台紙のパーツは、起きあがるページに
@@ -137,7 +137,7 @@ ehon/
 
 ### ファイル
 
-- `stories/momotaro/3d/book.json` … 場面の順番（`scenes`）と、つづきの平面ページ（`continue.page`）
+- `stories/momotaro/3d/book.json` … 場面の順番（`scenes`）。立体版がとちゅうまでのときは `continue.page` で平面の絵本のつづきへ
 - `stories/momotaro/3d/*.json` … 1場面の定義（単位は cm。台紙は x: -17〜17、z: -12（のど）〜6（手前））
 - `assets/art/popup/` … 立体版の絵。背景・草・木・柵などは `tools/gen_popup_art.py` で生成、人物・小道具は手描き SVG。
   原画の1単位 = 0.022cm（`"unit": 0.022`）にそろえ、線の太さが場面の中で同じに見えるようにしている
@@ -153,6 +153,8 @@ ehon/
 | `floor` | `"tatami"`（家の中のたたみ）・`"rock"`（鬼ヶ島の岩場）。海は `river` を台紙いっぱいに（`far: -11.95`, `near: 5.95`） |
 | `river` / `stream` / `paths` | 全幅の川（`far`・`near`）、曲がる小川（`points`・`width`）、土の道（`points`・`width`） |
 | `settle` | 動きを減らす設定のとき、何秒後の場面を見せるか |
+| `petals` / `sky.rays` | 花びらを降らせる／空に光の筋（表紙・おしまい） |
+| `end: true` | おしまいのページ（文章は `text.*.json` の `end`、下に素材・出典） |
 | `cards` | 台紙に立てるもの（下の表） |
 
 `cards` の1つ：
@@ -160,7 +162,7 @@ ehon/
 | キー | 意味 |
 |---|---|
 | `src` + `unit`（または `w`） | 紙のパーツ。`x`・`z` が足もとの位置、`lift` で持ちあげる |
-| `type` | 立体の小道具：`tub`（たらい）・`peach`（流れる桃）・`split-peach`（割れる桃）・`house`（かやぶきの家）・`cushion`（ざぶとん） |
+| `type` | 立体の小道具：`tub`（たらい）・`peach`（流れる桃）・`split-peach`（割れる桃）・`house`（かやぶきの家）・`cushion`（ざぶとん）。`title` は題字の札（`lines` の `key` の文字を、いまの言語で紙に刷る） |
 | `parts` | 部品で組んだ人物。`parent` + `anchor`（親の原画上の関節の位置）、`pivot`（自分の関節）、`z`（前後）、`rot`（最初の角度）、`alts`（表情の差しかえ）、`flip`、`mirror`（つながった部品ごと左右反転）、`shade`（奥の手足を暗く）。`type` を持つ部品は立体の小道具 |
 | `flip` | 左右反転（向きを変える） |
 | `pop` | `"grow"`（大きくなって出る）・`false`（動きで出す） |
@@ -169,7 +171,7 @@ ehon/
 | `behavior` + `params` | 動き：`sway` `drift` `peck`、`walk`（道にそって歩き、止まったら `keys` のポーズ）、`poses`（時間や出来事で関節の角度・表情・セリフを切りかえる）、`peach-drift` `grandma-wash` `peach-split` `baby-birth` |
 | `tap` | タップしたときのセリフのキー（`say`） |
 
-`poses` の `keys` は `{ "at": 秒 }` か `{ "on": "出来事", "after": 秒 }` で始まり、`pose`（部品ごとの角度、`lean`、`x`・`y`）・`face`・`osc`（ゆれ）・`say` を持ちます。出来事は `peach-arrived`（桃が着いた）・`peach-split`（桃が割れた）など。
+`poses` の `keys` は `{ "at": 秒 }` か `{ "on": "出来事", "after": 秒 }` で始まり、`pose`（部品ごとの角度、`lean`、`x`・`y`）・`face`・`show`/`hide`・`osc`（ゆれ）・`say`・`flag`（出来事を起こす）・`burst`（光のつぶ）を持ちます。`walk` の `wheels` は車輪を道のりだけ回します。出来事は `peach-arrived`（桃が着いた）・`peach-split`（桃が割れた）など。
 
 ### 確認用
 

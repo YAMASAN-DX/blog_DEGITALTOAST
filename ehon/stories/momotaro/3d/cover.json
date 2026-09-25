@@ -1,0 +1,612 @@
+{
+  "id": "cover",
+  "text": "cover",
+  "petals": true,
+  "settle": 6,
+  "camera": {
+    "fov": 34,
+    "position": [
+      0.4,
+      7.6,
+      23.5
+    ],
+    "target": [
+      0.4,
+      4.4,
+      -1.5
+    ]
+  },
+  "sky": {
+    "top": "#9fcfe8",
+    "bottom": "#f6efdc",
+    "sun": [
+      0.5,
+      0.34
+    ],
+    "rays": true
+  },
+  "cards": [
+    {
+      "id": "cloud1",
+      "src": "popup/cloud.svg",
+      "attach": "back",
+      "x": -11,
+      "y": 9.2,
+      "z": 0.3,
+      "unit": 0.022,
+      "behavior": "drift"
+    },
+    {
+      "id": "cloud2",
+      "src": "popup/cloud.svg",
+      "attach": "back",
+      "x": 10.5,
+      "y": 9.6,
+      "z": 0.25,
+      "w": 3.4,
+      "behavior": "drift"
+    },
+    {
+      "id": "mt-far",
+      "src": "popup/mountains-far.svg",
+      "x": 0,
+      "z": -11,
+      "unit": 0.022,
+      "blur": 2,
+      "haze": 0.3,
+      "border": 0.05
+    },
+    {
+      "id": "mt-mid",
+      "src": "popup/mountains-mid.svg",
+      "x": 1,
+      "z": -9,
+      "unit": 0.022,
+      "blur": 0.8,
+      "haze": 0.12,
+      "border": 0.06
+    },
+    {
+      "id": "title",
+      "type": "title",
+      "attach": "back",
+      "x": -2.6,
+      "y": 6.6,
+      "z": 0.5,
+      "w": 17.5,
+      "lines": [
+        {
+          "key": "title",
+          "size": 1
+        },
+        {
+          "key": "subtitle",
+          "size": 0.42,
+          "color": "#9c3d2e"
+        }
+      ]
+    },
+    {
+      "id": "hill",
+      "src": "popup/hill-plain.svg",
+      "x": 0,
+      "z": -6.6,
+      "unit": 0.022
+    },
+    {
+      "id": "pine",
+      "src": "popup/tree-pine.svg",
+      "x": -13.8,
+      "z": -4.4,
+      "unit": 0.022,
+      "behavior": "sway"
+    },
+    {
+      "id": "tree",
+      "src": "popup/tree-round.svg",
+      "x": 13.6,
+      "z": -4.6,
+      "unit": 0.022,
+      "behavior": "sway"
+    },
+    {
+      "id": "peach",
+      "type": "split-peach",
+      "r": 1.5,
+      "x": -9.2,
+      "z": 1.8,
+      "pop": "grow",
+      "tap": "peach"
+    },
+    {
+      "id": "dog",
+      "x": 1.4,
+      "z": 3.6,
+      "unit": 0.022,
+      "flip": true,
+      "tap": "dog",
+      "behavior": "poses",
+      "parts": [
+        {
+          "id": "body",
+          "src": "popup/dog-stand.svg",
+          "pivot": [
+            0.5,
+            1
+          ],
+          "alts": {
+            "sit": "popup/dog-sit.svg"
+          }
+        },
+        {
+          "id": "tail",
+          "parent": "body",
+          "anchor": [
+            130,
+            48
+          ],
+          "src": "popup/dog-tail.svg",
+          "pivot": [
+            0.2,
+            0.9
+          ],
+          "z": -0.01
+        },
+        {
+          "id": "tail2",
+          "parent": "body",
+          "anchor": [
+            118,
+            100
+          ],
+          "src": "popup/dog-tail.svg",
+          "pivot": [
+            0.2,
+            0.9
+          ],
+          "z": -0.01,
+          "hidden": true
+        },
+        {
+          "id": "head",
+          "parent": "body",
+          "anchor": [
+            46,
+            40
+          ],
+          "src": "popup/dog-head.svg",
+          "pivot": [
+            0.625,
+            0.88
+          ],
+          "z": 0.04,
+          "border": 0.05,
+          "alts": {
+            "happy": "popup/dog-head-happy.svg"
+          }
+        }
+      ],
+      "params": {
+        "keys": [
+          {
+            "at": 0,
+            "face": {
+              "body": "sit",
+              "head": "happy"
+            },
+            "hide": [
+              "tail"
+            ],
+            "show": [
+              "tail2"
+            ]
+          }
+        ],
+        "osc": [
+          {
+            "part": "tail2",
+            "amp": 0.35,
+            "speed": 11
+          },
+          {
+            "part": "head",
+            "amp": 0.05,
+            "speed": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "momotaro",
+      "x": 6.0,
+      "z": 2.8,
+      "unit": 0.022,
+      "tap": "momotaro",
+      "behavior": "poses",
+      "parts": [
+        {
+          "id": "body",
+          "src": "popup/momotaro-body.svg",
+          "pivot": [
+            0.55,
+            0.79
+          ],
+          "at": [
+            0,
+            2.53
+          ]
+        },
+        {
+          "id": "legF",
+          "parent": "body",
+          "anchor": [
+            96,
+            188
+          ],
+          "src": "popup/momotaro-leg.svg",
+          "pivot": [
+            0.47,
+            0.05
+          ],
+          "z": -0.024,
+          "shade": 0.2
+        },
+        {
+          "id": "legN",
+          "parent": "body",
+          "anchor": [
+            122,
+            188
+          ],
+          "src": "popup/momotaro-leg.svg",
+          "pivot": [
+            0.47,
+            0.05
+          ],
+          "z": -0.012
+        },
+        {
+          "id": "armF",
+          "parent": "body",
+          "anchor": [
+            82,
+            52
+          ],
+          "src": "popup/momotaro-arm-upper.svg",
+          "pivot": [
+            0.5,
+            0.136
+          ],
+          "z": -0.034,
+          "shade": 0.22,
+          "rot": 0.3
+        },
+        {
+          "id": "foreF",
+          "parent": "armF",
+          "anchor": [
+            32,
+            76
+          ],
+          "src": "popup/grandpa-arm-fore.svg",
+          "pivot": [
+            0.48,
+            0.085
+          ],
+          "z": -0.012,
+          "shade": 0.22,
+          "rot": 0.35
+        },
+        {
+          "id": "flag",
+          "parent": "foreF",
+          "anchor": [
+            29,
+            72
+          ],
+          "src": "popup/momotaro-flag.svg",
+          "pivot": [
+            0.154,
+            0.78
+          ],
+          "z": -0.006,
+          "border": 0.05,
+          "rot": -0.65
+        },
+        {
+          "id": "pouch",
+          "parent": "body",
+          "anchor": [
+            146,
+            122
+          ],
+          "src": "popup/momotaro-pouch.svg",
+          "pivot": [
+            0.5,
+            0.1
+          ],
+          "z": 0.02,
+          "border": 0.05,
+          "hidden": false
+        },
+        {
+          "id": "head",
+          "parent": "body",
+          "anchor": [
+            106,
+            38
+          ],
+          "src": "popup/momotaro-head.svg",
+          "unit": 0.0198,
+          "pivot": [
+            0.55,
+            0.93
+          ],
+          "z": 0.05,
+          "border": 0.05,
+          "alts": {
+            "shout": "popup/momotaro-head-shout.svg",
+            "happy": "popup/momotaro-head-happy.svg"
+          }
+        },
+        {
+          "id": "upper",
+          "parent": "body",
+          "anchor": [
+            126,
+            52
+          ],
+          "src": "popup/momotaro-arm-upper.svg",
+          "pivot": [
+            0.5,
+            0.136
+          ],
+          "z": 0.1,
+          "border": 0.05,
+          "rot": -0.1
+        },
+        {
+          "id": "fore",
+          "parent": "upper",
+          "anchor": [
+            32,
+            76
+          ],
+          "src": "popup/grandpa-arm-fore.svg",
+          "pivot": [
+            0.48,
+            0.085
+          ],
+          "z": -0.012,
+          "border": 0.05,
+          "rot": 0.25
+        }
+      ],
+      "params": {
+        "keys": [
+          {
+            "at": 0,
+            "pose": {
+              "armF": 1.1,
+              "foreF": 0.2,
+              "flag": -1.5,
+              "upper": 0.5,
+              "fore": 1.4
+            },
+            "face": {
+              "head": "shout"
+            }
+          }
+        ],
+        "osc": [
+          {
+            "part": "head",
+            "amp": 0.03,
+            "speed": 1.5
+          },
+          {
+            "part": "y",
+            "amp": 0.08,
+            "speed": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "monkey",
+      "x": 10.6,
+      "z": 3.4,
+      "unit": 0.022,
+      "tap": "monkey",
+      "behavior": "poses",
+      "parts": [
+        {
+          "id": "body",
+          "src": "popup/monkey-body.svg",
+          "pivot": [
+            0.5,
+            1
+          ]
+        },
+        {
+          "id": "tail",
+          "parent": "body",
+          "anchor": [
+            100,
+            108
+          ],
+          "src": "popup/monkey-tail.svg",
+          "pivot": [
+            0.08,
+            0.85
+          ],
+          "z": -0.01
+        },
+        {
+          "id": "head",
+          "parent": "body",
+          "anchor": [
+            52,
+            38
+          ],
+          "src": "popup/monkey-head.svg",
+          "pivot": [
+            0.55,
+            0.9
+          ],
+          "z": 0.04,
+          "border": 0.05,
+          "alts": {
+            "happy": "popup/monkey-head-happy.svg"
+          }
+        },
+        {
+          "id": "arm",
+          "parent": "body",
+          "anchor": [
+            56,
+            50
+          ],
+          "src": "popup/monkey-arm.svg",
+          "pivot": [
+            0.5,
+            0.09
+          ],
+          "z": 0.02,
+          "border": 0.05,
+          "rot": 0.1
+        }
+      ],
+      "params": {
+        "keys": [
+          {
+            "at": 0,
+            "pose": {
+              "arm": -2.5
+            },
+            "face": {
+              "head": "happy"
+            }
+          }
+        ],
+        "osc": [
+          {
+            "part": "arm",
+            "amp": 0.35,
+            "speed": 7
+          },
+          {
+            "part": "tail",
+            "amp": 0.2,
+            "speed": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "pheasant",
+      "x": 10.6,
+      "z": 0.4,
+      "unit": 0.022,
+      "pop": false,
+      "tap": "pheasant",
+      "behavior": "poses",
+      "parts": [
+        {
+          "id": "body",
+          "src": "popup/pheasant-body.svg",
+          "pivot": [
+            0.3,
+            1
+          ]
+        },
+        {
+          "id": "wingF",
+          "parent": "body",
+          "anchor": [
+            96,
+            50
+          ],
+          "src": "popup/pheasant-wing.svg",
+          "pivot": [
+            0.9,
+            0.2
+          ],
+          "z": -0.02,
+          "shade": 0.2
+        },
+        {
+          "id": "head",
+          "parent": "body",
+          "anchor": [
+            42,
+            24
+          ],
+          "src": "popup/pheasant-head.svg",
+          "pivot": [
+            0.55,
+            0.85
+          ],
+          "z": 0.03,
+          "border": 0.05,
+          "alts": {
+            "happy": "popup/pheasant-head-happy.svg"
+          }
+        },
+        {
+          "id": "wing",
+          "parent": "body",
+          "anchor": [
+            96,
+            50
+          ],
+          "src": "popup/pheasant-wing.svg",
+          "pivot": [
+            0.9,
+            0.2
+          ],
+          "z": 0.03,
+          "border": 0.05
+        }
+      ],
+      "params": {
+        "keys": [
+          {
+            "at": 0,
+            "pose": {
+              "y": 3.6,
+              "wing": -0.6,
+              "wingF": -0.4
+            }
+          }
+        ],
+        "osc": [
+          {
+            "part": "wing",
+            "amp": 0.7,
+            "speed": 12
+          },
+          {
+            "part": "wingF",
+            "amp": 0.7,
+            "speed": 12,
+            "phase": 0.3
+          },
+          {
+            "part": "y",
+            "amp": 0.3,
+            "speed": 1.8
+          }
+        ]
+      }
+    },
+    {
+      "id": "near-bank",
+      "src": "popup/grass-near.svg",
+      "x": 0,
+      "z": 5.3,
+      "unit": 0.022,
+      "border": 0.03
+    }
+  ]
+}
