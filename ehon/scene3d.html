@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ももたろう（立体版の試作）｜とびだす昔話</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@400;500&family=Yusei+Magic&family=Zen+Maru+Gothic:wght@500;700&display=swap">
+<link rel="stylesheet" href="assets/css/ehon.css">
+<script type="module" src="assets/js/scene3d.js"></script>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <a class="back-link" href="index.html">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+      <span data-ui="back">一覧</span>
+    </a>
+    <h1 class="story-title">ももたろう</h1>
+    <div class="tools">
+      <div class="seg" role="group" aria-label="言語 / Language">
+        <button type="button" data-lang="ja" aria-pressed="true">日本語</button>
+        <button type="button" data-lang="en" aria-pressed="false">English</button>
+      </div>
+      <div class="ja-tools">
+        <button type="button" class="chip" data-toggle="ruby" aria-pressed="true" data-ui="ruby">ふりがな</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="book">
+    <div class="stage stage-3d" aria-label="お話の絵">
+      <p class="stage3d-status" data-ui="loading">よみこみ中…</p>
+    </div>
+    <div class="text-panel">
+      <p class="story-text" aria-live="polite"></p>
+    </div>
+    <nav class="controls" aria-label="ページ">
+      <span></span>
+      <p class="status"><span class="hint"></span></p>
+      <button type="button" class="nav-btn next" data-act="replay">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v5h5"/></svg>
+        <span class="nav-label" data-ui="replay">もういちど</span>
+      </button>
+    </nav>
+  </main>
+</div>
+<noscript><p class="noscript">この絵本を読むには JavaScript を有効にしてください。</p></noscript>
+</body>
+</html>

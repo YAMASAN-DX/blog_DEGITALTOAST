@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 320">
+  <g fill="none" stroke-linecap="round">
+    <path d="M60 320C62 240 48 170 26 96" stroke="#557f45" stroke-width="7"/>
+    <path d="M92 320C92 226 98 142 116 50" stroke="#5e8f4c" stroke-width="7"/>
+    <path d="M120 320C118 250 132 190 166 136" stroke="#6ea35a" stroke-width="6"/>
+    <path d="M150 320C158 262 182 226 212 206" stroke="#79ad62" stroke-width="6"/>
+    <path d="M76 320C70 256 80 206 70 150" stroke="#6ea35a" stroke-width="5"/>
+  </g>
+  <g fill="#6ea35a" stroke="#4a6e3c" stroke-width="2" stroke-linejoin="round">
+    <path d="M40 320C30 250 6 214 2 170C24 214 50 250 58 320Z"/>
+    <path d="M104 320C104 270 132 236 178 222C140 246 118 276 118 320Z"/>
+    <path d="M130 320C150 286 186 274 218 276C182 284 156 298 146 320Z"/>
+    <path d="M18 320C20 290 34 266 54 256C40 276 32 296 34 320Z"/>
+  </g>
+  <g fill="#8a5a36" stroke="#5a3a22" stroke-width="2">
+    <rect x="108" y="22" width="14" height="50" rx="7" transform="rotate(8 115 47)"/>
+    <rect x="20" y="70" width="12" height="42" rx="6" transform="rotate(-18 26 91)"/>
+    <rect x="160" y="112" width="12" height="40" rx="6" transform="rotate(30 166 132)"/>
+  </g>
+</svg>

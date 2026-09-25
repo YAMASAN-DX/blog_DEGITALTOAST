@@ -729,3 +729,37 @@ a.card-link:focus-visible { outline-offset: -3px; }
   line-height: 1.8;
 }
 .lib-note p { margin: 0; }
+
+/* ---------- 立体版（three.js） ---------- */
+
+.stage.stage-3d {
+  background-color: #1c2740;
+  touch-action: none;
+}
+.stage.stage-3d::before,
+.stage.stage-3d::after { content: none; }
+.stage-3d canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.stage3d-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.bubble.bubble-3d {
+  bottom: auto;
+  translate: -50% -100%;
+  font-size: max(13px, 2cqw);
+}
+.stage3d-status {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  color: var(--cloth-muted);
+  font-size: 0.95rem;
+}

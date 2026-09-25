@@ -1,0 +1,204 @@
+{
+  "id": "peach",
+  "text": "s03",
+  "camera": {
+    "fov": 35,
+    "position": [
+      0,
+      8.3,
+      25
+    ],
+    "target": [
+      0,
+      3.4,
+      -3
+    ]
+  },
+  "sky": {
+    "top": "#b3d5e5",
+    "bottom": "#eef3e6",
+    "sun": [
+      0.8,
+      0.2
+    ]
+  },
+  "river": {
+    "far": -3.4,
+    "near": 1.8
+  },
+  "cards": [
+    {
+      "id": "cloud1",
+      "src": "cloud.svg",
+      "attach": "back",
+      "x": -9,
+      "y": 11.2,
+      "z": 0.3,
+      "w": 5,
+      "behavior": "drift"
+    },
+    {
+      "id": "cloud2",
+      "src": "cloud.svg",
+      "attach": "back",
+      "x": 3,
+      "y": 13.2,
+      "z": 0.25,
+      "w": 3.4,
+      "behavior": "drift"
+    },
+    {
+      "id": "mt-far",
+      "src": "mountains-far.svg",
+      "x": 0,
+      "z": -11,
+      "w": 33,
+      "blur": 2,
+      "haze": 0.35,
+      "border": 0.05
+    },
+    {
+      "id": "mt-mid",
+      "src": "mountains-mid.svg",
+      "x": 2,
+      "z": -9,
+      "w": 33,
+      "blur": 1,
+      "haze": 0.15,
+      "border": 0.06
+    },
+    {
+      "id": "hill",
+      "src": "hill.svg",
+      "x": 0,
+      "z": -6.6,
+      "w": 33,
+      "sy": 0.8
+    },
+    {
+      "id": "pine",
+      "src": "tree-pine.svg",
+      "x": -12.4,
+      "z": -5.2,
+      "w": 3.8,
+      "behavior": "sway"
+    },
+    {
+      "id": "tree",
+      "src": "tree-round.svg",
+      "x": 12.6,
+      "z": -5.5,
+      "w": 4,
+      "behavior": "sway"
+    },
+    {
+      "id": "far-bank",
+      "src": "grass.svg",
+      "x": 0,
+      "z": -3.8,
+      "w": 33,
+      "sy": 0.7
+    },
+    {
+      "id": "peach",
+      "src": "peach.svg",
+      "x": -2.5,
+      "z": -0.4,
+      "w": 3.8,
+      "pop": false,
+      "tap": "peach",
+      "behavior": "peach-drift",
+      "params": {
+        "from": -16,
+        "to": -4.5,
+        "delay": 0.3,
+        "duration": 5.5,
+        "lift": -0.55
+      }
+    },
+    {
+      "id": "ripple-front",
+      "src": "wave-front.svg",
+      "x": 0,
+      "z": 0.8,
+      "w": 33,
+      "sy": 0.32,
+      "behavior": "ripple"
+    },
+    {
+      "id": "grandma",
+      "x": 9.2,
+      "z": 3.0,
+      "tap": "grandma",
+      "behavior": "grandma-wash",
+      "parts": [
+        {
+          "id": "body",
+          "src": "grandma-kneel.svg",
+          "w": 6,
+          "pivot": [
+            0.5,
+            1
+          ],
+          "at": [
+            0,
+            0
+          ]
+        },
+        {
+          "id": "arm",
+          "src": "grandma-arm.svg",
+          "w": 3.3,
+          "pivot": [
+            0.86,
+            0.22
+          ],
+          "at": [
+            0.05,
+            3.2
+          ],
+          "z": 0.12
+        },
+        {
+          "id": "head",
+          "src": "grandma-head.svg",
+          "alt": "grandma-head-surprise.svg",
+          "w": 3.1,
+          "pivot": [
+            0.49,
+            0.86
+          ],
+          "at": [
+            0.49,
+            3.93
+          ],
+          "z": 0.06
+        }
+      ]
+    },
+    {
+      "id": "tub",
+      "src": "tub.svg",
+      "x": 5.9,
+      "z": 3.4,
+      "w": 3.6
+    },
+    {
+      "id": "near-bank",
+      "src": "grass.svg",
+      "x": 0,
+      "z": 5.3,
+      "w": 33,
+      "sy": 0.5
+    },
+    {
+      "id": "reeds",
+      "src": "reeds.svg",
+      "x": -14.3,
+      "z": 5.4,
+      "w": 4.2,
+      "blur": 1.2,
+      "behavior": "sway"
+    }
+  ]
+}
