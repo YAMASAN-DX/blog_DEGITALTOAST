@@ -31,7 +31,6 @@ const state = {
   index: 0,
   current: null,
   running: new Set(),
-  vertical: store.get('vertical', '1') === '1',
   ruby: store.get('ruby', '1') === '1',
 };
 
@@ -314,10 +313,8 @@ function applyLang() {
   document.body.dataset.lang = L;
   $$('[data-ui]').forEach((el) => { el.textContent = ui[el.dataset.ui]; });
   $$('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === L)));
-  $('[data-toggle="vertical"]').setAttribute('aria-pressed', String(state.vertical));
   $('[data-toggle="ruby"]').setAttribute('aria-pressed', String(state.ruby));
   els.jaTools.hidden = L !== 'ja';
-  els.book.classList.toggle('is-vertical', L === 'ja' && state.vertical);
   document.body.classList.toggle('hide-ruby', !state.ruby);
 
   els.title.textContent = t.title;
@@ -393,11 +390,6 @@ function bindEvents() {
     applyLang();
     syncURL();
   }));
-  $('[data-toggle="vertical"]').addEventListener('click', () => {
-    state.vertical = !state.vertical;
-    store.set('vertical', state.vertical ? '1' : '0');
-    applyLang();
-  });
   $('[data-toggle="ruby"]').addEventListener('click', () => {
     state.ruby = !state.ruby;
     store.set('ruby', state.ruby ? '1' : '0');

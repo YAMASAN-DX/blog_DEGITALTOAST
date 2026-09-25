@@ -448,36 +448,6 @@ body[data-lang="en"] .story-text { line-height: 1.65; }
 .hide-ruby .story-text rt,
 .hide-ruby .story-text rp { display: none; }
 
-/* 縦書き：文章は右上から、段は右から左へ */
-.book.is-vertical .text-panel {
-  height: clamp(10rem, 34dvh, 18rem);
-}
-.book.is-vertical .story-text {
-  position: absolute;
-  inset: 0;
-  max-width: none;
-  min-height: 0;
-  padding: 22px 20px;
-  writing-mode: vertical-rl;
-  line-height: 2.05;
-  letter-spacing: 0.06em;
-  overflow: auto;
-}
-
-@media (min-width: 760px) and (min-aspect-ratio: 4 / 3) {
-  .book.is-vertical {
-    --tw: clamp(190px, 19vw, 290px);
-    --chrome: 10.5rem;
-    --w: min(calc(100% - var(--tw) - 12px), max(18rem, calc((100dvh - var(--chrome)) * 16 / 9)), 1100px);
-    grid-template-columns: var(--w) var(--tw);
-  }
-  .book.is-vertical .text-panel {
-    height: auto;
-    margin-block: 6px;
-    margin-inline: 0 6px;
-  }
-}
-
 .controls {
   grid-column: 1 / -1;
   display: grid;
