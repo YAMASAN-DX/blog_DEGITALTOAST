@@ -45,6 +45,16 @@ ehon/
 
 絵と文章を分けているので、**言語を増やすときは `text.<lang>.json` を足し、`common.js` の `LANGS` と `UI` に追加するだけ**です。絵の中に文字は描きません。
 
+## 1つのお話だけを別の場所に置く（例：ブログの /ai/momotaro/）
+
+```sh
+python3 ehon/tools/build_deploy.py 出力先 https://d-toast.com/ai/momotaro/ og.jpg
+```
+
+出力先の中身を、そのままサーバーの `/ai/momotaro/` に置きます（`.htaccess` もいっしょに）。
+入口の `index.html` は立体版で、SNS で共有したときの題名・説明・画像（OGP、1200×630）と canonical を入れます。
+WebGL が使えない端末では、同じフォルダの `story.html`（平面の絵本）に切りかわります。このフォルダには一覧がないので「一覧」ボタンはかくします。
+
 ## お話を追加する
 
 1. `stories/<id>/` を作り、`story.json` と `text.ja.json`・`text.en.json` を置く
